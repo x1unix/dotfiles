@@ -2,8 +2,8 @@
 set -e
 
 SCRIPT="$(basename $0)"
-SHELL_RES="${SHELL_RES:-$HOME/.local/shell}"
-AUTOLOAD_FILE="$SHELL_RES/.autoload.sh"
+SHELL_RES="${SHELL_RES:-$HOME/.config/shell}"
+AUTOLOAD_FILE="${AUTOLOAD_FILE:-$SHELL_RES/.autoload.sh}"
 AUTOLOAD_TEMP="$SHELL_RES/.autoload.tmp"
 
 app_help() {

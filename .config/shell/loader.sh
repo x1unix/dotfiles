@@ -1,5 +1,4 @@
-export SHELL_RES="$HOME/.local/shell"
-export LOCAL="$HOME/.local"
+export SHELL_RES="$HOME/.config/shell"
 
 AUTOLOAD_FILE="$SHELL_RES/.autoload.sh"
 
