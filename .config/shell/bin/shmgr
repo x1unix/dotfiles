@@ -15,6 +15,7 @@ Commands:
   edit      - Edit include, function or alias file.
   rm        - Remove include, function or alias file.
   gen       - Generate autoload file.
+  load      - load config.
 EOF
 }
 
@@ -42,6 +43,10 @@ app_gen_autoload () {
   autoload_append_dir 'alias.d'
   rm -f "$AUTOLOAD_FILE"
   mv "$AUTOLOAD_TEMP" "$AUTOLOAD_FILE"
+}
+
+app_source() {
+  echo "source $SHELL_RES/loader.sh"
 }
 
 assert_ne() {
@@ -104,6 +109,10 @@ case "$1" in
   'g' | 'gen')
     shift
     app_gen_autoload
+    ;;
+  'load')
+    shift
+    app_source
     ;;
   * )
     echo "Error: invalid command '$1'"
