@@ -14,6 +14,7 @@ Plug 'godlygeek/tabular'
 Plug 'leafgarland/typescript-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jvirtanen/vim-hcl'
+Plug 'charlespascoe/vim-go-syntax'
 Plug 'sickill/vim-monokai'
 Plug 'tomasiser/vim-code-dark'
 Plug 'preservim/nerdcommenter'
@@ -26,6 +27,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
+
+" Neo Tree
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+
 " Plugins end
 
 "colorscheme codedark
@@ -75,6 +85,13 @@ nnoremap <Leader>k :tabn<CR>
 
 call plug#end()
 
+" Gno
+autocmd BufRead,BufNewFile *.gno set filetype=gno
+
+" Lua cfg
+if has('nvim')
+  lua require('config')
+endif
 
 "colorscheme onedark 
 colorscheme codedark 

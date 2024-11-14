@@ -1,0 +1,16 @@
+{
+	"diagnostic.enable": true,
+	"diagnostic.displayByAle": false,
+	"languageserver": {
+		"terraform": {
+			"command": "terraform-ls",
+			"args": ["serve"],
+			"filetypes": [
+				"terraform",
+				"tf"
+			],
+			"initializationOptions": {},
+			"settings": {}
+		}
+	}
+}

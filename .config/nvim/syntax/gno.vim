@@ -1,0 +1,1 @@
+runtime! syntax/go.vim
