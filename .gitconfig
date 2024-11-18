@@ -1,0 +1,26 @@
+[user]
+	name = x1unix
+	email = denis0051@gmail.com
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com
+[init]
+	defaultBranch = master
+[core]
+	autocrlf = input
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[push]
+	autoSetupRemote = true
+[pager]
+	diff = true
+	branch = false
+[alias]
+	undo = reset --hard HEAD~1
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	amend = commit --amend
+	pick = cherry-pick
+
