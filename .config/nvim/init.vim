@@ -18,8 +18,6 @@ Plug 'charlespascoe/vim-go-syntax'
 Plug 'sickill/vim-monokai'
 Plug 'tomasiser/vim-code-dark'
 Plug 'preservim/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -72,7 +70,9 @@ let $RC="$HOME/.vimrc"
 
 " == Hotkeys ==
 " Open NerdTree
-nnoremap <Leader>t :NERDTreeToggle<CR>
+" nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>t :Neotree toggle<CR>
+
 " Open file menu
 nnoremap <Leader>o :CtrlP<CR>
 " Open buffer menu
