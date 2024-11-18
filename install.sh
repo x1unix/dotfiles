@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+set -e
+
 script_path="$(readlink -f -- "$0")"
 dir="$(dirname -- "$script_path")"
 
@@ -20,10 +22,12 @@ link_local() {
   link_path ".local/$1"
 }
 
+mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.local/bin"
+
 link_config "shell"
 link_config "nvim"
 
-mkdir -p "$HOME/.local/bin"
 link_local "bin/shmgr"
 link_local "bin/unlock"
 
