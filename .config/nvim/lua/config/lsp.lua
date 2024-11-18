@@ -1,3 +1,30 @@
+local function register_gno_formatter()
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    group = "gno",
+    pattern = "*.gno",
+    callback = function(args)
+      local job = require('plenary.job')
+
+      -- Format code and refresh the buffer
+      job:new({
+        command = "gofumpt",
+        args = { "-w", args.file },
+        on_exit = function(_, exit_code)
+          if exit_code == 0 then
+            vim.schedule(function()
+              vim.cmd.checktime(args.buf)
+            end)
+          else
+            vim.notify("Error running gofumpt", vim.log.levels.ERROR, {
+              title = "Code Formatting",
+            })
+          end
+        end,
+      }):start()
+    end,
+  })
+end
+
 local function get_gnoroot()
   local gnoroot = os.getenv('GNOROOT')
   if gnoroot and gnoroot ~= '' then
@@ -15,41 +42,54 @@ local function get_gnoroot()
   return gnoroot
 end
 
-local function get_gnopls()
-  local gnopls = os.getenv('GNOPLS_BIN')
-  if gnopls and gnopls ~= "" then
-    return gnopls
+local function get_server(bin_name, env_name)
+  local bin_path = os.getenv(env_name)
+  if bin_path and bin_path ~= "" then
+    return bin_path
   end
 
-  return vim.fn.exepath("gnopls")
+  return vim.fn.exepath(bin_name)
 end
 
-local function start_gnopls(args)
-  local gnopls_bin = get_gnopls()
-  if gnopls == "" then
-    print("Error: can't find gnopls!")
+local function start_gno_lsp(args)
+  local server_name = 'gnoverse-gopls'
+  local server_bin = get_server(server_name, 'GNOPLS_BIN')
+  if server_bin == "" then
+    vim.notify("Error: can't find " .. server_name, vim.log.levels.ERROR, {
+      title = "Gno LSP",
+    })
     return
   end
 
-  local gnoroot = get_gnoroot()
-  if gnoroot == "" then
-    print("Error: can't find GNOROOT, is Gno installed?")
-    return
-  end
+--  local gnoroot = get_gnoroot()
+--  if gnoroot == "" then
+--    print("Error: can't find GNOROOT, is Gno installed?")
+--    return
+--  end
 
-  print("Starting gopls...")
   vim.lsp.start({
-      name = 'gnopls',
-      cmd = { gnopls_bin, 'serve', '--gnoroot', gnoroot },
+      name = server_name,
+      cmd = { server_bin, 'serve' },
+      -- cmd = { gnopls_bin, 'serve', '--gnoroot', gnoroot },
       -- root_dir = vim.fs.root(args.buf, { 'gno.mod', '.git' }),
   })
 end
 
 local function register_gno()
+  vim.treesitter.language.register('go', 'gno')
+  vim.api.nvim_create_augroup("gno", { clear = true })
+--  vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+--    group = "gno",
+--    pattern = "*.gno",
+--    callback = function ()
+--      vim.cmd("set filetype=gno")
+--    end
+--  })
+  register_gno_formatter()
   vim.api.nvim_create_autocmd('FileType', {
       pattern = 'gno',
       callback = function(args)
-        start_gnopls(args)
+        start_gno_lsp(args)
       end,
   })
 end
