@@ -27,6 +27,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 
 " Neo Tree
 Plug 'nvim-lua/plenary.nvim'
@@ -48,6 +49,13 @@ let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
 let g:Powerline_symbols='unicode'
 "let g:airline_theme='onedark'
 " End
+
+" coc.nvim: https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Map the leader key to SPACE
 let mapleader="\<SPACE>"
@@ -82,6 +90,12 @@ nnoremap <Leader>f :CtrlPMRUFiles<CR>
 " Tabs
 nnoremap <Leader>j :tabp<CR>
 nnoremap <Leader>k :tabn<CR>
+
+" Telescope
+nnoremap <Leader>: <cmd>Telescope find_files<cr>
+nnoremap <Leader>/ <cmd>Telescope live_grep<cr>
+nnoremap <Leader>b <cmd>Telescope buffers<cr>
+nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 
 call plug#end()
 

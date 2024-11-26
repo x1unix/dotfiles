@@ -10,7 +10,7 @@
 #yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 #yabai --load-sa
 
-padding=6
+padding=4
 
 # global settings
 # layout: bsp|stack|float
@@ -48,5 +48,5 @@ yabai -m config                                 \
     mouse_drop_action            swap
 
 yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="(Calculator|Preferences|Install|Parallels|Steam)" manage=off
+yabai -m rule --add app="(Adena|Calculator|Preferences|Install|Parallels|Steam)" manage=off
 
