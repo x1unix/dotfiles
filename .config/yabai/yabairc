@@ -48,5 +48,6 @@ yabai -m config                                 \
     mouse_drop_action            swap
 
 yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="(Adena|Calculator|Preferences|Install|Parallels|Steam)" manage=off
+yabai -m rule --add app="(Calculator|Preferences|Install|Parallels|Steam)" manage=off
+yabai -m rule --add title="(Adena)" manage=off
 
