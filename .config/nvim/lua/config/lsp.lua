@@ -7,11 +7,12 @@ local function register_gno_formatter()
 
       -- unlike "args.file", contains full file path.
       local filepath = vim.api.nvim_buf_get_name(bufnr)
+      local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 
       -- Format code and refresh the buffer
       job:new({
         command = "gofumpt",
-        args = { filepath },
+        writer = lines,
         on_exit = function(j, exit_code)
           if exit_code == 0 then
             vim.schedule(function()
