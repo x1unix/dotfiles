@@ -1,26 +1,31 @@
 local function register_gno_formatter()
-  vim.api.nvim_create_autocmd("BufWritePost", {
-    group = "gno",
+  vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.gno",
     callback = function(args)
       local job = require('plenary.job')
+      local bufnr = vim.api.nvim_get_current_buf()
+
+      -- unlike "args.file", contains full file path.
+      local filepath = vim.api.nvim_buf_get_name(bufnr)
 
       -- Format code and refresh the buffer
       job:new({
         command = "gofumpt",
-        args = { "-w", args.file },
-        on_exit = function(_, exit_code)
+        args = { filepath },
+        on_exit = function(j, exit_code)
           if exit_code == 0 then
             vim.schedule(function()
-              vim.cmd.checktime(args.buf)
+              vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, j:result())
             end)
           else
-            vim.notify("Error running gofumpt", vim.log.levels.ERROR, {
-              title = "Code Formatting",
-            })
+            vim.schedule(function()
+              vim.notify("Error running gofumpt", vim.log.levels.ERROR, {
+                title = "Code Formatting",
+              })
+            end)
           end
         end,
-      }):start()
+      }):sync()
     end,
   })
 end
