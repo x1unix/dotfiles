@@ -35,6 +35,9 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
 
+" LSP
+Plug 'neovim/nvim-lspconfig', { 'tag': 'v1.0.0' }
+
 " Plugins end
 
 "colorscheme codedark

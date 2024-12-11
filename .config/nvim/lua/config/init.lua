@@ -1,1 +1,3 @@
-require("config.lsp")
+require('config.gno').register()
+require('config.lsp')
+
