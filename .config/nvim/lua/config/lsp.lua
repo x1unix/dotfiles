@@ -2,6 +2,7 @@
 --
 -- Inspired by:
 --   * https://github.com/radleylewis/nvim/blob/7e0001ae2c4c206f7b42da2866f8a6deaf0423c9/lua/plugins/nvim-lspconfig.lua#L64
+--   * https://github.com/YasTheGoat/NeoConf/blob/de3cc569fef8e8854ba585b29a1f0ad58b9df1ad/lua/plugins/lsp-config.lua#L37
 --
 local lspconfig = require('lspconfig')
 local cmp = require('cmp')
