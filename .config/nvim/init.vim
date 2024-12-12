@@ -1,16 +1,13 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-"call plug#begin('~/.vim/plugged')
 call plug#begin(stdpath('data') . '/plugged')
 
 " Plugins Start
 Plug 'docker/docker'
 Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
-" Plug 'plasticboy/vim-markdown'
 Plug 'leafgarland/typescript-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jvirtanen/vim-hcl'
@@ -21,8 +18,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
 Plug 'nvim-lua/plenary.nvim'
@@ -37,12 +32,14 @@ Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
 
 " LSP
 Plug 'neovim/nvim-lspconfig', { 'tag': 'v1.0.0' }
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" Plug 'pmizio/typescript-tools.nvim', { 'branch': 'master' }
 
 " Plugins end
-
-"colorscheme codedark
-"colorscheme pulumi
-"colorscheme onedark 
 
 " Vim Airline Setup
 "set guifont=Fura\ Code\ Light\ Nerd\ Font\ Complete:h16
@@ -52,13 +49,6 @@ let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
 let g:Powerline_symbols='unicode'
 "let g:airline_theme='onedark'
 " End
-
-" coc.nvim: https://github.com/neoclide/coc.nvim#example-vim-configuration
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Map the leader key to SPACE
 let mapleader="\<SPACE>"

@@ -57,6 +57,18 @@ local function register_gno_formatter()
   })
 end
 
+local function decorate_lsp_config(cfg)
+  local cmpName =  'cmp_nvim_lsp'
+  local status, cmp = pcall(require, cmpName)
+  if not status then
+    vim.notify('Plugin "' .. cmpName .. '" is not installed. Autocomplete might not work.')
+    return cmp
+  end
+
+  cmp.capabilities = cmp.default_capabilities()
+  return cmp
+end
+
 local function start_gno_lsp(args)
   local server_name = 'gnoverse-gopls'
   local server_bin = get_server(server_name, 'GNOPLS_BIN')
@@ -67,10 +79,13 @@ local function start_gno_lsp(args)
     return
   end
 
-  vim.lsp.start({
-      name = server_name,
-      cmd = { server_bin, 'serve' },
-  })
+  local config = decorate_lsp_config {
+    name = server_name,
+    cmd = { server_bin, 'serve' },
+  }
+
+
+  vim.lsp.start(config)
 end
 
 local gno = {}
@@ -80,6 +95,9 @@ function gno.register()
   vim.api.nvim_create_augroup("gno", { clear = true })
 
   register_gno_formatter()
+
+  -- TODO: use vim.lsp.config[] to register.
+  -- See: https://neovim.io/doc/user/lsp.html#vim.lsp.start()
   vim.api.nvim_create_autocmd('FileType', {
       pattern = 'gno',
       callback = function(args)
