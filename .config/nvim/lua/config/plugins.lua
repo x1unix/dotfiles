@@ -41,6 +41,26 @@ require('ufo').setup({
     end
 })
 
+-- Prettier
+-- See: https://github.com/MunifTanjim/prettier.nvim#setting-up-prettiernvim
+require('prettier').setup({
+  bin = 'prettier',
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+  },
+})
+
 require('neo-tree').setup({
   close_if_last_window = true,
   filesystem = {

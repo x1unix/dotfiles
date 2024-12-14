@@ -55,7 +55,10 @@ if has('nvim')
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
-  " Plug 'pmizio/typescript-tools.nvim', { 'branch': 'master' }
+  Plug 'pmizio/typescript-tools.nvim', { 'branch': 'master' }
+
+  " JS/TS
+  Plug 'MunifTanjim/prettier.nvim'
 endif
 
 " Plugins end
