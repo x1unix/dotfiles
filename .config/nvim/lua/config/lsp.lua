@@ -14,6 +14,14 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --   lineFoldingOnly = true,
 -- }
 
+lspconfig.gopls.setup{
+  capabilities = capabilities
+}
+
+lspconfig.terraformls.setup{
+  capabilities = capabilities
+}
+
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   on_init = function(client)
