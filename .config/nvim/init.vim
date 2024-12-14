@@ -24,6 +24,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 
+" Git
+Plug 'lewis6991/gitsigns.nvim', { 'tag': 'v0.9.0' } 
+
 " Neo Tree
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-tree/nvim-web-devicons'

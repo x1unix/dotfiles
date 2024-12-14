@@ -17,6 +17,10 @@ cmp.setup {
   }),
 }
 
+-- See: https://github.com/lewis6991/gitsigns.nvim#installation--usage
+require('gitsigns').setup()
+
+
 require('neo-tree').setup({
   close_if_last_window = true,
   filesystem = {
