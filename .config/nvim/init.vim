@@ -117,6 +117,10 @@ call plug#end()
 " Gno
 autocmd BufRead,BufNewFile *.gno set filetype=gno
 
+" Fix tsx&jsx filetypes
+autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
+autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
+
 " Lua cfg
 if has('nvim')
   lua require('config')
