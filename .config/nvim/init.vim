@@ -14,33 +14,49 @@ Plug 'jvirtanen/vim-hcl'
 Plug 'charlespascoe/vim-go-syntax'
 Plug 'sickill/vim-monokai'
 Plug 'tomasiser/vim-code-dark'
-Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/harpoon'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 
-" Git
-Plug 'lewis6991/gitsigns.nvim', { 'tag': 'v0.9.0' } 
+" Comments
+if has('nvim')
+  Plug 'numToStr/Comment.nvim'
+else
+  Plug 'preservim/nerdcommenter'
+endif
 
-" Neo Tree
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+if has('nvim')
+  " Core deps
+  Plug 'nvim-lua/plenary.nvim'
 
-" LSP
-Plug 'neovim/nvim-lspconfig', { 'tag': 'v1.0.0' }
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-" Plug 'pmizio/typescript-tools.nvim', { 'branch': 'master' }
+  " UI
+  Plug 'ThePrimeagen/harpoon'
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+
+  " Git
+  Plug 'lewis6991/gitsigns.nvim', { 'tag': 'v0.9.0' } 
+
+  " Folding
+  Plug 'kevinhwang91/promise-async'
+  Plug 'kevinhwang91/nvim-ufo'
+
+  " Neo Tree
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+
+  " LSP
+  Plug 'neovim/nvim-lspconfig', { 'tag': 'v1.0.0' }
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  " Plug 'pmizio/typescript-tools.nvim', { 'branch': 'master' }
+endif
 
 " Plugins end
 

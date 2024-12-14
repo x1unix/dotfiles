@@ -8,7 +8,14 @@ local lspconfig = require('lspconfig')
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- Modify capabilities with folding range for nvim-ufo.
+-- capabilities.textDocument.foldingRange = {
+--   dynamicRegistration = false,
+--   lineFoldingOnly = true,
+-- }
+
 lspconfig.lua_ls.setup {
+  capabilities = capabilities,
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -42,7 +49,7 @@ lspconfig.lua_ls.setup {
 -- For servers not on your $PATH (e.g., jdtls, elixirls), you must manually set the cmd parameter when calling setup().
 lspconfig.rust_analyzer.setup{
   -- Server-specific settings. See `:help lspconfig-setup`
-  capabilities = capabilities, 
+  capabilities = capabilities,
   settings = {
     ['rust-analyzer'] = {},
   },
@@ -52,7 +59,7 @@ lspconfig.rust_analyzer.setup{
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
 -- lspconfig.ts_ls.setup{}
 lspconfig.ts_ls.setup{
-  capabilities = capabilities, 
+  capabilities = capabilities,
 }
 
 -- See: https://github.com/pmizio/typescript-tools.nvim#%EF%B8%8F-configuration
