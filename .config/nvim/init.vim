@@ -5,7 +5,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " Plugins Start
 Plug 'docker/docker'
-Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'godlygeek/tabular'
 Plug 'leafgarland/typescript-vim'
@@ -20,19 +19,19 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
 
-" Comments
-if has('nvim')
-  Plug 'numToStr/Comment.nvim'
-else
-  Plug 'preservim/nerdcommenter'
-endif
-
 if has('nvim')
   " Core deps
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  " Debugger
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'nvim-neotest/nvim-nio'
+  Plug 'rcarriga/nvim-dap-ui'
 
   " UI
   Plug 'ThePrimeagen/harpoon'
+  Plug 'numToStr/Comment.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 
   " Git
@@ -57,8 +56,15 @@ if has('nvim')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'pmizio/typescript-tools.nvim', { 'branch': 'master' }
 
+  " Go
+  Plug 'ray-x/go.nvim'
+  Plug 'ray-x/guihua.lua'
+
   " JS/TS
   Plug 'MunifTanjim/prettier.nvim'
+else
+  Plug 'preservim/nerdcommenter'
+  Plug 'fatih/vim-go'
 endif
 
 " Plugins end

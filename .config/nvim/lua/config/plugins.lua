@@ -17,11 +17,19 @@ cmp.setup {
   }),
 }
 
+-- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "go", "gomod", "gosum" }
+}
+
 -- See: https://github.com/lewis6991/gitsigns.nvim#installation--usage
 require('gitsigns').setup()
 
 -- See: https://github.com/numToStr/Comment.nvim#configuration-optional
 require('Comment').setup()
+
+-- See: https://github.com/ray-x/go.nvim
+require("go").setup()
 
 -- UFO for folding.
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
