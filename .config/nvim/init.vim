@@ -60,6 +60,9 @@ if has('nvim')
   Plug 'ray-x/go.nvim'
   Plug 'ray-x/guihua.lua'
 
+  " Gno
+  Plug 'x1unix/gno.nvim'
+
   " JS/TS
   Plug 'MunifTanjim/prettier.nvim'
 else
@@ -121,7 +124,7 @@ nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 call plug#end()
 
 " Gno
-autocmd BufRead,BufNewFile *.gno set filetype=gno
+" autocmd BufRead,BufNewFile *.gno set filetype=gno
 
 " Fix tsx&jsx filetypes
 autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact

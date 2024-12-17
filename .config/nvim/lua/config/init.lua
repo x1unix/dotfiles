@@ -1,5 +1,5 @@
 require('config.plugins')
-require('config.gno').register()
+require('gno-nvim').setup()
 require('config.lsp')
 require('config.js')
 
