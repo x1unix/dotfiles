@@ -3,6 +3,9 @@ local utils = require("gno-nvim.utils")
 local gs_gno = os.getenv("HOME") .. "/work/gs-gno"
 
 require('gno-nvim').setup({
+  lsp = {
+    capabilities = require("cmp_nvim_lsp").default_capabilities()
+  },
   gnoroot = function ()
     local cwd = vim.fn.expand("%:p:h")
     if cwd == "" then
