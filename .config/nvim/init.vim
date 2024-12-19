@@ -14,10 +14,7 @@ Plug 'charlespascoe/vim-go-syntax'
 Plug 'sickill/vim-monokai'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
-Plug 'joshdick/onedark.vim'
 
 if has('nvim')
   " Core deps
@@ -25,16 +22,22 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'Shatur/neovim-session-manager'
 
-  " Debugger
-  Plug 'mfussenegger/nvim-dap'
-  Plug 'nvim-neotest/nvim-nio'
-  Plug 'rcarriga/nvim-dap-ui'
+  " Theming
+  Plug 'Mofiqul/vscode.nvim'
+  Plug 'f-person/auto-dark-mode.nvim'
 
   " UI
   Plug 'ThePrimeagen/harpoon'
   Plug 'numToStr/Comment.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'nvim-telescope/telescope-ui-select.nvim'
+  Plug 'nvim-lualine/lualine.nvim'
+  " Plug 'nvim-tree/nvim-web-devicons'
+
+  " Debugger
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'nvim-neotest/nvim-nio'
+  Plug 'rcarriga/nvim-dap-ui'
 
   " Git
   Plug 'lewis6991/gitsigns.nvim', { 'tag': 'v0.9.0' } 
@@ -71,18 +74,12 @@ if has('nvim')
 else
   Plug 'preservim/nerdcommenter'
   Plug 'fatih/vim-go'
+  Plug 'joshdick/onedark.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 endif
 
 " Plugins end
-
-" Vim Airline Setup
-"set guifont=Fura\ Code\ Light\ Nerd\ Font\ Complete:h16
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#keymap#enabled = 0
-let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
-let g:Powerline_symbols='unicode'
-"let g:airline_theme='onedark'
-" End
 
 " Map the leader key to SPACE
 let mapleader="\<SPACE>"
@@ -104,8 +101,6 @@ set nobomb " No BOM
 let $RC="$HOME/.vimrc"
 
 " == Hotkeys ==
-" Open NerdTree
-" nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>t :Neotree toggle<CR>
 
 " Tabs
@@ -128,9 +123,6 @@ nnoremap <Leader>M <cmd>SessionManager<cr>
 
 call plug#end()
 
-" Gno
-" autocmd BufRead,BufNewFile *.gno set filetype=gno
-
 " Fix tsx&jsx filetypes
 autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
 autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
@@ -138,10 +130,19 @@ autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
 " Lua cfg
 if has('nvim')
   lua require('config')
+  colorscheme vscode 
+else
+  " Vim Airline Setup
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#keymap#enabled = 0
+  let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
+  let g:Powerline_symbols='unicode'
+  "let g:airline_theme='onedark'
+  " End
+
+  colorscheme codedark
 endif
 
-"colorscheme onedark 
-colorscheme codedark 
 syntax enable
 filetype plugin indent on    " required
 
