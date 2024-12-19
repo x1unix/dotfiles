@@ -120,6 +120,7 @@ nnoremap <Leader>Tr <cmd>Telescope lsp_references<cr>
 nnoremap <Leader>Td <cmd>Telescope lsp_definitions<cr>
 nnoremap <Leader>Ti <cmd>Telescope lsp_implementations<cr>
 nnoremap <Leader>Ts <cmd>Telescope lsp_document_symbols<cr>
+nnoremap <Leader>s <cmd>Telescope lsp_document_symbols<cr>
 
 " Session Manager
 nnoremap <Leader>M <cmd>SessionManager<cr>
