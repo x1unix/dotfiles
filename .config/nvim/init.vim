@@ -31,6 +31,7 @@ if has('nvim')
   Plug 'numToStr/Comment.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'nvim-telescope/telescope-ui-select.nvim'
+  Plug 'LukasPietzschmann/telescope-tabs'
   Plug 'nvim-lualine/lualine.nvim'
   " Plug 'nvim-tree/nvim-web-devicons'
 
@@ -101,7 +102,7 @@ set nobomb " No BOM
 let $RC="$HOME/.vimrc"
 
 " == Hotkeys ==
-nnoremap <Leader>t :Neotree toggle<CR>
+nnoremap <Leader>\ :Neotree toggle<CR>
 
 " Tabs
 nnoremap <Leader>j :tabp<CR>
@@ -109,6 +110,7 @@ nnoremap <Leader>k :tabn<CR>
 
 " Telescope
 nnoremap <Leader>T <cmd>Telescope<cr>
+nnoremap <Leader>t <cmd>Telescope telescope-tabs list_tabs<cr>
 nnoremap <Leader>: <cmd>Telescope find_files<cr>
 nnoremap <Leader>/ <cmd>Telescope live_grep<cr>
 nnoremap <Leader>b <cmd>Telescope buffers<cr>
