@@ -108,24 +108,23 @@ let $RC="$HOME/.vimrc"
 " nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>t :Neotree toggle<CR>
 
-" Open file menu
-nnoremap <Leader>o :CtrlP<CR>
-" Open buffer menu
-nnoremap <Leader>b :CtrlPBuffer<CR>
-" Open most recently used files
-nnoremap <Leader>f :CtrlPMRUFiles<CR>
 " Tabs
 nnoremap <Leader>j :tabp<CR>
 nnoremap <Leader>k :tabn<CR>
 
 " Telescope
+nnoremap <Leader>T <cmd>Telescope<cr>
 nnoremap <Leader>: <cmd>Telescope find_files<cr>
 nnoremap <Leader>/ <cmd>Telescope live_grep<cr>
 nnoremap <Leader>b <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <Leader>m <cmd>Telescope marks<cr>
+nnoremap <Leader>Tr <cmd>Telescope lsp_references<cr>
+nnoremap <Leader>Td <cmd>Telescope lsp_definitions<cr>
+nnoremap <Leader>Ti <cmd>Telescope lsp_implementations<cr>
 
 " Session Manager
-nnoremap <Leader>m <cmd>SessionManager<cr>
+nnoremap <Leader>M <cmd>SessionManager<cr>
 
 call plug#end()
 
