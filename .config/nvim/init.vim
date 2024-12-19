@@ -23,6 +23,7 @@ if has('nvim')
   " Core deps
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'Shatur/neovim-session-manager'
 
   " Debugger
   Plug 'mfussenegger/nvim-dap'
@@ -33,6 +34,7 @@ if has('nvim')
   Plug 'ThePrimeagen/harpoon'
   Plug 'numToStr/Comment.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
 
   " Git
   Plug 'lewis6991/gitsigns.nvim', { 'tag': 'v0.9.0' } 
@@ -61,7 +63,8 @@ if has('nvim')
   Plug 'ray-x/guihua.lua'
 
   " Gno
-  Plug 'x1unix/gno.nvim'
+  " Plug 'x1unix/gno.nvim'
+  Plug '~/prj/gno.nvim'
 
   " JS/TS
   Plug 'MunifTanjim/prettier.nvim'
@@ -120,6 +123,9 @@ nnoremap <Leader>: <cmd>Telescope find_files<cr>
 nnoremap <Leader>/ <cmd>Telescope live_grep<cr>
 nnoremap <Leader>b <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
+
+" Session Manager
+nnoremap <Leader>m <cmd>SessionManager<cr>
 
 call plug#end()
 

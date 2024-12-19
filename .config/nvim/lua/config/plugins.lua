@@ -1,6 +1,24 @@
-require("telescope").load_extension('harpoon')
+local telescope = require("telescope")
+telescope.setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {}
+    },
+  }
+}
+
+telescope.load_extension('harpoon')
+telescope.load_extension('ui-select')
 
 local cmp = require('cmp')
+
+-- See: https://github.com/Shatur/neovim-session-manager
+local smconfig = require('session_manager.config')
+require('session_manager').setup({
+  autoload_mode = smconfig.AutoloadMode.Disabled,
+  autosave_last_session = false,
+})
+
 
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup {
