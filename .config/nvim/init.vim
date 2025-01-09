@@ -33,6 +33,7 @@ if has('nvim')
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'LukasPietzschmann/telescope-tabs'
   Plug 'nvim-lualine/lualine.nvim'
+  Plug 'f-person/git-blame.nvim'
   " Plug 'nvim-tree/nvim-web-devicons'
 
   " Debugger

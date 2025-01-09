@@ -13,6 +13,11 @@ telescope.load_extension('telescope-tabs')
 
 local cmp = require('cmp')
 
+-- See: https://github.com/f-person/git-blame.nvim
+require('gitblame').setup {
+  enabled = false,
+}
+
 -- See: https://github.com/Shatur/neovim-session-manager
 local smconfig = require('session_manager.config')
 require('session_manager').setup({
