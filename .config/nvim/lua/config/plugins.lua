@@ -66,8 +66,9 @@ vim.o.foldenable = true
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
--- Use builtin treesitter for folding provider
+-- See: https://github.com/kevinhwang91/nvim-ufo
 require('ufo').setup({
+    -- Use builtin treesitter for folding provider
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
     end

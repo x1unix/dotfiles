@@ -113,7 +113,8 @@ nnoremap <Leader>k :tabn<CR>
 nnoremap <Leader>T <cmd>Telescope<cr>
 nnoremap <Leader>t <cmd>Telescope telescope-tabs list_tabs<cr>
 nnoremap <Leader>: <cmd>Telescope find_files<cr>
-nnoremap <Leader>/ <cmd>Telescope live_grep<cr>
+nnoremap <Leader>g <cmd>Telescope live_grep<cr>
+nnoremap <Leader>/ <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <Leader>b <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <Leader>m <cmd>Telescope marks<cr>
@@ -122,6 +123,7 @@ nnoremap <Leader>Td <cmd>Telescope lsp_definitions<cr>
 nnoremap <Leader>Ti <cmd>Telescope lsp_implementations<cr>
 nnoremap <Leader>Ts <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <Leader>s <cmd>Telescope lsp_document_symbols<cr>
+
 
 " Session Manager
 nnoremap <Leader>M <cmd>SessionManager<cr>
