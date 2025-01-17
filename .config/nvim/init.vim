@@ -91,6 +91,11 @@ set backspace=indent,eol,start
 set number
 set tabstop=2
 set shiftwidth=2
+set scrolloff=5
+set sidescrolloff=5
+set cursorline
+set smartcase
+set title
 set expandtab
 set clipboard=unnamedplus
 set nobackup
