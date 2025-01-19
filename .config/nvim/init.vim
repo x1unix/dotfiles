@@ -143,6 +143,7 @@ nnoremap <Leader>s <cmd>Telescope lsp_document_symbols<cr>
 
 nnoremap gd <cmd>Telescope lsp_definitions<cr>
 nnoremap gr <cmd>Telescope lsp_references<cr>
+nnoremap gi <cmd>Telescope lsp_implementations<cr>
 nnoremap gw <cmd>Telescope diagnostics<cr>
 
 " LspSaga
