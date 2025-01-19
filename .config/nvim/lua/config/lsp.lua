@@ -64,3 +64,5 @@ lspconfig.rust_analyzer.setup{
   },
 }
 
+require('lspsaga').setup({})
+

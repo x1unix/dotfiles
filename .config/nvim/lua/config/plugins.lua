@@ -39,7 +39,6 @@ require('session_manager').setup({
   autosave_last_session = false,
 })
 
-
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup {
   sources = {
