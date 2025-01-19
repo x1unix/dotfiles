@@ -64,5 +64,9 @@ lspconfig.rust_analyzer.setup{
   },
 }
 
-require('lspsaga').setup({})
+require('lspsaga').setup({
+  lightbulb = {
+    enable = false,
+  },
+})
 
