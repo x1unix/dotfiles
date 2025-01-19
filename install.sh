@@ -4,44 +4,57 @@ set -e
 script_path="$(readlink -f -- "$0")"
 dir="$(dirname -- "$script_path")"
 
-config="$HOME/.config"
-
-link_home() {
-  ln -s -v "$dir/$1" "$HOME/$1"
+step_brew() {
+  echo ":: Installing brew packages..."
+  brew bundle --file="$dir/Brewfile"
 }
 
-link_config() {
-  link_home ".config/$1"
+step_dots() {
+  echo ":: Linking dotfiles..."
+  stow .
 }
 
-link_local() {
-  link_home ".local/$1"
+step_vim() {
+  echo ":: Installing vim-plug..."
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
 
-echo ":: Linking dotfiles..."
-mkdir -p "$HOME/.config"
-mkdir -p "$HOME/.local/bin"
+step_shmgr() {
+  echo ":: Installing shmgr..."
+  echo '[ -f ~/.config/shell/loader.sh ] && . ~/.config/shell/loader.sh' >> ~/.zshrc
+  "$dir/.local/bin/shmgr" gen
+}
 
-link_config "shell"
-link_config "nvim"
-link_config "skhd"
-link_config "yabai"
+step_all() {
+  step_brew
+  step_dots
+  step_vim
+  step_shmgr
+}
 
-link_local "bin/shmgr"
-link_local "bin/unlock"
-
-link_home ".npmrc"
-link_home ".gitconfig"
-link_home ".tmux.conf"
-
-echo ":: Installing vim-plug..."
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-echo ":: Installing shmgr..."
-
-echo '[ -f ~/.config/shell/loader.sh ] && . ~/.config/shell/loader.sh' >> ~/.zshrc
-"$dir/.local/bin/shmgr" gen
-
-echo ":: Installing brew packages..."
-brew bundle --file="$dir/Brewfile"
+case "$1" in
+  'brew')
+    step_brew
+    ;;
+  'vim')
+    step_vim
+    ;;
+  'dots')
+    step_dots
+    ;;
+  'shmgr')
+    step_shmgr
+    ;;
+  'all' | '')
+    step_all
+    ;;
+  'help' | '-h')
+    echo "Usage: $0 [all|brew|dots|vim|shmgr] [-h]"
+    exit
+    ;;
+  *)
+    echo "Invalid step option '$1'. Valid options: all, brew, dots, vim, shmgr"
+    exit 1
+    ;;
+esac
