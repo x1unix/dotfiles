@@ -1,5 +1,19 @@
 local telescope = require("telescope")
 telescope.setup {
+  defaults = {
+    file_ignore_patterns = {
+      "^.git/",
+      "^.vscode/",
+      "^.idea/",
+      "^.DS_Store",
+      "node_modules/",
+    },
+  },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+  },
   extensions = {
     ["ui-select"] = {
       require("telescope.themes").get_dropdown {}
