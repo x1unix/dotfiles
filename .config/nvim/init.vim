@@ -68,8 +68,7 @@ if has('nvim')
   Plug 'ray-x/guihua.lua'
 
   " Gno
-  " Plug 'x1unix/gno.nvim'
-  Plug '~/prj/gno.nvim'
+  Plug 'x1unix/gno.nvim'
 
   " JS/TS
   Plug 'MunifTanjim/prettier.nvim'
