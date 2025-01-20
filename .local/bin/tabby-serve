@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
 COMP_MODEL=StarCoder-1B
 CHAT_MODEL=Qwen2-1.5B-Instruct
-tabby serve --device metal --model "$COMP_MODEL" --chat-model "$CHAT_MODEL"
+
+EXTRA_ARGS=''
+
+if [ `uname -s` == 'Darwin' ]; then
+  echo '[INFO] Apple detected'
+  EXTRA_ARGS='--device=metal --chat-device=metal --parallelism=2'
+fi
+
+tabby serve --model "$COMP_MODEL" --chat-model "$CHAT_MODEL" --host=127.0.0.1 $EXTRA_ARGS
 
