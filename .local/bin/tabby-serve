@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+COMP_MODEL=StarCoder-1B
+CHAT_MODEL=Qwen2-1.5B-Instruct
+tabby serve --device metal --model "$COMP_MODEL" --chat-model "$CHAT_MODEL"
+
