@@ -3,6 +3,7 @@ COMP_MODEL=StarCoder-1B
 CHAT_MODEL=Qwen2-1.5B-Instruct
 
 EXTRA_ARGS=''
+TABBY_WEBSERVER_JWT_TOKEN_SECRET='6d49f5cdedf11626e8dc2a2a5edb7c8b1c2d13714083f2332c692d6a299b79e6'
 
 if [ `uname -s` == 'Darwin' ]; then
   echo '[INFO] Apple detected'
