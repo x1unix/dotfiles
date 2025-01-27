@@ -11,7 +11,7 @@ step_brew() {
 
 step_dots() {
   echo ":: Linking dotfiles..."
-  stow .
+  stow -t "$HOME" .
 }
 
 step_vim() {
