@@ -113,6 +113,8 @@ set clipboard=unnamedplus
 set nobackup
 set nowritebackup
 set showmatch
+set ttyfast " Fast scroll
+set wildmode=longest,list " autocomplete command
 set backspace=start,eol,indent " enable backspace at start
 set nobomb " No BOM
 
