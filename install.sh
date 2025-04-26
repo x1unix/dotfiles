@@ -31,6 +31,7 @@ step_shmgr() {
 step_tmux() {
   echo ":: Installing tmux plugin manager..."
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  $HOME/.tmux/plugins/tpm/bin/install_plugins
 }
 
 step_all() {
