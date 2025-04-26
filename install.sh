@@ -28,11 +28,17 @@ step_shmgr() {
   "$dir/.local/bin/shmgr" gen
 }
 
+step_tmux() {
+  echo ":: Installing tmux plugin manager..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
 step_all() {
   step_brew
   step_dots
   step_vim
   step_shmgr
+  step_tmux
 }
 
 case "$1" in
@@ -47,6 +53,9 @@ case "$1" in
     ;;
   'shmgr')
     step_shmgr
+    ;;
+  'tmux')
+    step_tmux
     ;;
   'all' | '')
     step_all
