@@ -2,7 +2,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (column-number-mode 1)
-(show-paren-node 1)
+(display-line-numbers-mode 1)
 (message "test?")
 
 
