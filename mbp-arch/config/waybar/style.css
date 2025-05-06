@@ -1,0 +1,96 @@
+@import "colors.css";
+
+* {
+  font-family: ZedMono Nerd Font;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @base;
+  color: @text;
+}
+
+#workspaces button {
+  margin: 0px;
+  border-radius: 0;
+  padding: 2px;
+  border: 1px solid @ws-inactive-border;
+  background-color: @ws-inactive-background;
+  color: @ws-inactive-text;
+}
+
+#workspaces button label {
+  color: inherit;
+}
+
+#workspaces button.urgent {
+  color: @red;
+}
+
+#workspaces button.focused {
+  border-color: @ws-active-border;
+  background-color: @ws-active-background;
+  color: @ws-active-text;
+}
+
+#tray,
+#bluetooth,
+#network,
+#language,
+#idle_inhibitor {
+  margin: 0 10px;
+}
+
+#backlight,
+#battery,
+#wireplumber {
+  margin: 0 10px;
+}
+
+#clock {
+  color: @text;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#tray {
+  margin-right: 0.5rem;
+}
+
+#tray menu {
+  color: @text;
+  background: @surface0; 
+  border-radius: 0;
+  font-size: 1rem;
+}
+
+/* #tray menu * { */
+/*   padding: 0; */
+/*   margin: 0; */
+/* } */
+
+#mode {
+  background: @red;
+  color: @text;
+  padding: 0 5px;
+}
+
+#idle_inhibitor.activated {
+  color: @yellow;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @orange; 
+}
+
+#battery.critical:not(.charging) {
+  color: @hi-red;
+}
+
