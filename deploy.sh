@@ -392,8 +392,13 @@ __private_show_target() {
 	target_file="${TARGETS_DIR}/${1}${TARGET_EXT}"
 	availability='True'
 
+	if [ -z "$target_name" ]; then
+		echo "Usage: $__BINNAME show <target_name>"
+		die 'missing target name'
+	fi
+
 	if [ ! -f "$target_file" ]; then
-		die "file '$target_file' doesn't exist. Use '$0 list' to show available targets."
+		die "file '$target_file' doesn't exist. Use '$__BINNAME list' to show available targets."
 		return
 	fi
 	
@@ -416,7 +421,7 @@ __private_show_target() {
 	fi
 
 	echo "Source File:      $target_file"
-	echo "Resources Dir:    ./$target_name"
+	echo "Resources Dir:    $__DIR/$target_name"
 
 	# Dry run target to collect declarations.
 	G_DRY_RUN=1
