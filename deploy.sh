@@ -304,12 +304,18 @@ EOF
 
 # @param $1 key
 __private_get_os_release_field() {
-	line="$(grep -E "^ID=$key" /etc/os-release | head -n 1)"
+	line="$(grep -E "^$1=" /etc/os-release | head -n 1)"
 	if [ -z "$line" ]; then
 		return
 	fi
 
 	value="${line#*=}"
+	case "$value" in
+		\"*\")
+			value="${value#\"}";
+			value="${value%\"}";
+			;;
+	esac
 	echo "$value"
 }
 
@@ -318,11 +324,27 @@ __private_init_build_constraints() {
 	export G_ARCH="$(uname -m | tr '[:upper:]' '[:lower:]')"	
 
 	if [ ! -f /etc/os-release ]; then
+		log_debug 'os-release: not found'
 		return
 	fi
 
-	__private_get_os_release_field ID
-	__private_get_os_release_field VERSION_ID
+	G_DISTRO="$(__private_get_os_release_field ID)"
+	if [ -z "$G_DISTRO" ]; then
+		G_DISTRO='unknown'
+	fi
+
+	G_DISTRO_VERSION="$(__private_get_os_release_field VERSION_CODENAME)"
+	if [ -z "$G_DISTRO_VERSION" ]; then
+		debug_log 'os-release: VERSION_CODENAME is missing, trying VERSION_ID'
+		G_DISTRO_VERSION="$(__private_get_os_release_field VERSION_ID)"
+	fi
+
+	if [ -z "$G_DISTRO_VERSION" ]; then
+		debug_log 'os-release: VERSION_ID is missing, trying BUILD_ID'
+		G_DISTRO_VERSION="$(__private_get_os_release_field BUILD_ID)"
+	fi
+
+	debug_log "os-release: detected distro='$G_DISTRO' version='$G_DISTRO_VERSION'"
 }
 
 # @param $1 pragma name
@@ -377,6 +399,12 @@ __private_check_target_constraints() {
 						;;
 					'arch')
 						want_value="$G_ARCH"
+						;;
+					'distro')
+						want_value="$G_DISTRO"
+						;;
+					'version' | 'distro_version')
+						want_value="$G_DISTRO_VERSION"
 						;;
 					*)
 						if [ -z "$is_silent" ]; then
