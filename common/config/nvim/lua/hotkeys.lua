@@ -3,7 +3,7 @@ local wk = require("which-key")
 -- See: https://github.com/folke/which-key.nvim
 wk.setup({})
 
--- Note: debugger hotkeys defined at languages/dap.lua
+-- Note: some hotkeys are defined in plugins/*.lua
 
 -- Leader
 wk.add({
