@@ -25,66 +25,66 @@ wk.add({
     -- Hotkeys inspired by GoLand/IntelliJ
     {
       "<F5>", function() require("dap").continue() end,
-      desc = "Launch configuration", mode = "n", group = "dap",
+      desc = "launch configuration", mode = "n", group = "dap",
     },
     {
       "<F8>", function() require("dap").step_over() end,
-      desc = "Step over", mode = "n", group = "dap",
+      desc = "step over", mode = "n", group = "dap",
     },
     {
       "<F7>", function() require("dap").step_into() end,
-      desc = "Step into", mode = "n", group = "dap",
+      desc = "step into", mode = "n", group = "dap",
     },
     {
       -- <S-F8> doesn't work for some reason.
       "<F9>", function() require("dap").step_out() end,
-      desc = "Step out", mode = "n", group = "dap",
+      desc = "step out", mode = "n", group = "dap",
     },
 })
 
 wk.add({
-    { "<leader>d", group = "dap" },
+    { "<Leader>d", group = "dap" },
     {
       --   "<Leader>dd", function() require("dap").continue() end,
       "<Leader>dd", function() require'telescope'.extensions.dap.configurations{} end,
-      desc = "Launch configuration", mode = "n",
+      desc = "debug", mode = "n",
     },
     {
       "<Leader>dR", function() require("dap").restart() end,
-      desc = "Restart current session", mode = "n",
+      desc = "restart current session", mode = "n",
     },
     {
       "<Leader>dr", function() require("dap").run_last() end,
-      desc = "Run last debug configuration", mode = "n",
+      desc = "run last debug configuration", mode = "n",
     },
     {
       "<Leader>dq", function() require("dap").terminate() end,
-      desc = "Terminate debug session", mode = "n",
+      desc = "terminate debug session", mode = "n",
     },
     {
       "<Leader>db", function() require("dap").toggle_breakpoint() end,
-      desc = "Toggle breakpoint", mode = "n",
+      desc = "toggle breakpoint", mode = "n",
     },
     {
       "<Leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition:"), nil, nil) end,
-      desc = "Add conditional breakpoint", mode = "n",
+      desc = "add conditional breakpoint", mode = "n",
     },
     {
       "<Leader>dlb", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
-      desc = "Add log breakpoint", mode = "n",
+      desc = "add log breakpoint", mode = "n",
     },
     {
       "<Leader>dr", function() require("dap").repl.open() end,
-      desc = "Open REPL", mode = "n",
+      desc = "open REPL", mode = "n",
     },
     {
       "<Leader>d/", function() require'telescope'.extensions.dap.commands{} end,
-      desc = "Commands", mode = "n",
+      desc = "commands", mode = "n",
     },
     {
       -- "<Leader>d:", function() require("dap").list_breakpoints() end,
       "<Leader>d:", function() require'telescope'.extensions.dap.list_breakpoints{} end,
-      desc = "List breakpoints", mode = "n",
+      desc = "list breakpoints", mode = "n",
     },
 
     {
@@ -94,7 +94,7 @@ wk.add({
         -- widgets.centered_float(widgets.frames)
         require'telescope'.extensions.dap.frames{}
       end,
-      desc = "UI: stack frames", mode = "n",
+      desc = "stack frames", mode = "n",
     },
     {
       "<Leader>ds",
@@ -103,21 +103,21 @@ wk.add({
         -- local widgets = require("dap.ui.widgets")
         -- widgets.centered_float(widgets.scopes)
       end,
-      desc = "UI: variable scopes", mode = "n",
+      desc = "variable scopes", mode = "n",
     },
     {
       "<Leader>dh",
       function()
         require("dap.ui.widgets").hover()
       end,
-      desc = "UI: hover", mode = {"n", "v"},
+      desc = "ui: hover", mode = {"n", "v"},
     },
     {
       "<Leader>dp",
       function()
         require("dap.ui.widgets").preview()
       end,
-      desc = "UI: preview", mode = {"n", "v"},
+      desc = "ui: preview", mode = {"n", "v"},
     },
 })
 
