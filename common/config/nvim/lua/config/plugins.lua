@@ -11,7 +11,7 @@ telescope.setup {
   },
   pickers = {
     find_files = {
-      hidden = true,
+      hidden = false, -- Not needed anymore
     },
   },
   extensions = {
@@ -24,8 +24,6 @@ telescope.setup {
 telescope.load_extension('harpoon')
 telescope.load_extension('ui-select')
 telescope.load_extension('telescope-tabs')
-
-local cmp = require('cmp')
 
 -- See: https://github.com/f-person/git-blame.nvim
 require('gitblame').setup {
@@ -40,6 +38,7 @@ require('session_manager').setup({
 })
 
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
+local cmp = require('cmp')
 cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
@@ -53,6 +52,29 @@ cmp.setup {
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
 }
+
+-- Enable autosuggestions for commands
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
+
 
 -- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
 require('nvim-treesitter.configs').setup {

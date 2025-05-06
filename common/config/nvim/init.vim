@@ -85,6 +85,7 @@ if has('nvim')
 
   " JS/TS
   Plug 'MunifTanjim/prettier.nvim'
+
 else
   Plug 'preservim/nerdcommenter'
   Plug 'fatih/vim-go'
