@@ -44,6 +44,7 @@ if has('nvim')
   Plug 'numToStr/Comment.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'nvim-telescope/telescope-ui-select.nvim'
+  Plug 'nvim-telescope/telescope-dap.nvim'
   Plug 'LukasPietzschmann/telescope-tabs'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'f-person/git-blame.nvim'
