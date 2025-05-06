@@ -39,16 +39,16 @@ install_vim_plug() {
 	nvim -es -u "$TARGET_DIR/config/nvim/init.vim" -i NONE -c 'PlugInstall' -c 'qa'
 }
 
-# Mount all dotfiles in common/dotfiles - works
+# Mount all dotfiles in common/dotfiles
 link_home dotfiles
 
-# common/bin to ~/.local/bin - works
+# common/bin to ~/.local/bin
 link_local_bin bin
 
-# Mount emacs config to ~/.emacs.d - works
+# Mount emacs config to ~/.emacs.d
 link_home '.emacs.d' emacs
 
-# Mount ~/.config - works
+# Mount ~/.config
 link_xdg_config config
 
 step install_vim_plug 'flag:vim'
