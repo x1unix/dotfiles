@@ -79,12 +79,17 @@ if has('nvim')
   " Go
   Plug 'ray-x/go.nvim'
   Plug 'ray-x/guihua.lua'
+  Plug 'leoluz/nvim-dap-go'
 
   " Gno
   Plug 'x1unix/gno.nvim'
 
   " JS/TS
   Plug 'MunifTanjim/prettier.nvim'
+
+  " Misc
+  " TODO: migrate to lazy.nvim
+  Plug 'folke/lazydev.nvim'
 
 else
   Plug 'preservim/nerdcommenter'
