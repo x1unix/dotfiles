@@ -607,9 +607,12 @@ __private_eval_target() {
 	is_silent="$2"
 	new_target="$1"
 	script_file="${TARGETS_DIR}/${new_target}${TARGET_EXT}"
-	if ! __private_check_target_constraints "$new_target" "$script_file"; then
-		die 'Aborting due to unsatisfied constraints'	
+	if [ -z "$G_DRY_RUN" ]; then
+		if ! __private_check_target_constraints "$new_target" "$script_file"; then
+			die 'Aborting due to unsatisfied constraints'	
+		fi
 	fi
+
 
 	PREV_TARGET="$CURRENT_TARGET"
 	CURRENT_TARGET="$new_target"
