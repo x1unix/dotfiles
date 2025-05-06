@@ -177,7 +177,8 @@ autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
 
 " Lua cfg
 if has('nvim')
-  lua require('config')
+  " lua require('config')
+  lua require('.')
   colorscheme vscode 
 else
   " Vim Airline Setup
