@@ -5,6 +5,9 @@
 (display-line-numbers-mode 1)
 (global-display-line-numbers-mode 1)
 
+;; Add custom file to prevent emacs modifying original file.
+(setq custom-file "~/.emacs.d/custom")
+
 ;; Font
 (defun rc/get-default-font ()
   (cond
