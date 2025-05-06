@@ -128,53 +128,6 @@ set nobomb " No BOM
 " == ENVS ==
 let $RC="$HOME/.vimrc"
 
-" == Hotkeys ==
-nnoremap <Leader>\ :Neotree toggle<CR>
-
-" Tabs
-nnoremap <Leader>j :tabp<CR>
-nnoremap <Leader>k :tabn<CR>
-
-" Telescope
-nnoremap <Leader>T <cmd>Telescope<cr>
-nnoremap <Leader>t <cmd>Telescope telescope-tabs list_tabs<cr>
-nnoremap <Leader>: <cmd>Telescope find_files<cr>
-nnoremap <Leader>g <cmd>Telescope live_grep<cr>
-nnoremap <Leader>/ <cmd>Telescope current_buffer_fuzzy_find<cr>
-nnoremap <Leader>b <cmd>Telescope buffers<cr>
-nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <Leader>m <cmd>Telescope marks<cr>
-nnoremap <Leader>Tr <cmd>Telescope lsp_references<cr>
-nnoremap <Leader>Td <cmd>Telescope lsp_definitions<cr>
-nnoremap <Leader>Ti <cmd>Telescope lsp_implementations<cr>
-nnoremap <Leader>Ts <cmd>Telescope lsp_document_symbols<cr>
-nnoremap <Leader>s <cmd>Telescope lsp_document_symbols<cr>
-
-nnoremap gd <cmd>Telescope lsp_definitions<cr>
-nnoremap gr <cmd>Telescope lsp_references<cr>
-nnoremap gi <cmd>Telescope lsp_implementations<cr>
-nnoremap gw <cmd>Telescope diagnostics<cr>
-
-" LspSaga
-" See: https://github.com/mistgc/config.nvim/blob/d1b52b86aba704f6eecb2e95cf3d663f736ebfa1/lua/utils.lua#L53
-noremap ga <cmd>Lspsaga code_action<cr>
-noremap gh <cmd>Lspsaga hover_doc<cr>
-noremap gs <cmd>Lspsaga signature_help<cr>
-noremap g[ <cmd>Lspsaga diagnostic_jump_prev<cr>
-noremap g] <cmd>Lspsaga diagnostic_jump_next<cr>
-
-noremap <Leader>lo <cmd>Lspsaga outline<cr>
-noremap <Leader>lr <cmd>Lspsaga rename<cr>
-noremap <Leader>ld <cmd>Lspsaga goto_definition<cr>
-noremap <Leader>lf <cmd>Lspsaga lsp_finder<cr>
-noremap <Leader>lp <cmd>Lspsaga preview_definition<cr>
-noremap <Leader>ls <cmd>Lspsaga signature_help<cr>
-noremap <Leader>lw <cmd>Lspsaga show_line_diagnostics<cr>
-noremap <Leader>lW <cmd>Lspsaga show_workspace_diagnostics<cr>
-
-" Session Manager
-nnoremap <Leader>M <cmd>SessionManager<cr>
-
 call plug#end()
 
 " Fix tsx&jsx filetypes
