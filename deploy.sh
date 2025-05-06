@@ -302,9 +302,27 @@ EOF
 
 }
 
+# @param $1 key
+__private_get_os_release_field() {
+	line="$(grep -E "^ID=$key" /etc/os-release | head -n 1)"
+	if [ -z "$line" ]; then
+		return
+	fi
+
+	value="${line#*=}"
+	echo "$value"
+}
+
 __private_init_build_constraints() {
 	export G_OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 	export G_ARCH="$(uname -m | tr '[:upper:]' '[:lower:]')"	
+
+	if [ ! -f /etc/os-release ]; then
+		return
+	fi
+
+	__private_get_os_release_field ID
+	__private_get_os_release_field VERSION_ID
 }
 
 # @param $1 pragma name
