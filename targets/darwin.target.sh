@@ -6,7 +6,7 @@ darwin_brew_install() {
 	brew bundle --file="$TARGET_DIR/Brewfile"
 }
 
-step darwin_brew_install 'flag:pm'
+step darwin_brew_install 'flag:pkgs'
 require common
 link_xdg_config config
 

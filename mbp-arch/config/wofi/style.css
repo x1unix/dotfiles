@@ -1,0 +1,102 @@
+@define-color text #ffffff;
+@define-color text-dimmed #5c5c5c;
+@define-color surface0 #323232;
+@define-color surface1 #222;
+@define-color accent #285577;
+@define-color accent-border #437091;
+@define-color highlight #64bad7;
+@define-color highlight-border #64bad7;
+
+* {
+  /* font-family: 'Inter Variable', monospace; */
+  font-family: 'ZedMono Nerd Font', monospace;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Window */
+window {
+  background-color: @surface1;
+}
+
+/* Container inside a window */
+#outer-box {
+  border: 2px solid @accent-border;
+}
+
+/* Search results container */
+#inner-box {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+
+#expander-box {
+  background: @surface0;
+}
+
+/* Scroll */
+#scroll {
+  margin: 0px;
+  border: none;
+  background-color: @surface1;
+}
+
+/* Input */
+#input {
+  padding: 0px 5px;
+  background: @accent;
+  border: none;
+  color: @text;
+  border-radius: 0;
+}
+
+#input image {
+    border: none;
+    color: @text;
+}
+
+/* Search icon */
+#input image.left {
+  /* '-gtk-icon-size' doesn't have effect for some reason */
+  -gtk-icon-transform: scale(0.8);
+}
+
+/* Text */
+#text {
+  margin: 2px;
+  border: none;
+  color: @text;
+}
+
+#entry {
+  background-color: @base;
+}
+
+#entry arrow {
+  border: none;
+  color: @text;
+}
+
+#entry:nth-child(even) {
+  background: @surface0;
+}
+
+/* Selected Entry */
+#entry:selected {
+  background: @highlight;
+  border: none;
+}
+
+#entry:selected #text {
+  color: @text-dimmed;
+}
+
+#entry:selected .activatable #text {
+  color: @text;
+}
+
+#entry:selected arrow {
+  color: @text-dimmed;
+}
+

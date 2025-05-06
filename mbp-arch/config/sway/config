@@ -1,0 +1,264 @@
+# Read `man 5 sway` for a complete reference.
+# TODO: check https://github.com/jvinet/dotfiles/blob/85c3361b6ce6db770dd348d3995ee6d737de0dab/sway/config#L6
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Keys
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Colors
+set $C_focused_child_border #268bd2
+set $C_focused_indicator #86c1b9
+set $C_focused_text #ffffff
+set $C_focused_bg #285577
+set $C_focused_border #4c78cc
+client.focused $C_focused_border $C_focused_bg $C_focused_text $C_focused_indicator $C_focused_child_border
+
+# Misc
+set $font ZedMono Nerd Font Mono 10.75
+set $term alacritty
+set $menu wofi --show drun
+set $screenclip_copy slurp | grim -g - - | wl-copy
+set $screenclip_edit slurp | grim -g - - | swappy -f -
+set $screenclip_save slurp | grim -g - ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png
+
+# Appearance
+font pango:$font
+
+# No titlebar
+default_border pixel
+
+# Borders
+#smart_borders on
+
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
+output eDP-1 scale 1.5
+# HDMI-A-1 resolution 1920x1080 position 1920,0
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+exec swayidle -w \
+      timeout 300 'swaylock -f -c 000000' \
+      timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+      before-sleep 'playerctl pause; swaylock -e -f -c 000000'
+
+
+exec dunst
+exec_always nm-applet --indicator
+exec_always blueman-applet
+exec fusuma
+exec wl-paste -t text --watch clipman store --no-persist
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+    scroll_factor 0.5
+}
+
+# Core gestures. Rest is managed by fusuma.
+bindgesture swipe:4:right workspace prev
+bindgesture swipe:4:left workspace next
+
+input * {
+    xkb_layout "us,ru"
+    xkb_options grp:alt_shift_toggle
+}
+
+### Key bindings
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym --to-code $mod+q kill
+
+# Start your launcher
+bindsym $mod+space exec $menu
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym --to-code {
+  $mod+Shift+c reload
+  $mod+Alt+c exec 'pkill -SIGUSR2 waybar'
+}
+
+# Exit sway (logs you out of your Wayland session)
+#bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+Escape exec 'swaymsg exit'
+bindsym $mod+Escape exec 'swaylock -e -f -c 000000' 
+
+# Moving around:
+bindsym --to-code {
+  # Move your focus around
+  $mod+$left focus left
+  $mod+$down focus down
+  $mod+$up focus up
+  $mod+$right focus right
+  $mod+Tab focus next
+
+  # Move the focused window with the same, but add Shift
+  $mod+Shift+$left move left
+  $mod+Shift+$down move down
+  $mod+Shift+$up move up
+  $mod+Shift+$right move right
+}
+
+# Workspaces:
+bindsym {
+  $mod+1 workspace number 1
+  $mod+2 workspace number 2
+  $mod+3 workspace number 3
+  $mod+4 workspace number 4
+  $mod+5 workspace number 5
+  $mod+6 workspace number 6
+  $mod+7 workspace number 7
+  $mod+8 workspace number 8
+  $mod+9 workspace number 9
+  $mod+0 workspace number 10
+}
+
+# Move focused container to workspace
+# Note: workspaces can have any name you want, not just numbers.
+bindsym {
+  $mod+Shift+1 move container to workspace number 1
+  $mod+Shift+2 move container to workspace number 2
+  $mod+Shift+3 move container to workspace number 3
+  $mod+Shift+4 move container to workspace number 4
+  $mod+Shift+5 move container to workspace number 5
+  $mod+Shift+6 move container to workspace number 6
+  $mod+Shift+7 move container to workspace number 7
+  $mod+Shift+8 move container to workspace number 8
+  $mod+Shift+9 move container to workspace number 9
+  $mod+Shift+0 move container to workspace number 10
+}
+
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym --to-code {
+  $mod+b splith
+  $mod+v splitv
+}
+
+# Switch the current container between different layout styles
+bindsym --to-code {
+  $mod+s layout stacking
+  $mod+w layout tabbed
+  $mod+e layout toggle split
+}
+
+bindsym --to-code {
+  # Make the current focus fullscreen
+  $mod+f fullscreen
+
+  # Toggle the current focus between tiling and floating mode
+  $mod+Shift+f floating toggle
+
+  # Swap focus between the tiling area and the floating area
+  $mod+d focus mode_toggle
+
+  # Move focus to the parent container
+  $mod+a focus parent
+}
+
+#Screenshot
+bindsym --to-code --release {
+  $mod+Shift+P exec $screenclip_save
+  $mod+Ctrl+Shift+P exec $screenclip_edit
+  $mod+P exec $screenclip_copy
+}
+
+# Special key to take a screenshot with grim
+bindsym Print exec grim
+
+#
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+bindsym {
+  # Move the currently focused window to the scratchpad
+  $mod+Shift+minus move scratchpad
+
+  # Show the next scratchpad window or hide the focused scratchpad window.
+  # If there are multiple scratchpad windows, this command cycles through them.
+  $mod+minus scratchpad show
+}
+
+#
+# Resizing containers:
+#
+set $resize_step 32px
+mode "resize" {
+  bindsym --to-code {
+    $left resize shrink width $resize_step
+    $down resize grow height $resize_step
+    $up resize shrink height $resize_step
+    $right resize grow width $resize_step
+  }
+
+  # Return to default mode
+  bindsym {
+    Return mode "default"
+    Escape mode "default"
+  }
+}
+
+bindsym --to-code $mod+r mode "resize"
+
+bindsym --locked {
+  # Audio:
+  XF86AudioRaiseVolume exec wpctl set-volume -l 1 \@DEFAULT_AUDIO_SINK@ 5%+
+  XF86AudioLowerVolume exec wpctl set-volume \@DEFAULT_AUDIO_SINK@ 5%-
+  XF86AudioMute exec wpctl set-mute \@DEFAULT_AUDIO_SINK@ toggle
+  XF86AudioMicMute exec wpctl set-mute \@DEFAULT_AUDIO_SOURCE@ toggle
+  # Brightness:
+  XF86MonBrightnessUp exec brightnessctl set 10%+
+  XF86MonBrightnessDown exec brightnessctl set 10%-
+  # Media keys
+  XF86AudioNext exec playerctl next
+  XF86AudioPause exec playerctl play-pause
+  XF86AudioPlay exec playerctl play-pause
+  XF86AudioPrev exec playerctl previous
+}
+
+# Mouse follows focus
+mouse_warping container
+
+# Prevent hotkey steal
+seat * shortcuts_inhibitor disable
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+# bar {
+#     position bottom
+#     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
+
+bar {
+  swaybar_command waybar
+}
+
+include /etc/sway/config.d/*

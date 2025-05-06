@@ -1,0 +1,88 @@
+// See: https://github.com/Alexays/Waybar/wiki/Module:-Workspaces
+// See: https://github.com/mhkarimi1383/waybar/blob/main/config.jsonc
+{
+  "layer": "top",
+  "position": "top",
+  "gtk-layer-shell": true,
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-center": ["clock"],
+  "modules-right": ["tray", "idle_inhibitor", "sway/language", "wireplumber", "backlight", "battery"],
+  "sway/workspaces": {
+    "format": "{name}",
+  },
+  "mode": {
+    "format": "{title}",
+    "max-length": 10,
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%a %d %b %Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰛊",
+    },
+  },
+  "sway/language": {
+    "format": "{short}",
+    "tooltip-format": "{long}",
+    "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 16,
+  },
+  "battery": {
+    "interval": 5,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹",
+    ],
+  },
+  "wireplumber": {
+    "format": "{icon}",
+    "format-muted": "󰸈",
+    "on-click": "pavucontrol",
+    "tooltip-format": "{node_name} - {volume}%",
+    "format-icons": {
+      "default2": ["", "", ""],
+      "default": ["󰕿", "󰖀", "󰕾"],
+    },
+  },
+  "backlight": {
+    "device": "gmux_backlight",
+    "format": "{icon}",
+    "tooltip-format": "{percent}%",
+    "on-scroll-up": "brightnessctl s '+10%'",
+    "on-scroll-down": "brightnessctl s '10%-'",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+  },
+}

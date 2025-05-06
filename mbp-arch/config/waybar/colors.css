@@ -1,0 +1,28 @@
+@define-color text #ffffff;
+@define-color base #323232;
+@define-color surface0 #222222;
+
+/* sway/workspaces */
+@define-color ws-active-background #285577;
+@define-color ws-active-border #437091;
+@define-color ws-active-text #ffffff;
+@define-color ws-inactive-text #5c5c5c;
+@define-color ws-inactive-border #64bad7;
+@define-color ws-inactive-background #64bad7;
+
+/* @define-color red #ab4642; */
+@define-color red #900000;
+@define-color green #a1b56c;
+@define-color yellow #f7ca88;
+@define-color blue #7cafc2;
+@define-color magenta #ba88af;
+@define-color cyan #86c1b9;
+@define-color orange #dc9656;
+
+@define-color hi-red #ab4642;
+@define-color hi-green #a1b56c;
+@define-color hi-yellow #f7ca88;
+@define-color hi-blue #7cafc2;
+@define-color hi-magenta #ba8baf;
+@define-color hi-cyan #86c1b9;
+
