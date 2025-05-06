@@ -17,6 +17,7 @@ ESC=$(printf '\033')
 BOLD="${ESC}[1m"
 RESET="${ESC}[0m"
 RED="${ESC}[31m"
+CYAN="${ESC}[36m"
 YELLOW="${ESC}[33m"
 WHITE="${ESC}[37m"
 GRAY="${ESC}[90m"
@@ -28,6 +29,10 @@ die() {
 
 notify_step() {
 	printf "%s%s:: %s%s\n" "$BOLD" "$WHITE" "$*" "$RESET"
+}
+
+notify_info() {
+	printf "%s%sNOTE:%s %s\n" "$BOLD" "$CYAN" "$RESET" "$*"
 }
 
 notify_warn() {
@@ -252,7 +257,7 @@ __private_step_with_flag() {
 	eval "flag_value=\"\$G_FLAG_$bind_val\""
 	debug_log "condition: $func_name - flag:'$bind_val'; value:'$flag_value'"
 	if [ -z "$flag_value" ] && [ -z "$G_FLAG_all" ]; then
-		echo "step '$func_name' skipped as $bind_opt --$bind_val is missing"
+		notify_info "step '$func_name' skipped as $bind_opt --$bind_val is missing"
 		return
 	fi
 	
