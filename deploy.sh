@@ -324,7 +324,7 @@ __private_init_build_constraints() {
 	export G_ARCH="$(uname -m | tr '[:upper:]' '[:lower:]')"	
 
 	if [ ! -f /etc/os-release ]; then
-		log_debug 'os-release: not found'
+		debug_log 'os-release: not found'
 		return
 	fi
 
