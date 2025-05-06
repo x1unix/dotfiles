@@ -27,6 +27,10 @@ die() {
 	exit 1
 }
 
+notify_err() {
+	printf "%s%sError:%s %s%s%s%s\n" "$BOLD" "$RED" "$RESET" "$BOLD" "$WHITE" "$1" "$RESET" >&2
+}
+
 notify_step() {
 	printf "%s%s:: %s%s\n" "$BOLD" "$WHITE" "$*" "$RESET"
 }
@@ -682,7 +686,8 @@ __private_main() {
 			;;
 		*)
 			if [ -n "$cmd" ]; then
-				printf 'Error: unknown sub-command "%s"\n\n' "$cmd"
+				notify_err 'unknown sub-command "$cmd"'
+				echo ''
 			fi
 
 			__private_help
