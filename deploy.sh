@@ -1,31 +1,42 @@
 #!/usr/bin/env sh
 set -e
 
-TARGETS_DIR=targets
+__BINNAME="$0"
+__FILE="$(readlink -f -- "$0")"
+__DIR="$(dirname -- "$__FILE")"
+
 TARGET_EXT=.target.sh
-__FILE="$0"
+TARGETS_DIR="$__DIR/targets"
 
 # XDG defaults
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-"$HOME/.local/state"}"
 
+ESC=$(printf '\033')
+BOLD="${ESC}[1m"
+RESET="${ESC}[0m"
+RED="${ESC}[31m"
+YELLOW="${ESC}[33m"
+WHITE="${ESC}[37m"
+GRAY="${ESC}[90m"
+
 die() {
-	printf "Error: %s\n" "$1" >&2
+	printf "%s%sError:%s %s%s%s\n" "$BOLD" "$RED" "$RESET" "$BOLD" "$WHITE" "$1" >&2
 	exit 1
 }
 
 notify_step() {
-	printf ":: %s\n" "$@"
+	printf "%s%s:: %s%s\n" "$BOLD" "$WHITE" "$*" "$RESET"
 }
 
 notify_warn() {
-	printf "WARNING: %s\n" "$@"
+	printf "%s%sWARNING:%s %s%s%s\n" "$BOLD" "$YELLOW" "$RESET" "$BOLD" "$WHITE" "$*"
 }
 
 debug_log() {
 	if [ -n "$DEBUG" ]; then	
-		printf "[dbg] %s\n" "$@" >&2
+		printf "%s[dbg] %s%s\n" "$GRAY" "$*" "$RESET" >&2
 	fi
 }
 
@@ -48,8 +59,26 @@ assert_def() {
 	fi
 }
 
+link_dot() {
+	__private_stow 'link_dot' "$HOME" "$pkg" --dotfiles
+}
+
 link_home() {
-	__private_stow 'link_home' "$HOME" "$1"
+	dst="$HOME"
+	pkg="$1"
+	if [ -n "$2" ]; then
+		dst="$HOME/$1"
+		pkg="$2"
+		mkdir -p "$dst"
+	fi
+
+	__private_stow 'link_home' "$dst" "$pkg"
+}
+
+link_local_bin() {
+	bindir="$HOME/.local/bin"
+	mkdir -p "$bindir"
+	__private_stow 'link_local_bin' "$bindir" "$1"
 }
 
 link_xdg_config() {
@@ -64,9 +93,21 @@ link_xdg_state() {
 	__private_stow 'link_xdg_state' "$XDG_STATE_HOME" "$1"
 }
 
+pad_right() {
+    str=$1
+    width=$2
+    padchar=${3:-" "}  # default to space if not provided
+
+    while [ "${#str}" -lt "$width" ]; do
+        str="$str$padchar"
+    done
+    printf "%s" "$str"
+}
+
 # @param $1 operation name
 # @param $2 dest path
 # @param $3 target package (target/package)
+# @param $4 raw stow opts
 __private_stow() {
 	assert_in_target
 	assert_def "$2" "$1: missing dir name"
@@ -79,18 +120,19 @@ __private_stow() {
 	fi
 
 	if [ -n "$G_REVERT" ]; then
-		notify_step "Removing '$pkg' symlinks..."
+		notify_step "Removing '$CURRENT_TARGET/$pkg' symlinks..."
 		__private_stow_unlink "$1" "$dst" "$pkg"
 		return
 	fi
 
-	notify_step "Symlink item from '$pkg' to '$dst' ..."
+	notify_step "Symlink item from '$CURRENT_TARGET/$pkg' to '$dst' ..."
 	__private_stow_link "$1" "$dst" "$pkg"
 }
 
 # @param $1 operation name
 # @param $2 dest path
 # @param $3 target package (target/package)
+# @param $4 raw stow opts
 __private_stow_link() {
 	if [ -n "$G_DRY_RUN" ]; then
 		return
@@ -99,13 +141,16 @@ __private_stow_link() {
 	assert_command stow
 	mkdir -p "$2"
 
-	recipes_dir="$CURRENT_TARGET"
-	stow -R -t "$2" -d "$recipes_dir" "$3"
+	recipes_dir="$__DIR/$CURRENT_TARGET"
+	cmd="stow -v -t '$2' -d '$recipes_dir' '$3' $4"
+	echo "$cmd"
+	sh -c "$cmd"
 }
 
 # @param $1 operation name
 # @param $2 dest path
 # @param $3 target package (target/package)
+# @param $4 raw stow opts
 __private_stow_unlink() {
 	if [ -n "$G_DRY_RUN" ]; then
 		return
@@ -121,14 +166,14 @@ __private_stow_unlink() {
 		die "$1: directory '$recipes_dir/$3' doesn't exist"
 	fi
 
-	stow -D -t "$2" -d "$recipes_dir" "$3"
+	stow -v -D -t "$2" -d "$recipes_dir" "$3" "$4"
 }
 
 # @param $1 target
-extends() {
+require() {
 	assert_in_target
 	if [ "$#" -eq 0 ]; then
-		die 'extends: missing target'
+		die 'require: missing target'
 	fi
 
 	while [ $# -gt 0 ]; do
@@ -137,7 +182,7 @@ extends() {
 		shift
 
 		if [ ! -f "$target_file" ]; then
-			die "extends: '$target_file' doesn't exist"
+			die "require: '$target_file' doesn't exist"
 			return
 		fi
 		
@@ -147,7 +192,7 @@ extends() {
 		fi
 
 		notify_step "Processing parent target '$target_name' ..."
-		. "$target_file"
+		__private_eval_target "$target_name" 1
 	done
 }
 
@@ -206,8 +251,8 @@ __private_step_with_flag() {
 
 	eval "flag_value=\"\$G_FLAG_$bind_val\""
 	debug_log "condition: $func_name - flag:'$bind_val'; value:'$flag_value'"
-	if [ -z "$flag_value" ]; then
-		notify_step "$bind_opt $bind_val is empty, skipping..."
+	if [ -z "$flag_value" ] && [ -z "$G_FLAG_all" ]; then
+		echo "step '$func_name' skipped as $bind_opt --$bind_val is missing"
 		return
 	fi
 	
@@ -229,27 +274,8 @@ __private_step_with_flag() {
 	unset flag_value
 }
 
-__private_load_targets() {
-	if [ ! -d "$TARGETS_DIR" ]; then
-		return
-	fi
-
-	assert_in_target
-
-	for f in "$TARGETS_DIR"/*"$TARGET_EXT"; do 
-		explain_target_file "$f"
-	done
-}
-
 __private_get_target_name() {
 	basename "$1" | sed "s|$TARGET_EXT\$||"
-}
-
-# @param $1 target file
-__private_explain_target_file() {
-	G_DRY_RUN=1
-	CURRENT_TARGET="$(basename $1 | sed "s|$TARGET_EXT\$||")"
-	echo "$CURRENT_TARGET"
 }
 
 __private_help() {
@@ -405,8 +431,12 @@ __private_show_target() {
 		for val in $_DOC_FLAGS; do
 			flagname="$(printf '%s' "$val" | cut -d':' -f1)"
 			func_name="$(printf '%s' "$val" | cut -d':' -f2)"
-			echo "  --$flagname | -$flagname \t - Runs '$func_name' step"
+			flagstr="$(pad_right "$flagname" 10)"
+			echo "  --$flagstr - Runs optional '$func_name' step"
 		done
+
+		flagstr="$(pad_right 'all' 10)"
+		echo "  --$flagstr - Runs flagged optional steps"
 	fi 
 }
 
@@ -505,11 +535,14 @@ __private_parse_flags() {
 __private_eval_target() {
 	assert_def "$1" "empty target name (at: $CURRENT_TARGET)"
 	if [ -r "$MAIN_TARGET" ]; then
+		debug_log "set MAIN_TARGET='$1'"
 		MAIN_TARGET="$1"
 	fi
 
 	is_silent="$2"
+	PREV_TARGET="$CURRENT_TARGET"
 	CURRENT_TARGET="$1"
+	TARGET_DIR="${__DIR}/${CURRENT_TARGET}"
 	script_file="${TARGETS_DIR}/${CURRENT_TARGET}${TARGET_EXT}"
 	if [ ! -f "$script_file" ]; then
 		die "Target file '$script_file' doesn't exist"
@@ -521,6 +554,11 @@ __private_eval_target() {
 	fi
 
 	. "$script_file"
+
+	# Restore env
+	# FIXME: use stack to avoid undefined behavior during nesting
+	CURRENT_TARGET="$PREV_TARGET"
+	TARGET_DIR="${__DIR}/${CURRENT_TARGET}"
 }
 
 __private_deploy_cmd() {
@@ -530,7 +568,7 @@ __private_deploy_cmd() {
 			opt='rollback'
 		fi
 
-		echo "Usage: $__FILE $opt target_name [flags]"
+		echo "Usage: $__BINNAME $opt target_name [flags]"
 		die "missing target name."
 	fi
 

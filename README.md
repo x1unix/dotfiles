@@ -2,7 +2,11 @@
 
 ## Install
 
-* `./install.sh all`
+* Find your deployment target using `./deploy.sh list`
+* Run `./deploy.sh apply <your target> --all`
+
+> [!NOTE]
+> Use `./deploy.sh info` to get information about each target.
 
 ## Post-installation
 
