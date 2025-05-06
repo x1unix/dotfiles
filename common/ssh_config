@@ -1,0 +1,43 @@
+Host github.com
+	AddKeysToAgent yes
+	IdentityFile "~/.ssh/gh_rsa"
+
+Host hz2.x1unix.dev
+	Port 20480
+	IdentityFile "~/.ssh/id_infra"
+
+Host hz2
+	Port 20480
+	IdentityFile "~/.ssh/id_infra"
+
+Host hz3-direct
+	HostName 138.201.206.144
+	User x1unix
+	Port 30022
+	IdentityFile "~/.ssh/id_infra"
+
+Host hz3
+	User x1unix
+	IdentityFile "~/.ssh/id_infra"
+
+# oracle cloud micro
+Host oracle
+	User ubuntu
+	HostName 143.47.187.185
+	AddKeysToAgent yes
+	IdentityFile "~/.ssh/id_infra_rsa"
+
+Host hz2
+	User x1unix
+	IdentityFile "~/.ssh/id_infra"
+
+Host tinybox
+	User ds
+	HostName 192.168.1.101
+	IdentityFile "~/.ssh/id_tinybox"
+
+Host mbp-arch
+	User x1unix
+	HostName 192.168.1.68
+	IdentityFile "~/.ssh/id_infra"
+

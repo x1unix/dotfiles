@@ -39,6 +39,20 @@ install_vim_plug() {
 	nvim -es -u "$TARGET_DIR/config/nvim/init.vim" -i NONE -c 'PlugInstall' -c 'qa'
 }
 
+install_ssh_config() {
+	mkdir -p ~/.ssh
+
+	include_dir="${TARGET_DIR#"$HOME"}"
+	include_dir="~$include_dir"
+
+	ssh_include="Include \"$include_dir/ssh_config\""
+	if ! grep -q "$ssh_include" ~/.ssh/config; then
+		echo "$ssh_include" >> ~/.ssh/config
+	else
+		echo 'ssh config already updated'
+	fi
+}
+
 # Mount all dotfiles in common/dotfiles
 link_home dotfiles
 
@@ -54,4 +68,5 @@ link_xdg_config config
 step install_vim_plug 'flag:vim'
 step install_shmgr 'flag:shmgr'
 step install_tpm 'flag:tpm'
+step install_ssh_config
 
