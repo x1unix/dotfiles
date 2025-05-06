@@ -1,30 +1,3 @@
-local telescope = require("telescope")
-telescope.setup {
-  defaults = {
-    file_ignore_patterns = {
-      "^.git/",
-      "^.vscode/",
-      "^.idea/",
-      "^.DS_Store",
-      "node_modules/",
-    },
-  },
-  pickers = {
-    find_files = {
-      hidden = false, -- Not needed anymore
-    },
-  },
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {}
-    },
-  }
-}
-
-telescope.load_extension('harpoon')
-telescope.load_extension('ui-select')
-telescope.load_extension('telescope-tabs')
-
 -- See: https://github.com/f-person/git-blame.nvim
 require('gitblame').setup {
   enabled = false,
@@ -86,25 +59,6 @@ require('gitsigns').setup()
 
 -- See: https://github.com/numToStr/Comment.nvim#configuration-optional
 require('Comment').setup()
-
--- UFO for folding.
--- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
--- See: https://github.com/kevinhwang91/nvim-ufo
-require('ufo').setup({
-    -- Use builtin treesitter for folding provider
-    provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
-    end
-})
 
 -- Prettier
 -- See: https://github.com/MunifTanjim/prettier.nvim#setting-up-prettiernvim
