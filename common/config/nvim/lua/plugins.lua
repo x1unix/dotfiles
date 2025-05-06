@@ -87,9 +87,6 @@ require('gitsigns').setup()
 -- See: https://github.com/numToStr/Comment.nvim#configuration-optional
 require('Comment').setup()
 
--- See: https://github.com/ray-x/go.nvim
-require("go").setup()
-
 -- UFO for folding.
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 vim.o.foldcolumn = '1' -- '0' is not bad

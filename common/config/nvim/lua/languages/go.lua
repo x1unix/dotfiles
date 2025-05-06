@@ -1,3 +1,6 @@
+-- See: https://github.com/ray-x/go.nvim
+require("go").setup()
+
 -- See: https://github.com/leoluz/nvim-dap-go
 require("dap-go").setup {
   dap_configurations = {
