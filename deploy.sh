@@ -322,6 +322,15 @@ __private_get_os_release_field() {
 __private_init_build_constraints() {
 	export G_OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 	export G_ARCH="$(uname -m | tr '[:upper:]' '[:lower:]')"	
+	export G_DISTRO='unknown'
+	export G_DISTRO_VERSION='unknown'
+
+	if [ "$G_OS" = 'darwin' ]; then
+		G_DISTRO="$(sw_vers --productName)"
+		G_DISTRO_VERSION="$(sw_vers --productVersion)"
+		debug_log 'os-release: using values from sw_vers'
+		return
+	fi
 
 	if [ ! -f /etc/os-release ]; then
 		debug_log 'os-release: not found'
@@ -424,7 +433,7 @@ __private_check_target_constraints() {
 				debug_log "constraints: not sasisfied: '$current_key' ('$current_value' != '$want_value')"
 				if [ -z "$is_silent" ]; then
 					echo "Target '$target_name' has unsatisfied constraints: $constraints"
-					echo "Current values: os=$G_OS arch=$G_ARCH"
+					echo "Current values: os=$G_OS arch=$G_ARCH distro=$G_DISTRO version=$G_DISTRO_VERSION"
 					die "cannot continue due to unsatisfied target constraints"
 				fi	
 
@@ -596,10 +605,15 @@ __private_eval_target() {
 	fi
 
 	is_silent="$2"
+	new_target="$1"
+	script_file="${TARGETS_DIR}/${new_target}${TARGET_EXT}"
+	if ! __private_check_target_constraints "$new_target" "$script_file"; then
+		die 'Aborting due to unsatisfied constraints'	
+	fi
+
 	PREV_TARGET="$CURRENT_TARGET"
-	CURRENT_TARGET="$1"
+	CURRENT_TARGET="$new_target"
 	TARGET_DIR="${__DIR}/${CURRENT_TARGET}"
-	script_file="${TARGETS_DIR}/${CURRENT_TARGET}${TARGET_EXT}"
 	if [ ! -f "$script_file" ]; then
 		die "Target file '$script_file' doesn't exist"
 		return
