@@ -1,11 +1,25 @@
 local lspconfig = require('lspconfig')
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 local use_ts_tools = true
 
+-- Fix filetypes for tsx & jsx
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = "*.tsx",
+  callback = function()
+    vim.bo.filetype = "typescriptreact"
+  end,
+})
+
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = "*.jsx",
+  callback = function()
+    vim.bo.filetype = "javascriptreact"
+  end,
+})
+
+
 lspconfig.eslint.setup({
-    on_attach = function (client, bufnr)
+    on_attach = function (_client, bufnr)
       vim.api.nvim_create_autocmd("BufWritePre", {
         buffer = bufnr,
         command = "EslintFixAll",

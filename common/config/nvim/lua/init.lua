@@ -11,8 +11,8 @@ require("lazydev").setup({
     end,
 })
 
+require("core")
 require("plugins")
 require("hotkeys")
-require("theme")
 require("languages")
 

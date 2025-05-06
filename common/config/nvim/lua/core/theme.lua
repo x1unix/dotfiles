@@ -38,10 +38,12 @@ local function init_lualine()
   })
 end
 
-local function init()
+local M = {}
+
+function M.setup()
   init_theme()
   init_lualine()
 end
 
-init()
+return M
 
