@@ -36,7 +36,7 @@ notify_info() {
 }
 
 notify_warn() {
-	printf "%s%sWARNING:%s %s%s%s\n" "$BOLD" "$YELLOW" "$RESET" "$BOLD" "$WHITE" "$*"
+	printf "%s%sWARNING:%s %s%s%s$s\n" "$BOLD" "$YELLOW" "$RESET" "$BOLD" "$WHITE" "$*" "$RESET"
 }
 
 debug_log() {
