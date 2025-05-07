@@ -60,6 +60,21 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
 
+" Neotest - https://github.com/nvim-neotest/neotest
+"Plug 'nvim-lua/plenary.nvim'
+Plug 'antoinemadec/FixCursorHold.nvim'
+"Plug 'nvim-treesitter/nvim-treesitter'
+"Plug 'nvim-neotest/nvim-nio'
+Plug 'nvim-neotest/neotest'
+
+" Neotest - integration
+Plug 'fredrikaverpil/neotest-golang'  " Go
+Plug 'mrcjkb/rustaceanvim'            " Rust
+Plug 'marilari88/neotest-vitest'      " vitest
+
+" Coverage for neotest
+Plug 'andythigpen/nvim-coverage'
+
 " Git
 Plug 'lewis6991/gitsigns.nvim', { 'tag': 'v0.9.0' } 
 

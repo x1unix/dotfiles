@@ -1,7 +1,7 @@
 require("lazydev").setup({
   debug = nil,
   runtime = vim.env.VIMRUNTIME,
-  library = { "nvim-dap-ui" },
+  library = { "nvim-dap-ui", "neotest" },
   integrations = {
     lspconfig = true,
     cmp = true,
