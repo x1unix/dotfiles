@@ -28,7 +28,7 @@ wk.add({
   },
   -- Telescope global shortcuts --
   {
-    "<Leader>t", "<cmd>Telescope telescope-tabs list_tabs<cr>",
+    "<Leader>w", "<cmd>Telescope telescope-tabs list_tabs<cr>",
     mode = "n", desc = "list tabs",
   },
   {
