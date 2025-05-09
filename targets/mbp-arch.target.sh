@@ -6,7 +6,7 @@ arch_pacman_install() {
 	sudo pacman -S \
 		sway swaybg swayidle swaylock xorg-xwaylang xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk wofi waybar wl-clipboard \
 		grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor neovim neofetch git net-tools man-db gpu-switch \
-		gnome-keyring blueman ttf-zed-mono-nerd zsh-syntax-highlighting zsh
+		gnome-keyring polkit-gnome blueman ttf-zed-mono-nerd zsh-syntax-highlighting zsh
 
 	paru ruby-fusuma
 }
