@@ -14,6 +14,12 @@
       "model": "qwen2.5-coder:7b",
       "title": "qwen2.5-coder:7b",
       "provider": "ollama"
+    },
+    {
+      "model": "gemini-2.0-flash",
+      "title": "gemini-2.0-flash",
+      "provider": "gemini",
+      "apiKey": "AIzaSyCLluU6SU67ccJ4pJSDsBfjtW7ih91MW4o"
     }
   ],
   "tabAutocompleteModel": {
