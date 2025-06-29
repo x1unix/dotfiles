@@ -14,6 +14,7 @@ Packages are managed by *lazy.nvim*.
   * `config`
     * `init.lua` - Vim configuration.
     * `theme.lua` - Theming config.
+    * `formatters.lua` - Code formatters config, powered by [conform.nvim](https://github.com/stevearc/conform.nvim).
   * `keymap` - Keymaps managed by [which-key](https://github.com/folke/which-key.nvim).
   * `plugins`
     * `core` - Core plugins
