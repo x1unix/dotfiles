@@ -9,8 +9,19 @@ return {
       'MunifTanjim/nui.nvim',
     },
     config = function()
+      -- Notify LSP server when file is renamed.
+      local function on_move(data)
+        Snacks.rename.on_rename_file(data.source, data.destination)
+      end
+      local events = require('neo-tree.events')
+      local event_handlers = {
+        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
+      }
+
       require('neo-tree').setup({
         close_if_last_window = true,
+        event_handlers = event_handlers,
         filesystem = {
           follow_current_file = {
             enabled = true,
@@ -21,17 +32,6 @@ return {
           --   hide_hidden = false,
           -- },
         },
-      })
-
-      -- Notify LSP server when file is renamed.
-      local function on_move(data)
-        Snacks.rename.on_rename_file(data.source, data.destination)
-      end
-      local events = require('neo-tree.events')
-      opts.event_handlers = opts.event_handlers or {}
-      vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
-        { event = events.FILE_RENAMED, handler = on_move },
       })
     end,
   },
