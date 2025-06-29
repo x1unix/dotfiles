@@ -26,6 +26,15 @@ return {
                 capabilities = capabilities
             }
 
+            lspconfig.eslint.setup({
+                on_attach = function (_client, bufnr)
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    buffer = bufnr,
+                    command = "EslintFixAll",
+                })
+                end
+            })
+
             -- Run ":checkhealth lsp" to see the status or to troubleshoot.
             -- Read ":help lspconfig" for details. Read ":help lspconfig-all" for the full list of server-specific details.
             --
