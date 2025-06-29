@@ -2,6 +2,9 @@ return {
   {
     'echasnovski/mini.nvim',
     version = false,
+    keys = {
+      { '<leader>e', '<cmd>:lua MiniFiles.open()<CR>', desc = 'mini.files' },
+    },
     config = function()
       -- Better Around/Inside textobject
       --
@@ -18,6 +21,16 @@ return {
       -- - sd'    - [s]urround [d]elete [']quotes
       -- - sr)'   - [s]urround [r]eplace [)][']
       require('mini.surround').setup()
+
+      require('mini.files').setup({
+        content = {
+          filter = function(name)
+            local blocked =
+              { ['__pycache__'] = true, ['venv'] = true, ['.venv'] = true, ['.pytest_cache'] = true, ['.git'] = true }
+            return not blocked[name.name]
+          end,
+        },
+      })
     end,
   },
 }
