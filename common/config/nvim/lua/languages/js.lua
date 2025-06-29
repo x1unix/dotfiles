@@ -27,23 +27,6 @@ lspconfig.eslint.setup({
     end
 })
 
-if (not use_ts_tools) then
-  -- ts_ls sucks and can't provide completion items.
-  -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
-  -- lspconfig.ts_ls.setup{}
-  lspconfig.ts_ls.setup{
-    capabilities = capabilities,
-    filetypes = { "js", "javascript", "typescript", "ojs", "typescriptreact", "typescript.tsx" },
-    root_dir = function ()
-      return vim.fs.root(0, {
-        "tsconfig.json",
-        "package.json",
-        "jsconfig.json",
-        ".git",
-      }) or vim.uv.cwd()
-    end,
-  }
-else
   -- See: https://github.com/pmizio/typescript-tools.nvim#%EF%B8%8F-configuration
   require('typescript-tools').setup{
     settings = {
@@ -90,7 +73,6 @@ else
       },
     },
   }
-end
 
 -- Call prettier
 -- local function is_prettier_file(fname)
