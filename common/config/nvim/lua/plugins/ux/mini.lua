@@ -31,6 +31,10 @@ return {
           end,
         },
       })
+
+      require('mini.tabline').setup({
+        tabpage_section = 'none',
+      })
     end,
   },
 }
