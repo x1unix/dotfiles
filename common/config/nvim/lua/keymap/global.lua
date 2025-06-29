@@ -22,6 +22,12 @@ wk.add({
     mode = 'n',
     desc = 'tab: next',
   },
+  {
+    '<Leader>q',
+    ':bd<cr>',
+    mode = 'n',
+    desc = 'buffer: close',
+  },
   -- Session manager --
   {
     '<Leader>M',

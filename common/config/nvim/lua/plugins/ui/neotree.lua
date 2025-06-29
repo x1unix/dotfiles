@@ -16,10 +16,10 @@ return {
             enabled = true,
           },
           hijack_netrw_behavior = 'open_default',
-          filtered_items = {
-            visible = true, -- when true, they will just be displayed differently than normal items
-            hide_hidden = false,
-          },
+          -- filtered_items = {
+          --   visible = true, -- when true, they will just be displayed differently than normal items
+          --   hide_hidden = false,
+          -- },
         },
       })
     end,
