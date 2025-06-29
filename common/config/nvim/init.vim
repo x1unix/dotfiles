@@ -54,11 +54,19 @@ Plug 'LukasPietzschmann/telescope-tabs'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'f-person/git-blame.nvim'
 " Plug 'nvim-tree/nvim-web-devicons'
+Plug 'folke/todo-comments.nvim'
+
+" Editing
+Plug 'ggandor/flit.nvim' " + leap & repeat as deps
+Plug 'ggandor/leap.nvim'
+Plug 'echasnovski/mini.nvim'
+"Plug 'tpope/vim-repeat'
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
 
 " Neotest - https://github.com/nvim-neotest/neotest
 "Plug 'nvim-lua/plenary.nvim'
