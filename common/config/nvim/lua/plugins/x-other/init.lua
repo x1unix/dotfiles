@@ -1,3 +1,3 @@
 return {
-  { import = "plugins.x-other.lazydev" },
+  { import = 'plugins.x-other.lazydev' },
 }

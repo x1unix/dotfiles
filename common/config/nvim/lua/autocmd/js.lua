@@ -1,15 +1,15 @@
 -- Fix filetypes for tsx & jsx
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*.tsx",
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.tsx',
   callback = function()
-    vim.bo.filetype = "typescriptreact"
+    vim.bo.filetype = 'typescriptreact'
   end,
 })
 
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*.jsx",
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.jsx',
   callback = function()
-    vim.bo.filetype = "javascriptreact"
+    vim.bo.filetype = 'javascriptreact'
   end,
 })
 

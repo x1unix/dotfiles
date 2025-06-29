@@ -1,9 +1,9 @@
 -- Map leader key to SPACE --
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
-local opt = vim.opt  -- Shortcut for convenience
+local opt = vim.opt -- Shortcut for convenience
 
-opt.backspace = { "start", "eol", "indent" }
+opt.backspace = { 'start', 'eol', 'indent' }
 opt.number = true
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -13,11 +13,10 @@ opt.cursorline = true
 opt.smartcase = true
 opt.title = true
 opt.expandtab = true
-opt.clipboard = "unnamedplus"
+opt.clipboard = 'unnamedplus'
 opt.backup = false
 opt.writebackup = false
 opt.showmatch = true
 opt.ttyfast = true
-opt.wildmode = { "longest", "list" }
+opt.wildmode = { 'longest', 'list' }
 opt.bomb = false
-

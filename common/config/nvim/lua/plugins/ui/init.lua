@@ -1,7 +1,7 @@
 return {
-  { import = "plugins.ui.dap" },
-  { import = "plugins.ui.neotest" },
-  { import = "plugins.ui.neotree" },
-  { import = "plugins.ui.telescope" },
-  { import = "plugins.ui.todo" },
+  { import = 'plugins.ui.dap' },
+  { import = 'plugins.ui.neotest' },
+  { import = 'plugins.ui.neotree' },
+  { import = 'plugins.ui.telescope' },
+  { import = 'plugins.ui.todo' },
 }

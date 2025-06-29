@@ -1,22 +1,22 @@
 return {
   {
-    "mrcjkb/rustaceanvim",
-    version = "^6",
+    'mrcjkb/rustaceanvim',
+    version = '^6',
     lazy = false,
   },
   {
-    "nvim-neotest/neotest",
+    'nvim-neotest/neotest',
     dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
 
       -- Adapters
-      "nvim-neotest/neotest-plenary",
-      "fredrikaverpil/neotest-golang",
-      "marilari88/neotest-vitest",
-      "mrcjkb/rustaceanvim"
+      'nvim-neotest/neotest-plenary',
+      'fredrikaverpil/neotest-golang',
+      'marilari88/neotest-vitest',
+      'mrcjkb/rustaceanvim',
     },
     opts = function(_, opts)
       if opts.adapters == nil then
@@ -24,17 +24,17 @@ return {
       end
 
       vim.list_extend(opts.adapters, {
-        require("neotest-golang"),
-        require("neotest-vitest"),
-        require("rustaceanvim.neotest"),
-      }) 
-    end
+        require('neotest-golang'),
+        require('neotest-vitest'),
+        require('rustaceanvim.neotest'),
+      })
+    end,
   },
   {
-    "andythigpen/nvim-coverage",
-    version = "*",
+    'andythigpen/nvim-coverage',
+    version = '*',
     config = function()
-      require("coverage").setup()
-    end
-  }
+      require('coverage').setup()
+    end,
+  },
 }

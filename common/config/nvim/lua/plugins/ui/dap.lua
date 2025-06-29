@@ -6,7 +6,7 @@ return {
         'rcarriga/nvim-dap-ui',
         'nvim-neotest/nvim-nio',
         config = function(_, opts)
-          local dap, dapui = require("dap"), require("dapui")
+          local dap, dapui = require('dap'), require('dapui')
           dapui.setup()
 
           -- Sync dap-ui with dap state.
@@ -23,15 +23,15 @@ return {
           dap.listeners.before.event_exited.dapui_config = function()
             dapui.close()
           end
-        end
+        end,
       },
       {
         -- Go integration for DAP
         'leoluz/nvim-dap-go',
         config = function()
           -- See: https://github.com/leoluz/nvim-dap-go
-          require("dap-go").setup()
-        end
+          require('dap-go').setup()
+        end,
       },
       {
         'theHamsta/nvim-dap-virtual-text',
@@ -40,19 +40,19 @@ return {
       {
         -- Mason package manager adapter for DAP
         'jay-babu/mason-nvim-dap.nvim',
-        dependencies = "mason-org/mason.nvim",
-        cmd = { "DapInstall", "DapUninstall" },
+        dependencies = 'mason-org/mason.nvim',
+        cmd = { 'DapInstall', 'DapUninstall' },
         opts = {
           automatic_installation = true,
           handlers = {},
           ensure_installed = {
-            "delve"
+            'delve',
           },
         },
       },
 
       -- DAP adapter for Neovim Lua debugging
-      { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+      { 'jbyuki/one-small-step-for-vimkind', module = 'osv' },
     },
   },
 }
