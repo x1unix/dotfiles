@@ -1,0 +1,32 @@
+# vim: set filetype=toml
+
+# See: https://ghostty.org/docs/config/reference
+
+shell-integration = detect
+#command = /opt/homebrew/bin/tmux
+
+theme = "dark:Apple System Colors,light:Apple System Colors Light"
+font-family = "ZedMono NFM"
+font-size = 16
+
+macos-option-as-alt = true
+macos-icon-frame = beige
+macos-non-native-fullscreen = true
+macos-window-shadow = false
+
+clipboard-read=allow
+clipboard-write=allow
+
+cursor-style = block
+cursor-style-blink = true
+
+confirm-close-surface = false
+mouse-hide-while-typing = true
+
+# Toggle terminal
+quick-terminal-screen=mouse
+quick-terminal-animation-duration=0
+
+# Keybinds
+keybind = global:cmd+`=toggle_quick_terminal
+
