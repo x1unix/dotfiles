@@ -4,7 +4,7 @@ return {
     opts = {
       debug = nil,
       runtime = vim.env.VIMRUNTIME,
-      library = { 'nvim-dap-ui', 'neotest' },
+      library = { 'nvim-dap-ui', 'neotest', 'snacks' },
       integrations = {
         lspconfig = true,
         cmp = true,
