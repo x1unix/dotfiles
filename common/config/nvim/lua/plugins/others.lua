@@ -80,16 +80,3 @@ require('prettier').setup({
   },
 })
 
-require('neo-tree').setup({
-  close_if_last_window = true,
-  filesystem = {
-		follow_current_file = {
-      enabled = true,
-    },
-		hijack_netrw_behavior = "open_default",
-		filtered_items = {
-			visible = true, -- when true, they will just be displayed differently than normal items
-			hide_hidden = false
-		}
-	},
-})

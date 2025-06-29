@@ -1,12 +1,3 @@
-require("coverage").setup()
-require("neotest").setup({
-  adapters = {
-    require("neotest-golang"),
-    require("neotest-vitest"),
-    require("rustaceanvim.neotest"),
-  },
-})
-
 local function run_test(args)
   local nt = require("neotest")
   -- very buggy
@@ -63,5 +54,6 @@ require("which-key").add({
     desc = "close test output panel and clear",
   },
 })
+
 
 
