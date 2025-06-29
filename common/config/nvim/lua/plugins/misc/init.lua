@@ -1,0 +1,1 @@
+require("stubs").lazy_require("plugins.misc.lazydev")
