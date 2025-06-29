@@ -13,7 +13,7 @@ require("lazydev").setup({
 
 local stubs = require('stubs')
 
-require("core")
+require("config")
 require("plugins")
 require("keymap")
 -- stubs.lazy_require('keymap')
