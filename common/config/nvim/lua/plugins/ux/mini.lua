@@ -25,8 +25,14 @@ return {
       require('mini.files').setup({
         content = {
           filter = function(name)
-            local blocked =
-              { ['__pycache__'] = true, ['venv'] = true, ['.venv'] = true, ['.pytest_cache'] = true, ['.git'] = true, ['.idea'] = true }
+            local blocked = {
+              ['__pycache__'] = true,
+              ['venv'] = true,
+              ['.venv'] = true,
+              ['.pytest_cache'] = true,
+              ['.git'] = true,
+              ['.idea'] = true,
+            }
             return not blocked[name.name]
           end,
         },
