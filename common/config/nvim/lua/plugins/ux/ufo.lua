@@ -5,6 +5,7 @@
 return {
   {
     'kevinhwang91/nvim-ufo',
+    lazy = false,
     dependencies = 'kevinhwang91/promise-async',
     version = 'v1.5.0',
     config = function()
