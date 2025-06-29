@@ -1,5 +1,4 @@
 local function vscode_switch_style(style)
-  vim.notify("update style")
   -- Plugin resets file syntax after switch and breaks syntax highlight.
   -- Restore syntax after switch
   local filetype = vim.bo.filetype
