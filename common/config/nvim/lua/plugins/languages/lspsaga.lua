@@ -1,10 +1,10 @@
 return {
-    {
-        'nvimdev/lspsaga.nvim',
-        opts = {
-            lightbulb = {
-                enable = false,
-            }
-        },
-    }
+  {
+    'nvimdev/lspsaga.nvim',
+    opts = {
+      lightbulb = {
+        enable = false,
+      },
+    },
+  },
 }

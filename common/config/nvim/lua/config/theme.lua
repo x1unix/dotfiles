@@ -2,10 +2,10 @@ local function vscode_switch_style(style)
   -- Plugin resets file syntax after switch and breaks syntax highlight.
   -- Restore syntax after switch
   local filetype = vim.bo.filetype
-  require("vscode").load(style)
+  require('vscode').load(style)
 
-  if filetype and filetype ~= "" then
-    vim.cmd("setlocal filetype=" .. filetype)
+  if filetype and filetype ~= '' then
+    vim.cmd('setlocal filetype=' .. filetype)
   end
 end
 
@@ -15,13 +15,13 @@ end
 -- Following config is used by "plugins/core/theme.lua".
 return {
   -- Name of theme package to install.
-  package = "Mofiqul/vscode.nvim",
+  package = 'Mofiqul/vscode.nvim',
 
   -- Lualine options
   lualine = {
     options = {
       icons_enabled = true,
-      theme = "vscode",
+      theme = 'vscode',
     },
   },
 
@@ -29,16 +29,16 @@ return {
   darkmode = {
     update_interval = 1000,
     set_dark_mode = function()
-      vscode_switch_style("dark")
+      vscode_switch_style('dark')
     end,
-    set_light_mode = function ()
-      vscode_switch_style("light")
+    set_light_mode = function()
+      vscode_switch_style('light')
     end,
   },
 
   -- Called after theming plugins loaded
   setup = function()
-    require("vscode").setup({ style = "light" })
-    vim.cmd.colorscheme("vscode")
+    require('vscode').setup({ style = 'light' })
+    vim.cmd.colorscheme('vscode')
   end,
 }

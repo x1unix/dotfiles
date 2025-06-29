@@ -1,1 +1,1 @@
-require("autocmd.js")
+require('autocmd.js')
