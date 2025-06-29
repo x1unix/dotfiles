@@ -15,7 +15,7 @@ Packages are managed by *lazy.nvim*.
     * `init.lua` - Vim configuration.
     * `theme.lua` - Theming config.
     * `formatters.lua` - Code formatters config, powered by [conform.nvim](https://github.com/stevearc/conform.nvim).
-    * `mason.nvim` - List of LSP servers and tools to install by [Mason](https://github.com/mason-org/mason.nvim).
+    * `lang_packages.nvim` - List of languages, LSP servers and tools to install by [Mason](https://github.com/mason-org/mason.nvim) and [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/#adding-parsers).
   * `keymap` - Keymaps managed by [which-key](https://github.com/folke/which-key.nvim).
   * `plugins`
     * `core` - Core plugins

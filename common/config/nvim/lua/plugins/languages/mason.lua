@@ -1,11 +1,11 @@
-local meson = require('config.meson')
+local pkgs = require('config.lang_packages')
 
 return {
   {
     -- Automatic nvim-lspconfig config by Meson.
     'mason-org/mason-lspconfig.nvim',
     opts = {
-      ensure_installed = meson.lsp_configs,
+      ensure_installed = pkgs.lsp_configs,
     },
     dependencies = {
       {
@@ -31,7 +31,7 @@ return {
     -- Automatic tools installation using Meson.
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     opts = {
-      ensure_installed = meson.tools,
+      ensure_installed = pkgs.tools,
     },
     dependencies = {
       'mason-org/mason.nvim',

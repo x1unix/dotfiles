@@ -2,6 +2,25 @@
 -- See: plugins/languges/mason.lua.
 
 return {
+  -- List of treesitter languages to install.
+  -- Passed to nvim-treesitter.
+  languages = {
+    'go',
+    'gomod',
+    'gosum',
+    'proto',
+    'jsonc',
+    'ini',
+    'lua',
+    'make',
+    'nix',
+    'php',
+    'terraform',
+    'typescript',
+    'xml',
+    'yaml',
+  },
+
   -- List of language servers to install and configure.
   -- Passed to mason-lspconfig.nvim.
   lsp_configs = {
