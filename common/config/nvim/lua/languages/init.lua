@@ -1,2 +1,0 @@
-require('languages.go')
-
