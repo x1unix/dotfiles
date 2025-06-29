@@ -38,6 +38,14 @@ return {
         },
       })
 
+      -- Notify LSP server when file is moved in mini.files.
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesActionRename',
+        callback = function(event)
+          Snacks.rename.on_rename_file(event.data.from, event.data.to)
+        end,
+      })
+
       require('mini.tabline').setup({
         tabpage_section = 'none',
       })

@@ -28,6 +28,14 @@ wk.add({
     mode = 'n',
     desc = 'buffer: close',
   },
+  {
+    '<Leader>g',
+    function()
+      Snacks.lazygit()
+    end,
+    mode = 'n',
+    desc = 'lazygit',
+  },
   -- Session manager --
   {
     '<Leader>M',
