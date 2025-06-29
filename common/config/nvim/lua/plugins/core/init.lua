@@ -1,7 +1,8 @@
-local stubs = require("stubs")
-
-stubs.lazy_require("plugins.core.theme")
-stubs.lazy_require("plugins.core.cmp")
-stubs.lazy_require("plugins.core.git")
-stubs.lazy_require("plugins.core.misc")
-stubs.lazy_require("plugins.core.sessionmgr")
+return {
+  { import = "plugins.core.cmp" },
+  { import = "plugins.core.git" },
+  { import = "plugins.core.misc" },
+  { import = "plugins.core.sessionmgr" },
+  { import = "plugins.core.theme" },
+  { import = "plugins.core.whichkey" },
+}
