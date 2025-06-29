@@ -40,7 +40,7 @@ return {
       {
         -- Mason package manager adapter for DAP
         'jay-babu/mason-nvim-dap.nvim',
-        dependencies = "mason.nvim",
+        dependencies = "mason-org/mason.nvim",
         cmd = { "DapInstall", "DapUninstall" },
         opts = {
           automatic_installation = true,
