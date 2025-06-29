@@ -1,5 +1,3 @@
-require("plugins.telescope")
-require("plugins.ufo")
+require("plugins.ui")
+require("plugins.ux")
 require("plugins.others")
-require("plugins.dap")
-require("plugins.neotest")

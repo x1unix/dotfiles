@@ -11,8 +11,10 @@ require("lazydev").setup({
     end,
 })
 
+local stubs = require('stubs')
+
 require("core")
 require("plugins")
-require("hotkeys")
+stubs.lazy_require('keymap')
 require("languages")
 
