@@ -15,7 +15,7 @@ wk.add({
     desc = 'find files',
   },
   {
-    '<Leader>g',
+    '<Leader>f',
     '<cmd>Telescope live_grep<cr>',
     mode = 'n',
     desc = 'grep',
@@ -33,7 +33,7 @@ wk.add({
     desc = 'buffers',
   },
   {
-    '<Leader>fh',
+    '<Leader>h',
     '<cmd>Telescope help_tags<cr>',
     mode = 'n',
     desc = 'tags',
