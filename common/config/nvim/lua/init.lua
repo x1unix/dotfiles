@@ -15,6 +15,7 @@ local stubs = require('stubs')
 
 require("core")
 require("plugins")
-stubs.lazy_require('keymap')
+require("keymap")
+-- stubs.lazy_require('keymap')
 require("languages")
 
