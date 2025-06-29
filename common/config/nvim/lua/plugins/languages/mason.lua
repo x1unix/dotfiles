@@ -4,7 +4,7 @@ return {
     opts = {
       ensure_installed = {
         'lua_ls', 'rust_analyzer', 'gopls', 'terraformls', 'buf_ls',
-        'bashls', 'clang-format', 'eslint',
+        'bashls', 'clangd', 'eslint',
       }
     },
     dependencies = {
