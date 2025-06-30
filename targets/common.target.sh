@@ -26,19 +26,6 @@ install_tpm_rollback() {
 	rm -rf "$HOME/.tmux/plugins/tpm"
 }
 
-install_vim_plug() {
-	plug_file="${XDG_DATA_HOME}/nvim/site/autoload/plug.vim"
-	plug_src='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	if [ ! -f "$plug_file" ]; then
-		sh -c "curl -fLo '$plug_file' --create-dirs '$plug_src'"
-	else
-		echo 'vim-plug already installed'
-	fi
-
-	echo 'installing vim-plug packages...'
-	nvim -es -u "$TARGET_DIR/config/nvim/init.vim" -i NONE -c 'PlugInstall' -c 'qa'
-}
-
 install_ssh_config() {
 	mkdir -p ~/.ssh
 
@@ -65,7 +52,6 @@ link_home '.emacs.d' emacs
 # Mount ~/.config
 link_xdg_config config
 
-step install_vim_plug 'flag:vim'
 step install_shmgr 'flag:shmgr'
 step install_tpm 'flag:tpm'
 step install_ssh_config
