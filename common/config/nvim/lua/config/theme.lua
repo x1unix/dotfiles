@@ -38,7 +38,7 @@ return {
 
   -- Called after theming plugins loaded
   setup = function()
-    require('vscode').setup({ style = 'light' })
+    require('vscode').setup({ style = 'dark' })
     vim.cmd.colorscheme('vscode')
   end,
 }
