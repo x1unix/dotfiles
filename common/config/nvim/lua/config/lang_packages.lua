@@ -30,7 +30,7 @@ return {
     'terraformls',
     'buf_ls',
     'bashls',
-    'clangd',
+    -- 'clangd',
     'eslint',
   },
 
