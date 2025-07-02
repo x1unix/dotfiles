@@ -20,3 +20,7 @@ opt.showmatch = true
 opt.ttyfast = true
 opt.wildmode = { 'longest', 'list' }
 opt.bomb = false
+
+-- configure default splits
+vim.o.splitright = true
+vim.o.splitbelow = true
