@@ -13,6 +13,10 @@ return {
     },
     opts = {
       ensure_installed = pkgs.languages,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
       textobjects = {
         lsp_interop = {
           enable = true,
