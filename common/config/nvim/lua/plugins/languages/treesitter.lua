@@ -11,52 +11,58 @@ return {
       'RRethy/nvim-treesitter-endwise',
       'windwp/nvim-ts-autotag',
     },
-    opts = {
-      ensure_installed = pkgs.languages,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      textobjects = {
-        lsp_interop = {
+    opts = function()
+      local pkgs = require('config.lang_packages')
+      return {
+        ensure_installed = pkgs.languages,
+        highlight = {
           enable = true,
-          border = 'none',
-          floating_preview_opts = {},
-          peek_definition_code = {
-            ['<leader>df'] = '@function.outer',
-            ['<leader>dF'] = '@class.outer',
-          },
+          additional_vim_regex_highlighting = false,
         },
-        select = {
-          enable = true,
-          -- Automatically jump forward to textobj, similar to targets.vim
-          lookahead = true,
+        textobjects = {
+          lsp_interop = {
+            enable = true,
+            border = 'none',
+            floating_preview_opts = {},
+            peek_definition_code = {
+              ['<leader>df'] = '@function.outer',
+              ['<leader>dF'] = '@class.outer',
+            },
+          },
+          select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
 
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
-            ['as'] = { query = '@local.scope', query_group = 'locals', desc = 'Select language scope' },
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+              ['as'] = { query = '@local.scope', query_group = 'locals', desc = 'Select language scope' },
+            },
+            selection_modes = {
+              ['@parameter.outer'] = 'v', -- charwise
+              ['@function.outer'] = 'V', -- linewise
+              ['@class.outer'] = '<c-v>', -- blockwise
+            },
+            include_surrounding_whitespace = true,
           },
-          selection_modes = {
-            ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V', -- linewise
-            ['@class.outer'] = '<c-v>', -- blockwise
+          matchup = {
+            enable = true,
           },
-          include_surrounding_whitespace = true,
+          endwise = {
+            enable = true,
+          },
+          autotag = {
+            enable = true,
+          },
         },
-        matchup = {
-          enable = true,
-        },
-        endwise = {
-          enable = true,
-        },
-        autotag = {
-          enable = true,
-        },
-      },
-    },
+      }
+    end,
+    config = function(_, opts)
+      require('nvim-treesitter.configs').setup(opts)
+    end,
   },
 }
