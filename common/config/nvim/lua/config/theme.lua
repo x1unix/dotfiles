@@ -1,3 +1,5 @@
+local ts = require('util.treesitter')
+
 local function vscode_switch_style(style)
   -- Plugin resets file syntax after switch and breaks syntax highlight.
   -- Restore syntax after switch
@@ -39,6 +41,7 @@ return {
   -- Called after theming plugins loaded
   setup = function()
     require('vscode').setup({ style = 'dark' })
+    ts.install_reload_highlights_autocmd()
     vim.cmd.colorscheme('vscode')
   end,
 }
