@@ -7,7 +7,7 @@ return {
         'nvim-neotest/nvim-nio',
         config = function(_, opts)
           local dap, dapui = require('dap'), require('dapui')
-          dapui.setup()
+          dapui.setup(opts)
 
           -- Sync dap-ui with dap state.
           -- See ":help dap-extensions"
@@ -28,7 +28,12 @@ return {
       {
         -- Go integration for DAP
         'leoluz/nvim-dap-go',
-        config = function()
+        opts = {
+          tests = {
+            verbose = true,
+          },
+        },
+        config = function(_, opts)
           -- See: https://github.com/leoluz/nvim-dap-go
           require('dap-go').setup()
         end,
