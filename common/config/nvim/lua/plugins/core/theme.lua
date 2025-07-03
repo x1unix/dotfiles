@@ -4,6 +4,7 @@ return {
   {
     config.package,
     lazy = false,
+    priority = 1000,
     dependencies = {
       'f-person/auto-dark-mode.nvim',
       'nvim-lualine/lualine.nvim',
