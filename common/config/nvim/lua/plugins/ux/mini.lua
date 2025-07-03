@@ -20,7 +20,8 @@ return {
       -- - saiw)  - [s]urround [a]dd [i]nner [w]ord [)]paren
       -- - sd'    - [s]urround [d]elete [']quotes
       -- - sr)'   - [s]urround [r]eplace [)][']
-      require('mini.surround').setup()
+      --require('mini.surround').setup()
+      -- TODO: 's' key conflicts with flash.nvim. Figure out other binding.
 
       require('mini.files').setup({
         content = {
