@@ -39,13 +39,13 @@ return {
       -- Read ":help lspconfig" for details. Read ":help lspconfig-all" for the full list of server-specific details.
       --
       -- For servers not on your $PATH (e.g., jdtls, elixirls), you must manually set the cmd parameter when calling setup().
-      lspconfig.rust_analyzer.setup({
-        -- Server-specific settings. See `:help lspconfig-setup`
-        capabilities = capabilities,
-        settings = {
-          ['rust-analyzer'] = {},
-        },
-      })
+      -- For server-specific settings, see `:help lspconfig-setup`
+      -- lspconfig.rust_analyzer.setup({
+      --   capabilities = capabilities,
+      --   settings = {
+      --     ['rust-analyzer'] = {},
+      --   },
+      -- })
 
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
