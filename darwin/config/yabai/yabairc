@@ -55,5 +55,5 @@ yabai -m rule --add title="(Adena)" manage=off
 yabai -m rule --add \
          label="Finder floating" \
          app="^Finder$" \
-         title="(Copy|Connect|Move|Info|Finder Settings)" \
+         title="(Bin|Copy|Connect|Move|Info|Finder Settings)" \
          manage=off
