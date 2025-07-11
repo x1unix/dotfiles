@@ -51,3 +51,9 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="(Calculator|Preferences|Install|Parallels|Steam)" manage=off
 yabai -m rule --add title="(Adena)" manage=off
 
+# No floating dialogs
+yabai -m rule --add \
+         label="Finder floating" \
+         app="^Finder$" \
+         title="(Copy|Connect|Move|Info|Finder Settings)" \
+         manage=off
