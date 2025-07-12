@@ -1,4 +1,5 @@
 return {
+  { import = 'plugins.ui.oil' },
   { import = 'plugins.ui.dap' },
   { import = 'plugins.ui.neotest' },
   { import = 'plugins.ui.neotree' },
