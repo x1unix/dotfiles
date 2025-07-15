@@ -1,2 +1,14 @@
+" See: https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+
+Plug 'vim-scripts/argtextobj.vim'
+"Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'michaeljsmith/vim-indent-object'
+
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
+
+set functiontextobj
 set clipboard+=unnamedplus
 
