@@ -9,6 +9,23 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 
+set number
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+set scrolloff=5 sidescrolloff=10
+
+set multiple-cursors
+set commentary
+set surround
+set ideajoin
+
+let mapleader = " "
 set functiontextobj
 set clipboard+=unnamedplus
 
+nmap <leader>? :action GotoAction<CR>
+nmap <leader>f :action FindInPath<CR>
+nmap gi :action GotoImplementation<CR>
