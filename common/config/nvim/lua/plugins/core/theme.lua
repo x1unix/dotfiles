@@ -20,6 +20,7 @@ return {
       end
 
       require('lualine').setup(config.lualine)
+      vim.opt.showmode = false
     end,
   },
 }
