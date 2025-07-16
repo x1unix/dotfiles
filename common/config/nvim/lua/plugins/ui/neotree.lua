@@ -19,6 +19,7 @@ return {
         { event = events.FILE_RENAMED, handler = on_move },
       }
 
+      local cfg = require('config.filesystem')
       require('neo-tree').setup({
         close_if_last_window = true,
         event_handlers = event_handlers,
@@ -27,6 +28,9 @@ return {
             enabled = true,
           },
           hijack_netrw_behavior = 'open_default',
+          filtered_items = {
+            always_show = cfg.show_hidden_files,
+          },
           -- filtered_items = {
           --   visible = true, -- when true, they will just be displayed differently than normal items
           --   hide_hidden = false,
