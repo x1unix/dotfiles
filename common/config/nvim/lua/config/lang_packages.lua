@@ -25,8 +25,9 @@ return {
   -- Passed to mason-lspconfig.nvim.
   lsp_configs = {
     'lua_ls',
+    --- Already provided by plugins:
     -- 'rust_analyzer',
-    'gopls',
+    -- 'gopls',
     'terraformls',
     'buf_ls',
     'bashls',

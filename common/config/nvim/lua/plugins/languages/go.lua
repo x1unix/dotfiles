@@ -3,15 +3,17 @@ return {
     'ray-x/go.nvim',
     dependencies = {
       'ray-x/guihua.lua',
+      'hrsh7th/cmp-nvim-lsp',
       'neovim/nvim-lspconfig',
       'nvim-treesitter/nvim-treesitter',
     },
-    opts = {
-      -- lsp_keymaps = false,
-      -- other options
-    },
     config = function(lp, opts)
-      require('go').setup(opts)
+      local capabilities = require('util.lsp').make_capabilities()
+      require('go').setup({
+        lsp_cfg = {
+          capabilities = capabilities,
+        },
+      })
       local format_sync_grp = vim.api.nvim_create_augroup('GoFormat', {})
       vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = '*.go',

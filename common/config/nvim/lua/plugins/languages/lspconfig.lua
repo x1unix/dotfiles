@@ -10,7 +10,7 @@ return {
     dependencies = { 'hrsh7th/cmp-nvim-lsp' },
     config = function()
       local lspconfig = require('lspconfig')
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require('util.lsp').make_capabilities()
 
       -- Modify capabilities with folding range for nvim-ufo.
       -- capabilities.textDocument.foldingRange = {
@@ -18,9 +18,10 @@ return {
       --   lineFoldingOnly = true,
       -- }
 
-      lspconfig.gopls.setup({
-        capabilities = capabilities,
-      })
+      --- Already provided by go.nvim
+      -- lspconfig.gopls.setup({
+      --   capabilities = capabilities,
+      -- })
 
       lspconfig.terraformls.setup({
         capabilities = capabilities,
