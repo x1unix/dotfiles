@@ -1,11 +1,16 @@
 return {
   {
     'echasnovski/mini.nvim',
+    lazy = false,
     version = false,
     keys = {
       { '<leader>e', '<cmd>:lua MiniFiles.open()<CR>', desc = 'mini.files' },
     },
     config = function()
+      require('mini.tabline').setup({
+        -- tabpage_section = 'none',
+      })
+
       -- Better Around/Inside textobject
       --
       -- Examples:
@@ -45,10 +50,6 @@ return {
         callback = function(event)
           Snacks.rename.on_rename_file(event.data.from, event.data.to)
         end,
-      })
-
-      require('mini.tabline').setup({
-        tabpage_section = 'none',
       })
     end,
   },
