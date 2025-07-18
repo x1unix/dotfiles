@@ -5,6 +5,8 @@ wk.add({
   { 'N', 'Nzzzv', mode = 'n', desc = 'previous search result centered' },
   { 'g,', 'g,zvzz', mode = 'n', desc = 'next change centered' },
   { 'g;', 'g;zvzz', mode = 'n', desc = 'previous change centered' },
+  { '<C-f>', '<C-f>zz', mode = 'n', desc = 'page half-down centered' },
+  { '<C-b>', '<C-b>zz', mode = 'n', desc = 'page half-up centered' },
   { '<C-d>', '<C-d>zz', mode = 'n', desc = 'page down centered' },
   { '<C-u>', '<C-u>zz', mode = 'n', desc = 'page up centered' },
   { '<C-o>', '<C-o>zz', mode = 'n', desc = 'jump back centered' },
