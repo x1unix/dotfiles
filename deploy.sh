@@ -336,6 +336,12 @@ __private_init_build_constraints() {
 		return
 	fi
 
+  if [ -n "$ANDROID_DATA" ]; then
+    G_DISTRO='android'
+    G_DISTRO_VERSION="$ANDROID__BUILD_VERSION_SDK"
+    debug_log "os-release: detected distro='$G_DISTRO' version='$G_DISTRO_VERSION'"
+  fi
+
 	if [ ! -f /etc/os-release ]; then
 		debug_log 'os-release: not found'
 		return
