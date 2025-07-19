@@ -7,9 +7,9 @@ return {
       { '<leader>e', '<cmd>:lua MiniFiles.open()<CR>', desc = 'mini.files' },
     },
     config = function()
-      require('mini.tabline').setup({
-        -- tabpage_section = 'none',
-      })
+      -- require('mini.tabline').setup({
+      --   -- tabpage_section = 'none',
+      -- })
 
       -- Better Around/Inside textobject
       --
