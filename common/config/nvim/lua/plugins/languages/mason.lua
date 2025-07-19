@@ -1,11 +1,15 @@
-local pkgs = require('config.lang_packages')
+local lang_packages = require('config.lang_packages')
+local os = require('util.os')
+
+-- Use different install list for Android
+local pkgs = (os.is_android() and lang_packages.android) or lang_packages
 
 return {
   {
     -- Automatic nvim-lspconfig config by Meson.
     'mason-org/mason-lspconfig.nvim',
     opts = {
-      ensure_installed = pkgs.lsp_configs,
+      ensure_installed = pkgs.lsp_servers,
     },
     dependencies = {
       {

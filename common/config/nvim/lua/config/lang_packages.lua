@@ -23,7 +23,7 @@ return {
 
   -- List of language servers to install and configure.
   -- Passed to mason-lspconfig.nvim.
-  lsp_configs = {
+  lsp_servers = {
     'lua_ls',
     --- Already provided by plugins:
     -- 'rust_analyzer',
@@ -44,5 +44,20 @@ return {
   tools = {
     'stylua',
     'prettier',
+  },
+
+  -- Certain Mason packages aren't compatible with Android.
+  -- Here is a separate install list for Android only.
+  android = {
+    lsp_servers = {
+      'terraformls',
+      'buf_ls',
+      'bashls',
+      'eslint',
+    },
+
+    tools = {
+      'prettier',
+    },
   },
 }
