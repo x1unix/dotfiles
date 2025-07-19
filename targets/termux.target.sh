@@ -23,7 +23,9 @@ termux_init_bashrc() {
 
 termux_init_home() {
   mkdir -p "$HOME/.local/bin"
-  termux-setup-storage
+  if [ ! -d ~/storage ]; then
+    termux-setup-storage
+  fi
 }
 
 step termux_init_home
