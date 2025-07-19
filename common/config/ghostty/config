@@ -13,6 +13,7 @@ macos-option-as-alt = true
 macos-icon-frame = beige
 macos-non-native-fullscreen = true
 macos-window-shadow = false
+window-decoration = none
 
 clipboard-read=allow
 clipboard-write=allow
