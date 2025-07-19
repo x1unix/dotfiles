@@ -12,7 +12,7 @@ install_shmgr() {
 }
 
 install_tpm() {
-	if [ ! -d ~/.tmux/plugins/tpl ]; then
+	if [ ! -d ~/.tmux/plugins/tpm ]; then
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	else
 		echo "tpm already installed, skip"
