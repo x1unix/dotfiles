@@ -435,7 +435,7 @@ __private_check_target_constraints() {
 						;;
 				esac
 
-				if [ "$current_value" == "$want_value" ]; then
+				if [ "$current_value" = "$want_value" ]; then
 					debug_log "constraints: satisfied: '$current_key'"
 					continue
 				fi
