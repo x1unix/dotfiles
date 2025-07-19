@@ -10,12 +10,13 @@ return {
       'nvim-lualine/lualine.nvim',
     },
     config = function()
+      local os = require('util.os')
       if type(config.setup) == 'function' then
         config.setup()
       end
 
       local darkmode = config.darkmode
-      if type(darkmode) == 'table' then
+      if type(darkmode) == 'table' and !os.is_android() then
         require('auto-dark-mode').setup(darkmode)
       end
 
