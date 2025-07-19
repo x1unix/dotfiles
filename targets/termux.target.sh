@@ -26,6 +26,9 @@ termux_init_home() {
   if [ ! -d ~/storage ]; then
     termux-setup-storage
   fi
+
+  # To avoid conflicts with stow
+  rm -f ~/.termux/termux.properties
 }
 
 step termux_init_home
