@@ -16,7 +16,7 @@ return {
       end
 
       local darkmode = config.darkmode
-      if type(darkmode) == 'table' and !os.is_android() then
+      if type(darkmode) == 'table' and not os.is_android() then
         require('auto-dark-mode').setup(darkmode)
       end
 
