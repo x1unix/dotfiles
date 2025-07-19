@@ -1,6 +1,7 @@
 set -o vi
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin"
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 
 alias ..='cd ..'
 alias ll='ls -la'

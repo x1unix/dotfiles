@@ -19,6 +19,7 @@ install_tpm() {
 	fi
 
 	echo 'installing tpm plugins...'
+  export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
   $HOME/.tmux/plugins/tpm/bin/install_plugins
 }
 
