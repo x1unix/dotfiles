@@ -692,7 +692,7 @@ __private_main() {
 			;;
 		*)
 			if [ -n "$cmd" ]; then
-				notify_err 'unknown sub-command "$cmd"'
+				notify_err "unknown sub-command '$cmd'"
 				echo ''
 			fi
 
