@@ -44,6 +44,7 @@ return {
   tools = {
     'stylua',
     'prettier',
+    'codelldb',
   },
 
   -- Certain Mason packages aren't compatible with Android.
