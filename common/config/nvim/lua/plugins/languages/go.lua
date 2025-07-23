@@ -7,9 +7,10 @@ return {
       'neovim/nvim-lspconfig',
       'nvim-treesitter/nvim-treesitter',
     },
-    config = function(lp, opts)
+    config = function()
       local capabilities = require('util.lsp').make_capabilities()
       require('go').setup({
+        lsp_keymaps = false,
         lsp_cfg = {
           capabilities = capabilities,
         },
