@@ -21,10 +21,8 @@ return {
 
   -- Lualine options
   lualine = {
-    options = {
-      icons_enabled = true,
-      theme = 'vscode',
-    },
+    icons_enabled = true,
+    theme = 'vscode',
   },
 
   -- Auto-dark-mode options
