@@ -18,7 +18,10 @@ return {
       --   lineFoldingOnly = true,
       -- }
 
-      --- Already provided by go.nvim
+      -- Enable LSP Diagnostic as virtual text below
+      vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true } })
+
+      -- Managed by go.nvim
       -- lspconfig.gopls.setup({
       --   capabilities = capabilities,
       -- })
