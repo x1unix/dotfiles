@@ -10,6 +10,7 @@ return {
     'mason-org/mason-lspconfig.nvim',
     opts = {
       ensure_installed = pkgs.lsp_servers,
+      automatic_enable = false,
     },
     dependencies = {
       {
