@@ -22,8 +22,6 @@ arch_pacman_install() {
 		stow sway swaybg swayidle swaylock xorg-xwayland xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk wofi waybar wl-clipboard \
 		grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor neovim git net-tools man-db \
 		gnome-keyring polkit-gnome blueman ttf-zed-mono-nerd zsh-syntax-highlighting zsh lazygit
-
-	paru ruby-fusuma
 }
 
 step arch_paru_install 'flag:pkgs'
