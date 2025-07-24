@@ -8,7 +8,7 @@ arch_paru_install() {
 		return
 	fi
 
-	sudo pacman -S base-devel git rustup --noconfirm
+	sudo pacman -S base-devel git rustup --noconfirm --needed
 	rustup default stable
 	git clone https://aur.archlinux.org/paru.git /tmp/paru-src
 	cd /tmp/paru-src
@@ -21,7 +21,8 @@ arch_pacman_install() {
 	sudo pacman -S \
 		stow sway swaybg swayidle swaylock xorg-xwayland xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk wofi waybar wl-clipboard \
 		alacritty ghostty grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor neovim git net-tools man-db \
-		gnome-keyring polkit-gnome blueman ttf-zed-mono-nerd zsh-syntax-highlighting zsh lazygit nodejs npm go
+		gnome-keyring polkit-gnome blueman ttf-zed-mono-nerd zsh-syntax-highlighting zsh lazygit nodejs npm go \
+    --needed --noconfirm
 }
 
 step arch_paru_install 'flag:pkgs'
