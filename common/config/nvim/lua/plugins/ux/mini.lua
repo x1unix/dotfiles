@@ -52,6 +52,10 @@ return {
             return not blocked[name.name]
           end,
         },
+        windows = {
+          preview = true,
+          width_preview = 50,
+        },
       })
 
       -- Notify LSP server when file is moved in mini.files.
