@@ -39,6 +39,11 @@ return {
         end,
       })
 
+      -- Sometimes Mason's buf_ls doesn't start
+      lspconfig.buf_ls.setup({
+        capabilities = capabilities,
+      })
+
       -- Run ":checkhealth lsp" to see the status or to troubleshoot.
       -- Read ":help lspconfig" for details. Read ":help lspconfig-all" for the full list of server-specific details.
       --
