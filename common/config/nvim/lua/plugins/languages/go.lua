@@ -13,6 +13,14 @@ return {
         lsp_keymaps = false,
         lsp_cfg = {
           capabilities = capabilities,
+
+          -- Disable function arguments autofill as it works incorrectly.
+          -- gopls returns a full function prototype as snippet and replacing prototype arguments with actual are PITA.
+          settings = {
+            gopls = {
+              usePlaceholders = false,
+            },
+          },
         },
       })
       local format_sync_grp = vim.api.nvim_create_augroup('GoFormat', {})
