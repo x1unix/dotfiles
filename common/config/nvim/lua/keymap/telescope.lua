@@ -9,7 +9,7 @@ wk.add({
     desc = 'list tabs',
   },
   {
-    '<Leader>:',
+    '<Leader>;',
     '<cmd>Telescope find_files<cr>',
     mode = 'n',
     desc = 'find files',
