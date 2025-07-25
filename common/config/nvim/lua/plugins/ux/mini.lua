@@ -5,6 +5,16 @@ return {
     version = false,
     keys = {
       { '<leader>e', '<cmd>:lua MiniFiles.open()<CR>', desc = 'mini.files' },
+      {
+        '<leader>e',
+        function()
+          local buf_name = vim.api.nvim_buf_get_name(0)
+          local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+          MiniFiles.open(path)
+          MiniFiles.reveal_cwd()
+        end,
+        desc = 'mini.files',
+      },
     },
     config = function()
       -- require('mini.tabline').setup({
