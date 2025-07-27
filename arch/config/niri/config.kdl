@@ -35,10 +35,6 @@ environment {
   __JAVA_AWT_WM_NONREPARENTING "1"
 }
 
-xwayland-satellite {
-  path "xwayland-satellite"
-}
-
 // See: https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
     keyboard {
@@ -93,7 +89,7 @@ cursor {
 
 // Desktop - 4k
 output "GIGA-BYTE TECHNOLOGY CO., LTD. M28U 23090B006897" {
-  mode "3840x2160@119.879Hz" 
+  mode "3840x2160@119.999" 
   scale 1.25
 }
 
