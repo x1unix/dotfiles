@@ -6,7 +6,7 @@
   "gtk-layer-shell": true,
   "modules-left": ["niri/workspaces", "sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "idle_inhibitor", "sway/language", "wireplumber", "backlight", "battery"],
+  "modules-right": ["tray", "idle_inhibitor", "niri/language", "sway/language", "wireplumber", "backlight", "battery"],
   "niri/workspaces": {
     "format": "{value}",
   },
@@ -28,6 +28,10 @@
       "activated": "󰅶",
       "deactivated": "󰛊",
     },
+  },
+  "niri/language": {
+    "format": "{short}",
+    "tooltip-format": "{long}",
   },
   "sway/language": {
     "format": "{short}",
