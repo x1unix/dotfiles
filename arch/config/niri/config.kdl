@@ -4,7 +4,8 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 spawn-at-startup "waybar"
-spawn-at-startup "nm-applet --indicator"
+spawn-at-startup "dunst"
+spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "fusuma"
 
