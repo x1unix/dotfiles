@@ -23,6 +23,8 @@ arch_pacman_install() {
 		alacritty ghostty grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor neovim git net-tools man-db \
 		gnome-keyring polkit-gnome blueman ttf-zed-mono-nerd zsh-syntax-highlighting zsh lazygit nodejs npm go \
     --needed --noconfirm
+
+  gsettings set org.blueman.general notification-daemon true
 }
 
 step arch_paru_install 'flag:pkgs'
