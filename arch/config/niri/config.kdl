@@ -3,9 +3,43 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
-// Input device configuration.
-// Find the full list of options on the wiki:
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+spawn-at-startup "waybar"
+spawn-at-startup nm-applet --indicator
+spawn-at-startup blueman-applet
+spawn-at-startup fusuma
+
+prefer-no-csd
+
+environment {
+  LANG "en_US.UTF-8"
+  EDITOR "/usr/bin/nvim"
+
+  WLR_NO_HARDWARE_CURSORS "1"
+  // Set wlroots renderer to Vulkan to avoid flickering
+  WLR_RENDERER "vulkan"
+ 
+  // General wayland environment variables
+  XDG_SESSION_TYPE "wayland"
+  QT_QPA_PLATFORM "wayland"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+
+  // Firefox wayland environment variable
+  MOZ_ENABLE_WAYLAND "1"
+  MOZ_USE_XINPUT2 "1"
+
+  // Xwayland compatibility
+  XWAYLAND_NO_GLAMOR "1"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+
+  // Ghidra
+  __JAVA_AWT_WM_NONREPARENTING "1"
+}
+
+xwayland-satellite {
+  path "xwayland-satellite"
+}
+
+// See: https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
     keyboard {
         xkb {
@@ -49,6 +83,10 @@ input {
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     // focus-follows-mouse max-scroll-amount="0%"
+}
+
+cursor {
+  hide-when-typing
 }
 
 // See: https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
@@ -158,12 +196,6 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
-spawn-at-startup nm-applet --indicator
-spawn-at-startup blueman-applet
-spawn-at-startup fusuma
-
-
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
