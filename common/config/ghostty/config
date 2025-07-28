@@ -21,7 +21,7 @@ clipboard-write=allow
 cursor-style = block
 cursor-style-blink = true
 
-confirm-close-surface = false
+confirm-close-surface = true
 mouse-hide-while-typing = true
 
 # Toggle terminal
