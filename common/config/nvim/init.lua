@@ -17,6 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 -- Core configs should be loaded before lazy.nvim init.
 require('config')
 require('autocmd')
+require('pkg').setup()
+--require('plugins.pkg')
 
 -- Load lazy.nvim
 require('lazy').setup({
