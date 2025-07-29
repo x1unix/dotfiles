@@ -7,6 +7,7 @@ __DIR="$(dirname -- "$__FILE")"
 
 TARGET_EXT=.target.sh
 TARGETS_DIR="$__DIR/targets"
+G_DEPS="stow sops"
 
 # XDG defaults
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
@@ -21,6 +22,9 @@ CYAN="${ESC}[36m"
 YELLOW="${ESC}[33m"
 WHITE="${ESC}[37m"
 GRAY="${ESC}[90m"
+
+# HELPERS
+# ------
 
 die() {
 	printf "%s%sError:%s %s%s%s\n" "$BOLD" "$RED" "$RESET" "$BOLD" "$WHITE" "$1" >&2
@@ -67,6 +71,17 @@ assert_def() {
 		die "$2"
 	fi
 }
+
+command_exists() {
+	if ! command -v "$1" >/dev/null 2>&1; then
+		return 1
+	fi
+
+  return 0
+}
+
+# Target Functions
+# ----------------
 
 link_dot() {
 	__private_stow 'link_dot' "$HOME" "$pkg" --dotfiles
@@ -281,6 +296,81 @@ __private_step_with_flag() {
 
 	"$func_name" "$flag_value"
 	unset flag_value
+}
+
+# Private Functions
+# -----------------
+
+# Installs prerequisites
+__private_install_deps() {
+	if [ -n "$G_DRY_RUN" ]; then
+		return
+	fi
+
+  install_deps=""
+  for pkg in $G_DEPS; do
+    if ! command_exists "$pkg"; then
+      if [ -z "$install_deps" ]; then
+        install_deps="$pkg"
+      else
+        install_deps="$install_deps $pkg"
+      fi
+    fi
+  done
+
+  if [ -z "$install_deps" ]; then
+    debug_log "[deps] all dependencies satisfied"
+    return
+  fi
+
+  notify_step "Installing missing dependencies"
+  echo "Packages to install: $install_deps"
+  case "$G_OS" in
+    'darwin')
+      if ! command_exists 'brew'; then
+        die 'Homebrew is required to install missing packages. See: https://brew.sh/'
+        return
+      fi
+
+      install_cmd="brew install $install_deps"
+      echo "$ $install_cmd"
+      eval "$install_cmd"
+      return
+      ;;
+    'linux')
+      break
+      ;;
+    *)
+      die 'Please install missing dependencies manually and re-run the script'
+      return
+      ;;
+  esac
+
+  case "$G_DISTRO" in 
+    'arch')
+      install_cmd="sudo pacman -S --noconfirm --needed $install_deps"
+      ;;
+    'debian' | 'ubuntu')
+      install_cmd="sudo apt install -y $install_deps"
+      ;;
+    'fedora')
+      install_cmd="sudo dnf install $install_deps"
+      ;;
+    'android')
+      install_cmd="pkg install -y $install_deps"
+      ;;
+    *)
+      die "Unsupported Linux distro '$G_DISTRO'. Please install dependencies manually and re-run script"
+      exit 0
+      ;;
+  esac
+
+  echo "$ $install_cmd"
+  if [ -n "$G_DRY_RUN" ]; then
+    exit 0
+  fi
+
+  eval "$install_cmd"
 }
 
 __private_get_target_name() {
@@ -659,6 +749,7 @@ __private_deploy_cmd() {
 	shift
 
 	__private_parse_flags "$@"
+  __private_install_deps
 	__private_eval_target	"$target_name"
 }
 
