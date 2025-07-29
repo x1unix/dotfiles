@@ -28,6 +28,7 @@ install_tpm_rollback() {
 }
 
 install_ssh_config() {
+  # TODO: use file_append_once
 	mkdir -p ~/.ssh
 
 	include_dir="${TARGET_DIR#"$HOME"}"

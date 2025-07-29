@@ -224,6 +224,39 @@ sops_decrypt() {
   sops --decrypt "$src_file" > "$2" 
 }
 
+# Appends a line to a file if line doesn't exist.
+#
+# Usage:
+#   file_append_once 'filename' 'some line'
+file_append_once() {
+  assert_def "$1" 'file path is required'
+  assert_def "$2" 'missing contents'
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    # TODO: implement revert
+    notify_warn 'file_append_once: revert is not implemented yet'
+    return
+  fi
+
+  notify_step "Updating file '$1'..."
+  parentdir="$(dirname "$1")"
+
+  if [ ! -d "$parentdir" ]; then
+    mkdir -p -v "$parentdir"
+  fi
+
+  if grep -q "$ssh_include" ~/.ssh/config; then
+    notify_info 'File is already updated, skip'
+    return
+  fi
+
+  echo "$2" >> "$1"
+}
+
 # @param $1 target
 require() {
 	assert_in_target
