@@ -9,7 +9,10 @@ spawn-at-startup "xwayland-satellite"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "blueman-applet"
 // spawn-at-startup "fusuma"
-spawn-at-startup "swayidle" "-w" "timeout" "301" "niri msg action power-off-monitors" "timeout" "300" "swaylock" "-f" "-c" "000000" "before-sleep" "playerctl pause" "resume" "niri msg action power-on-monirors"
+spawn-at-startup "swayidle" "-w" "timeout" "301" "niri msg action power-off-monitors" "timeout" "300" "swaylock -f -c 000000" "before-sleep" "playerctl pause" "resume" "niri msg action power-on-monirors"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+// spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+// spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 prefer-no-csd
 
