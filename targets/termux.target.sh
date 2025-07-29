@@ -35,11 +35,12 @@ step termux_init_home
 step termux_init_bashrc
 step termux_pkg_install 'flag:pkgs'
 
+# Mount Termux config to ~/.termux
+link_home '.termux' termux
+link_home '.gnupg' dot_gnupg
+
 require common
 
 # Link .bashrc
 link_home dotfiles
-
-# Mount Termux config to ~/.termux
-link_home '.termux' termux
 
