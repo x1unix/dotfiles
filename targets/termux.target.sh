@@ -4,7 +4,7 @@
 
 termux_pkg_install() {
   pkg install -y \
-    x11-repo termux-tools termux-services unzip which build-essential \
+    x11-repo termux-tools termux-services unzip which build-essential pinentry \
     inetutils htop iproute2 lsof net-tools nmap \
     tmux proot-distro sed stow git openssh fzf ripgrep \
     neovim zsh rust stylua nodejs golang lua-language-server rust-analyzer lazygit
