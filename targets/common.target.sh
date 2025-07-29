@@ -27,21 +27,6 @@ install_tpm_rollback() {
 	rm -rf "$HOME/.tmux/plugins/tpm"
 }
 
-install_ssh_config() {
-  # TODO: use file_append_once
-	mkdir -p ~/.ssh
-
-	include_dir="${TARGET_DIR#"$HOME"}"
-	include_dir="~$include_dir"
-
-	ssh_include="Include \"$include_dir/ssh_config\""
-	if ! grep -q "$ssh_include" ~/.ssh/config; then
-		echo "$ssh_include" >> ~/.ssh/config
-	else
-		echo 'ssh config already updated'
-	fi
-}
-
 # Mount all dotfiles in common/dotfiles
 link_home dotfiles
 
@@ -56,5 +41,9 @@ link_xdg_config config
 
 step install_shmgr 'flag:shmgr'
 step install_tpm 'flag:tpm'
-step install_ssh_config
+
+# Install SSH config
+SSH_CONFIGS_DIR="$HOME/.ssh/config.d"
+sops_decrypt 'ssh_config.enc' "$SSH_CONFIGS_DIR/hosts"
+ssh_config_include "$SSH_CONFIGS_DIR/hosts"
 

@@ -7,7 +7,7 @@ __DIR="$(dirname -- "$__FILE")"
 
 TARGET_EXT=.target.sh
 TARGETS_DIR="$__DIR/targets"
-G_DEPS="stow sops gnupg"
+G_DEPS="stow sops"
 
 # XDG defaults
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
@@ -220,6 +220,11 @@ sops_decrypt() {
     die "sops_decrypt: file '$src_file' doesn't exist"
   fi
 
+  parentdir="$(dirname "$2")"
+  if [ ! -d "$parentdir" ]; then
+    mkdir -p -v "$parentdir"
+  fi
+
   rm -f "$2"
   sops --decrypt "$src_file" > "$2" 
 }
@@ -255,6 +260,30 @@ file_append_once() {
   fi
 
   echo "$2" >> "$1"
+}
+
+# Adds an include into SSH config file ($HOME/.ssh/config).
+#
+# Usage:
+#   ssh_config_include path
+ssh_config_include() {
+  assert_def "$1" 'file path is required'
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  # Replace $HOME to have conflg flexible
+  rel_include_path="$(printf '%s\n' "$1" | sed "s|^$HOME|~|")"
+	ssh_include="Include \"$rel_include_path\""
+  
+  if [ -n "$G_REVERT" ]; then
+    # TODO: implement revert
+    notify_warn 'ssh_config_include: revert is not implemented yet'
+    return
+  fi
+
+  file_append_once "$HOME/.ssh/config" "$ssh_include"
 }
 
 # @param $1 target
