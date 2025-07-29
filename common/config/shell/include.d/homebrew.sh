@@ -1,3 +1,2 @@
 export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_GITHUB_API_TOKEN='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'
 export PATH="$PATH:/opt/homebrew/bin/"
