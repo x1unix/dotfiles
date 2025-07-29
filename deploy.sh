@@ -7,7 +7,7 @@ __DIR="$(dirname -- "$__FILE")"
 
 TARGET_EXT=.target.sh
 TARGETS_DIR="$__DIR/targets"
-G_DEPS="stow sops"
+G_DEPS="stow sops gnupg"
 
 # XDG defaults
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
@@ -25,6 +25,17 @@ GRAY="${ESC}[90m"
 
 # HELPERS
 # ------
+
+pad_right() {
+    str=$1
+    width=$2
+    padchar=${3:-" "}  # default to space if not provided
+
+    while [ "${#str}" -lt "$width" ]; do
+        str="$str$padchar"
+    done
+    printf "%s" "$str"
+}
 
 die() {
 	printf "%s%sError:%s %s%s%s\n" "$BOLD" "$RED" "$RESET" "$BOLD" "$WHITE" "$1" >&2
@@ -117,17 +128,6 @@ link_xdg_state() {
 	__private_stow 'link_xdg_state' "$XDG_STATE_HOME" "$1"
 }
 
-pad_right() {
-    str=$1
-    width=$2
-    padchar=${3:-" "}  # default to space if not provided
-
-    while [ "${#str}" -lt "$width" ]; do
-        str="$str$padchar"
-    done
-    printf "%s" "$str"
-}
-
 # @param $1 operation name
 # @param $2 dest path
 # @param $3 target package (target/package)
@@ -191,6 +191,37 @@ __private_stow_unlink() {
 	fi
 
 	stow -v -D -t "$2" -d "$recipes_dir" "$3" "$4"
+}
+
+# Decrypts SOPS encrypted file.
+#
+# Second parameter is destination filename.
+#
+# Usage:
+#   sops_decrypt 'filename.enc' 'dest'
+#   sops_decrypt 'filename.enc' 'dest'
+sops_decrypt() {
+  assert_def "$1" 'source file name is required'
+  assert_def "$2" 'destination file path is required'
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    notify_step "Removing encrypted file '$2'..."
+    rm -f "$2"
+    return
+  fi
+  
+	src_file="$__DIR/$CURRENT_TARGET/$1"
+  notify_step "Decrypting '$1' -> '$2'..."
+  if [ ! -f "$src_file" ]; then
+    die "sops_decrypt: file '$src_file' doesn't exist"
+  fi
+
+  rm -f "$2"
+  sops --decrypt "$src_file" > "$2" 
 }
 
 # @param $1 target
