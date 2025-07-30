@@ -67,8 +67,8 @@ local function create_popup()
     border = config.border,
   })
 
-  -- Set window options
-  vim.api.nvim_set_option_value('winblend', 10, { win = popup_win })
+  -- Winblend controls window transparency
+  vim.api.nvim_set_option_value('winblend', 0, { win = popup_win })
 
   -- Set buffer-specific keymaps
   vim.keymap.set('t', config.keymap, function()
