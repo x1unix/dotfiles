@@ -1,6 +1,7 @@
-NPM_PACKAGES="$HOME/.npm/bin"
+NPM_PREFIX="$HOME/.npm"
+NPM_BIN_PATH="$HOME/.npm/bin"
 
-export PATH="$PATH:$NPM_PACKAGES"
+export PATH="$PATH:$NPM_BIN_PATH"
 
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
