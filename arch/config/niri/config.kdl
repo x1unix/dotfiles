@@ -313,9 +313,18 @@ binds {
     // rather than stacked on top of each other.
     Mod+W { toggle-column-tabbed-display; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    // Print { screenshot; }
+    // Ctrl+Print { screenshot-screen; }
+    // Alt+Print { screenshot-window; }
+
+    // $mod+Shift+P exec $screenclip_save
+    // $mod+Ctrl+Shift+P exec $screenclip_edit
+    // $mod+P exec $screenclip_copy
+    // set $screenclip_copy slurp | grim -g - - | wl-copy
+    // set $screenclip_edit slurp | grim -g - - | swappy -f -
+    // set $screenclip_save slurp | grim -g - ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png
+    Mod+P { spawn "sh" "-c" "slurp | grim -g -- | wl-copy"; }
+    Mod+Shift+P { screenshot; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -333,5 +342,5 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
 }
