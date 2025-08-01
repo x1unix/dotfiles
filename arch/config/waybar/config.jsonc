@@ -4,9 +4,12 @@
   "layer": "top",
   "position": "top",
   "gtk-layer-shell": true,
-  "modules-left": ["niri/workspaces", "sway/workspaces", "sway/mode"],
+  "modules-left": ["hyprland/workspaces", "niri/workspaces", "sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "idle_inhibitor", "niri/language", "sway/language", "wireplumber", "backlight", "battery"],
+  "modules-right": ["tray", "idle_inhibitor", "hyprland/language", "niri/language", "sway/language", "wireplumber", "backlight", "battery"],
+  "hyprland/workspaces": {
+    "format": "{value}",
+  },
   "niri/workspaces": {
     "format": "{value}",
   },
@@ -28,6 +31,9 @@
       "activated": "󰅶",
       "deactivated": "󰛊",
     },
+  },
+  "hyprland/language": {
+    "format": "{short}"
   },
   "niri/language": {
     "format": "{short}",
