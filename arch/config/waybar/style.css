@@ -28,7 +28,8 @@ window#waybar {
   color: @red;
 }
 
-#workspaces button.focused {
+#workspaces button.focused,
+#workspaces button.active {
   border-color: @ws-active-border;
   background-color: @ws-active-background;
   color: @ws-active-text;

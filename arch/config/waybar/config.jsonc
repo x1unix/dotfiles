@@ -8,7 +8,7 @@
   "modules-center": ["clock"],
   "modules-right": ["tray", "idle_inhibitor", "hyprland/language", "niri/language", "sway/language", "wireplumber", "backlight", "battery"],
   "hyprland/workspaces": {
-    "format": "{value}",
+    "format": "{id}"
   },
   "niri/workspaces": {
     "format": "{value}",
