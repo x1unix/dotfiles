@@ -4,12 +4,13 @@ return {
     lazy = false,
     version = false,
     keys = {
-      { '<leader>e', '<cmd>:lua MiniFiles.open()<CR>', desc = 'mini.files' },
       {
         '<leader>e',
         function()
           local buf_name = vim.api.nvim_buf_get_name(0)
           local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+          ---@module 'mini.files'
+          ---@type mini.files.MiniFiles
           MiniFiles.open(path)
           MiniFiles.reveal_cwd()
         end,
@@ -17,6 +18,10 @@ return {
       },
     },
     config = function()
+      -- Startup screen.
+      -- See: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-starter.md
+      require('mini.starter').setup()
+
       -- require('mini.tabline').setup({
       --   -- tabpage_section = 'none',
       -- })
