@@ -36,6 +36,15 @@ return {
     end,
   },
 
+  -- Starter screen header style.
+  --
+  -- See: https://github.com/MaximilianLloyd/ascii.nvim/tree/master
+  starter = {
+    header = function()
+      return require('ascii').art.text.neovim.bloody
+    end,
+  },
+
   -- Called after theming plugins loaded
   setup = function()
     require('vscode').setup({ style = 'dark' })

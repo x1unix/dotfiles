@@ -20,7 +20,11 @@ return {
     config = function()
       -- Startup screen.
       -- See: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-starter.md
-      require('mini.starter').setup()
+      require('mini.starter').setup({
+        header = function()
+          return require('util.uiutil').get_header()
+        end,
+      })
 
       -- require('mini.tabline').setup({
       --   -- tabpage_section = 'none',
@@ -84,5 +88,10 @@ return {
         end,
       })
     end,
+    dependencies = {
+      -- For ascii art
+      'MaximilianLloyd/ascii.nvim',
+      'MunifTanjim/nui.nvim',
+    },
   },
 }
