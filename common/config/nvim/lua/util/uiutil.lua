@@ -24,16 +24,11 @@ local function get_header_func()
 end
 
 M.get_header = function()
-  local theme = require('config.theme')
-  if not theme.starter or not theme.starter.header then
-    return nil
-  end
-
   local header_func = get_header_func()
   if not header_func then
     return 'Neovim'
   end
-  local header = join_strings(theme.starter.header())
+  local header = join_strings(header_func())
   return header .. '\n\n' .. vim.fn.getcwd()
 end
 
