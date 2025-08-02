@@ -41,7 +41,8 @@ return {
   -- See: https://github.com/MaximilianLloyd/ascii.nvim/tree/master
   starter = {
     header = function()
-      return require('ascii').art.text.neovim.bloody
+      -- return require('ascii').art.text.neovim.bloody
+      return require('ascii').art.gaming.doom.logo
     end,
   },
 
