@@ -31,6 +31,8 @@ wk.add({
   {
     '<Leader>g',
     function()
+      ---@module 'snacks'
+      ---@type snacks.plugins
       Snacks.lazygit()
     end,
     mode = 'n',
@@ -38,7 +40,7 @@ wk.add({
   },
   -- Session manager --
   {
-    '<Leader>M',
+    '<Leader>s',
     '<cmd>SessionManager<cr>',
     mode = 'n',
     desc = 'session manager',
