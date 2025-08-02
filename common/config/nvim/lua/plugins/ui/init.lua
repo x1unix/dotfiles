@@ -1,6 +1,7 @@
 return {
   { import = 'plugins.ui.oil' },
   { import = 'plugins.ui.barbar' },
+  { import = 'plugins.ui.snacks' },
   { import = 'plugins.ui.dap' },
   { import = 'plugins.ui.neotest' },
   { import = 'plugins.ui.neotree' },

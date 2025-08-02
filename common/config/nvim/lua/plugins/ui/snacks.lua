@@ -5,6 +5,12 @@ return {
     lazy = false,
     opts = {
       lazygit = {},
+      input = {},
+      styles = {
+        input = {
+          border = 'rounded',
+        },
+      },
     },
   },
 }

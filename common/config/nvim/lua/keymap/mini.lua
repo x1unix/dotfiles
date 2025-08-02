@@ -22,8 +22,9 @@ wk.add({
   {
     '<Leader>ss',
     function()
-      local session_name = require('util.sessionutil').prompt_session_name()
-      require('mini.sessions').write(session_name, { force = true })
+      require('util.sessionutil').prompt_session_name(function(session_name)
+        require('mini.sessions').write(session_name, { force = true })
+      end)
     end,
     mode = 'n',
     desc = 'Save current session',
