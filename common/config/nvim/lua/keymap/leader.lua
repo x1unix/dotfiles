@@ -38,6 +38,12 @@ wk.add({
     mode = 'n',
     desc = 'lazygit',
   },
+  {
+    '<Leader><Leader>',
+    '<C-w>',
+    mode = 'n',
+    desc = '<C-w>',
+  },
   -- Session manager --
   {
     '<Leader>s',
