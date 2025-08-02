@@ -44,11 +44,4 @@ wk.add({
     mode = 'n',
     desc = '<C-w>',
   },
-  -- Session manager --
-  {
-    '<Leader>s',
-    '<cmd>SessionManager<cr>',
-    mode = 'n',
-    desc = 'session manager',
-  },
 })

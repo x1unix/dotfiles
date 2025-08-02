@@ -2,6 +2,7 @@
 require('keymap.overrides')
 require('keymap.leader')
 require('keymap.ufo')
+require('keymap.mini')
 require('keymap.trouble')
 require('keymap.telescope')
 require('keymap.lsp')

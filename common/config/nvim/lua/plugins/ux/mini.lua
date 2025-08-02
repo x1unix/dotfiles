@@ -43,6 +43,17 @@ return {
       --require('mini.surround').setup()
       -- TODO: 's' key conflicts with flash.nvim. Figure out other binding.
 
+      -- Session management
+      require('mini.sessions').setup({
+        autoread = true,
+        autowrite = true,
+        file = '',
+        directory = vim.fn.stdpath('data') .. '/sessions',
+        force = {
+          write = true,
+        },
+      })
+
       require('mini.files').setup({
         content = {
           filter = function(name)
@@ -67,6 +78,8 @@ return {
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesActionRename',
         callback = function(event)
+          ---@module 'snacks'
+          ---@type snacks.plugins
           Snacks.rename.on_rename_file(event.data.from, event.data.to)
         end,
       })
