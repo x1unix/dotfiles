@@ -52,4 +52,13 @@ return {
     ts.install_reload_highlights_autocmd()
     vim.cmd.colorscheme('vscode')
   end,
+
+  -- Android-specific rules
+  android = {
+    starter = {
+      header = function()
+        return require('ascii').art.text.neovim.default1
+      end,
+    },
+  },
 }
