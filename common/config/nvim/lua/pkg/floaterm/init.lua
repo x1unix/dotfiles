@@ -71,7 +71,7 @@ local function create_popup()
   vim.api.nvim_set_option_value('winblend', 0, { win = popup_win })
 
   -- Set buffer-specific keymaps
-  vim.keymap.set('t', config.keymap, function()
+  vim.keymap.set('t', '<Esc>', function()
     close_popup()
   end, {
     buffer = popup_buf,
@@ -79,11 +79,12 @@ local function create_popup()
     silent = true,
   })
 
-  vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {
-    buffer = popup_buf,
-    desc = 'Exit terminal mode',
-    silent = true,
-  })
+  -- TODO: figure out a keybind for this
+  -- vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {
+  --   buffer = popup_buf,
+  --   desc = 'Exit terminal mode',
+  --   silent = true,
+  -- })
 
   -- Start terminal if not already running
   if not term_job_id then
