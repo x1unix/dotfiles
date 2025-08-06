@@ -226,7 +226,7 @@ sops_decrypt() {
   fi
 
   rm -f "$2"
-  sops --decrypt "$src_file" > "$2" 
+  GPG_TTY=$(tty) sops --decrypt "$src_file" > "$2" 
 }
 
 # Appends a line to a file if line doesn't exist.
