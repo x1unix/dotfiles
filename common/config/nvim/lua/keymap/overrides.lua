@@ -26,5 +26,5 @@ wk.add({
 
   -- Add a new line before and after cursor in normal mode.
   -- Similar to pressing Return in insert mode.
-  { '<CR>', 'i<CR><Esc>O', mode = 'n', desc = 'Add new line in between' },
+  { '<CR>', 'a<CR><Esc>O', mode = 'n', desc = 'Add new line in between' },
 })
