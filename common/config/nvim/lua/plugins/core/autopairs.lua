@@ -7,6 +7,7 @@ return {
     event = 'InsertEnter',
     config = true,
     opts = {
+      check_ts = true,
       disable_filetype = require('util.typeutil').ignored_plugin_filetypes,
     },
   },
