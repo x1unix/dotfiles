@@ -30,6 +30,11 @@ return {
         capabilities = capabilities,
       })
 
+      -- Fix filetypes for clangd. See: https://github.com/LazyVim/LazyVim/discussions/3997
+      lspconfig.clangd.setup({
+        filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'hpp' },
+      })
+
       lspconfig.eslint.setup({
         on_attach = function(_client, bufnr)
           vim.api.nvim_create_autocmd('BufWritePre', {
