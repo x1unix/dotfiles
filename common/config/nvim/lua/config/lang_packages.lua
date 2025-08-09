@@ -13,12 +13,15 @@ return {
     'ini',
     'lua',
     'make',
+    'jsonc',
     'nix',
     'php',
     'terraform',
     'typescript',
+    'udev',
     'xml',
     'yaml',
+    'ssh_config',
   },
 
   -- List of language servers to install and configure.
