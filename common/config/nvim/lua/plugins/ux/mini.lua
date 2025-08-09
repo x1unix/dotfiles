@@ -48,6 +48,7 @@ return {
       -- TODO: 's' key conflicts with flash.nvim. Figure out other binding.
 
       -- Session management
+      vim.opt.sessionoptions:append('folds')
       require('mini.sessions').setup({
         autoread = true,
         autowrite = true,
