@@ -23,18 +23,4 @@ wk.add({
   -- { '<leader>ttk', '<cmd> tabNext <CR>', mode = 'n', desc = 'next tab' },
   -- { '<leader>ttj', '<cmd> tabprevious <CR>', mode = 'n', desc = 'previous tab' },
   -- { '<leader>sf', ":echo expand('%:p'},<CR>", mode = 'n', desc = 'display full path' },
-
-  -- Add a new line before and after cursor in normal mode.
-  -- Similar to pressing Return in insert mode.
-  {
-    '<CR>',
-    'a<CR><Esc>O',
-    mode = 'n',
-    desc = 'Add new line in between',
-    cond = function()
-      -- avoid conflict with quicklist
-      local bo = vim.bo[0]
-      return bo.modifiable and not bo.readonly
-    end,
-  },
 })
