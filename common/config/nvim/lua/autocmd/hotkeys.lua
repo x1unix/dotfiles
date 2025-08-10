@@ -3,10 +3,12 @@
 local bind_ignore_buftypes = {
   nofile = true,
   quickfix = true,
+  help = true,
 }
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = '*',
+local filebuf_aug = vim.api.nvim_create_augroup('file_only_maps', { clear = true })
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'FileType' }, {
+  group = filebuf_aug,
   callback = function(args)
     local bo = vim.bo[args.buf]
     if bind_ignore_buftypes[bo.buftype] or bo.readonly or not bo.modifiable then
