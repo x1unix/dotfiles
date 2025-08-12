@@ -1,5 +1,3 @@
-local pkgs = require('config.lang_packages')
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
