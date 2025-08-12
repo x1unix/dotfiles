@@ -5,6 +5,7 @@ local function vscode_switch_style(style)
   -- Restore syntax after switch
   local filetype = vim.bo.filetype
   require('vscode').load(style)
+  vim.cmd.colorscheme('vscode')
 
   if filetype and filetype ~= '' then
     vim.cmd('setlocal filetype=' .. filetype)
