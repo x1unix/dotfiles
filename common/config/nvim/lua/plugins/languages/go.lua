@@ -10,6 +10,7 @@ return {
     config = function()
       local capabilities = require('util.lsp').make_capabilities()
       require('go').setup({
+        luasnip = true,
         lsp_keymaps = false,
         lsp_cfg = {
           capabilities = capabilities,
