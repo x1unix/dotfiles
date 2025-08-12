@@ -10,17 +10,6 @@ return {
 
     ---@module "ibl"
     ---@type ibl.config
-    opts = {
-      -- See ':highlight' command.
-      -- indent = {
-      --   highlight = highlight,
-      -- },
-      -- whitespace = {
-      --   highlight = highlight,
-      -- },
-      -- scope = {
-      --   highlight = highlight,
-      -- },
-    },
+    opts = {},
   },
 }
