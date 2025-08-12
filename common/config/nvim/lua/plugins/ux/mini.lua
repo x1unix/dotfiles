@@ -44,8 +44,17 @@ return {
       -- - saiw)  - [s]urround [a]dd [i]nner [w]ord [)]paren
       -- - sd'    - [s]urround [d]elete [']quotes
       -- - sr)'   - [s]urround [r]eplace [)][']
-      --require('mini.surround').setup()
-      -- TODO: 's' key conflicts with flash.nvim. Figure out other binding.
+      require('mini.surround').setup({
+        mappings = {
+          add = 'ysa', -- Add surrounding in Normal and Visual modes
+          delete = 'ysd', -- Delete surrounding
+          find = 'ysf', -- Find surrounding (to the right)
+          find_left = 'ysF', -- Find surrounding (to the left)
+          highlight = 'ysh', -- Highlight surrounding
+          replace = 'ysr', -- Replace surrounding
+          update_n_lines = 'ysn', -- Update `n_lines`
+        },
+      })
 
       -- Session management
       vim.opt.sessionoptions:append('folds')
