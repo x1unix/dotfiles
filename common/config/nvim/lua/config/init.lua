@@ -5,6 +5,7 @@ local opt = vim.opt -- Shortcut for convenience
 
 opt.backspace = { 'start', 'eol', 'indent' }
 opt.number = true
+opt.relativenumber = true
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.scrolloff = 5
