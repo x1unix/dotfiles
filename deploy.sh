@@ -440,7 +440,7 @@ __private_install_deps() {
   esac
 
   case "$G_DISTRO" in 
-    'arch')
+    'arch' | 'archarm')
       install_cmd="sudo pacman -S --noconfirm --needed $install_deps"
       ;;
     'debian' | 'ubuntu')
