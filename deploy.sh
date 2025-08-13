@@ -581,8 +581,9 @@ __private_get_target_pragma() {
 __private_check_constraint_value() {
   for item in $(printf '%s\n' "$2" | tr '|' ' ')
   do
+      debug_log "constraints: TEST '$1' == '$item'"
       if [ "$item" = "$1" ]; then
-        debug_log "constraints: '$1' == '$item'"
+        debug_log "constraints: OK '$1' == '$item'"
         return 0
       fi
   done
