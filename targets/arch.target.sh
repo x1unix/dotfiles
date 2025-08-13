@@ -20,7 +20,7 @@ arch_paru_install() {
 arch_pacman_install() {
 	sudo pacman -S \
 		sway swaybg swayidle swaylock dunst xorg-xwayland xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk gnome-keyring polkit-gnome blueman ttf-zed-mono-nerd \
-		stow wofi waybar wl-clipboard alacritty ghostty grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor \
+		stow wofi waybar wl-clipboard alacritty grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor \
     qt5-wayland qt6-wayland \
     zsh-syntax-highlighting zsh lazygit neovim git net-tools man-db lf nodejs npm go \
     --needed --noconfirm
