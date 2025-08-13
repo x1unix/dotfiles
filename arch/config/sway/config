@@ -4,7 +4,7 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod4
+set $mod Mod1
 
 # Keys
 set $left h
@@ -22,8 +22,8 @@ client.focused $C_focused_border $C_focused_bg $C_focused_text $C_focused_indica
 
 # Misc
 set $font ZedMono Nerd Font Mono 10.75
-set $term alacritty
-set $menu wofi --show drun
+set $term foot
+set $menu wofi --show drun,run
 set $screenclip_copy slurp | grim -g - - | wl-copy
 set $screenclip_edit slurp | grim -g - - | swappy -f -
 set $screenclip_save slurp | grim -g - ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png
@@ -98,8 +98,9 @@ floating_modifier $mod normal
 
 # Reload the configuration file
 bindsym --to-code {
+  # $mod+Shift+c reload
   $mod+Shift+c reload
-  $mod+Alt+c exec 'pkill -SIGUSR2 waybar'
+  # $mod+Alt+c exec 'pkill -SIGUSR2 waybar'
 }
 
 # Exit sway (logs you out of your Wayland session)
