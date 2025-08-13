@@ -639,7 +639,7 @@ __private_check_target_constraints() {
 						;;
 				esac
 
-        if __private_check_constraint_value "$current_value" "$want_value"; then
+        if __private_check_constraint_value "$want_value" "$current_value"; then
 					debug_log "constraints: satisfied: '$current_key'"
 					continue
 				fi
