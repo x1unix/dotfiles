@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-#require: os=linux arch=x86_64 distro=arch
+#require: os=linux distro=arch|archarm
 #description: dotfiles and packages for Arch Linux
 
 arch_paru_install() {

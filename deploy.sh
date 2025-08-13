@@ -570,6 +570,26 @@ __private_get_target_pragma() {
 	echo "$require_line" | sed "$sed_line"
 }
 
+# Checks if constraint rule matches against a current value.
+#
+# Example of rules:
+#   "foo"
+#   "foo|bar|baz"
+#
+# @param $1 current value
+# @param $2 constraint string
+__private_check_constraint_value() {
+  for item in $(printf '%s\n' "$2" | tr '|' ' ')
+  do
+      if [ "$item" = "$1" ]; then
+        debug_log "constraints: '$1' == '$item'"
+        return 0
+      fi
+  done
+
+  return 1
+}
+
 # @param $1 target name
 # @param $2 absolute file path
 # @param $3 is silent
@@ -618,7 +638,7 @@ __private_check_target_constraints() {
 						;;
 				esac
 
-				if [ "$current_value" = "$want_value" ]; then
+        if __private_check_constraint_value "$current_value" "$want_value"; then
 					debug_log "constraints: satisfied: '$current_key'"
 					continue
 				fi
