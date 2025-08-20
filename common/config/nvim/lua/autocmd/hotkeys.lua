@@ -15,9 +15,10 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'FileType' }, {
       return
     end
 
-    vim.keymap.set('n', '<CR>', 'a<CR><Esc>O', {
-      buffer = args.buf,
-      desc = 'Add new line in between',
-    })
+    -- TODO: fix buggy behavior
+    -- vim.keymap.set('n', '<CR>', 'a<CR><Esc>O', {
+    --   buffer = args.buf,
+    --   desc = 'Add new line in between',
+    -- })
   end,
 })
