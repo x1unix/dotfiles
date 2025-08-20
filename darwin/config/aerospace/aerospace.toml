@@ -157,3 +157,13 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+# Focus follows mouse
+on-focus-changed = [
+  'move-mouse window-lazy-center'
+]
+
+on-focused-monitor-changed = [
+  'move-mouse monitor-lazy-center'
+]
+
