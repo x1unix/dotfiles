@@ -27,8 +27,8 @@ default-root-container-orientation = 'auto'
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
-# Focus follows mouse
-on-focus-changed = ['move-mouse window-lazy-center']
+# Focus follows mouse is disabled as it breaks Fusion360 and other QT apps
+# on-focus-changed = ['move-mouse window-lazy-center']
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # Possible values: (qwerty|dvorak|colemak)
