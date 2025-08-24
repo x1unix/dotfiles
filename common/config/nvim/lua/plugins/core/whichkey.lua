@@ -11,8 +11,13 @@ return {
         desc = 'Buffer Local Keymaps (which-key)',
       },
     },
-    config = function()
-      require('which-key').setup({})
+    ---@module 'which-key'
+    ---@type wk.Opts
+    opts = {
+      preset = 'modern',
+    },
+    config = function(_, opts)
+      require('which-key').setup(opts)
       require('keymap')
     end,
   },
