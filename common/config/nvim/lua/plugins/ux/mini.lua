@@ -46,13 +46,13 @@ return {
       -- - sr)'   - [s]urround [r]eplace [)][']
       require('mini.surround').setup({
         mappings = {
-          add = 'ysa', -- Add surrounding in Normal and Visual modes
-          delete = 'ysd', -- Delete surrounding
-          find = 'ysf', -- Find surrounding (to the right)
-          find_left = 'ysF', -- Find surrounding (to the left)
-          highlight = 'ysh', -- Highlight surrounding
-          replace = 'ysr', -- Replace surrounding
-          update_n_lines = 'ysn', -- Update `n_lines`
+          add = '<Leader>za', -- Add surrounding in Normal and Visual modes
+          delete = '<Leader>zd', -- Delete surrounding
+          find = '<Leader>zf', -- Find surrounding (to the right)
+          find_left = '<Leader>zF', -- Find surrounding (to the left)
+          highlight = '<Leader>zh', -- Highlight surrounding
+          replace = '<Leader>zr', -- Replace surrounding
+          update_n_lines = '<Leader>zn', -- Update `n_lines`
         },
       })
 
