@@ -5,23 +5,6 @@ local function apply_hl()
   vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'IblScope' })
 end
 
-local function vscode_switch_style(style)
-  -- Plugin resets file syntax after switch and breaks syntax highlight.
-  -- Restore syntax after switch
-  local filetype = vim.bo.filetype
-  require('vscode').load(style)
-
-  apply_hl()
-
-  -- Trigger highlights reload
-  vim.cmd('doautocmd ColorScheme')
-
-  -- FIXME: reload bufferline highlights on theme change.
-  if filetype and filetype ~= '' then
-    vim.cmd('setlocal filetype=' .. filetype)
-  end
-end
-
 -- Theme config.
 -- Setup supports lualine and automatic dark/light mode switching.
 --
@@ -48,7 +31,17 @@ return {
 
   -- OS dark/light mode switch hook.
   on_dark_mode_change = function(style)
-    vscode_switch_style(style)
+    -- FIXME: reload bufferline highlights on theme change.
+    require('vscode').load(style)
+
+    apply_hl()
+
+    -- Plugin resets file syntax after switch and breaks syntax highlight.
+    -- Restore syntax after switch
+    local filetype = vim.bo.filetype
+    if filetype and filetype ~= '' then
+      vim.cmd('setlocal filetype=' .. filetype)
+    end
   end,
 
   -- Initial theme setup.
