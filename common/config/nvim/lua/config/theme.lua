@@ -31,7 +31,6 @@ return {
 
   -- OS dark/light mode switch hook.
   on_dark_mode_change = function(style)
-    -- FIXME: reload bufferline highlights on theme change.
     require('vscode').load(style)
 
     apply_hl()

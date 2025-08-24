@@ -8,6 +8,7 @@ local lualine_opts = {
 
 local darkmode_init = false
 local function darkmode_hook(style)
+  -- FIXME: reload bufferline highlights on theme change.
   if darkmode_init then
     config.on_dark_mode_change(style)
     vim.cmd('doautocmd ColorScheme')
