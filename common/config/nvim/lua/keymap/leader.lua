@@ -1,4 +1,5 @@
 local wk = require('which-key')
+local icons = require('util.icons')
 
 -- Leader
 wk.add({
@@ -8,6 +9,7 @@ wk.add({
     ':Neotree toggle<cr>',
     mode = 'n',
     desc = 'neotree',
+    icon = icons.folder,
   },
   -- Tabs --
   {
@@ -51,12 +53,14 @@ wk.add({
       end
     end,
     mode = 'n',
-    desc = 'splits: switch',
+    desc = 'splits: leap',
+    icon = icons.grid,
   },
   {
     '<Leader><Leader>',
     '<C-w>',
     mode = 'n',
-    desc = 'Ctrl+w',
+    desc = 'splits: C^w',
+    icon = icons.grid,
   },
 })

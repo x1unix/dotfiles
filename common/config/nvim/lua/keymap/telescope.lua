@@ -1,4 +1,5 @@
 local wk = require('which-key')
+local icons = require('util.icons')
 
 -- Leader global hotkeys --
 wk.add({
@@ -19,30 +20,20 @@ wk.add({
     '<cmd>Telescope live_grep<cr>',
     mode = 'n',
     desc = 'grep',
+    icon = icons.action_search,
   },
   {
     '<Leader>/',
     '<cmd>Telescope current_buffer_fuzzy_find<cr>',
     mode = 'n',
-    desc = 'find',
+    desc = 'find in file',
+    icon = icons.action_search,
   },
   {
     '<Leader>b',
     '<cmd>Telescope buffers<cr>',
     mode = 'n',
     desc = 'buffers',
-  },
-  {
-    '<Leader>h',
-    '<cmd>Telescope help_tags<cr>',
-    mode = 'n',
-    desc = 'help',
-  },
-  {
-    '<Leader>m',
-    '<cmd>Telescope marks<cr>',
-    mode = 'n',
-    desc = 'marks',
   },
 })
 
@@ -78,5 +69,17 @@ wk.add({
     '<cmd>Telescope lsp_document_symbols<cr>',
     mode = 'n',
     desc = 'lsp_document_symbols',
+  },
+  {
+    '<Leader>Tm',
+    '<cmd>Telescope marks<cr>',
+    mode = 'n',
+    desc = 'marks',
+  },
+  {
+    '<Leader>Th',
+    '<cmd>Telescope help_tags<cr>',
+    mode = 'n',
+    desc = 'help',
   },
 })

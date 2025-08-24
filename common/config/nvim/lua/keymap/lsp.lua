@@ -1,4 +1,5 @@
 local wk = require('which-key')
+local icons = require('util.icons')
 
 -- LSP hotkeys
 wk.add({
@@ -7,16 +8,19 @@ wk.add({
     'gd',
     '<cmd>Telescope lsp_definitions<cr>',
     desc = 'lsp: go to definitions',
+    icon = icons.symbol_class,
   },
   {
     'gr',
     '<cmd>Telescope lsp_references<cr>',
     desc = 'lsp: go to references',
+    icon = icons.symbol_class,
   },
   {
     'gi',
     '<cmd>Telescope lsp_implementations<cr>',
     desc = 'lsp: go to implementations',
+    icon = icons.symbol_class,
   },
   {
     'gw',
@@ -29,6 +33,7 @@ wk.add({
     'ga',
     '<cmd>Lspsaga code_action<cr>',
     desc = 'lsp: code actions',
+    icon = icons.bulb,
   },
   {
     'gh',
@@ -53,7 +58,11 @@ wk.add({
 })
 
 wk.add({
-  { '<Leader>l', group = 'lspsaga' },
+  {
+    '<Leader>l',
+    group = 'lspsaga',
+    icon = icons.symbol_event,
+  },
   {
     '<Leader>lo',
     '<cmd>Lspsaga outline<cr>',
@@ -63,6 +72,7 @@ wk.add({
     '<Leader>lr',
     '<cmd>Lspsaga rename<cr>',
     desc = 'lsp: rename',
+    icon = icons.action_rename,
   },
   {
     '<Leader>ld',

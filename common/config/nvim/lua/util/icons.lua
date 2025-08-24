@@ -36,6 +36,7 @@ return {
     icon = '',
     color = 'blue',
   },
+
   --- @type wk.Icon
   variables = {
     icon = '',
@@ -45,5 +46,47 @@ return {
   terminal = {
     icon = '',
     color = 'grey',
+  },
+  --- @type wk.Icon
+  bulb = {
+    icon = '',
+    color = 'yellow',
+  },
+  --- @type wk.Icon
+  folder = {
+    icon = '',
+    color = 'orange',
+  },
+  --- @type wk.Icon
+  grid = {
+    icon = '󰕰',
+    color = 'blue',
+  },
+
+  --- @type wk.Icon
+  symbol_var = {
+    icon = '',
+    color = 'purple',
+  },
+  --- @type wk.Icon
+  symbol_class = {
+    icon = '',
+    color = 'purple',
+  },
+  --- @type wk.Icon
+  symbol_event = {
+    icon = '',
+    color = 'yellow',
+  },
+
+  --- @type wk.Icon
+  action_rename = {
+    icon = '󰑕',
+    color = 'blue',
+  },
+  --- @type wk.Icon
+  action_search = {
+    icon = '',
+    color = 'green',
   },
 }
