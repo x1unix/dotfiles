@@ -1,10 +1,17 @@
 local ts = require('util.treesitter')
 
+local function apply_hl()
+  -- Override colors for folds
+  vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'IblScope' })
+end
+
 local function vscode_switch_style(style)
   -- Plugin resets file syntax after switch and breaks syntax highlight.
   -- Restore syntax after switch
   local filetype = vim.bo.filetype
   require('vscode').load(style)
+
+  apply_hl()
 
   -- Trigger highlights reload
   vim.cmd('doautocmd ColorScheme')
@@ -54,6 +61,7 @@ return {
     require('vscode').setup({ style = 'dark' })
     ts.install_reload_highlights_autocmd()
     vim.cmd.colorscheme('vscode')
+    apply_hl()
   end,
 
   -- Android-specific rules

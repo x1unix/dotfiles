@@ -56,6 +56,28 @@ return {
         },
       })
 
+      -- Highlight current indent scope.
+      local indentscope = require('mini.indentscope')
+      indentscope.setup({
+        symbol = '▎',
+        draw = {
+          delay = 0,
+          animation = indentscope.gen_animation.none(),
+        },
+        mappings = {
+          -- Textobjects
+          object_scope = 'ii',
+          object_scope_with_border = 'ai',
+
+          -- Motions (jump to respective border line; if not present - body line)
+          goto_top = '[i',
+          goto_bottom = ']i',
+        },
+        options = {
+          indent_at_cursor = true,
+        },
+      })
+
       -- Session management
       vim.opt.sessionoptions:append('folds')
       require('mini.sessions').setup({
