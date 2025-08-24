@@ -12,6 +12,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "conform.nvim": { "branch": "master", "commit": "a0ab60ed666c56b37fd7ed1847d2ac52f2482ce0" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
+  "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "git-blame.nvim": { "branch": "master", "commit": "8503b199edf9a666fe7b1a989cf14e3c26b2eb03" },
   "gitsigns.nvim": { "branch": "main", "commit": "6e3c66548035e50db7bd8e360a29aec6620c3641" },
   "go.nvim": { "branch": "master", "commit": "3279d15d146ab2eae6ad9bc930f3c8fc62a3697b" },
@@ -70,6 +71,7 @@
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
   "typescript-tools.nvim": { "branch": "master", "commit": "3c501d7c7f79457932a8750a2a1476a004c5c1a9" },
+  "vim-vscode-snippets": { "branch": "master", "commit": "c34e9edee6a00cf3d0b8edb515e08e3df450bcfa" },
   "vscode.nvim": { "branch": "main", "commit": "cb9df0873c10a21d05362455ae3bb355eadcef6b" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
   "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" }
