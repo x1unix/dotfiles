@@ -14,6 +14,15 @@ return {
     'bashls',
     'clangd',
     'eslint',
+
+    'html',
+    'emmel_language_server',
+    'cssls',
+    'tailwindcss',
+
+    -- Misc
+    'yamlls',
+    'jsonls',
   },
 
   -- List of other tools to install by Mason.

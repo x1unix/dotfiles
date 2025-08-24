@@ -9,6 +9,16 @@ return {
     'buf_ls',
     'bashls',
     'eslint',
+
+    -- Web
+    'html',
+    'emmel_language_server',
+    'cssls',
+    'tailwindcss',
+
+    -- Misc
+    'yamlls',
+    'jsonls',
   },
 
   -- List of other tools to install by Mason.
