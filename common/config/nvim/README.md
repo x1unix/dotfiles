@@ -23,3 +23,20 @@ Packages are managed by *lazy.nvim*.
     * `ui` - User interface enhancements.
     * `ux` - User experience enhancements.
     * `x-other` - Low-priority plugins.
+
+## Notable Features
+
+List of features that extends neovim, but not bound to `<leader>` key:
+
+### UI
+
+| Hotkey      | Description                                    |
+| ----------- | ---------------------------------------------- |
+| `;`         | Telescope-powered cmdline. Alternative to `:`  |
+
+### Editing
+
+| Hotkey      | Description                                    |
+| ----------- | ---------------------------------------------- |
+| `s`         | leap.nvim                                      |
+
