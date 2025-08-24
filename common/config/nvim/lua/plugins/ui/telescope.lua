@@ -10,6 +10,7 @@ return {
       'nvim-telescope/telescope-dap.nvim',
       'LukasPietzschmann/telescope-tabs',
       'ThePrimeagen/harpoon',
+      'jonarrien/telescope-cmdline.nvim',
     },
     config = function()
       local telescope = require('telescope')
@@ -32,12 +33,27 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown({}),
           },
+          cmdline = {
+            -- See: https://github.com/jonarrien/telescope-cmdline.nvim/tree/main#configuration
+            picker = {
+              layout_config = {
+                width = 120,
+                height = 25,
+              },
+            },
+            mappings = {
+              complete = '<Tab>',
+              run_selection = '<C-CR>',
+              run_input = '<CR>',
+            },
+          },
         },
       })
 
       telescope.load_extension('harpoon')
       telescope.load_extension('ui-select')
       telescope.load_extension('telescope-tabs')
+      telescope.load_extension('cmdline')
     end,
   },
 }
