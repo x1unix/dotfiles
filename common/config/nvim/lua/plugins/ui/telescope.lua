@@ -16,6 +16,9 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
 
+      -- Integrations
+      'folke/trouble.nvim',
+
       -- Extensions
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-telescope/telescope-dap.nvim',
@@ -30,6 +33,7 @@ return {
       },
     },
     config = function()
+      local open_with_trouble = require('trouble.sources.telescope').open
       local telescope = require('telescope')
       telescope.setup({
         defaults = {
@@ -39,6 +43,13 @@ return {
             '^.idea/',
             '^.DS_Store',
             'node_modules/',
+          },
+
+          -- Although trouble has autocmd to replace qfl, Telescope doesn't trigger it.
+          -- As workaround: remap qfl hotkey.
+          mappings = {
+            i = { ['<C-q>'] = open_with_trouble },
+            n = { ['<C-q>'] = open_with_trouble },
           },
         },
         extensions = {

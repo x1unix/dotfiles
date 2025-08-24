@@ -21,5 +21,14 @@ return {
         },
       },
     },
+    init = function()
+      -- Use trouble as quickfix list viewer
+      vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+        callback = function()
+          vim.print('hook!')
+          vim.cmd([[Trouble qflist open]])
+        end,
+      })
+    end,
   },
 }
