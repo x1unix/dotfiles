@@ -16,6 +16,7 @@ local function vscode_switch_style(style)
   -- Trigger highlights reload
   vim.cmd('doautocmd ColorScheme')
 
+  -- FIXME: reload bufferline highlights on theme change.
   if filetype and filetype ~= '' then
     vim.cmd('setlocal filetype=' .. filetype)
   end
