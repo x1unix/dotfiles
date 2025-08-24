@@ -1,7 +1,14 @@
 local wk = require('which-key')
 
 wk.add({
-  { '<leader>x', group = 'trouble' },
+  {
+    '<leader>x',
+    group = 'trouble',
+    icon = {
+      name = 'trouble',
+      cat = 'filetype',
+    },
+  },
   {
     '<leader>xx',
     '<cmd>Trouble diagnostics toggle<cr>',

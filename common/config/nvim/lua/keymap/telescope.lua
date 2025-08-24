@@ -36,7 +36,7 @@ wk.add({
     '<Leader>h',
     '<cmd>Telescope help_tags<cr>',
     mode = 'n',
-    desc = 'tags',
+    desc = 'help',
   },
   {
     '<Leader>m',

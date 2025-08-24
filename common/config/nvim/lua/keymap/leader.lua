@@ -37,6 +37,10 @@ wk.add({
     end,
     mode = 'n',
     desc = 'lazygit',
+    icon = {
+      name = 'git',
+      cat = 'filetype',
+    },
   },
   {
     '<Leader>p',

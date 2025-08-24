@@ -3,6 +3,8 @@
 -- * https://github.com/rcarriga/nvim-dap-ui
 -- * https://github.com/nvim-telescope/telescope-dap.nvim
 local wk = require('which-key')
+local icons = require('util.icons')
+
 wk.add({
   -- Hotkeys inspired by GoLand/IntelliJ
   {
@@ -45,7 +47,11 @@ wk.add({
 })
 
 wk.add({
-  { '<Leader>d', group = 'dap' },
+  {
+    '<Leader>d',
+    group = 'dap',
+    icon = icons.dap,
+  },
   {
     --   "<Leader>dd", function() require("dap").continue() end,
     '<Leader>dd',
@@ -62,6 +68,7 @@ wk.add({
     end,
     desc = 'restart current session',
     mode = 'n',
+    icon = icons.debug_restart,
   },
   {
     '<Leader>dr',
@@ -70,6 +77,7 @@ wk.add({
     end,
     desc = 'run last debug configuration',
     mode = 'n',
+    icon = icons.debug_rerun,
   },
   {
     '<Leader>dq',
@@ -78,6 +86,7 @@ wk.add({
     end,
     desc = 'terminate debug session',
     mode = 'n',
+    icon = icons.debug_stop,
   },
   {
     '<Leader>db',
@@ -94,6 +103,7 @@ wk.add({
     end,
     desc = 'add conditional breakpoint',
     mode = 'n',
+    icon = icons.debug_bp_cond,
   },
   {
     '<Leader>dlb',
@@ -102,14 +112,16 @@ wk.add({
     end,
     desc = 'add log breakpoint',
     mode = 'n',
+    icon = icons.debug_bp_log,
   },
   {
-    '<Leader>dr',
+    '<Leader>de',
     function()
       require('dap').repl.open()
     end,
     desc = 'open REPL',
     mode = 'n',
+    icon = icons.terminal,
   },
   {
     '<Leader>d/',
@@ -118,9 +130,9 @@ wk.add({
     end,
     desc = 'commands',
     mode = 'n',
+    icon = icons.terminal,
   },
   {
-    -- "<Leader>d:", function() require("dap").list_breakpoints() end,
     '<Leader>d:',
     function()
       require('telescope').extensions.dap.list_breakpoints({})
@@ -138,6 +150,7 @@ wk.add({
     end,
     desc = 'stack frames',
     mode = 'n',
+    icon = icons.debug_frames,
   },
   {
     '<Leader>ds',
@@ -148,6 +161,7 @@ wk.add({
     end,
     desc = 'variable scopes',
     mode = 'n',
+    icon = icons.variables,
   },
   {
     '<Leader>dh',
