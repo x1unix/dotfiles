@@ -35,6 +35,12 @@ wk.add({
     mode = 'n',
     desc = 'buffers',
   },
+  {
+    '<Leader>B',
+    '<cmd>Telescope scope buffers<cr>',
+    mode = 'n',
+    desc = 'buffers: all',
+  },
 })
 
 -- Telescope hotkey

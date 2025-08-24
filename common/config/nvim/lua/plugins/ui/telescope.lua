@@ -18,6 +18,7 @@ return {
 
       -- Integrations
       'folke/trouble.nvim',
+      'tiagovla/scope.nvim',
 
       -- Extensions
       'nvim-telescope/telescope-ui-select.nvim',
@@ -78,6 +79,7 @@ return {
       telescope.load_extension('ui-select')
       telescope.load_extension('telescope-tabs')
       telescope.load_extension('cmdline')
+      require('telescope').load_extension('scope')
     end,
   },
 }
