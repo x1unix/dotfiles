@@ -11,6 +11,12 @@ return {
       'LukasPietzschmann/telescope-tabs',
       'ThePrimeagen/harpoon',
       'jonarrien/telescope-cmdline.nvim',
+
+      -- Use fast native fzf finder. Requires CMake!
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      },
     },
     config = function()
       local telescope = require('telescope')
@@ -24,11 +30,6 @@ return {
             'node_modules/',
           },
         },
-        -- pickers = {
-        --   find_files = {
-        --     hidden = false,
-        --   },
-        -- },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown({}),
@@ -50,6 +51,7 @@ return {
         },
       })
 
+      telescope.load_extension('fzf')
       telescope.load_extension('harpoon')
       telescope.load_extension('ui-select')
       telescope.load_extension('telescope-tabs')
