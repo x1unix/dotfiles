@@ -84,6 +84,7 @@ return {
 
       -- Session management
       vim.opt.sessionoptions:append('folds')
+      vim.opt.sessionoptions:append('globals')
       require('mini.sessions').setup({
         autoread = true,
         autowrite = true,

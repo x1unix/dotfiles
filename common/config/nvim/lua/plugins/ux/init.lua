@@ -4,5 +4,6 @@ return {
   { import = 'plugins.ux.lsp_signature' },
   { import = 'plugins.ux.mini' },
   { import = 'plugins.ux.ufo' },
+  { import = 'plugins.ux.scope' },
   { import = 'plugins.ux.trouble' },
 }
