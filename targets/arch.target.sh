@@ -24,7 +24,8 @@ arch_pacman_install() {
     hyprland hyprcursor hypridle hyprutils hyprlock hyprpaper hyprpicker hyprpolkitagent hyprshot hyprsunset \
 		stow wofi waybar wl-clipboard alacritty grim slurp kitty dolphin network-manager-applet networkmanager nm-connection-editor \
     qt5-wayland qt6-wayland \
-    tmux zsh-syntax-highlighting zsh lazygit neovim git net-tools man-db lf nodejs npm go fzf ripgrep \
+    tmux zsh-syntax-highlighting zsh net-tools man-db lf \
+    git cmake nodejs npm go fzf ripgrep lazygit neovim \
     --needed --noconfirm
 
   gsettings set org.blueman.general notification-daemon true

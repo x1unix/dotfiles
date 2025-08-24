@@ -7,7 +7,7 @@ termux_pkg_install() {
     x11-repo termux-tools termux-services unzip which build-essential pinentry \
     inetutils htop iproute2 lsof net-tools nmap \
     tmux proot-distro sed stow git openssh fzf ripgrep \
-    neovim zsh rust stylua nodejs golang lua-language-server rust-analyzer lazygit
+    cmake neovim zsh rust stylua nodejs golang lua-language-server rust-analyzer lazygit
 }
 
 termux_init_bashrc() {
