@@ -1,3 +1,14 @@
+local os = require('util.os')
+
+local function get_fzf_build_cmd()
+  -- See: https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/120
+  if os.is_win32() then
+    return 'cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  end
+
+  return 'make'
+end
+
 return {
   {
     'nvim-telescope/telescope.nvim',
@@ -15,7 +26,7 @@ return {
       -- Use fast native fzf finder. Requires CMake!
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        build = get_fzf_build_cmd(),
       },
     },
     config = function()
