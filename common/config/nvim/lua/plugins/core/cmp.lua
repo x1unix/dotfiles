@@ -1,3 +1,5 @@
+local os = require('util.os')
+
 -- Autocompletion
 return {
   {
@@ -23,7 +25,7 @@ return {
         -- C-n/C-p or Up/Down: Select next/previous item
         -- C-e: Hide menu
         -- C-k: Toggle signature help (if signature.enabled = true)
-        preset = 'default',
+        preset = os.is_android() and 'super-tab' or 'default',
 
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
