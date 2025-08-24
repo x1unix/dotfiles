@@ -1,5 +1,6 @@
 local M = {
   __ok__ = false,
+  __arm__ = false,
   __ostype__ = 0,
 }
 
@@ -23,6 +24,7 @@ M.__init__ = function()
     M.__ostype__ = OSTYPE_WIN32
   end
 
+  M.__arm__ = uname.machine == 'aarch64' or uname.machine == 'arm64'
   M.__ok__ = true
 end
 
@@ -44,5 +46,7 @@ M.is_win32 = function()
   M.__init__()
   return M.__ostype__ == OSTYPE_WIN32
 end
+
+M.is_arm = function() end
 
 return M

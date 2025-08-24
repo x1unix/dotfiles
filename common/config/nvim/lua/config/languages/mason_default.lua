@@ -1,29 +1,7 @@
--- Language servers and tools to install.
+-- List of Mason packages for a general x86-64 systems.
 -- See: plugins/languges/mason.lua.
 
 return {
-  -- List of treesitter languages to install.
-  -- Passed to nvim-treesitter.
-  languages = {
-    'go',
-    'gomod',
-    'gosum',
-    'proto',
-    'jsonc',
-    'ini',
-    'lua',
-    'make',
-    'jsonc',
-    'nix',
-    'php',
-    'terraform',
-    'typescript',
-    'udev',
-    'xml',
-    'yaml',
-    'ssh_config',
-  },
-
   -- List of language servers to install and configure.
   -- Passed to mason-lspconfig.nvim.
   lsp_servers = {
@@ -48,20 +26,5 @@ return {
     'stylua',
     'prettier',
     'codelldb',
-  },
-
-  -- Certain Mason packages aren't compatible with Android.
-  -- Here is a separate install list for Android only.
-  android = {
-    lsp_servers = {
-      'terraformls',
-      'buf_ls',
-      'bashls',
-      'eslint',
-    },
-
-    tools = {
-      'prettier',
-    },
   },
 }

@@ -10,7 +10,7 @@ return {
       'windwp/nvim-ts-autotag',
     },
     opts = function()
-      local pkgs = require('config.lang_packages')
+      local pkgs = require('config.languages.grammars')
       return {
         ensure_installed = pkgs.languages,
         highlight = {

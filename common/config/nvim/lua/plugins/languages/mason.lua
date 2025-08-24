@@ -1,8 +1,5 @@
-local lang_packages = require('config.lang_packages')
-local os = require('util.os')
-
--- Use different install list for Android
-local pkgs = (os.is_android() and lang_packages.android) or lang_packages
+-- Load platform-specific Mason config.
+local pkgs = require('util.configutil').get_mason_config()
 
 return {
   {
