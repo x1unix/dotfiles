@@ -35,17 +35,6 @@ return {
     theme = 'vscode',
   },
 
-  -- Auto-dark-mode options
-  darkmode = {
-    update_interval = 1000,
-    set_dark_mode = function()
-      vscode_switch_style('dark')
-    end,
-    set_light_mode = function()
-      vscode_switch_style('light')
-    end,
-  },
-
   -- Starter screen header style.
   --
   -- See: https://github.com/MaximilianLloyd/ascii.nvim/tree/master
@@ -56,9 +45,14 @@ return {
     end,
   },
 
-  -- Called after theming plugins loaded
-  setup = function()
-    require('vscode').setup({ style = 'dark' })
+  -- OS dark/light mode switch hook.
+  on_dark_mode_change = function(style)
+    vscode_switch_style(style)
+  end,
+
+  -- Initial theme setup.
+  setup = function(style)
+    require('vscode').setup({ style = style })
     ts.install_reload_highlights_autocmd()
     vim.cmd.colorscheme('vscode')
     apply_hl()
