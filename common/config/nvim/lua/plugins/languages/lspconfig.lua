@@ -6,7 +6,7 @@
 --
 local auto_enable = {
   'html',
-  'emmel_language_server',
+  'emmet_language_server',
   'cssls',
   'tailwindcss',
   'yamlls',

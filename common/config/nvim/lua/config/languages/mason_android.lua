@@ -12,7 +12,7 @@ return {
 
     -- Web
     'html',
-    'emmel_language_server',
+    'emmet_language_server',
     'cssls',
     'tailwindcss',
 
