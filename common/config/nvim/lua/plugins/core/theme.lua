@@ -6,12 +6,27 @@ local lualine_opts = {
   disabled_filetypes = { 'neo-tree', 'Trouble' },
 }
 
+local function reload_bufferline_highlights()
+  --FIXME: hack, unreliable.
+  --See: https://github.com/akinsho/bufferline.nvim/issues/1030
+  local all_highlights = vim.api.nvim_get_hl(0, {})
+
+  for name, _ in pairs(all_highlights) do
+    if name:match('^BufferLine') then
+      vim.api.nvim_set_hl(0, name, {})
+    end
+  end
+
+  local kfg = require('bufferline.config')
+  kfg.update_highlights()
+end
+
 local darkmode_init = false
 local function darkmode_hook(style)
-  -- FIXME: reload bufferline highlights on theme change.
   if darkmode_init then
     config.on_dark_mode_change(style)
     vim.cmd('doautocmd ColorScheme')
+    reload_bufferline_highlights()
     return
   end
 
