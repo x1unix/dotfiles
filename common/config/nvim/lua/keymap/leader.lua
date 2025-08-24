@@ -24,7 +24,7 @@ wk.add({
   },
   {
     '<Leader>q',
-    ':bnext | :bd#<cr>',
+    ':bprev | :bd#<cr>',
     mode = 'n',
     desc = 'buffer: close',
   },
