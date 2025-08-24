@@ -39,9 +39,20 @@ wk.add({
     desc = 'lazygit',
   },
   {
+    '<Leader>p',
+    function()
+      local win_id = require('window-picker').pick_window()
+      if win_id and vim.api.nvim_win_is_valid(win_id) then
+        vim.api.nvim_set_current_win(win_id)
+      end
+    end,
+    mode = 'n',
+    desc = 'splits: switch',
+  },
+  {
     '<Leader><Leader>',
     '<C-w>',
     mode = 'n',
-    desc = '<C-w>',
+    desc = 'Ctrl+w',
   },
 })

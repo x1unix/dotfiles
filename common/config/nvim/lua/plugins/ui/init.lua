@@ -6,5 +6,6 @@ return {
   { import = 'plugins.ui.neotest' },
   { import = 'plugins.ui.neotree' },
   { import = 'plugins.ui.telescope' },
+  { import = 'plugins.ui.window_picker' },
   { import = 'plugins.ui.todo' },
 }
