@@ -16,7 +16,7 @@ local auto_enable = {
 return {
   {
     'neovim/nvim-lspconfig',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp' },
+    dependencies = { 'saghen/blink.cmp' },
     config = function()
       local lspconfig = require('lspconfig')
       local capabilities = require('util.lsp').make_capabilities()

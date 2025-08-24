@@ -3,17 +3,16 @@ return {
     'ray-x/go.nvim',
     dependencies = {
       'ray-x/guihua.lua',
-      'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
       'neovim/nvim-lspconfig',
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      local capabilities = require('util.lsp').make_capabilities()
       require('go').setup({
         luasnip = true,
         lsp_keymaps = false,
         lsp_cfg = {
-          capabilities = capabilities,
+          capabilities = require('util.lsp').make_capabilities(),
 
           -- Disable function arguments autofill as it works incorrectly.
           -- gopls returns a full function prototype as snippet and replacing prototype arguments with actual are PITA.
