@@ -15,5 +15,6 @@ return {
   tools = {
     'stylua',
     'prettier',
+    'shfmt',
   },
 }

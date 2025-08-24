@@ -6,6 +6,8 @@ local M = {}
 -- list of available formatters: `:help conform-formatters`
 -- see: https://github.com/stevearc/conform.nvim#formatters
 M.formatters_by_ft = {
+  sh = { 'shfmt' },
+  bash = { 'shfmt' },
   lua = { 'stylua' },
   python = { 'isort', 'black' },
   proto = { 'buf' },

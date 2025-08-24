@@ -35,5 +35,6 @@ return {
     'stylua',
     'prettier',
     'codelldb',
+    'shfmt',
   },
 }
