@@ -9,7 +9,7 @@ return {
     },
     config = function()
       require('go').setup({
-        luasnip = false,
+        luasnip = true,
         lsp_keymaps = false,
         lsp_cfg = {
           capabilities = require('util.lsp').make_capabilities(),
