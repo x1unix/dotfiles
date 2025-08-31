@@ -14,7 +14,10 @@ return {
 
       -- Adapters
       'nvim-neotest/neotest-plenary',
-      'fredrikaverpil/neotest-golang',
+      {
+        'fredrikaverpil/neotest-golang',
+        branch = 'stream',
+      },
       'marilari88/neotest-vitest',
       'mrcjkb/rustaceanvim',
     },
