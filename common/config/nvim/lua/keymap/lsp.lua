@@ -42,8 +42,15 @@ wk.add({
   },
   {
     'gs',
-    '<cmd>Lspsaga signature_help<cr>',
-    desc = 'lsp: signature help',
+    '<cmd>Telescope lsp_document_symbols<cr>',
+    desc = 'lsp: document symbols',
+  },
+  {
+    'gS',
+    function()
+      Snacks.picker.lsp_workspace_symbols()
+    end,
+    desc = 'lsp: workspace symbols',
   },
   {
     'g[',
