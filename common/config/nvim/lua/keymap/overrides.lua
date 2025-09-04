@@ -20,7 +20,7 @@ wk.add({
   { 'p', 'P', mode = 'v', desc = 'paste' },
 
   -- Fancy cmdline using telescope
-  { ';', '<cmd>Telescope cmdline<cr>', mode = 'n', desc = 'cmdline' },
+  { ';', ':', mode = 'n', desc = 'cmdline' },
 
   -- { '<leader>ttn', '<cmd> tabnew <CR>', mode = 'n', desc = 'create new tab' },
   -- { '<leader>ttq', '<cmd> tabclose <CR>', mode = 'n', desc = 'close tab' },

@@ -25,7 +25,6 @@ return {
       'nvim-telescope/telescope-dap.nvim',
       'LukasPietzschmann/telescope-tabs',
       'ThePrimeagen/harpoon',
-      'jonarrien/telescope-cmdline.nvim',
 
       -- Use fast native fzf finder. Requires CMake!
       {
@@ -78,7 +77,6 @@ return {
       telescope.load_extension('harpoon')
       telescope.load_extension('ui-select')
       telescope.load_extension('telescope-tabs')
-      telescope.load_extension('cmdline')
       require('telescope').load_extension('scope')
     end,
   },
