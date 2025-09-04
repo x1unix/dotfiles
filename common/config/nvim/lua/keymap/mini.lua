@@ -38,3 +38,45 @@ wk.add({
     desc = 'Select & delete a session',
   },
 })
+
+local map_split = function(buf_id, lhs, direction)
+  local rhs = function()
+    local cur_target = MiniFiles.get_explorer_state().target_window
+    local new_target = vim.api.nvim_win_call(cur_target, function()
+      vim.cmd(direction .. ' split')
+      return vim.api.nvim_get_current_win()
+    end)
+
+    MiniFiles.set_target_window(new_target)
+    MiniFiles.go_in({ close_on_file = true })
+  end
+
+  -- Adding `desc` will result into `show_help` entries
+  local desc = 'Split ' .. direction
+  vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
+end
+
+-- Extra binds for mini.files
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(args)
+    local bufnr = args.data.buf_id
+
+    map_split(bufnr, '<C-s>', 'belowright horizontal')
+    map_split(bufnr, '<C-v>', 'belowright vertical')
+    vim.keymap.set('n', '<C-t>', function()
+      -- Tried to adapt vsplit example from mini.files docs with 'tabe' - didn't work :(
+      local entry = MiniFiles.get_fs_entry()
+      if not entry then
+        return vim.notify('Cursor is not on valid entry')
+      end
+      if entry.fs_type == 'file' then
+        MiniFiles.close()
+        vim.cmd('tabedit ' .. vim.fn.fnameescape(entry.path))
+      else
+        -- if it's a directory, just go in normally
+        MiniFiles.go_in()
+      end
+    end, { buffer = bufnr, desc = 'Open in a new window' })
+  end,
+})
