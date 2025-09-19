@@ -1,3 +1,4 @@
+" Inspired by https://www.cyberwizard.io/posts/the-ultimate-ideavim-setup/
 " See: https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
 
 Plug 'vim-scripts/argtextobj.vim'
