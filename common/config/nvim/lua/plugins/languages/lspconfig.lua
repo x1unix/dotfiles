@@ -12,30 +12,21 @@ return {
       local lsputil = require('util.lsp')
       local capabilities = lsputil.make_capabilities()
 
-      -- Modify capabilities with folding range for nvim-ufo.
-      -- capabilities.textDocument.foldingRange = {
-      --   dynamicRegistration = false,
-      --   lineFoldingOnly = true,
-      -- }
-
       -- Enable LSP Diagnostic as virtual text below
       vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true } })
 
-      -- Managed by go.nvim
-      -- lspconfig.gopls.setup({
-      --   capabilities = capabilities,
-      -- })
-
       lsputil.config({
-        terraformls = {
+        'terraformls',
+        'html',
+        'emmet_language_server',
+        'cssls',
+        'tailwindcss',
+        'yamlls',
+        'jsonls',
+        buf_ls = {
+          -- Sometimes Mason's buf_ls doesn't start
           capabilities = capabilities,
         },
-        html = { capabilities = capabilities },
-        emmet_language_server = { capabilities = capabilities },
-        cssls = { capabilities = capabilities },
-        tailwindcss = { capabilities = capabilities },
-        yamlls = { capabilities = capabilities },
-        jsonls = { capabilities = capabilities },
         clangd = {
           -- Fix filetypes for clangd. See: https://github.com/LazyVim/LazyVim/discussions/3997
           filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'hpp' },
@@ -47,10 +38,6 @@ return {
               command = 'EslintFixAll',
             })
           end,
-        },
-        buf_ls = {
-          -- Sometimes Mason's buf_ls doesn't start
-          capabilities = capabilities,
         },
         lua_ls = {
           capabilities = capabilities,
@@ -82,18 +69,6 @@ return {
           end,
         },
       })
-
-      -- Run ":checkhealth lsp" to see the status or to troubleshoot.
-      -- Read ":help lspconfig" for details. Read ":help lspconfig-all" for the full list of server-specific details.
-      --
-      -- For servers not on your $PATH (e.g., jdtls, elixirls), you must manually set the cmd parameter when calling setup().
-      -- For server-specific settings, see `:help lspconfig-setup`
-      -- lspconfig.rust_analyzer.setup({
-      --   capabilities = capabilities,
-      --   settings = {
-      --     ['rust-analyzer'] = {},
-      --   },
-      -- })
     end,
   },
 }

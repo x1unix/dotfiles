@@ -17,24 +17,60 @@ M.lspconfig = function()
   return require('lspconfig')
 end
 
---- Setups specified language servers.
----
---- Function is compatibility wrapper around vim.lsp.config introduced in v0.11+ and legacy 'lspconfig' module.
---- @param kv table<string, vim.lsp.Config>
-M.config = function(kv)
-  -- nvim 0.11+
-  if vim.lsp and vim.lsp.config then
-    for name, cfg in pairs(kv) do
+--- @param kv (string|table<string, vim.lsp.Config>)[] | table<string, vim.lsp.Config>
+--- @param cb fun(name: string, cfg: vim.lsp.Config)
+local function iter_lsp_configs(kv, cb)
+  local caps = M.make_capabilities()
+  for k, v in pairs(kv) do
+    ---@type string
+    local name
+    ---@type vim.lsp.Config
+    local cfg = {}
+    if type(k) == 'number' and type(v) == 'string' then
+      name = v
+    else
+      name = k
+    end
+
+    if type(v) == 'table' then
+      cfg = v
+    end
+
+    if not cfg.capabilities then
+      cfg.capabilities = caps
+    end
+
+    cb(name, cfg)
+  end
+end
+
+--- @return fun(name: string, cfg: vim.lsp.Config)
+local function get_lsp_setup()
+  if vim.fn.has('nvim-0.11') == 1 then
+    return function(name, cfg)
       vim.lsp.config(name, cfg)
       vim.lsp.enable(name)
     end
-    return
   end
-
   local lspconfig = require('lspconfig')
-  for name, cfg in pairs(kv) do
+  return function(name, cfg)
     lspconfig[name].setup(cfg)
   end
 end
+
+--- Setups specified language servers.
+---
+--- Function is compatibility wrapper around vim.lsp.config introduced in v0.11+ and legacy 'lspconfig' module.
+--- @param kv (string|table<string, vim.lsp.Config>)[] | table<string, vim.lsp.Config>
+M.config = function(kv)
+  --- @type fun(name: string, cfg: vim.lsp.Config)
+  local cb = get_lsp_setup()
+  iter_lsp_configs(kv, cb)
+end
+
+--- Setups correct LSP capabilities for given servers.
+---
+--- @see use [config] to extend server config props.
+M.config_capabilities = function(servers) end
 
 return M
