@@ -16,6 +16,7 @@ set smartcase
 set incsearch
 set wrapscan
 set scrolloff=5 sidescrolloff=10
+set relativenumber
 
 set multiple-cursors
 set commentary
@@ -29,3 +30,7 @@ set clipboard+=unnamedplus
 nmap <leader>? :action GotoAction<CR>
 nmap <leader>f :action FindInPath<CR>
 nmap gi :action GotoImplementation<CR>
+
+" AceJump integration
+" See: https://github.com/acejump/AceJump
+map s <Action>(AceAction)
