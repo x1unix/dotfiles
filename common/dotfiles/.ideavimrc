@@ -22,6 +22,7 @@ set multiple-cursors
 set commentary
 set surround
 set ideajoin
+set which-key
 
 let mapleader = " "
 set functiontextobj
