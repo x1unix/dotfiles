@@ -5,9 +5,6 @@ M.make_capabilities = function()
   return require('blink.cmp').get_lsp_capabilities({}, true)
 end
 
--- Returns lspconfig object.
---
--- Uses 'vim.lsp.config' since nvim 0.11+ or falls back to require('lspconfig').
 M.lspconfig = function()
   if vim.lsp and vim.lsp.config then
     -- nvim 0.11+
@@ -28,7 +25,8 @@ local function iter_lsp_configs(kv, cb)
     local cfg = {}
     if type(k) == 'number' and type(v) == 'string' then
       name = v
-    else
+    end
+    if type(k) == 'string' then
       name = k
     end
 
@@ -67,10 +65,5 @@ M.config = function(kv)
   local cb = get_lsp_setup()
   iter_lsp_configs(kv, cb)
 end
-
---- Setups correct LSP capabilities for given servers.
----
---- @see use [config] to extend server config props.
-M.config_capabilities = function(servers) end
 
 return M
