@@ -31,3 +31,5 @@ quick-terminal-animation-duration=0
 # Keybinds
 keybind = global:cmd+`=toggle_quick_terminal
 
+# Disable useless and annoying bell
+bell-features = no-audio,no-system,no-title,no-attention
