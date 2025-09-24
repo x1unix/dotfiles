@@ -47,11 +47,21 @@ return {
       local trouble = require('trouble')
       local trouble_qflist = function(bufnr)
         actions.send_to_qflist(bufnr)
-        trouble.open({ mode = 'quickfix', focus = true })
+        trouble.open({
+          mode = 'quickfix',
+          focus = true,
+          pinned = true,
+          new = true,
+        })
       end
       local trouble_loclist = function(bufnr)
         actions.send_to_loclist(bufnr)
-        trouble.open({ mode = 'loclist', focus = true })
+        trouble.open({
+          mode = 'loclist',
+          focus = true,
+          pinned = true,
+          new = true,
+        })
       end
 
       -- END
