@@ -33,8 +33,28 @@ return {
       },
     },
     config = function()
-      -- local open_with_trouble = require('trouble.sources.telescope').open
       local telescope = require('telescope')
+      local actions = require('telescope.actions')
+
+      -- In Telescope source code, actions are combined with '+' operator.
+      -- It should work for cases when there is an Action object + function, e.g:
+      --    actions.send_to_loclist + actions.open_loclist
+      --
+      -- For some reason, this "magic" doesn't work with custom functions.
+      -- Thus, I have to wrap and call parent action manually.
+      --
+      -- P.S - Although in code, builtins are tables. In runtime - they're weird callbable values. WTF?
+      local trouble = require('trouble')
+      local trouble_qflist = function(bufnr)
+        actions.send_to_qflist(bufnr)
+        trouble.open({ mode = 'quickfix', focus = true })
+      end
+      local trouble_loclist = function(bufnr)
+        actions.send_to_loclist(bufnr)
+        trouble.open({ mode = 'loclist', focus = true })
+      end
+
+      -- END
       telescope.setup({
         defaults = {
           file_ignore_patterns = {
@@ -48,8 +68,14 @@ return {
           -- Although trouble has autocmd to replace qfl, Telescope doesn't trigger it.
           -- As workaround: remap qfl hotkey.
           mappings = {
-            -- i = { ['<C-q>'] = open_with_trouble },
-            -- n = { ['<C-q>'] = open_with_trouble },
+            i = {
+              ['<C-q>'] = trouble_qflist,
+              ['<C-l>'] = trouble_loclist,
+            },
+            n = {
+              ['<C-q>'] = trouble_qflist,
+              ['<C-l>'] = trouble_loclist,
+            },
           },
         },
         extensions = {

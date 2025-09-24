@@ -30,12 +30,12 @@ wk.add({
     desc = 'LSP Definitions / references / ... (Trouble)',
   },
   {
-    '<leader>xL',
+    '<leader>xl',
     '<cmd>Trouble loclist toggle<cr>',
     desc = 'Location List (Trouble)',
   },
   {
-    '<leader>xQ',
+    '<leader>xq',
     '<cmd>Trouble qflist toggle<cr>',
     desc = 'Quickfix List (Trouble)',
   },
