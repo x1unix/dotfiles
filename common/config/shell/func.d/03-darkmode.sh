@@ -12,21 +12,20 @@ darkmode_gtk() {
 }
 
 darkmode_macos() {
-  osascript -e '$darkmodecmd'
+  osascript -e "$darkmodecmd"
 }
 
 darkmode() {
   case "$(uname -s)" in
-    Darwin)
-      darkmode_macos
-      ;;
-    Linux)
-      darkmode_gtk
-      ;;
-    *)
-      echo "Error: unsupported platform: $(uname -s)"
-      exit 1
-      ;;
-    esac
+  Darwin)
+    darkmode_macos
+    ;;
+  Linux)
+    darkmode_gtk
+    ;;
+  *)
+    echo "Error: unsupported platform: $(uname -s)"
+    exit 1
+    ;;
+  esac
 }
-
