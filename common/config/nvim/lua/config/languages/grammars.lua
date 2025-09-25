@@ -2,21 +2,22 @@
 -- Passed to nvim-treesitter.
 
 return {
+  'bash',
   'go',
   'gomod',
   'gosum',
-  'proto',
-  'jsonc',
   'ini',
+  'jsonc',
+  'jsonc',
   'lua',
   'make',
-  'jsonc',
   'nix',
   'php',
+  'proto',
+  'ssh_config',
   'terraform',
   'typescript',
   'udev',
   'xml',
   'yaml',
-  'ssh_config',
 }
