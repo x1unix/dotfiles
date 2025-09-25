@@ -78,6 +78,11 @@ return {
     icon = '',
     color = 'yellow',
   },
+  --- @type wk.Icon
+  symbol_brain = {
+    icon = '',
+    color = 'yellow',
+  },
 
   --- @type wk.Icon
   action_rename = {
@@ -88,5 +93,15 @@ return {
   action_search = {
     icon = '',
     color = 'green',
+  },
+  --- @type wk.Icon
+  action_chat = {
+    icon = '󰭹',
+    color = 'blue',
+  },
+  --- @type wk.Icon
+  action_chat_outline = {
+    icon = '󰻞',
+    color = 'blue',
   },
 }
