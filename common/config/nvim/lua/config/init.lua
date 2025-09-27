@@ -25,3 +25,8 @@ opt.bomb = false
 -- configure default splits
 vim.o.splitright = true
 vim.o.splitbelow = true
+
+-- highlight search
+-- use ':noh' to clear.
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
