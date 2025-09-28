@@ -1,0 +1,206 @@
+# vim: set filetype=conf :
+# List of packages to install by pacman
+
+# Build dependencies
+base-devel
+git
+rustup
+
+# Shell dependencies
+stow
+tmux
+zsh-syntax-highlighting
+zsh
+net-tools
+man-db
+lf
+cmake
+nodejs
+npm
+go
+fzf
+ripgrep
+lazygit
+neovim
+
+# Sway (used in VM)
+sway
+swaybg
+swayidle
+swaylock
+dunst
+
+# XWayland & portals
+xorg-xwayland
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+gnome-keyring
+polkit-gnome
+
+# Wayland support
+qt5-wayland
+qt6-wayland
+
+# Hyprland
+hyprland
+hyprcursor
+hypridle
+hyprutils
+hyprlock
+hyprpaper
+hyprpicker
+hyprpolkitagent
+hyprshot
+hyprsunset
+hyprpaper
+
+# Fonts & tools used in dotfiles
+blueman
+ttf-zed-mono-nerd
+wofi
+waybar
+wl-clipboard
+alacritty
+grim
+slurp
+kitty
+dolphin
+network-manager-applet
+networkmanager
+nm-connection-editor
+
+# List of packages to install by pacman
+
+# Core deps
+stow
+tmux
+zsh-syntax-highlighting
+zsh
+net-tools
+man-db
+lf
+git
+cmake
+nodejs
+npm
+go
+fzf
+ripgrep
+lazygit
+neovim
+
+# Sway (used in VM)
+sway
+swaybg
+swayidle
+swaylock
+dunst
+
+# XWayland & portals
+xorg-xwayland
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+gnome-keyring
+polkit-gnome
+
+# Wayland support
+qt5-wayland
+qt6-wayland
+
+# Hyprland
+hyprland
+hyprcursor
+hypridle
+hyprutils
+hyprlock
+hyprpaper
+hyprpicker
+hyprpolkitagent
+hyprshot
+hyprsunset
+hyprpaper
+
+# Fonts & tools used in dotfiles
+blueman
+ttf-zed-mono-nerd
+wofi
+waybar
+wl-clipboard
+alacritty
+grim
+slurp
+kitty
+dolphin
+network-manager-applet
+networkmanager
+nm-connection-editor
+
+# List of packages to install by pacman
+
+# Core deps
+stow
+tmux
+zsh-syntax-highlighting
+zsh
+net-tools
+man-db
+lf
+git
+cmake
+nodejs
+npm
+go
+fzf
+ripgrep
+lazygit
+neovim
+
+# Sway (used in VM)
+sway
+swaybg
+swayidle
+swaylock
+dunst
+
+# XWayland & portals
+xorg-xwayland
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+gnome-keyring
+polkit-gnome
+
+# Wayland support
+qt5-wayland
+qt6-wayland
+
+# Hyprland
+hyprland
+hyprcursor
+hypridle
+hyprutils
+hyprlock
+hyprpaper
+hyprpicker
+hyprpolkitagent
+hyprshot
+hyprsunset
+hyprpaper
+
+# Fonts & tools used in dotfiles
+blueman
+ttf-zed-mono-nerd
+wofi
+waybar
+wl-clipboard
+alacritty
+grim
+slurp
+kitty
+dolphin
+network-manager-applet
+networkmanager
+nm-connection-editor
+
