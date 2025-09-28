@@ -206,6 +206,32 @@ __private_assert_archlinux() {
   esac
 }
 
+# brewfile - Install brew packages from file
+brewfile() {
+  assert_in_target
+  assert_def "$1" "brewfile: missing package name"
+
+  fp="$__DIR/$CURRENT_TARGET/$1"
+  if [ ! -f "$fp" ]; then
+    die "brewfile: cannot read packages file '$fp'"
+  fi
+
+  if ! command_exists 'brew'; then
+    die 'Homebrew is not installed'
+  fi
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    notify_info "brewfile: revert not supported this action"
+    return
+  fi
+
+  brew bundle --file="$fp"
+}
+
 # aurpkg - Clone and install Arch package from AUR
 AUR_URL_TEMPLATE="${AUR_URL_TEMPLATE:-https://aur.archlinux.org/%s.git}"
 aurpkg() {
