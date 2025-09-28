@@ -197,16 +197,79 @@ __private_stow_unlink() {
 
 # -- Package managers --
 
-pacmanfile() {
-  assert_in_target
-  assert_def "$1" "pacmanfile: missing package list file"
-
+__private_assert_archlinux() {
   case "$G_DISTRO" in
   'arch' | 'archarm') ;;
   *)
-    die "'pacmanfile' action is supported only when running inside ArchLinux systems."
+    die "'$1' action is supported only when running inside ArchLinux systems."
     ;;
   esac
+}
+
+# aurpkg - Clone and install Arch package from AUR
+AUR_URL_TEMPLATE="${AUR_URL_TEMPLATE:-https://aur.archlinux.org/%s.git}"
+aurpkg() {
+  assert_in_target
+  assert_def "$1" "aurpkg: missing package name"
+  __private_assert_archlinux 'aurpkg'
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    notify_info "aurpkg: revert not supported this action"
+    return
+  fi
+
+  not_installed=$(pacman -T -- "$@" || :)
+  if [ -z "$not_installed" ]; then
+    notify_info 'aurpkg: packages already installed, skip.'
+    return
+  fi
+
+  if ! command -v git >/dev/null 2>&1; then
+    notify_info 'git is not installed, installing...'
+    sudo pacman -S git
+  fi
+
+  oldwd="$PWD"
+  debug_log "aurpkg: not installed: '$(printf "$not_installed" | tr '\n' ', ')'"
+  for pkg in $not_installed; do
+    notify_step "Downloading package '$pkg' from AUR..."
+
+    clonedir="$(mktemp -d)"
+    aururl=$(printf "$AUR_URL_TEMPLATE" "$pkg")
+    debug_log "aurpkg: clone '$aururl' into '$clonedir'"
+
+    if ! git clone "$aururl" "$clonedir"; then
+      die "failed to clone '$aururl'"
+    fi
+
+    if [ ! -f "$clonedir/PKGBUILD" ]; then
+      die "package '$pkg' doesn't exist on AUR (PKGBUILD not found)"
+      cd "$oldwd"
+      rm -rf "$clonedir"
+    fi
+
+    notify_step "Building package '$pkg'..."
+    cd "$clonedir"
+    if ! makepkg -si; then
+      cd "$oldwd"
+      rm -rf "$clonedir"
+      die "failed to install AUR package '$pkg'"
+    fi
+
+    cd "$oldwd"
+    rm -rf "$clonedir"
+    unset clonedir
+  done
+}
+
+# pacmanfile - Install Arch packages from a text file
+pacmanfile() {
+  assert_in_target
+  assert_def "$1" "pacmanfile: missing package list file"
+  __private_assert_archlinux 'pacmanfile'
 
   fp="$__DIR/$CURRENT_TARGET/$1"
   if [ ! -f "$fp" ]; then
