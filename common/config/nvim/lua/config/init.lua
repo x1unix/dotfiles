@@ -30,3 +30,9 @@ vim.o.splitbelow = true
 -- use ':noh' to clear.
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+
+-- Rebalance splits on resize
+vim.opt.equalalways = true -- re-balance on open/close window
+vim.opt.eadirection = 'both' -- resize both directions
+-- vim.opt.winminwidth = 5
+-- vim.opt.winminheight = 3
