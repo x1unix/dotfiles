@@ -227,7 +227,7 @@ aurpkg() {
     return
   fi
 
-  if ! command -v git >/dev/null 2>&1; then
+  if ! command_exists 'git'; then
     notify_info 'git is not installed, installing...'
     sudo pacman -S git
   fi
