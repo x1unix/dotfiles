@@ -9,6 +9,7 @@ return {
       highlight_duration = 150,
     },
     keys = {
+      -- Movement
       {
         '<C-k>',
         '<cmd>Treewalker Up<cr>',
@@ -37,6 +38,8 @@ return {
         desc = 'treewalker: go right',
         mode = { 'n', 'v' },
       },
+
+      -- Swap
       {
         '<C-S-k>',
         '<cmd>Treewalker SwapUp<cr>',
