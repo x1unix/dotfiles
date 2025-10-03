@@ -1,0 +1,45 @@
+# vim: set filetype=conf :
+# List of packages to install by Termux package manager
+
+# Termux stuff
+x11-repo
+termux-tools
+termux-services
+proot-distro
+openssh
+
+# Build dependencies
+build-essential
+pinentry
+stow
+git
+sed
+sops
+
+# Shell dependencies
+zsh
+tmux
+fzf
+ripgrep
+
+# Extra shell tools
+inetutils
+htop
+iproute2
+lsof
+net-tools
+nmap
+which
+unzip
+
+# Neovim and dependencies
+cmake
+neovim
+rust
+stylua
+nodejs
+golang
+lua-language-server
+rust-analyzer
+lazygit
+

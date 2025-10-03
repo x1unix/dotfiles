@@ -231,6 +231,68 @@ brewfile() {
   brew bundle --file="$fp"
 }
 
+# __private_read_pkglist - Read packages list file
+# Args:
+# $1 - File path
+__private_read_pkglist() {
+  grep -v '^[[:space:]]*#' "$1" |          # remove comment lines
+    grep -v '^[[:space:]]*$' |             # remove empty lines
+    tr '\n' ' ' | sed 's/[[:space:]]\+$//' # join into single line, trim trailing space
+}
+
+# aptfile - Install packages from a file using apt package manager.
+#
+# Note: on Termux, `pkg` tool is used.
+aptfile() {
+  assert_in_target
+  assert_def "$1" "aptfile: missing package list file"
+  pkgmgr='apt'
+  verb='sudo '
+  if [ "$G_DISTRO" = 'android' ]; then
+    pkgmgr='pkg'
+    verb=''
+  fi
+
+  if ! command_exists "$pkgmgr"; then
+    die 'aptfile: APT package manager not available. Are you running in Debian-based distro?'
+  fi
+
+  fp="$__DIR/$CURRENT_TARGET/$1"
+  if [ ! -f "$fp" ]; then
+    die "aptfile: cannot read packages file '$fp'"
+  fi
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    notify_info 'aptfile: revert not supported this action'
+    return
+  fi
+
+  debug_log "aptfile: read $fp"
+  packages=$(__private_read_pkglist "$fp")
+  debug_log "aptfile: pkgs - $packages"
+
+  count=0
+  for pkg in $packages; do
+    if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+      missing="$missing $pkg"
+      count=$((count + 1))
+    fi
+  done
+
+  if [ -z "$missing" ]; then
+    notify_info 'aptfile: no packages to install, skip'
+  fi
+
+  notify_step "Installing $count package(s) using '$pkgmgr'..."
+  if ! "$verb" "$pkgmgr" install -y --no-upgrade $packages; then
+    die "Failed to install packages using '$pkgmgr'"
+  fi
+}
+
 # aurpkg - Clone and install Arch package from AUR
 AUR_URL_TEMPLATE="${AUR_URL_TEMPLATE:-https://aur.archlinux.org/%s.git}"
 aurpkg() {
@@ -311,11 +373,7 @@ pacmanfile() {
   fi
 
   debug_log "pacmanfile: read $fp"
-  packages=$(
-    grep -v '^[[:space:]]*#' "$fp" |         # remove comment lines
-      grep -v '^[[:space:]]*$' |             # remove empty lines
-      tr '\n' ' ' | sed 's/[[:space:]]\+$//' # join into single line, trim trailing space
-  )
+  packages=$(__private_read_pkglist "$fp")
   pkgcount=$(printf '%s\n' "$packages" | tr ' ' '\n' | grep -v '^$' | wc -l)
   debug_log "pacmanfile: pkgs - $packages"
 
