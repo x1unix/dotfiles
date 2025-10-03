@@ -41,25 +41,25 @@ return {
 
       -- Swap
       {
-        '<C-S-k>',
+        '<C-M-k>',
         '<cmd>Treewalker SwapUp<cr>',
         silent = true,
         desc = 'treewalker: swap up',
       },
       {
-        '<C-S-j>',
+        '<C-M-j>',
         '<cmd>Treewalker SwapDown<cr>',
         silent = true,
         desc = 'treewalker: swap down',
       },
       {
-        '<C-S-h>',
+        '<C-M-h>',
         '<cmd>Treewalker SwapLeft<cr>',
         silent = true,
         desc = 'treewalker: swap left',
       },
       {
-        '<C-S-l>',
+        '<C-M-l>',
         '<cmd>Treewalker SwapRight<cr>',
         silent = true,
         desc = 'treewalker: swap right',
