@@ -250,7 +250,7 @@ aptfile() {
   # On Termux (Android): Run rootless 'pkg' wrapper
   # On real Linux: Run classic 'sudo apt'.
   pkgmgr='apt'
-  verb='sudo '
+  verb='sudo'
   if [ "$G_DISTRO" = 'android' ]; then
     pkgmgr='pkg'
     verb=''
@@ -279,6 +279,7 @@ aptfile() {
   debug_log "aptfile: pkgs - $packages"
 
   count=0
+  missing=""
   for pkg in $packages; do
     if ! dpkg -s "$pkg" >/dev/null 2>&1; then
       missing="$missing $pkg"
@@ -288,12 +289,17 @@ aptfile() {
 
   if [ -z "$missing" ]; then
     notify_info 'aptfile: no packages to install, skip'
-    return
+    # return
   fi
 
   notify_step "Installing $count package(s) using '$pkgmgr'..."
-  debug_log "aptfile: cmd - $verb $pkgmgr install -y --no-upgrade $packages"
-  if ! "$verb" "$pkgmgr" install -y --no-upgrade $packages; then
+  install_cmd="$pkgmgr install -y --no-upgrade $missing"
+  if [ -n "$verb" ]; then
+    install_cmd="$verb $install_cmd"
+  fi
+
+  debug_log "aptfile: cmd - $install_cmd"
+  if ! eval "$install_cmd"; then
     die "Failed to install packages using '$pkgmgr'"
   fi
 }
@@ -1104,3 +1110,4 @@ __private_main() {
 }
 
 __private_main "$@"
+
