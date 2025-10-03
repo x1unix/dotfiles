@@ -156,6 +156,14 @@ Installs packages on macOS using Homebrew from a `Brewfile`.
 **Parameters:**
 *   `filename`: Path to a Brewfile within the target directory.
 
+### `aptfile`
+
+Installs packages on Debian/Ubuntu-based systems using `apt-get` from a list in a file. On Android (Termux), it uses `pkg` instead.
+
+**Usage:** `aptfile <filename>`
+**Parameters:**
+*   `filename`: Path to a file within the target directory containing a space-separated list of packages to install.
+
 ## File Operations
 
 ### `sops_decrypt`
