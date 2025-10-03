@@ -7,6 +7,7 @@ __DIR="$(dirname -- "$__FILE")"
 
 TARGET_EXT=.target.sh
 TARGETS_DIR="$__DIR/targets"
+TARGET_FILE='target.sh'
 G_DEPS="stow sops"
 
 # XDG defaults
@@ -442,7 +443,7 @@ require() {
 
   while [ $# -gt 0 ]; do
     target_name="$1"
-    target_file="$TARGETS_DIR/$target_name$TARGET_EXT"
+    target_file="$__DIR/$target_name/$TARGET_FILE"
     shift
 
     if [ ! -f "$target_file" ]; then
@@ -613,7 +614,7 @@ __private_install_deps() {
 }
 
 __private_get_target_name() {
-  basename "$1" | sed "s|$TARGET_EXT\$||"
+  dirname "$1" | xargs basename
 }
 
 __private_help() {
@@ -807,7 +808,7 @@ __private_check_target_constraints() {
 
 __private_show_target() {
   target_name="$1"
-  target_file="${TARGETS_DIR}/${1}${TARGET_EXT}"
+  target_file="$1/$TARGET_FILE"
   availability='True'
 
   if [ -z "$target_name" ]; then
@@ -867,12 +868,8 @@ __private_list_targets() {
   #__private_check_target_constraints
   unavailable_targets=''
   available_targets=''
-  if [ ! -d "$TARGETS_DIR" ]; then
-    echo "no targets available in '$targets_dir' directory"
-    return
-  fi
 
-  for f in "$TARGETS_DIR"/*"$TARGET_EXT"; do
+  for f in "$__DIR"/*/"$TARGET_FILE"; do
     target_name="$(__private_get_target_name "$f")"
     if __private_check_target_constraints "$target_name" "$f" 1; then
       available_targets="$available_targets $target_name"

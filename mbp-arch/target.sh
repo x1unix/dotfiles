@@ -3,7 +3,7 @@
 #description: dotfiles and packages for Intel MacBook Pro on Arch Linux
 
 arch_pacman_extra() {
-	paru ruby-fusuma
+  paru ruby-fusuma
 }
 
 link_xdg_config config
