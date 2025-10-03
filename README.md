@@ -1,5 +1,9 @@
 # Das Dotfiles
 
+My personal dotfiles and bootstrap configs for different systems.
+
+Bootstrapping is managed [deploy.sh](./deploy.sh) script.
+
 ## Install
 
 * Find your deployment target using `./deploy.sh list`
