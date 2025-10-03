@@ -246,6 +246,9 @@ __private_read_pkglist() {
 aptfile() {
   assert_in_target
   assert_def "$1" "aptfile: missing package list file"
+
+  # On Termux (Android): Run rootless 'pkg' wrapper
+  # On real Linux: Run classic 'sudo apt'.
   pkgmgr='apt'
   verb='sudo '
   if [ "$G_DISTRO" = 'android' ]; then
@@ -285,9 +288,11 @@ aptfile() {
 
   if [ -z "$missing" ]; then
     notify_info 'aptfile: no packages to install, skip'
+    return
   fi
 
   notify_step "Installing $count package(s) using '$pkgmgr'..."
+  debug_log "aptfile: cmd - $verb $pkgmgr install -y --no-upgrade $packages"
   if ! "$verb" "$pkgmgr" install -y --no-upgrade $packages; then
     die "Failed to install packages using '$pkgmgr'"
   fi
