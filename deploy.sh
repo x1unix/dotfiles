@@ -289,7 +289,7 @@ aptfile() {
 
   if [ -z "$missing" ]; then
     notify_info 'aptfile: no packages to install, skip'
-    # return
+    return
   fi
 
   notify_step "Installing $count package(s) using '$pkgmgr'..."
