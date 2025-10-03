@@ -23,6 +23,7 @@ return {
         'tailwindcss',
         'yamlls',
         'jsonls',
+        'bashls',
         buf_ls = {
           -- Sometimes Mason's buf_ls doesn't start
           capabilities = capabilities,
