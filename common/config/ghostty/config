@@ -27,9 +27,11 @@ mouse-hide-while-typing = true
 # Toggle terminal
 quick-terminal-screen=mouse
 quick-terminal-animation-duration=0
+quick-terminal-size = 100%,100%
 
 # Keybinds
 keybind = global:cmd+`=toggle_quick_terminal
+keybind = ctrl+shift+comma=reload_config
 
 # Disable useless and annoying bell
 bell-features = no-audio,no-system,no-title,no-attention
