@@ -4,6 +4,9 @@ My personal dotfiles and bootstrap configs for different systems.
 
 Bootstrapping is managed [deploy.sh](./deploy.sh) script.
 
+> [!TIP]
+> See `deploy.sh` and target file documentation [here](./docs/DEPLOY.md)
+
 ## Install
 
 * Find your deployment target using `./deploy.sh list`
