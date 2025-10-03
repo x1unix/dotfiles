@@ -5,8 +5,6 @@ __BINNAME="$0"
 __FILE="$(readlink -f -- "$0")"
 __DIR="$(dirname -- "$__FILE")"
 
-TARGET_EXT=.target.sh
-TARGETS_DIR="$__DIR/targets"
 TARGET_FILE='target.sh'
 G_DEPS="stow sops"
 
@@ -273,9 +271,9 @@ aurpkg() {
     fi
 
     if [ ! -f "$clonedir/PKGBUILD" ]; then
-      die "package '$pkg' doesn't exist on AUR (PKGBUILD not found)"
       cd "$oldwd"
       rm -rf "$clonedir"
+      die "package '$pkg' doesn't exist on AUR (PKGBUILD not found)"
     fi
 
     notify_step "Building package '$pkg'..."
@@ -569,7 +567,6 @@ __private_install_deps() {
   'darwin')
     if ! command_exists 'brew'; then
       die 'Homebrew is required to install missing packages. See: https://brew.sh/'
-      return
     fi
 
     install_cmd="brew install $install_deps"
@@ -577,12 +574,9 @@ __private_install_deps() {
     eval "$install_cmd"
     return
     ;;
-  'linux')
-    break
-    ;;
+  'linux') ;;
   *)
     die 'Please install missing dependencies manually and re-run the script'
-    return
     ;;
   esac
 
@@ -601,7 +595,6 @@ __private_install_deps() {
     ;;
   *)
     die "Unsupported Linux distro '$G_DISTRO'. Please install dependencies manually and re-run script"
-    exit 0
     ;;
   esac
 
@@ -633,7 +626,6 @@ Commands:
   info <target>         Show information about target and its allowed command-line flags.
   help                  Display this help.
 EOF
-
 }
 
 # @param $1 key
@@ -870,6 +862,7 @@ __private_list_targets() {
   available_targets=''
 
   for f in "$__DIR"/*/"$TARGET_FILE"; do
+    [ -e "$f" ] || continue
     target_name="$(__private_get_target_name "$f")"
     if __private_check_target_constraints "$target_name" "$f" 1; then
       available_targets="$available_targets $target_name"
@@ -880,7 +873,7 @@ __private_list_targets() {
 
   echo "Available targets:"
   if [ -z "$available_targets" ]; then
-    echo "  No targets available in '$TARGETS_DIR' directory"
+    echo "  No targets available"
   else
     for value in $available_targets; do
       echo "  - $value"
@@ -961,7 +954,7 @@ __private_eval_target() {
 
   is_silent="$2"
   new_target="$1"
-  script_file="${TARGETS_DIR}/${new_target}${TARGET_EXT}"
+  script_file="$__DIR/$new_target/$TARGET_FILE"
   if [ -z "$G_DRY_RUN" ]; then
     if ! __private_check_target_constraints "$new_target" "$script_file"; then
       die 'Aborting due to unsatisfied constraints'
