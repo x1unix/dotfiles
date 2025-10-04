@@ -21,6 +21,8 @@ zsh
 tmux
 fzf
 ripgrep
+mandoc
+yazi
 
 # Extra shell tools
 inetutils
