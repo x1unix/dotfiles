@@ -11,6 +11,8 @@ arch_pacman_install() {
   gsettings set org.blueman.general notification-daemon true
 }
 
+require 'common'
+
 # Deps
 step arch_pacman_install 'flag:pkgs'
 
