@@ -23,6 +23,7 @@ fzf
 ripgrep
 mandoc
 yazi
+zoxide
 
 # Extra shell tools
 inetutils
