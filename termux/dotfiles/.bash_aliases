@@ -1,6 +1,6 @@
 set -o vi
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:/system/bin"
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 
 alias ..='cd ..'
@@ -20,4 +20,3 @@ mcd() {
 # linuxbrew
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
