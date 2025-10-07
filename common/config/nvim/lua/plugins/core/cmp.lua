@@ -9,6 +9,7 @@ return {
     version = '1.*',
     dependencies = {
       'rafamadriz/friendly-snippets',
+      'Kaiser-Yang/blink-cmp-avante',
       {
         'L3MON4D3/LuaSnip',
         version = 'v2.*',
@@ -17,6 +18,25 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      sources = {
+        default = {
+          'avante',
+          'lsp',
+          'path',
+          'luasnip',
+          'buffer',
+        },
+        providers = {
+          -- See: https://github.com/Kaiser-Yang/blink-cmp-avante#installation
+          avante = {
+            module = 'blink-cmp-avante',
+            name = 'Avante',
+            opts = {
+              -- options for blink-cmp-avante
+            },
+          },
+        },
+      },
       keymap = {
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- 'super-tab' for mappings similar to vscode (tab to accept)
