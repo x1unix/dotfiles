@@ -23,7 +23,7 @@ return {
           'avante',
           'lsp',
           'path',
-          'luasnip',
+          'snippets',
           'buffer',
         },
         providers = {
