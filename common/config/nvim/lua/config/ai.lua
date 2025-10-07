@@ -23,5 +23,9 @@ return {
         model = 'anthropic/claude-sonnet-4',
       },
     },
+    input = {
+      -- See: https://github.com/yetone/avante.nvim#input-provider-configuration
+      provider = 'snacks',
+    },
   },
 }
