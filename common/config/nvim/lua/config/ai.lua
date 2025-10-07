@@ -1,6 +1,15 @@
 return {
   enabled = true,
 
+  -- List of providers that I use. It's a subset of supported Avante providers.
+  --
+  -- Used in provider switcher dialog.
+  enabled_providers = {
+    'gemini',
+    'gemini-cli',
+    'openrouter',
+  },
+
   ---@module 'avante'
   ---@type avante.Config
   opts = {
