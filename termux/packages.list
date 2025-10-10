@@ -26,6 +26,7 @@ yazi
 zoxide
 
 # Extra shell tools
+dnsutils
 inetutils
 htop
 iproute2
