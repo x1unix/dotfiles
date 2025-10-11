@@ -70,8 +70,6 @@ network-manager-applet
 networkmanager
 nm-connection-editor
 
-# List of packages to install by pacman
-
 # Core deps
 stow
 tmux
@@ -204,3 +202,10 @@ network-manager-applet
 networkmanager
 nm-connection-editor
 
+# WinApps dependencies
+# See: https://github.com/winapps-org/winapps/tree/main#step-2-install-dependencies
+dialog
+freerdp
+iproute2
+libnotify
+openbsd-netcat
