@@ -6,6 +6,9 @@ xmldtd="https://x1unix.dev/rdp-run"
 labels_tag='labels'
 labels_key="$xmlns:$labels_tag"
 
+LIBVIRT_DEFAULT_URI="${LIBVIRT_DEFAULT_URI:-qemu:///system}"
+export LIBVIRT_DEFAULT_URI
+
 die() {
   printf "Error: %s\n" "$1" >&2
   exit 1

@@ -2,6 +2,9 @@
 
 __DIR="$(dirname -- "$0")"
 
+LIBVIRT_DEFAULT_URI="${LIBVIRT_DEFAULT_URI:-qemu:///system}"
+export LIBVIRT_DEFAULT_URI
+
 die() {
   printf "Error: %s\n" "$1" >&2
   exit 1
