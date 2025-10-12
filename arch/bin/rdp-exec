@@ -69,6 +69,46 @@ rdp_config() {
   ui_assert_ok "$?" 'Failed to get VM RDP attributes'
 }
 
+rdp_map_scale() {
+  ui_assert_def "$1" 'missing argument'
+
+  # Map scale to allowed values: 100|140|180
+  scale="$1"
+  if [ "$scale" -le 100 ]; then
+    RDP_SCALE=100
+  elif [ "$scale" -le 140 ]; then
+    RDP_SCALE=140
+  else
+    RDP_SCALE=180
+  fi
+
+  export RDP_SCALE
+}
+
+hypr_get_scale() {
+  scale="$(hyprctl monitors -j | jq -r '.[] | select(.focused) | (.scale * 100 | round)' -)"
+  if [ -z "$scale" ]; then
+    return
+  fi
+
+  rdp_map_scale "$scale"
+}
+
+rdp_detect_scale() {
+  case "$XDG_CURRENT_DESKTOP" in
+  'Hyprland')
+    hypr_get_scale
+    ;;
+  *)
+    export RDP_SCALE=100
+    debug_log "RdpDetectScale: unsupported desktop '$XDG_CURRENT_DESKTOP'"
+    return
+    ;;
+  esac
+
+  debug_log "RdpDetectScale: use scale '$RDP_SCALE'"
+}
+
 app_help() {
   cat <<EOF
 Usage: rdp-exec [-d] [-v] [-h] <program> 
@@ -100,6 +140,7 @@ rdp_desktop_exec() {
   # Optional globals used by rdp_start and ui_die
   APP_NAME="$(grep -E '^Name=' "$f" | cut -d= -f2-)"
   APP_ICON="$(grep -E '^Icon=' "$f" | cut -d= -f2-)"
+  RDP_SCALE="$(grep -E '^X-RDP-Scale=' "$f" | cut -d= -f2-)"
   RDP_OPTS="$(grep -E '^X-RDP-Opts=' "$f" | cut -d= -f2-)"
 
   rdp_prog="$(grep -E '^X-RDP-Program=' "$f" | cut -d= -f2-)"
@@ -153,6 +194,11 @@ rdp_start() {
     APP_NAME="${rdp_prog##*\\}"
   fi
 
+  if [ -z "$RDP_SCALE" ]; then
+    rdp_detect_scale
+  fi
+  RDP_SCALE="${RDP_SCALE:-100}"
+
   debug_log "RdpStart: $rdp_prog (AppName=$APP_NAME; Icon=$APP_ICON; Opts=$RDP_OPTS;)"
   rdp_discover_vm
   ui_assert_def "$RDP_VM" 'invariant failed: RDP_VM'
@@ -166,7 +212,7 @@ rdp_start() {
     app_args="$app_args,icon:$APP_ICON"
   fi
 
-  if ! xfreerdp3 /cert:tofu /u:$RDP_USER /p:$RDP_PASS /v:$RDP_IP /sound /app:"$app_args" +home-drive +auto-reconnect $RDP_OPTS; then
+  if ! xfreerdp3 /cert:tofu /u:$RDP_USER /p:$RDP_PASS /v:$RDP_IP /scale:$RDP_SCALE /sound /app:"$app_args" +home-drive +auto-reconnect $RDP_OPTS; then
     ui_die "Failed to connect to VM '$RDP_VM'"
   fi
 }
