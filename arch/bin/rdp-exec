@@ -77,6 +77,7 @@ Open a RemoteApp session and run program in Windows VM.
 If ".desktop" file passed - uses executable path from "X-RDP-Program" attribute.
 
 Examples:
+  rdp-exec ssh
   rdp-exec 'C:\\Windows\\System32\\calc.exe'
   rdp-exec /usr/share/applications/rdp/fusion-360.desktop
 
