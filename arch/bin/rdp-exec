@@ -170,12 +170,23 @@ rdp_start() {
   fi
 }
 
+rdp_ssh() {
+  rdp_discover_vm
+  ui_assert_def "$RDP_VM" 'invariant failed: RDP_VM'
+  ui_assert_def "$RDP_USER" 'invariant failed: RDP_USER'
+  ui_assert_def "$RDP_PASS" 'invariant failed: RDP_PASS'
+  ui_assert_def "$RDP_IP" 'invariant failed: RDP_IP'
+  debug_log "RdpSshConnect: Vm=$RDP_VM; User=$RDP_USER; IP=$RDP_IP"
+  ssh "$RDP_USER@$RDP_IP"
+}
+
 rdp_exec() {
   ui_assert_def "$1" 'Missing executable path'
   assert_has_deps
 
   prog="$1"
   case "$prog" in
+  ssh) rdp_ssh ;;
   *.desktop) rdp_desktop_exec "$1" ;;
   *) rdp_start "$1" ;;
   esac
