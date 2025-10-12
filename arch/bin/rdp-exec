@@ -1,0 +1,197 @@
+#!/usr/bin/env sh
+
+__DIR="$(dirname -- "$0")"
+
+die() {
+  printf "Error: %s\n" "$1" >&2
+  exit 1
+}
+
+debug_log() {
+  if [ -n "$DEBUG" ]; then
+    printf "%s\n" "$1" >&2
+  fi
+}
+
+assert_def() {
+  if [ -z "$1" ]; then
+    die "$2"
+  fi
+}
+
+assert_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    ui_die "$1 command not found. $2"
+    return
+  fi
+}
+
+assert_has_deps() {
+  assert_command virsh 'Is libvirt installed?'
+  assert_command xmllint 'Install libxml package.'
+  assert_command xfreerdp3 'Install freerdp package.'
+}
+
+ui_die() {
+  if [ -z "$BACKGROUND" ]; then
+    die "$1. $2"
+    return
+  fi
+
+  if ! command -v notify-send >/dev/null 2>&1; then
+    die "$1"
+    return
+  fi
+
+  progname="${APP_NAME:-program}"
+  title="${2:-Failed to start $APP_NAME}"
+  notify-send -a "${APP_NAME:-rdp-exec}" "$title" "$1"
+  exit 1
+}
+
+ui_assert_ok() {
+  if [ "$1" -ne 0 ]; then
+    ui_die "$2" "$3"
+  fi
+}
+
+ui_assert_def() {
+  if [ -z "$1" ]; then
+    ui_die "$2" "$3"
+  fi
+}
+
+rdp_config() {
+  "$__DIR/rdp-config" $@
+  ui_assert_ok "$?" 'Failed to get VM RDP attributes'
+}
+
+app_help() {
+  cat <<EOF
+Usage: rdp-exec [-d] [-v] [-h] <program> 
+
+Open a RemoteApp session and run program in Windows VM.
+If ".desktop" file passed - uses executable path from "X-RDP-Program" attribute.
+
+Examples:
+  rdp-exec 'C:\\Windows\\System32\\calc.exe'
+  rdp-exec /usr/share/applications/rdp/fusion-360.desktop
+
+Options:
+  -d      Use desktop notifications to display errors instead of printing them to stderr.
+  -v      Enable debug logging.
+  -h      Show help.
+
+Note: virtual machine name, IP and login credentials are read from VM metadata set by "rdp-config" tool.
+Use "rdp-onboard" to configure a virtual machine.
+EOF
+}
+
+rdp_desktop_exec() {
+  f="$1"
+  if [ ! -f "$f" ]; then
+    ui_die "Desktop file doesn't exist: $f"
+  fi
+
+  # Optional globals used by rdp_start and ui_die
+  APP_NAME="$(grep -E '^Name=' "$f" | cut -d= -f2-)"
+  APP_ICON="$(grep -E '^Icon=' "$f" | cut -d= -f2-)"
+  RDP_OPTS="$(grep -E '^X-RDP-Opts=' "$f" | cut -d= -f2-)"
+
+  rdp_prog="$(grep -E '^X-RDP-Program=' "$f" | cut -d= -f2-)"
+  ui_assert_def "$rdp_prog" 'Missing X-RDP-Program key in desktop entry'
+  rdp_start "$rdp_prog"
+}
+
+rdp_discover_vm() {
+  # TODO: cache discovered VM
+  vms="$(virsh list --name)"
+  ui_assert_ok "$?" 'Failed to get list of VMs'
+  ui_assert_def "$vms" 'No running VMs found. Start a virtual machine to run apps.'
+  for vm in "$vms"; do
+    debug_log "RdpDiscoverVm: [$vm] test"
+    prop="$(rdp_config getprop "$vm" rdp.enabled)"
+    if [ "$prop" -ne 1 ]; then
+      continue
+    fi
+
+    rdp_usr="$(rdp_config -d getprop "$vm" rdp.user)"
+    rdp_pass="$(rdp_config -d getprop "$vm" rdp.pass)"
+    if [ -z "$rdp_usr" ]; then
+      debug_log "RdpDiscoverVm: [$vm] missing username, skip"
+      continue
+    fi
+
+    if [ -z "$rdp_pass" ]; then
+      debug_log "RdpDiscoverVm: [$vm] missing password, skip"
+      continue
+    fi
+
+    rdp_ip="$(rdp_config getip "$vm")"
+    ui_assert_def "$rdp_ip" 'Failed to get VM IP address'
+
+    debug_log "RdpDiscoverVm: [$vm] MATCH"
+    export RDP_VM="$vm"
+    export RDP_USER="$rdp_usr"
+    export RDP_PASS="$rdp_pass"
+    export RDP_IP="$rdp_ip"
+    return
+  done
+
+  ui_die 'No runnable VMs available. Use rdp-onboard to register a VM.'
+}
+
+rdp_start() {
+  rdp_prog="$1"
+  ui_assert_def "$rdp_prog" 'Empty executable path'
+
+  if [ -z "$APP_NAME" ]; then
+    APP_NAME="${rdp_prog##*\\}"
+  fi
+
+  debug_log "RdpStart: $rdp_prog (AppName=$APP_NAME; Icon=$APP_ICON; Opts=$RDP_OPTS;)"
+  rdp_discover_vm
+  ui_assert_def "$RDP_VM" 'invariant failed: RDP_VM'
+  ui_assert_def "$RDP_USER" 'invariant failed: RDP_USER'
+  ui_assert_def "$RDP_PASS" 'invariant failed: RDP_PASS'
+  ui_assert_def "$RDP_IP" 'invariant failed: RDP_IP'
+
+  app_args="program:$rdp_prog,name:$APP_NAME,hidef:on"
+  debug_log "RdpConnect: '$app_args' (Vm=$RDP_VM; User=$RDP_USER; Pass=$RDP_PASS; IP=$RDP_IP)"
+  if [ -n "$APP_ICON" ]; then
+    app_args="$app_args,icon:$APP_ICON"
+  fi
+
+  if ! xfreerdp3 /cert:tofu /u:$RDP_USER /p:$RDP_PASS /v:$RDP_IP /sound /app:"$app_args" +home-drive +auto-reconnect $RDP_OPTS; then
+    ui_die "Failed to connect to VM '$RDP_VM'"
+  fi
+}
+
+rdp_exec() {
+  ui_assert_def "$1" 'Missing executable path'
+  assert_has_deps
+
+  prog="$1"
+  case "$prog" in
+  *.desktop) rdp_desktop_exec "$1" ;;
+  *) rdp_start "$1" ;;
+  esac
+}
+
+BACKGROUND=''
+while getopts ':hdv' opt; do
+  case "$opt" in
+  d) BACKGROUND=1 ;;
+  v) DEBUG=1 ;;
+  h)
+    app_help
+    exit 0
+    ;;
+  \?)
+    die "Unknown option: -$OPTARG"
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+rdp_exec $@

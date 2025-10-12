@@ -1,0 +1,254 @@
+#!/usr/bin/env sh
+set -e
+
+xmlns='rdpconfig'
+xmldtd="https://x1unix.dev/rdp-run"
+labels_tag='labels'
+labels_key="$xmlns:$labels_tag"
+
+die() {
+  printf "Error: %s\n" "$1" >&2
+  exit 1
+}
+
+assert_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    die "$1 command not found. $2"
+    return
+  fi
+}
+
+assert_has_deps() {
+  assert_command virsh 'Is libvirt installed?'
+  assert_command xmllint 'Install libxml package.'
+}
+
+assert_def() {
+  if [ -z "$1" ]; then
+    die "$2"
+  fi
+}
+
+xml_label_add() {
+  key="$1"
+  val="$2"
+  buff="$3"
+  printf '%s\n<label key="%s">%s</label>' "$buff" "$key" "$val"
+}
+
+xml_labels_wrap() {
+  body="$1"
+  printf '<%s xmlns:%s="%s">\n%s\n</%s>' "$labels_key" "$xmlns" "$xmldtd" "$body" "$labels_key"
+}
+
+vm_writeprop() {
+  assert_def "$1" 'missing vm name'
+  vm_name="$1"
+
+  shift
+  assert_def "$1" 'at least 1 property is required'
+
+  buff=''
+  for prop in $*; do
+    # Use switch to validate key-value pair
+    case "$prop" in
+    *=*)
+      key="${prop%%=*}"
+      value="${prop#*=}"
+      assert_def "$key" "missing property key (at '$prop')"
+      assert_def "$value" "missing property value (at '$prop')"
+      buff="$(xml_label_add "$key" "$value" "$buff")"
+      ;;
+    *)
+      die "property should be a key=value pair (at '$prop')"
+      ;;
+    esac
+  done
+
+  buff="$(xml_labels_wrap "$buff")"
+  virsh metadata "$vm_name" \
+    --key "$labels_tag" \
+    --set "$buff" \
+    --uri "$xmldtd"
+}
+
+vm_clearprop() {
+  assert_def "$1" 'missing vm name'
+  vm_name="$1"
+
+  virsh metadata "$vm_name" \
+    --remove --config --live \
+    --key "$labels_tag" \
+    --uri "$xmldtd"
+}
+
+vm_delprop() {
+  assert_def "$1" 'missing vm name'
+  assert_def "$2" 'missing property key'
+
+  vm="$1"
+  key="$2"
+
+  xpath="$(printf "/labels/label[@key!='%s']" "$key")"
+  props="$(virsh metadata "$vm" --uri "$xmldtd")"
+  if [ -z "$props" ]; then
+    return
+  fi
+
+  props="$(echo -n "$props" | xmllint --xpath "$xpath" -)"
+  props="$(xml_labels_wrap "$props")"
+
+  virsh metadata "$vm" \
+    --key "$labels_tag" \
+    --set "$props" \
+    --uri "$xmldtd"
+}
+
+vm_getip() {
+  assert_def "$1" 'missing vm name'
+  vm="$1"
+
+  out=$(virsh domifaddr "$vm")
+  out="$(printf '%s\n' "$out" | awk '/ipv4/ {print $4}' | cut -d'/' -f1)"
+  assert_def "$out" 'cannot get IP address'
+  echo "$out"
+}
+
+vm_setprop() {
+  assert_def "$1" 'missing vm name'
+  assert_def "$2" 'missing property key'
+  assert_def "$3" 'missing property value'
+
+  vm="$1"
+  key="$2"
+  val="$3"
+
+  if [ -n "$DECODE" ]; then
+    val="$(printf '%s' "$val" | base64)"
+  fi
+
+  echo "$res"
+  xpath="$(printf "/labels/label[@key!='%s']" "$key")"
+  props="$(virsh metadata "$vm" --uri "$xmldtd")"
+  if [ -n "$props" ]; then
+    props="$(echo -n "$props" | xmllint --xpath "$xpath" -)"
+  fi
+
+  props="$(xml_label_add "$key" "$val" "$props")"
+  props="$(xml_labels_wrap "$props")"
+
+  virsh metadata "$vm" \
+    --key "$labels_tag" \
+    --set "$props" \
+    --uri "$xmldtd"
+}
+
+vm_dumpprop() {
+  assert_def "$1" 'missing vm name'
+  vm="$1"
+  virsh metadata "$1" --uri "$xmldtd"
+}
+
+vm_getprop() {
+  assert_def "$1" 'missing vm name'
+  assert_def "$2" 'missing property name'
+  vm="$1"
+
+  xpath="$(printf 'string(//label[@key="%s"]/text())' "$2")"
+  props="$(virsh metadata "$vm" --uri "$xmldtd")"
+  if [ -z "$props" ]; then
+    return
+  fi
+
+  res="$(echo -n "$props" | xmllint --xpath "$xpath" -)"
+  if [ -n "$DECODE" ]; then
+    echo -n "$res" | base64 -d
+    return
+  fi
+
+  echo "$res"
+}
+
+app_help() {
+  cat <<EOF
+Usage: rdp-config [options] <subcommand> vm_name args...
+
+Manage custom VM attributes used by rdp-run tool.
+
+Subcommands:
+  getip         - Print VM IP address.
+  getprop       - Get a property value.
+  setprop       - Set a property value.
+  delprop       - Delete a property.
+  write         - Bulk write properties. Removes previously set properties.
+  dump          - Print raw properties XML.
+  clear         - Clear all properties.
+  help          - Prints this message.
+
+Options:
+  -d              Encode or decode a value as base64.
+  -v              Enable debug logging.
+  -h              Show help.
+EOF
+
+}
+
+while getopts ':dvh' opt; do
+  case "$opt" in
+  d) DECODE=1 ;;
+  v) DEBUG=1 ;;
+  h)
+    app_help
+    exit 0
+    ;;
+  \?)
+    die "Unknown option: -$OPTARG"
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [ -z "$1" ]; then
+  app_help
+  exit 1
+fi
+
+cmd="$1"
+shift
+case "$cmd" in
+'getprop')
+  assert_has_deps
+  vm_getprop $@
+  ;;
+'setprop')
+  assert_has_deps
+  vm_setprop $@
+  ;;
+'delprop')
+  assert_has_deps
+  vm_delprop $@
+  ;;
+'write')
+  assert_has_deps
+  vm_writeprop $@
+  ;;
+'getip')
+  assert_has_deps
+  vm_getip $@
+  ;;
+'dump')
+  assert_has_deps
+  vm_dumpprop $@
+  ;;
+'clear')
+  assert_has_deps
+  vm_clearprop $@
+  ;;
+'help' | '')
+  app_help
+  ;;
+*)
+  die "unknown subcommand $cmd"
+  ;;
+esac

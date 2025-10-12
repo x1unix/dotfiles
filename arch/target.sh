@@ -21,3 +21,6 @@ link_home 'Pictures/wallpapers' 'wallpapers'
 
 # Configs
 link_xdg_config config
+
+# Extra binaries
+link_home '.local/bin' bin
