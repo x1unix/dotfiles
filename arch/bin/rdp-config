@@ -172,6 +172,25 @@ vm_getprop() {
   echo "$res"
 }
 
+vm_onboard() {
+  assert_def "$1" 'missing vm name'
+  assert_def "$2" 'missing RDP username'
+  assert_def "$3" 'missing RDP password'
+  vm_name="$1"
+  user="$(printf '%s' "$2" | base64)"
+  pass="$(printf '%s' "$3" | base64)"
+
+  buff="$(xml_label_add rdp.enabled 1)"
+  buff="$(xml_label_add rdp.user "$user" "$buff")"
+  buff="$(xml_label_add rdp.pass "$pass" "$buff")"
+
+  buff="$(xml_labels_wrap "$buff")"
+  virsh metadata "$vm_name" \
+    --key "$labels_tag" \
+    --set "$buff" \
+    --uri "$xmldtd"
+}
+
 app_help() {
   cat <<EOF
 Usage: rdp-config [options] <subcommand> vm_name args...
@@ -179,6 +198,7 @@ Usage: rdp-config [options] <subcommand> vm_name args...
 Manage custom VM attributes used by rdp-run tool.
 
 Subcommands:
+  onboard       - Set RDP configuration to use VM with rdp-exec.
   getip         - Print VM IP address.
   getprop       - Get a property value.
   setprop       - Set a property value.
@@ -247,6 +267,10 @@ case "$cmd" in
 'clear')
   assert_has_deps
   vm_clearprop $@
+  ;;
+'onboard')
+  assert_has_deps
+  vm_onboard $@
   ;;
 'help' | '')
   app_help

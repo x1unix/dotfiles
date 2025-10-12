@@ -127,7 +127,7 @@ Options:
   -h      Show help.
 
 Note: virtual machine name, IP and login credentials are read from VM metadata set by "rdp-config" tool.
-Use "rdp-onboard" to configure a virtual machine.
+Use "rdp-config onboard" to configure a virtual machine.
 EOF
 }
 
@@ -183,7 +183,7 @@ rdp_discover_vm() {
     return
   done
 
-  ui_die 'No runnable VMs available. Use rdp-onboard to register a VM.'
+  ui_die 'No runnable VMs available. Use "rdp-config onboard" to register a VM.'
 }
 
 rdp_start() {
