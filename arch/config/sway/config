@@ -22,7 +22,7 @@ client.focused $C_focused_border $C_focused_bg $C_focused_text $C_focused_indica
 
 # Misc
 set $font ZedMono Nerd Font Mono 10.75
-set $term ghostty
+set $term alacritty
 set $menu wofi --show drun
 set $screenclip_copy slurp | grim -g - - | wl-copy
 set $screenclip_edit slurp | grim -g - - | swappy -f -

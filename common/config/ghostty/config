@@ -50,9 +50,3 @@ bell-features = no-audio,no-system,no-title,no-attention
 
 # Disable annoying toasts
 app-notifications = no-clipboard-copy
-
-# Daenonize ghostty on Linux
-# See: https://ghostty.org/docs/linux/systemd
-quit-after-last-window-closed = true
-quit-after-last-window-closed-delay = 5m
-
