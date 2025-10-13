@@ -1,5 +1,6 @@
 " Inspired by https://www.cyberwizard.io/posts/the-ultimate-ideavim-setup/
 " See: https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+" TODO: check https://github.com/akinsho/dotfiles/blob/3ca020b1849b5ce51d64fc773270cfe776ea3da7/.config/ideavim/.ideavimrc
 
 Plug 'vim-scripts/argtextobj.vim'
 "Plug 'easymotion/vim-easymotion'
