@@ -1,9 +1,18 @@
 local config = require('config.theme')
 
--- Global lualine opts
-local lualine_opts = {
-  -- Disable in neotree
-  disabled_filetypes = { 'neo-tree', 'Trouble' },
+local lualine_config = {
+  options = {
+    -- Disable in neotree
+    disabled_filetypes = { 'neo-tree', 'Trouble' },
+  },
+  sections = {
+    lualine_c = {
+      {
+        'filename',
+        path = 1,
+      },
+    },
+  },
 }
 
 local function reload_bufferline_highlights()
@@ -67,7 +76,8 @@ return {
       end
 
       require('lualine').setup({
-        options = vim.tbl_deep_extend('force', lualine_opts, config.lualine),
+        options = vim.tbl_deep_extend('force', lualine_config.options, config.lualine),
+        sections = lualine_config.sections,
       })
       vim.opt.showmode = false
     end,
