@@ -69,6 +69,7 @@ dolphin
 network-manager-applet
 networkmanager
 nm-connection-editor
+udiskie
 
 # Core deps
 stow

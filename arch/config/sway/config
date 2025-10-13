@@ -58,6 +58,7 @@ exec swayidle -w \
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 exec dunst
+exec udiskie
 exec_always nm-applet --indicator
 exec_always blueman-applet
 exec fusuma
