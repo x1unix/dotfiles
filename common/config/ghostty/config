@@ -33,6 +33,20 @@ quick-terminal-size = 100%,100%
 # Keybinds
 keybind = global:cmd+`=toggle_quick_terminal
 keybind = ctrl+shift+comma=reload_config
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+zero=reset_font_size
+keybind = ctrl+shift+l=clear_screen
+
+# TODO: use ghostty instead of tmux?
+# keybind = ctrl+shift+x=new_split:down
+
+keybind = ctrl+shift+t=new_tab
+gtk-titlebar-style = native
 
 # Disable useless and annoying bell
 bell-features = no-audio,no-system,no-title,no-attention
+
+# Disable annoying toasts
+app-notifications = no-clipboard-copy
