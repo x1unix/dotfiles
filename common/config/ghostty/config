@@ -3,11 +3,12 @@
 # See: https://ghostty.org/docs/config/reference
 
 shell-integration = detect
-#command = /opt/homebrew/bin/tmux
 
-theme = "dark:Apple System Colors,light:Apple System Colors Light"
+#theme = "dark:Apple System Colors,light:Apple System Colors Light"
+theme = "dark:base16-dark,light:Apple System Colors Light"
 font-family = "ZedMono NFM"
-font-size = 14
+font-size = 11
+# font-size = 14
 
 macos-option-as-alt = true
 macos-icon-frame = beige
