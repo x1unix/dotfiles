@@ -14,7 +14,7 @@ M.lspconfig = function()
   return require('lspconfig')
 end
 
---- @param kv (string|table<string, vim.lsp.Config>)[] | table<string, vim.lsp.Config>
+--- @param kv (string|table<string, vim.lsp.Config>)[] | table<string, vim.lsp.Config | function>
 --- @param cb fun(name: string, cfg: vim.lsp.Config)
 local function iter_lsp_configs(kv, cb)
   local caps = M.make_capabilities()
@@ -30,6 +30,17 @@ local function iter_lsp_configs(kv, cb)
       name = k
     end
 
+    -- Value can be a factory func.
+    -- Factory also used to load servers on demand.
+    if type(v) == 'function' then
+      local ret_val = v()
+      if not ret_val then
+        goto continue
+      end
+
+      cfg = type(ret_val) == 'table' and ret_val or {}
+    end
+
     if type(v) == 'table' then
       cfg = v
     end
@@ -39,6 +50,7 @@ local function iter_lsp_configs(kv, cb)
     end
 
     cb(name, cfg)
+    ::continue::
   end
 end
 
@@ -59,7 +71,7 @@ end
 --- Setups specified language servers.
 ---
 --- Function is compatibility wrapper around vim.lsp.config introduced in v0.11+ and legacy 'lspconfig' module.
---- @param kv (string|table<string, vim.lsp.Config>)[] | table<string, vim.lsp.Config>
+--- @param kv (string|table<string, vim.lsp.Config>)[] | table<string, vim.lsp.Config | function>
 M.config = function(kv)
   --- @type fun(name: string, cfg: vim.lsp.Config)
   local cb = get_lsp_setup()
