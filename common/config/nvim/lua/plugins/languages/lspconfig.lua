@@ -10,6 +10,7 @@ return {
     dependencies = { 'saghen/blink.cmp' },
     config = function()
       local lsputil = require('util.lsp')
+      local osutil = require('util.os')
       local capabilities = lsputil.make_capabilities()
 
       -- Enable LSP Diagnostic as virtual text below
@@ -69,6 +70,24 @@ return {
             })
           end,
         },
+        perlpls = function()
+          -- Atm perl langserver is provided only for arch.
+          if osutil.is_android() or not osutil.is_linux() then
+            return false
+          end
+
+          return {
+            cmd = {
+              'perl',
+              '-MPerl::LanguageServer',
+              '-e',
+              'Perl::LanguageServer::run',
+              '--',
+              '--stdio',
+            },
+            capabilities = capabilities,
+          }
+        end,
       })
     end,
   },
