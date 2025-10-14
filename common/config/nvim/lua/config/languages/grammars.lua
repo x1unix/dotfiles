@@ -22,6 +22,7 @@ return {
   'markdown',
   'markdown_inline',
   'nix',
+  'perl',
   'php',
   'proto',
   'python',
@@ -37,4 +38,3 @@ return {
   'xml',
   'yaml',
 }
-
