@@ -71,8 +71,15 @@ return {
           end,
         },
         perlpls = function()
-          -- Atm perl langserver is provided only for arch.
-          if osutil.is_android() or not osutil.is_linux() then
+          -- Check if perl is available and Perl::LanguageServer module is installed
+          if vim.fn.executable('perl') == 0 then
+            return false
+          end
+
+          -- Check if Perl::LanguageServer module is available
+          local check_cmd = { 'perl', '-MPerl::LanguageServer', '-e', 'exit 0' }
+          local _ = vim.fn.system(check_cmd)
+          if vim.v.shell_error ~= 0 then
             return false
           end
 
