@@ -13,7 +13,8 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
-    provider = 'gemini-cli',
+    -- provider = 'gemini-cli',
+    provider = 'openrouter',
     acp_providers = {
       ['gemini-cli'] = {
         command = 'gemini',
