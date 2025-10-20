@@ -34,6 +34,7 @@ return {
   'toml',
   'tsx',
   'typescript',
+  'sql',
   'udev',
   'xml',
   'yaml',
