@@ -4,9 +4,25 @@
   "layer": "top",
   "position": "top",
   "gtk-layer-shell": true,
-  "modules-left": ["hyprland/workspaces", "niri/workspaces", "sway/workspaces", "sway/mode"],
-  "modules-center": ["clock"],
-  "modules-right": ["tray", "idle_inhibitor", "hyprland/language", "niri/language", "sway/language", "wireplumber", "backlight", "battery"],
+  "modules-left": [
+    "hyprland/workspaces",
+    "niri/workspaces",
+    "sway/workspaces",
+    "sway/mode"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "tray",
+    "idle_inhibitor",
+    "hyprland/language",
+    "niri/language",
+    "sway/language",
+    "wireplumber",
+    "backlight",
+    "battery"
+  ],
   "hyprland/workspaces": {
     "format": "{id}"
   },
@@ -21,8 +37,8 @@
     "max-length": 10,
   },
   "clock": {
-    "format": "{:%H:%M}",
-    "format-alt": "{:%a %d %b %Y}",
+    "format": "{:%a %d %b, %H:%M}",
+    "format-alt": "{:%a %d %b, %I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "idle_inhibitor": {
@@ -76,8 +92,16 @@
     "on-click": "pavucontrol",
     "tooltip-format": "{node_name} - {volume}%",
     "format-icons": {
-      "default2": ["", "", ""],
-      "default": ["󰕿", "󰖀", "󰕾"],
+      "default2": [
+        "",
+        "",
+        ""
+      ],
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ],
     },
   },
   "backlight": {
@@ -86,16 +110,16 @@
     "tooltip-format": "{percent}%",
     "on-scroll-up": "brightnessctl s '+10%'",
     "on-scroll-down": "brightnessctl s '10%-'",
-      "format-icons": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
 }
