@@ -1,0 +1,74 @@
+#!/usr/bin/env sh
+set -e
+darkmodecmd='tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+
+_GTK_THEME_KS='org.gnome.desktop.interface'
+darkmode_toggle_gtk() {
+  current="$(gsettings get "$_GTK_THEME_KS" color-scheme)"
+  new_val='prefer-dark'
+  if [ "$current" = "'$new_val'" ]; then
+    new_val='default'
+  fi
+
+  gsettings set "$_GTK_THEME_KS" color-scheme "$new_val"
+}
+
+darkmode_toggle_macos() {
+  osascript -e "$darkmodecmd"
+}
+
+darkmode_toggle() {
+  case "$(uname -s)" in
+  Darwin)
+    darkmode_toggle_macos
+    ;;
+  Linux)
+    darkmode_toggle_gtk
+    ;;
+  *)
+    echo "Error: unsupported platform: $(uname -s)"
+    exit 1
+    ;;
+  esac
+}
+
+darkmode_status_gtk() {
+  current="$(gsettings get org.gnome.desktop.interface color-scheme)"
+  case "$current" in
+  *dark*)
+    text='dark'
+    percent='0'
+    ;;
+  *)
+    text='light'
+    percent='100'
+    ;;
+  esac
+
+  printf '{"text": "%s", "alt": "%s", "tooltip": "Theme: %s", "class": "darkmode", "percentage": %s}' "$text" "$text" "$text" "$percent"
+}
+
+darkmode_status() {
+  case "$(uname -s)" in
+  Linux)
+    darkmode_status_gtk
+    ;;
+  *)
+    echo "Error: unsupported platform: $(uname -s)"
+    exit 1
+    ;;
+  esac
+}
+
+case "$1" in
+toggle)
+  darkmode_toggle
+  ;;
+status)
+  darkmode_status
+  ;;
+*)
+  echo "Usage: $0 <toggle|status>"
+  exit 1
+  ;;
+esac

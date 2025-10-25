@@ -39,7 +39,8 @@ window#waybar {
 #bluetooth,
 #network,
 #language,
-#idle_inhibitor {
+#idle_inhibitor,
+.darkmode {
   margin: 0 10px;
 }
 
@@ -63,7 +64,7 @@ window#waybar {
 
 #tray menu {
   color: @text;
-  background: @surface0; 
+  background: @surface0;
   border-radius: 0;
   font-size: 1rem;
 }
@@ -88,10 +89,9 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-  color: @orange; 
+  color: @orange;
 }
 
 #battery.critical:not(.charging) {
   color: @hi-red;
 }
-

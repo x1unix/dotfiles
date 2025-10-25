@@ -16,12 +16,13 @@
   "modules-right": [
     "tray",
     "idle_inhibitor",
-    "hyprland/language",
-    "niri/language",
-    "sway/language",
+    "custom/darkmode",
     "wireplumber",
     "backlight",
-    "battery"
+    "battery",
+    "hyprland/language",
+    "niri/language",
+    "sway/language"
   ],
   "hyprland/workspaces": {
     "format": "{id}"
@@ -63,6 +64,17 @@
   "tray": {
     "icon-size": 16,
     "spacing": 16
+  },
+  "custom/darkmode": {
+    "exec": "~/.local/bin/darkmode status",
+    "return-type": "json",
+    "interval": "once",
+    "on-click": "~/.local/bin/darkmode toggle",
+    "format": "{icon}",
+    "format-icons": {
+      "dark": "󰛩",
+      "light": "󰛨"
+    }
   },
   "battery": {
     "interval": 5,
