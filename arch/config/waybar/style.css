@@ -40,7 +40,7 @@ window#waybar {
 #network,
 #language,
 #idle_inhibitor,
-.darkmode {
+#custom-darkmode {
   margin: 0 10px;
 }
 

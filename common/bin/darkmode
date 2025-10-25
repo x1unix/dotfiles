@@ -45,7 +45,7 @@ darkmode_status_gtk() {
     ;;
   esac
 
-  printf '{"text": "%s", "alt": "%s", "tooltip": "Theme: %s", "class": "darkmode", "percentage": %s}' "$text" "$text" "$text" "$percent"
+  printf '{"text": "%s", "alt": "%s", "tooltip": "Theme: %s", "class": "darkmode-%s", "percentage": %s}' "$text" "$text" "$text" "$text" "$percent"
 }
 
 darkmode_status() {
