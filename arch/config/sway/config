@@ -21,7 +21,7 @@ set $C_focused_border #4c78cc
 client.focused $C_focused_border $C_focused_bg $C_focused_text $C_focused_indicator $C_focused_child_border
 
 # Misc
-set $font ZedMono Nerd Font Mono 10.75
+set $font Iosevka NFM 10.75
 set $term alacritty
 set $menu wofi --show drun
 set $screenclip_copy slurp | grim -g - - | wl-copy

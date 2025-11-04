@@ -54,9 +54,13 @@ hyprpolkitagent
 hyprshot
 hyprsunset
 
-# Fonts & tools used in dotfiles
-blueman
+# Fonts
 ttf-zed-mono-nerd
+ttf-iosevka-nerd
+ttf-iosevkaterm-nerd
+
+# Tools used in dotfiles
+blueman
 wofi
 waybar
 wl-clipboard

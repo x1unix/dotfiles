@@ -9,7 +9,7 @@
 
 * {
   /* font-family: 'Inter Variable', monospace; */
-  font-family: 'ZedMono Nerd Font', monospace;
+  font-family: 'Iosevka Nerd Font Mono', 'ZedMono Nerd Font', monospace;
   font-weight: 500;
   font-size: 14px;
 }
@@ -52,8 +52,8 @@ window {
 }
 
 #input image {
-    border: none;
-    color: @text;
+  border: none;
+  color: @text;
 }
 
 /* Search icon */
@@ -99,4 +99,3 @@ window {
 #entry:selected arrow {
   color: @text-dimmed;
 }
-

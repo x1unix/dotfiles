@@ -3,9 +3,9 @@ live_config_reload = true
 
 [font]
 size = 11.0
-normal = { family = "ZedMono Nerd Font Mono", style = "Regular" }
-italic = { family = "ZedMono Nerd Font Mono", style = "Italic" }
-bold = { family = "ZedMono Nerd Font Mono", style = "Bold" }
+normal = { family = "Iosevka NFM", style = "Regular" }
+italic = { family = "Iosevka NFM", style = "Italic" }
+bold = { family = "Iosevka NFM", style = "Bold" }
 
 [selection]
 save_to_clipboard = true
