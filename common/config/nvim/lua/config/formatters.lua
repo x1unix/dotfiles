@@ -13,11 +13,21 @@ M.formatters_by_ft = {
   proto = { 'buf' },
   go = { 'gofumpt', 'golangci-lint', 'goimports', stop_after_first = true },
   markdown = { 'prettier', stop_after_first = true },
+  alloy = { 'alloy' },
 }
 
 M.format_on_save = {
   timeout_ms = 300,
   lsp_format = 'fallback',
+}
+
+M.formatters = {
+  alloy = {
+    command = 'alloy',
+    args = {
+      'fmt',
+    },
+  },
 }
 
 return M
