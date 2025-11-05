@@ -8,4 +8,5 @@ return {
   { import = 'plugins.languages.treewalker' },
   { import = 'plugins.languages.go' },
   { import = 'plugins.languages.ts' },
+  { import = 'plugins.languages.misc' },
 }

@@ -1,0 +1,5 @@
+return {
+  {
+    'grafana/vim-alloy',
+  },
+}
