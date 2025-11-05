@@ -67,6 +67,13 @@ return {
       -- END
       telescope.setup({
         defaults = {
+          layout_strategy = 'vertical',
+          layout_config = {
+            vertical = {
+              width = 0.8,
+              -- preview_height = 0.75,
+            },
+          },
           file_ignore_patterns = {
             '^.git/',
             '^.vscode/',

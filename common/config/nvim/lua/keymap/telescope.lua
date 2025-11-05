@@ -11,20 +11,32 @@ wk.add({
   },
   {
     '<Leader>;',
-    '<cmd>Telescope find_files<cr>',
+    function()
+      require('telescope.builtin').find_files({
+        hidden = true,
+      })
+    end,
     mode = 'n',
     desc = 'find files',
   },
   {
     '<Leader>f',
-    '<cmd>Telescope live_grep<cr>',
+    function()
+      require('telescope.builtin').live_grep({
+        hidden = true,
+      })
+    end,
     mode = 'n',
     desc = 'grep',
     icon = icons.action_search,
   },
   {
     '<Leader>/',
-    '<cmd>Telescope current_buffer_fuzzy_find<cr>',
+    function()
+      require('telescope.builtin').current_buffer_fuzzy_find({
+        hidden = true,
+      })
+    end,
     mode = 'n',
     desc = 'find in file',
     icon = icons.action_search,
