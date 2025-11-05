@@ -42,7 +42,11 @@ wk.add({
   },
   {
     'gs',
-    '<cmd>Telescope lsp_document_symbols<cr>',
+    function()
+      require('telescope.builtin').lsp_document_symbols({
+        symbol_width = 80,
+      })
+    end,
     desc = 'lsp: document symbols',
   },
   {
