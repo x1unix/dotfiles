@@ -30,7 +30,7 @@ return {
         __inherited_from = 'openai',
         endpoint = 'https://openrouter.ai/api/v1',
         api_key_name = 'OPENROUTER_API_KEY',
-        model = 'anthropic/claude-sonnet-4',
+        model = 'google/gemini-2.5-flash',
         model_names = {
           'anthropic/claude-sonnet-4',
           'anthropic/claude-sonnet-4.5',
