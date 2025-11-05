@@ -73,6 +73,8 @@ network-manager-applet
 networkmanager
 nm-connection-editor
 udiskie
+simdjson
+prettier
 
 # WinApps dependencies
 # See: https://github.com/winapps-org/winapps/tree/main#step-2-install-dependencies

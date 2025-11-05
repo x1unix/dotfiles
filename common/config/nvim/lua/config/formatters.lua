@@ -12,6 +12,7 @@ M.formatters_by_ft = {
   python = { 'isort', 'black' },
   proto = { 'buf' },
   go = { 'gofumpt', 'golangci-lint', 'goimports', stop_after_first = true },
+  markdown = { 'prettier', stop_after_first = true },
 }
 
 M.format_on_save = {
