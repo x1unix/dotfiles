@@ -31,6 +31,12 @@ wk.add({
     desc = 'buffer: close',
   },
   {
+    '<Leader>Q',
+    ':close<cr>',
+    mode = 'n',
+    desc = 'split: close',
+  },
+  {
     '<Leader>g',
     function()
       ---@module 'snacks'
