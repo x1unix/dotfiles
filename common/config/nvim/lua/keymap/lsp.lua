@@ -12,7 +12,12 @@ wk.add({
   },
   {
     'gr',
-    '<cmd>Telescope lsp_references<cr>',
+    function()
+      require('telescope.builtin').lsp_references({
+        fname_width = 60,
+        trim_text = true,
+      })
+    end,
     desc = 'lsp: go to references',
     icon = icons.symbol_class,
   },
