@@ -62,6 +62,7 @@ vim.api.nvim_create_autocmd('User', {
   callback = function(args)
     local bufnr = args.data.buf_id
 
+    -- Open selected file in split
     map_split(bufnr, '<C-s>', 'belowright horizontal')
     map_split(bufnr, '<C-v>', 'belowright vertical')
     vim.keymap.set('n', '<C-t>', function()
@@ -78,5 +79,25 @@ vim.api.nvim_create_autocmd('User', {
         MiniFiles.go_in()
       end
     end, { buffer = bufnr, desc = 'Open in a new window' })
+
+    -- Grep in selected dir
+    vim.keymap.set('n', '<C-/>', function()
+      local entry = MiniFiles.get_fs_entry()
+      if not entry then
+        return vim.notify('Cursor is not on valid entry')
+      end
+
+      local target_dir = entry.path
+      -- If cursor over file - grep in dir.
+      if entry.fs_type ~= 'directory' then
+        target_dir = vim.fs.dirname(target_dir)
+      end
+
+      MiniFiles.close()
+      require('telescope.builtin').live_grep({
+        cwd = target_dir,
+      })
+      vim.print(target_dir)
+    end, { buffer = bufnr, desc = 'Grep in selected directory' })
   end,
 })
