@@ -26,17 +26,31 @@ Packages are managed by *lazy.nvim*.
 
 ## Notable Features
 
-List of features that extends neovim, but not bound to `<leader>` key:
+### Hotkeys
 
-### UI
+List of custom hotkeys not bound to `<leader>` key and/or not visible in `which-key`:
+
+#### UI
 
 | Hotkey      | Description                                    |
 | ----------- | ---------------------------------------------- |
 | `;`         | Telescope-powered cmdline. Alternative to `:`  |
 
-### Editing
+
+#### Editing
 
 | Hotkey      | Description                                    |
 | ----------- | ---------------------------------------------- |
 | `s`         | leap.nvim                                      |
+
+
+#### mini.files
+
+Additional hotkeys bound to `mini.files`
+
+| Hotkey      | Description                                    |
+| ----------- | ---------------------------------------------- |
+| `<C-x>`     | Open in horizontal split                       |
+| `<C-v>`     | Open in vertical split                         |
+| `<C-/>`     | Open live grep in dir under cursor.            |
 
