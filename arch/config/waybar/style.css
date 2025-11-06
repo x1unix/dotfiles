@@ -1,7 +1,7 @@
 @import "colors.css";
 
 * {
-  font-family: 'Iosevka Nerd Font Mono', 'ZedMono Nerd Font';
+  font-family: 'ZedMono Nerd Font';
   font-size: 14px;
   min-height: 0;
 }
