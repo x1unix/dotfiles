@@ -15,7 +15,8 @@ return {
   ---@type avante.Config
   opts = {
     -- provider = 'gemini-cli',
-    provider = 'openrouter',
+    -- provider = 'openrouter',
+    provider = 'codex',
     acp_providers = {
       ['gemini-cli'] = {
         command = 'gemini',
@@ -27,9 +28,6 @@ return {
       },
       codex = {
         command = 'codex-acp',
-        env = {
-          RUST_LOG = 'info',
-        },
       },
     },
     providers = {
