@@ -5,6 +5,7 @@ return {
   --
   -- Used in provider switcher dialog.
   enabled_providers = {
+    'codex',
     'gemini',
     'gemini-cli',
     'openrouter',
@@ -22,6 +23,12 @@ return {
         env = {
           NODE_NO_WARNINGS = '1',
           GEMINI_API_KEY = os.getenv('GEMINI_API_KEY'),
+        },
+      },
+      codex = {
+        command = 'codex-acp',
+        env = {
+          RUST_LOG = 'info',
         },
       },
     },
