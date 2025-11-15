@@ -776,6 +776,10 @@ expand_template() {
     esac
   done
 
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
   if [ -n "$G_REVERT" ]; then
     notify_step "Removing generated file '$dst_file'..."
     rm -f "$dst_file"
@@ -786,10 +790,6 @@ expand_template() {
   awk_script="$(printf "$__EXPAND_TPL_AWK_SCRIPT" "$varlist")"
   debug_log "expand_template: Src='$tpl_file' Dst='$dst_file'"
   debug_log "$awk_script"
-
-  if [ -n "$G_DRY_RUN" ]; then
-    return
-  fi
 
   awk "$awk_script" "$tpl_file" >"$dst_file"
 }
