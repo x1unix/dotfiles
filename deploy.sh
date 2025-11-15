@@ -7,6 +7,7 @@ __DIR="$(dirname -- "$__FILE")"
 
 TARGET_FILE='target.sh'
 G_DEPS="stow sops"
+_G_DOC_PARAMS=''
 
 # XDG defaults
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
@@ -528,6 +529,115 @@ require() {
   done
 }
 
+# param - declare a recipe input parameter
+# @param $1 - Paramerer
+# @param $* - Options in format 'key:value'
+param() {
+  assert_in_target
+  assert_def "$1" 'param: missing name'
+
+  param_name="$1"
+  shift
+
+  descr="Set $param_name parameter"
+  doc_validate=''
+  param_required=''
+
+  debug_log "param: parse $param_name"
+  for param in "$@"; do
+    key="${param%%:*}"
+    val="${param#*:}"
+
+    debug_log "param: Name=$param_name; Opt='$key'; Val='$val';"
+    case "$key" in
+    description)
+      descr="$val"
+      ;;
+    required)
+      param_required='1'
+      ;;
+    validate)
+      doc_validate="$val"
+      ;;
+    *)
+      die "param: unsupported option for parameter - $key"
+      ;;
+    esac
+  done
+
+  # TODO: dedup
+  if [ -n "$G_DRY_RUN" ]; then
+    # Just assembly doc
+    if [ -n "$doc_validate" ]; then
+      descr="$descr ($doc_validate)"
+    fi
+    if [ -n "$param_required" ]; then
+      descr="$descr (required)"
+    fi
+
+    if [ -n "$_G_DOC_PARAMS" ]; then
+      _G_DOC_PARAMS="$_G_DOC_PARAMS;"
+    fi
+
+    _G_DOC_PARAMS="${_G_DOC_PARAMS}${param_name}=${descr}"
+    _G_TARGET_EXPECT_FLAGS="$_G_TARGET_EXPECT_FLAGS $param_name"
+    return
+  fi
+
+  # If inside target - check if var is supplied
+  # Check if there are validation requirements
+  param_value=$(__get_flag_val "$param_name")
+  if [ -n "$param_required" ]; then
+    assert_def "$param_value" "flag '--$param_name' is required. See '$__BINNAME info $CURRENT_TARGET' for documentation."
+  fi
+
+  __private_validate_oneof "$param_name" "$param_value" "$doc_validate"
+
+  if [ -n "$doc_oneof" ]; then
+    eval "__G_PARAM_SPEC_${param_name}_ONEOF='$doc_oneof'"
+  fi
+
+  if [ -n "$param_required" ]; then
+    eval "__G_PARAM_SPEC_${param_name}_REQUIRED='$doc_oneof'"
+  fi
+}
+
+# get_param - return value of parameter declared using 'param' keyword.
+# @param $1 name
+get_param() {
+  assert_def "$1" 'get_param: missing param name'
+  echo __get_flag_val "$1"
+}
+
+# has_param - checks whetner parameter is defined.
+# @param $1 name
+has_param() {
+  assert_def "$1" 'has_param: missing param name'
+  if [ -n "$(__get_flag_val)" ]; then
+    return 0
+  fi
+
+  return 1
+}
+
+# @param $1 key
+# @param $2 value
+# @param $3 rule
+__private_validate_oneof() {
+  if [ -z "$3" ]; then
+    debug_log "param.validate: no rules for param '$1'"
+    return
+  fi
+
+  debug_log "param.validate: TEST '$1' Val='$2' Rule='$3'"
+  if echo "$2" | grep -qE "^($3)$"; then
+    return
+  fi
+
+  debug_log "param.validate: OK '$1'"
+  die "invalid value of flag '--$1': value '$2' doesn't match rule '$3'"
+}
+
 # @param $1 func_name
 # @param $2 optional, flag or var name
 step() {
@@ -911,8 +1021,17 @@ __private_show_target() {
     echo "Dependencies:    $_DOC_EXTENDS"
   fi
 
+  if [ -n "$_G_DOC_PARAMS" ]; then
+    echo "Params:"
+
+    # Print recipe options
+    __private_dump_params
+  fi
+
   if [ -n "$_DOC_FLAGS" ]; then
     echo "Flags:"
+
+    # Print step flags
     for val in $_DOC_FLAGS; do
       flagname="$(printf '%s' "$val" | cut -d':' -f1)"
       func_name="$(printf '%s' "$val" | cut -d':' -f2)"
@@ -923,6 +1042,19 @@ __private_show_target() {
     flagstr="$(pad_right 'all' 10)"
     echo "  --$flagstr - Runs flagged optional steps"
   fi
+}
+
+__private_dump_params() {
+  old_ifs="$IFS"
+  IFS=';'
+  set -- $_G_DOC_PARAMS
+  IFS="$old_ifs"
+  for part in "$@"; do
+    flagname="$(printf '%s' "$part" | cut -d'=' -f1)"
+    descr="$(printf '%s' "$part" | cut -d'=' -f2)"
+    flagstr="$(pad_right "$flagname" 10)"
+    echo "  --$flagstr - $descr"
+  done
 }
 
 __private_list_targets() {
@@ -957,6 +1089,17 @@ __private_list_targets() {
   fi
 }
 
+__get_flag_val() {
+  key="$1"
+  eval "echo \$G_FLAG_${flag}"
+}
+
+__set_flag_val() {
+  key="$1"
+  val="$2"
+  eval "G_FLAG_${flag}=\"${value}\""
+}
+
 __private_parse_flags() {
   while [ $# -gt 0 ]; do
     case "$1" in
@@ -965,25 +1108,25 @@ __private_parse_flags() {
       flag="${1%%=*}"
       value="${1#*=}"
       flag="${flag#--}"
-      eval "G_FLAG_${flag}=\"${value}\""
+      __set_flag_val "$flag" "$value"
       ;;
     -*=*)
       # Handle -flag=value format
       flag="${1%%=*}"
       value="${1#*=}"
       flag="${flag#-}"
-      eval "G_FLAG_${flag}=\"${value}\""
+      __set_flag_val "$flag" "$value"
       ;;
     --*)
       # Handle --flag format or --flag value format
       flag="${1#--}"
       if [ $# -gt 1 ] && [ "${2#-}" = "$2" ]; then
         # Next argument doesn't start with -, so it's a value
-        eval "G_FLAG_${flag}=\"$2\""
+        __set_flag_val "$flag" "$2"
         shift
       else
         # No value, set to 1
-        eval "G_FLAG_${flag}=1"
+        __set_flag_val "$flag" 1
       fi
       ;;
     -*)
@@ -991,11 +1134,11 @@ __private_parse_flags() {
       flag="${1#-}"
       if [ $# -gt 1 ] && [ "${2#-}" = "$2" ]; then
         # Next argument doesn't start with -, so it's a value
-        eval "G_FLAG_${flag}=\"$2\""
+        __set_flag_val "$flag" "$2"
         shift
       else
         # No value, set to 1
-        eval "G_FLAG_${flag}=1"
+        __set_flag_val "$flag" 1
       fi
       ;;
     *)
@@ -1110,4 +1253,3 @@ __private_main() {
 }
 
 __private_main "$@"
-
