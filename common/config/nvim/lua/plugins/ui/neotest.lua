@@ -16,7 +16,7 @@ return {
       'nvim-neotest/neotest-plenary',
       {
         'fredrikaverpil/neotest-golang',
-        branch = 'stream',
+        version = '^2',
       },
       'marilari88/neotest-vitest',
       'mrcjkb/rustaceanvim',
