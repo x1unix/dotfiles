@@ -13,6 +13,7 @@ zsh-syntax-highlighting
 zsh
 net-tools
 man-db
+unzip
 lf
 cmake
 nodejs
