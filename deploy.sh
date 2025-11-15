@@ -650,6 +650,7 @@ __private_validate_oneof() {
   die "invalid value of flag '--$1': value '$2' doesn't match rule '$3'"
 }
 
+# step - Run function as a part of target process.
 # @param $1 func_name
 # @param $2 optional, flag or var name
 step() {
@@ -725,6 +726,70 @@ __private_step_with_flag() {
 
   "$func_name" "$flag_value"
   unset flag_value
+}
+
+__EXPAND_TPL_AWK_SCRIPT=$(
+  cat <<EOF
+BEGIN { %s }
+{
+    for (k in v)
+        gsub("{{" k "}}", v[k])
+    print
+}
+EOF
+)
+
+# expand_template - Takes input template file and processes into output file.
+# Accepts key-value pair of variables to expand in a template.
+#
+# Example:
+#   expand_template 'config.tpl' "$XDG_CONFIG_HOME/config.txt" 'foo=bar' 'bar=baz'
+#
+# @param $1 source_file
+# @param $2 target_file
+# @param $@ key-value pair of variables and values.
+expand_template() {
+  assert_in_target
+  assert_def "$1" 'expand_template: missing template file name'
+  assert_def "$2" 'expand_template: missing destination file name'
+  tpl_file="$__DIR/$CURRENT_TARGET/$1"
+  dst_file="$2"
+  shift 2
+
+  if [ ! -f "$tpl_file" ]; then
+    die "expand_template: source template file doesn't exist - '$tpl_file'"
+  fi
+
+  varlist=''
+  for kv in "$@"; do
+    case "$kv" in
+    *=*)
+      k="${kv%%=*}"
+      v="${kv#*=}"
+
+      v=$(printf '%s\n' "$v" | sed 's/\\/\\\\/g; s/"/\\"/g')
+      varlist="$(printf '%s\nv["%s"]="%s"' "$varlist" "$k" "$v")"
+      ;;
+    *)
+      die "expand_template: invalid key-value pair '$kv'"
+      ;;
+    esac
+  done
+
+  awk_script="$(printf "$__EXPAND_TPL_AWK_SCRIPT" "$varlist")"
+  debug_log "expand_template: Src='$tpl_file' Dst='$dst_file'"
+  debug_log "$awk_script"
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    rm -f "$dst_file"
+    return
+  fi
+
+  awk "$awk_script" "$tpl_file" >"$dst_file"
 }
 
 # Private Functions
