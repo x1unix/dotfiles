@@ -760,6 +760,10 @@ expand_template() {
     die "expand_template: source template file doesn't exist - '$tpl_file'"
   fi
 
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
   varlist=''
   for kv in "$@"; do
     case "$kv" in
@@ -775,10 +779,6 @@ expand_template() {
       ;;
     esac
   done
-
-  if [ -n "$G_DRY_RUN" ]; then
-    return
-  fi
 
   if [ -n "$G_REVERT" ]; then
     notify_step "Removing generated file '$dst_file'..."
