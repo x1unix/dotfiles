@@ -542,6 +542,7 @@ param() {
   descr="Set $param_name parameter"
   doc_validate=''
   param_required=''
+  param_defaults=''
 
   debug_log "param: parse $param_name"
   for param in "$@"; do
@@ -559,17 +560,27 @@ param() {
     validate)
       doc_validate="$val"
       ;;
+    default)
+      param_defaults="$val"
+      ;;
     *)
-      die "param: unsupported option for parameter - $key"
+      die "param: unsupported option - $key"
       ;;
     esac
   done
+
+  if [ -n "$param_defaults" ] && [ -n "$param_required" ]; then
+    notify_warn "param '$param_name' - option 'required' has no effect when default value is defined."
+  fi
 
   # TODO: dedup
   if [ -n "$G_DRY_RUN" ]; then
     # Just assembly doc
     if [ -n "$doc_validate" ]; then
       descr="$descr ($doc_validate)"
+    fi
+    if [ -n "$param_defaults" ]; then
+      descr="$descr (default: '$param_defaults')"
     fi
     if [ -n "$param_required" ]; then
       descr="$descr (required)"
@@ -606,14 +617,15 @@ param() {
 # @param $1 name
 get_param() {
   assert_def "$1" 'get_param: missing param name'
-  echo __get_flag_val "$1"
+  __get_flag_val "$1"
 }
 
 # has_param - checks whetner parameter is defined.
 # @param $1 name
 has_param() {
   assert_def "$1" 'has_param: missing param name'
-  if [ -n "$(__get_flag_val)" ]; then
+  echo "has_param: $1 V=$(__get_flag_val "$1")"
+  if [ -n "$(__get_flag_val "$1")" ]; then
     return 0
   fi
 
@@ -1091,7 +1103,7 @@ __private_list_targets() {
 
 __get_flag_val() {
   key="$1"
-  eval "echo \$G_FLAG_${flag}"
+  eval "echo \$G_FLAG_${1}"
 }
 
 __set_flag_val() {
