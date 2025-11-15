@@ -77,6 +77,10 @@ udiskie
 simdjson
 prettier
 
+# Greeter
+greetd
+greetd-tuigreet
+
 # WinApps dependencies
 # See: https://github.com/winapps-org/winapps/tree/main#step-2-install-dependencies
 dialog
