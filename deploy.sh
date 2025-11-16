@@ -812,9 +812,8 @@ __private_step_with_flag() {
     return
   fi
 
-  eval "flag_value=\"\$G_FLAG_$bind_val\""
-  debug_log "condition: $func_name - flag:'$bind_val'; value:'$flag_value'"
-  if [ -z "$flag_value" ] && [ -z "$G_FLAG_all" ]; then
+  debug_log "condition: $func_name - flag:'$bind_val'"
+  if ! __is_flag_defined "$bind_val" && ! __is_flag_defined 'all'; then
     notify_info "step '$func_name' skipped as $bind_opt --$bind_val is missing"
     return
   fi
@@ -1285,6 +1284,12 @@ __private_list_targets() {
 __get_flag_val() {
   key="$1"
   eval "echo \$G_FLAG_${1}"
+}
+
+__is_flag_defined() {
+  # In POSIX Sh there is no way to distinguish between undefined and null variables.
+  # Flags for steps are defined and have no values.
+  eval '[ -n "${G_FLAG_'"$1"'+x}" ]'
 }
 
 __set_flag_val() {
