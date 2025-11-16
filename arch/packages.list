@@ -23,6 +23,7 @@ fzf
 ripgrep
 lazygit
 neovim
+zoxide
 
 # Sway (used in VM)
 sway
@@ -38,6 +39,8 @@ xdg-desktop-portal-wlr
 xdg-desktop-portal-gtk
 gnome-keyring
 polkit-gnome
+pipewire-pulse
+pipewire-jack
 
 # Wayland support
 qt5-wayland
