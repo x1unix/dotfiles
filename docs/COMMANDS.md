@@ -140,6 +140,14 @@ Installs packages on Arch Linux using `pacman` from a list in a file.
 **Parameters:**
 *   `filename`: Path to a file within the target directory containing a space-separated list of packages to install.
 
+### `aurfile`
+
+Installs AUR packages listed in a file using whichever helper (`yay`, `paru`, etc.) is available on the system. Use [`aurpkg`](#aurpkg) first to ensure a helper is installed.
+
+**Usage:** `aurfile <filename>`
+**Parameters:**
+*   `filename`: Path to a file within the target directory; blank lines and comments (`# ...`) are ignored and the remaining package names are installed via the helper. Rollback is not supported.
+
 ### `aurpkg`
 
 Installs packages from the Arch User Repository (AUR) on Arch Linux.
