@@ -1,4 +1,5 @@
 [global]
+font = Iosevka NFM 11
 frame_color = "#8caaee"
 separator_color= frame
 highlight = "#8caaee"
