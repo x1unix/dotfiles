@@ -83,6 +83,7 @@ brightnessctl
 
 # Core Desktop
 flatpak
+bluetui
 
 # Greeter
 greetd
