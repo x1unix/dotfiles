@@ -98,6 +98,7 @@ wireless-regdb
 # Audio
 easyeffects
 zam-plugins
+calf
 
 # WinApps dependencies
 # See: https://github.com/winapps-org/winapps/tree/main#step-2-install-dependencies
