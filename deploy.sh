@@ -9,6 +9,10 @@ TARGET_FILE='target.sh'
 G_DEPS="stow sops"
 _G_DOC_PARAMS=''
 
+# Current recipe and its variant on stacks.
+_G_TARGET=''
+_G_VARIANT=''
+
 # XDG defaults
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
@@ -89,6 +93,99 @@ command_exists() {
   fi
 
   return 0
+}
+
+# Push a value onto the stack
+# @param $1 var_name
+# @param $2 value
+stack_push() {
+  stack_var="$1"
+  value="$2"
+
+  eval "current_stack=\$$stack_var"
+
+  if [ -z "$current_stack" ]; then
+    eval "$stack_var=\"\$value\""
+  else
+    eval "$stack_var=\"\$current_stack,\$value\""
+  fi
+}
+
+# Peek at the last value without removing it
+# @param $1 var_name
+stack_peek() {
+  stack_var="$1"
+  eval "current_stack=\$$stack_var"
+
+  if [ -z "$current_stack" ] && [ "$(eval "echo \"\$$stack_var\"")" = "" ]; then
+    return 1
+  fi
+
+  # Save IFS and set to comma
+  old_ifs="$IFS"
+  IFS=','
+
+  # Get the last element
+  last=""
+  for item in $current_stack; do
+    last="$item"
+  done
+
+  IFS="$old_ifs"
+  echo "$last"
+}
+
+# Pop the last value from the stack
+# @param $1 var_name
+# @param $2 is_ret
+stack_pop() {
+  stack_var="$1"
+  is_ret="$2"
+  eval "current_stack=\$$stack_var"
+
+  if [ -z "$current_stack" ] && [ "$(eval "echo \"\$$stack_var\"")" = "" ]; then
+    return 1
+  fi
+
+  # Save IFS and set to comma
+  old_ifs="$IFS"
+  IFS=','
+
+  # Count elements and get last
+  count=0
+  last=""
+  for item in $current_stack; do
+    count=$((count + 1))
+    last="$item"
+  done
+
+  # Rebuild stack without last element
+  new_stack=""
+  i=0
+  for item in $current_stack; do
+    i=$((i + 1))
+    if [ $i -lt $count ]; then
+      if [ -z "$new_stack" ]; then
+        new_stack="$item"
+      else
+        new_stack="$new_stack,$item"
+      fi
+    fi
+  done
+
+  IFS="$old_ifs"
+  eval "$stack_var=\"\$new_stack\""
+  if [ -n "$is_ret" ]; then
+    echo "$last"
+  fi
+}
+
+current_target() {
+  stack_peek '_G_TARGET'
+}
+
+current_variant() {
+  stack_peek '_G_VARIANT'
 }
 
 # Target Functions
@@ -510,7 +607,8 @@ require() {
   fi
 
   while [ $# -gt 0 ]; do
-    target_name="$1"
+    target_name="$(__private_parse_target_name "$1")"
+    target_variant="$(__private_parse_target_variant "$1")"
     target_file="$__DIR/$target_name/$TARGET_FILE"
     shift
 
@@ -525,7 +623,7 @@ require() {
     fi
 
     notify_step "Processing parent target '$target_name' ..."
-    __private_eval_target "$target_name" 1
+    __private_eval_target "$target_name" "$target_variant" 1
   done
 }
 
@@ -946,6 +1044,7 @@ __private_init_build_constraints() {
   debug_log "os-release: detected distro='$G_DISTRO' version='$G_DISTRO_VERSION'"
 }
 
+# Reads annotation from a target file.
 # @param $1 pragma name
 # @param $1 script path
 __private_get_target_pragma() {
@@ -1057,7 +1156,8 @@ __private_check_target_constraints() {
 }
 
 __private_show_target() {
-  target_name="$1"
+  target_name="$(__private_parse_target_name "$1")"
+  target_variant="$(__private_parse_target_name "$1")"
   target_file="$1/$TARGET_FILE"
   availability='True'
 
@@ -1083,18 +1183,22 @@ __private_show_target() {
     echo "Description:      $description"
   fi
 
+  variants="$(__private_get_target_pragma 'variants' "$target_file" | tr '|' ' ')"
+  if [ -n "$variants" ]; then
+    echo "Variants:         $variants"
+  fi
+
   echo "Runnable:         $availability"
   constraints="$(__private_get_target_pragma 'require' "$target_file")"
   if [ -n "$constraints" ]; then
     echo "Constraints:      $constraints"
   fi
 
-  echo "Source File:      $target_file"
-  echo "Resources Dir:    $__DIR/$target_name"
+  echo "Directory:        $__DIR/$target_name"
 
   # Dry run target to collect declarations.
   G_DRY_RUN=1
-  __private_eval_target "$target_name" 1
+  __private_eval_target "$target_name" "$target_variant" 1
 
   if [ -n "$_DOC_EXTENDS" ]; then
     echo "Dependencies:    $_DOC_EXTENDS"
@@ -1235,6 +1339,7 @@ __private_parse_flags() {
 }
 
 # @param $1 target name
+# @param $2 variant
 # @param $2 is silent?
 __private_eval_target() {
   assert_def "$1" "empty target name (at: $CURRENT_TARGET)"
@@ -1243,33 +1348,88 @@ __private_eval_target() {
     MAIN_TARGET="$1"
   fi
 
-  is_silent="$2"
   new_target="$1"
+  new_variant="$2"
+  is_silent="$3"
   script_file="$__DIR/$new_target/$TARGET_FILE"
+  if [ ! -f "$script_file" ]; then
+    die "Target file '$script_file' doesn't exist"
+    return
+  fi
+
   if [ -z "$G_DRY_RUN" ]; then
     if ! __private_check_target_constraints "$new_target" "$script_file"; then
       die 'Aborting due to unsatisfied constraints'
+    fi
+
+    # Check variant constraints
+    # Fail if no variant given but target is variadic.
+    # Fail if variant is not supported.
+    target_variants="$(__private_get_target_pragma 'variants' "$script_file")"
+    if [ -z "$target_variants" ] && [ -n "$new_variant" ]; then
+      die "Target '$target_name' doesn't support variants."
+    fi
+
+    if [ -n "$target_variants" ] && [ -z "$new_variant" ]; then
+      var_str=$(echo "$target_variants" | tr '|' ',')
+      die "Target '$target_name' requires one of variants: $var_str"
+    fi
+
+    if ! echo "$new_variant" | grep -qE "^($target_variants)$"; then
+      var_str=$(echo "$target_variants" | tr '|' ',')
+      die "Invalid variant '$new_variant' for target '$new_target'. Supported variants: $var_str"
     fi
   fi
 
   PREV_TARGET="$CURRENT_TARGET"
   CURRENT_TARGET="$new_target"
   TARGET_DIR="${__DIR}/${CURRENT_TARGET}"
-  if [ ! -f "$script_file" ]; then
-    die "Target file '$script_file' doesn't exist"
-    return
-  fi
-
+  stack_push '_G_VARIANT' "$new_variant"
+  stack_push '_G_TARGET' "$new_target"
   if [ -z "$is_silent" ]; then
-    notify_step "Processing target '$CURRENT_TARGET'..."
+    notify_step "Processing target '$new_target'..."
   fi
 
   . "$script_file"
 
   # Restore env
-  # FIXME: use stack to avoid undefined behavior during nesting
-  CURRENT_TARGET="$PREV_TARGET"
+  stack_pop '_G_TARGET'
+  stack_pop '_G_VARIANT'
+  CURRENT_TARGET="$(stack_peek '_G_TARGET')"
   TARGET_DIR="${__DIR}/${CURRENT_TARGET}"
+}
+
+# Parse target name from query string.
+# Format: 'target_name#variant'.
+__private_parse_target_name() {
+  assert_def "$1" '__private_parse_target_name: missing argument'
+  case "$1" in
+  *\#*)
+    n="${1%%#*}"
+    assert_def "$n" 'Missing target name but variant provided'
+    echo "$n"
+    ;;
+  *)
+    echo "$1"
+    ;;
+  esac
+}
+
+# Parse target variant from query string.
+# Format: 'target_name#variant'.
+__private_parse_target_variant() {
+  assert_def "$1" '__private_parse_target_variant: missing argument'
+  # Check if '#' exists in the string
+  case "$1" in
+  *\#*)
+    # Has variant - extract it
+    echo "${1#*#}"
+    ;;
+  *)
+    # No variant - return empty string
+    echo ""
+    ;;
+  esac
 }
 
 __private_deploy_cmd() {
@@ -1283,12 +1443,15 @@ __private_deploy_cmd() {
     die "missing target name."
   fi
 
-  target_name="$1"
+  # Input target name can contain variant, like in NixOS.
+  # E.g. 'target_name#variant'
+  target_name="$(__private_parse_target_name "$1")"
+  target_variant="$(__private_parse_target_variant "$1")"
   shift
 
   __private_parse_flags "$@"
   __private_install_deps
-  __private_eval_target "$target_name"
+  __private_eval_target "$target_name" "$target_variant"
 }
 
 __private_main() {
