@@ -95,6 +95,8 @@ command_exists() {
   return 0
 }
 
+__STACK_EMPTY_VAR='-'
+
 # Push a value onto the stack
 # @param $1 var_name
 # @param $2 value
@@ -102,8 +104,12 @@ stack_push() {
   stack_var="$1"
   value="$2"
 
-  eval "current_stack=\$$stack_var"
+  #HACK: shell skips empty entries. Use placeholder
+  if [ -z "$value" ]; then
+    value="$__STACK_EMPTY_VAR"
+  fi
 
+  eval "current_stack=\$$stack_var"
   if [ -z "$current_stack" ]; then
     eval "$stack_var=\"\$value\""
   else
@@ -132,6 +138,10 @@ stack_peek() {
   done
 
   IFS="$old_ifs"
+  if [ "$last" = "$__STACK_EMPTY_VAR" ]; then
+    last=''
+  fi
+
   echo "$last"
 }
 
@@ -175,7 +185,7 @@ stack_pop() {
 
   IFS="$old_ifs"
   eval "$stack_var=\"\$new_stack\""
-  if [ -n "$is_ret" ]; then
+  if [ -n "$is_ret" ] && [ "$last" != "$__STACK_EMPTY_VAR" ]; then
     echo "$last"
   fi
 }
