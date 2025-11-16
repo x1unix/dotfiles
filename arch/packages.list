@@ -37,6 +37,7 @@ xorg-xwayland
 xdg-desktop-portal
 xdg-desktop-portal-wlr
 xdg-desktop-portal-gtk
+xdg-desktop-portal-hyprland
 gnome-keyring
 polkit-gnome
 pipewire-pulse
@@ -88,6 +89,11 @@ bluetui
 # Greeter
 greetd
 greetd-tuigreet
+
+# Networking
+# See: https://wiki.archlinux.org/title/Network_configuration/Wireless#Respecting_the_regulatory_domain
+iw
+wireless-regdb
 
 # WinApps dependencies
 # See: https://github.com/winapps-org/winapps/tree/main#step-2-install-dependencies
