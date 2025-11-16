@@ -16,7 +16,7 @@ darwin/
     └── ...
 ```
 
-*   `target.sh`: The recipe file containing the deployment steps.
+*   `target.sh`: The recipe file containing the deployment steps. This file also declares metadata via comment directives such as `#description`, `#require`, and `#variants`.
 *   Other files (`Brewfile`, `config/`): Resources used by the recipe, like package lists or configuration files to be symlinked.
 
 ## The `target.sh` Recipe File
@@ -30,6 +30,7 @@ A simple `target.sh` might look like this:
 ```shell
 # description: My macOS setup
 # require: os=darwin
+# variants: laptop|desktop
 
 # Include the 'common' target which has shared configs
 require "common"
@@ -42,6 +43,20 @@ install_packages() {
 # Create a step that can be run with '--pkgs'
 step install_packages flag:pkgs
 ```
+
+### Declaring Parameters
+
+Targets can declare typed input parameters that are passed through long flags (for example, `./deploy.sh apply darwin --hostname mini`). Parameters are declared with the [`param`](./COMMANDS.md#param) command and accessed later via `get_param`/`has_param`. This allows a recipe to request user input (such as hostnames, API tokens, or layout selections) in a consistent and documented way. Parameter documentation is surfaced automatically in `deploy.sh info <target>`.
+
+## Target Variants
+
+Targets can offer multiple variants that tweak behavior without duplicating whole recipes. Declare supported variants in `target.sh` via the `#variants:` pragma:
+
+```shell
+#variants: desktop|laptop|server
+```
+
+Run a particular variant by appending `#<variant>` to the target when calling the CLI, e.g. `./deploy.sh apply arch#desktop`. Inside a recipe you can detect the currently selected variant with the `current_variant` helper and branch logic accordingly (for example, rendering template values based on the variant).
 
 ## Using the `deploy.sh` Script
 
@@ -75,6 +90,7 @@ Shows detailed information about a specific target, including its description, c
 $ ./deploy.sh info darwin
 Target Name:      darwin
 Description:      dotfiles and packages for macOS machines
+Variants:         laptop desktop
 Runnable:         True
 Constraints:      os=darwin
 Source File:      darwin/target.sh
@@ -94,6 +110,9 @@ Applies a target's configuration. This executes the `target.sh` recipe file for 
 ```shell
 # Apply the 'darwin' target
 ./deploy.sh apply darwin
+
+# Apply the 'arch' target using the 'desktop' variant
+./deploy.sh apply arch#desktop
 
 # Apply the 'darwin' target and run the optional 'pkgs' step
 ./deploy.sh apply darwin --pkgs

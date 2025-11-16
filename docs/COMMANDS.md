@@ -191,3 +191,86 @@ A specialized wrapper around `file_append_once` to add an `Include` directive to
 **Usage:** `ssh_config_include <path_to_ssh_config>`
 **Parameters:**
 *   `path_to_ssh_config`: The absolute path to the SSH configuration file you want to include.
+
+## Parameters
+
+Targets can declare and consume structured input parameters. Parameters are exposed as CLI flags (`--<name>`) during `apply`/`rollback`, documented via `deploy.sh info`, and evaluated in recipes using the helpers below.
+
+### `param`
+
+Declares a parameter with optional metadata.
+
+**Usage:**
+```shell
+param <name> [description:<text>] [required:1] [default:<value>] [validate:<regex>]
+```
+
+**Options:**
+* `description:<text>` – Shown in `deploy.sh info` output.
+* `required:<any>` – Fails execution when the flag is missing (the value itself is ignored, but the `:value` suffix is required).
+* `default:<value>` – Default value when the flag is not passed.
+* `validate:<regex>` – Regular expression (without outer slashes) to validate user input.
+
+**Example:**
+```shell
+param hostname description:"Target hostname" required:1 validate:'[a-z0-9-]+'
+```
+
+### `get_param`
+
+Returns the value of a previously declared parameter.
+
+**Usage:** `get_param <name>`
+
+**Example:**
+```shell
+deploy_host="$(get_param hostname)"
+```
+
+### `has_param`
+
+Returns success (exit code 0) when a value was supplied for a parameter, even if it is optional.
+
+**Usage:** `has_param <name>`
+
+**Example:**
+```shell
+if has_param monitor_layout; then
+  configure_monitors "$(get_param monitor_layout)"
+fi
+```
+
+## Template Generation
+
+### `expand_template`
+
+Renders a template file by replacing `{{KEY}}` placeholders with provided key-value pairs. On rollback (`./deploy.sh rollback ...`) the generated file is removed automatically.
+
+**Usage:**
+```shell
+expand_template <source_template> <destination_path> [key=value ...]
+```
+
+**Parameters:**
+* `source_template`: Path to the template file relative to the target directory.
+* `destination_path`: Absolute path for the rendered file.
+* `key=value`: One or more replacement pairs; nested braces are not supported.
+
+**Example:**
+```shell
+expand_template \
+  'templates/hyprland-vars.conf' \
+  "$XDG_CONFIG_HOME/hypr/hyprland.d/platform.conf" \
+  "target=$(current_variant)" \
+  "hostname=$(get_param hostname)"
+```
+
+## Context Helpers
+
+### `current_target`
+
+Returns the name of the target whose `target.sh` is currently executing. Helpful for logging or building target-relative paths.
+
+### `current_variant`
+
+Returns the selected variant (if any) for the current target. Use this to branch logic or feed values into templates when the target supports the `#variants:` pragma.
