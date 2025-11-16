@@ -60,6 +60,28 @@ Run a particular variant by appending `#<variant>` to the target when calling th
 
 Targets can also collect typed inputs in addition to variant selection through the [`param`](./COMMANDS.md#param) command. Parameters appear as long flags when running `apply`/`rollback`, so you can combine both concepts: `./deploy.sh apply arch#desktop --hostname=mini`.
 
+Variant-aware targets can provide per-variant hooks by defining functions named `variant_<target>_<variant>`. These functions run automatically when the matching variant is selected. Optional rollback logic follows the same naming scheme with a `_rollback` suffix.
+
+```shell
+# variants declared at the top of target.sh
+#variants: desktop|laptop|server
+
+# Runs only for `arch#desktop`
+variant_arch_desktop() {
+  # setup desktop extras
+}
+
+# Revert logic for the desktop variant
+variant_arch_desktop_rollback() {
+  # undo desktop extras
+}
+
+# Runs only for `arch#server`
+variant_arch_server() {
+  # setup server-specific bits
+}
+```
+
 ## Using the `deploy.sh` Script
 
 The script is straightforward to use. Here are the main commands:
