@@ -13,10 +13,10 @@ Defines a step in the deployment process. A step is typically a shell function d
 **Usage:**
 
 1.  **Standard Step:**
-    ```shell
-    step <function_name>
-    ```
-    This runs the specified function unconditionally.
+```shell
+step <function_name>
+```
+This runs the specified function unconditionally.
 
 2.  **Flag-based Step:**
     ```shell
@@ -47,6 +47,20 @@ step install_apps
 
 # This step only runs with 'deploy apply <target> --extra'
 step install_extra_apps flag:extra
+```
+
+When `./deploy.sh rollback ...` runs, the framework looks for a sibling function named `<function_name>_rollback`. If present, that rollback function is executed to undo the step:
+
+```shell
+install_apps() {
+  # install logic
+}
+
+install_apps_rollback() {
+  # uninstall logic
+}
+
+step install_apps
 ```
 
 ### `require`
