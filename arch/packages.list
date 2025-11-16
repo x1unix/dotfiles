@@ -79,6 +79,7 @@ nm-connection-editor
 udiskie
 simdjson
 prettier
+brightnessctl
 
 # Greeter
 greetd
