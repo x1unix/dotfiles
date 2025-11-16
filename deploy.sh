@@ -124,7 +124,7 @@ stack_peek() {
   eval "current_stack=\$$stack_var"
 
   if [ -z "$current_stack" ] && [ "$(eval "echo \"\$$stack_var\"")" = "" ]; then
-    return 1
+    return
   fi
 
   # Save IFS and set to comma
