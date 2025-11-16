@@ -31,6 +31,7 @@ link_home 'Pictures/wallpapers' 'wallpapers'
 
 # Configs
 link_xdg_config config
+link_home dotfiles
 
 # Hyprland configs
 step arch_hyprland_configs
