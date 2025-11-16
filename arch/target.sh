@@ -2,7 +2,7 @@
 #require: os=linux distro=arch|archarm
 #description: dotfiles and packages for Arch Linux
 
-param system 'validate:desktop|macbookProIntel|qemu|other' 'description:Target system type' required
+param system 'validate:desktop|framework13|macbookProIntel|qemu|other' 'description:Target system type' required
 
 arch_pacman_install() {
   pacmanfile 'packages.list'
