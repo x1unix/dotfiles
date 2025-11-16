@@ -56,7 +56,9 @@ Targets can offer multiple variants that tweak behavior without duplicating whol
 #variants: desktop|laptop|server
 ```
 
-Run a particular variant by appending `#<variant>` to the target when calling the CLI, e.g. `./deploy.sh apply arch#desktop`. Inside a recipe you can detect the currently selected variant with the `current_variant` helper and branch logic accordingly (for example, rendering template values based on the variant).
+Run a particular variant by appending `#<variant>` to the target when calling the CLI, e.g. `./deploy.sh apply arch#desktop`. Inside a recipe you can detect the currently selected variant with the `current_variant` helper and branch logic accordingly (for example, rendering template values based on the variant). Targets that declare variants cannot be applied without providing a variant name—`./deploy.sh apply arch` would fail if `arch/target.sh` contains `#variants`.
+
+Targets can also collect typed inputs in addition to variant selection through the [`param`](./COMMANDS.md#param) command. Parameters appear as long flags when running `apply`/`rollback`, so you can combine both concepts: `./deploy.sh apply arch#desktop --hostname=mini`.
 
 ## Using the `deploy.sh` Script
 
@@ -116,6 +118,9 @@ Applies a target's configuration. This executes the `target.sh` recipe file for 
 
 # Apply the 'darwin' target and run the optional 'pkgs' step
 ./deploy.sh apply darwin --pkgs
+
+# Apply a target, selecting a variant and supplying a parameter
+./deploy.sh apply target_name#variant --your_param_name=value
 ```
 
 ### `rollback`
