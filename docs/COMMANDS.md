@@ -130,33 +130,37 @@ Symlinks a package into the XDG state directory (`$XDG_STATE_HOME`, typically `~
 
 ## Package Management
 
-These commands help manage system packages on different operating systems.
+Commands below are grouped by the platform(s) where they work. Each command reads package names from either arguments or files in the target directory.
 
-### `pacmanfile`
+### Arch Linux / pacman-based distros
 
-Installs packages on Arch Linux using `pacman` from a list in a file.
+#### `pacmanfile`
+
+Installs packages using `pacman` from a list in a file.
 
 **Usage:** `pacmanfile <filename>`
 **Parameters:**
 *   `filename`: Path to a file within the target directory containing a space-separated list of packages to install.
 
-### `aurfile`
+#### `aurpkg`
 
-Installs AUR packages listed in a file using whichever helper (`yay`, `paru`, etc.) is available on the system. Use [`aurpkg`](#aurpkg) first to ensure a helper is installed.
-
-**Usage:** `aurfile <filename>`
-**Parameters:**
-*   `filename`: Path to a file within the target directory; blank lines and comments (`# ...`) are ignored and the remaining package names are installed via the helper. Rollback is not supported.
-
-### `aurpkg`
-
-Installs packages from the Arch User Repository (AUR) on Arch Linux.
+Installs AUR packages via whichever helper (`yay`, `paru`, etc.) is installed and available on the PATH.
 
 **Usage:** `aurpkg <package_name> [another_package...]`
 **Parameters:**
 *   `package_name`: One or more AUR package names to install.
 
-### `brewfile`
+#### `aurfile`
+
+Installs AUR packages listed in a file using the detected helper (install one via `aurpkg` if needed).
+
+**Usage:** `aurfile <filename>`
+**Parameters:**
+*   `filename`: Path to a file within the target directory; blank lines and comments (`# ...`) are ignored and the remaining package names are installed via the helper. Rollback is not supported.
+
+### macOS (Homebrew)
+
+#### `brewfile`
 
 Installs packages on macOS using Homebrew from a `Brewfile`.
 
@@ -164,7 +168,9 @@ Installs packages on macOS using Homebrew from a `Brewfile`.
 **Parameters:**
 *   `filename`: Path to a Brewfile within the target directory.
 
-### `aptfile`
+### Debian/Ubuntu and Termux (APT/pkg)
+
+#### `aptfile`
 
 Installs packages on Debian/Ubuntu-based systems using `apt-get` from a list in a file. On Android (Termux), it uses `pkg` instead.
 
