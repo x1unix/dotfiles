@@ -144,11 +144,11 @@ Installs packages using `pacman` from a list in a file.
 
 #### `aurpkg`
 
-Installs AUR packages via whichever helper (`yay`, `paru`, etc.) is installed and available on the PATH.
+Builds one or more AUR packages manually using `git` + `makepkg`, without relying on a helper. This is primarily used to bootstrap an AUR helper that `aurfile` can later use.
 
 **Usage:** `aurpkg <package_name> [another_package...]`
 **Parameters:**
-*   `package_name`: One or more AUR package names to install.
+*   `package_name`: One or more AUR package names to build/install directly.
 
 #### `aurfile`
 
