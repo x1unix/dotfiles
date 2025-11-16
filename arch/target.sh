@@ -18,7 +18,7 @@ arch_hyprland_configs() {
   expand_template \
     'templates/hyprland-vars.conf' \
     "$HYPRLAND_PLATFORM_CFG" \
-    "target=$(get_param 'system')"
+    "target=$(current_variant)"
 }
 
 require 'common'
