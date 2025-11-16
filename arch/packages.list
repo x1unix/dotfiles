@@ -83,6 +83,7 @@ prettier
 brightnessctl
 usbutils
 fprintd
+imagemagick
 
 # Core Desktop
 flatpak
