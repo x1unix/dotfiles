@@ -355,6 +355,10 @@ aptfile() {
   assert_in_target
   assert_def "$1" "aptfile: missing package list file"
 
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
   # On Termux (Android): Run rootless 'pkg' wrapper
   # On real Linux: Run classic 'sudo apt'.
   pkgmgr='apt'
@@ -371,10 +375,6 @@ aptfile() {
   fp="$__DIR/$CURRENT_TARGET/$1"
   if [ ! -f "$fp" ]; then
     die "aptfile: cannot read packages file '$fp'"
-  fi
-
-  if [ -n "$G_DRY_RUN" ]; then
-    return
   fi
 
   if [ -n "$G_REVERT" ]; then
