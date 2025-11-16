@@ -413,6 +413,11 @@ aptfile() {
 }
 
 # aurpkg - Clone and install Arch package from AUR
+# Used to install aur helper, such as yay or paru.
+#
+# Note: use aurfile to install packages from AUR using a helper.
+#
+# Support: works only in Arch Linux, and other pacman-based distros.
 AUR_URL_TEMPLATE="${AUR_URL_TEMPLATE:-https://aur.archlinux.org/%s.git}"
 aurpkg() {
   assert_in_target
@@ -472,6 +477,8 @@ aurpkg() {
 }
 
 # pacmanfile - Install Arch packages from a text file
+#
+# Support: works only in Arch Linux, and other pacman-based distros.
 pacmanfile() {
   assert_in_target
   assert_def "$1" "pacmanfile: missing package list file"
@@ -508,6 +515,75 @@ pacmanfile() {
 
   notify_step "Installing $pkgcount pacman $verb from '$fp'..."
   sudo pacman -S $packages --needed --noconfirm || {
+    die 'failed to install packages, command returned an error'
+  }
+}
+
+_G_AUR_HELPER=''
+_G_AUR_HELPERS='yay paru yaourt'
+
+__private_init_aurhelper() {
+  if [ -n "$_G_AUR_HELPER" ]; then
+    debug_log "aur: using AUR helper '$pkg'"
+    return
+  fi
+
+  for pkg in $_G_AUR_HELPERS; do
+    if command_exists "$pkg"; then
+      debug_log "aur: detected AUR helper '$pkg'"
+      _G_AUR_HELPER="$pkg"
+      return
+    fi
+  done
+
+  die "Failed to find AUR helper. Install one of following helpers using 'aurpkg' directive: $_G_AUR_HELPERS"
+}
+
+# aurfile - Install AUR packages from a file.
+#
+# @param $1 text file with list of packages.
+#
+# Note: this requires a working aur helper to be installed.
+# Use `aurpkg` to install AUR helper (e.g.: `aurpkg yay`).
+#
+# Support: works only in Arch Linux, and other pacman-based distros.
+aurfile() {
+  assert_in_target
+  assert_def "$1" "aurfile: missing package list file"
+  __private_assert_archlinux 'aurfile'
+  __private_init_aurhelper
+
+  fp="$__DIR/$CURRENT_TARGET/$1"
+  if [ ! -f "$fp" ]; then
+    die "aurfile: cannot read packages file '$fp'"
+  fi
+
+  if [ -n "$G_DRY_RUN" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    notify_info "aurfile: revert not supported this action"
+    return
+  fi
+
+  debug_log "aurfile: read $fp"
+  packages=$(__private_read_pkglist "$fp")
+  pkgcount=$(printf '%s\n' "$packages" | tr ' ' '\n' | grep -v '^$' | wc -l)
+  debug_log "aurfile: pkgs - $packages"
+
+  if [ "$pkgcount" -le 0 ]; then
+    notify_info "aurfile: empty packages list, skip."
+    return
+  fi
+
+  verb='package'
+  if [ "$pkgcount" -gt 1 ]; then
+    verb="${verb}s"
+  fi
+
+  notify_step "Installing $pkgcount AUR $verb from '$fp'..."
+  "$_G_AUR_HELPER" -S $packages --needed --noconfirm || {
     die 'failed to install packages, command returned an error'
   }
 }

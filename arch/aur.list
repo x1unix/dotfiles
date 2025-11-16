@@ -1,0 +1,6 @@
+# vim: set filetype=conf :
+# List of AUR packages to install.
+
+perl-perl-languageserver
+mda.lv2
+lsp-plugins

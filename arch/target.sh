@@ -8,12 +8,7 @@ arch_pacman_install() {
 
   rustup default stable
   aurpkg 'paru'
-  paru -S \
-    perl-perl-languageserver \
-    mda.lv2 \
-    lsp-plugins \
-    --noconfirm --needed
-
+  aurfile 'aur.list'
   gsettings set org.blueman.general notification-daemon true
 }
 
