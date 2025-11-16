@@ -1483,6 +1483,21 @@ __private_eval_target() {
 
   . "$script_file"
 
+  # Run hooks for variants if defined.
+  variant_hook_name=''
+  new_variant="$(current_variant)" # var can be overwriten by nested calls.
+  if [ -n "$new_variant" ]; then
+    variant_hook_name="variant_$(current_target)_${new_variant}"
+    if [ -n "$G_REVERT" ]; then
+      variant_hook_name="${variant_hook_name}_rollback"
+    fi
+    debug_log "hooks: checking for '$variant_hook_name' hook"
+  fi
+  if [ -n "$variant_hook_name" ] && command_exists "$variant_hook_name"; then
+    notify_step "Running variant hook '$variant_hook_name'..."
+    "$variant_hook_name"
+  fi
+
   # Restore env
   stack_pop '_G_TARGET'
   stack_pop '_G_VARIANT'
