@@ -6,5 +6,5 @@ perl-perl-languageserver
 codex-acp
 
 # Stuff for EasyEffects
-mda.lv2
-lsp-plugins
+# mda.lv2
+# lsp-plugins
