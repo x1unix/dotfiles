@@ -20,6 +20,11 @@ arch_hyprland_configs() {
     "target=$(current_variant)"
 }
 
+arch_install_audioplugins() {
+  pacmanfile 'audio.packages.list'
+  aurfile 'audio.aur.list'
+}
+
 require 'common'
 
 # Deps
@@ -34,6 +39,9 @@ link_home dotfiles
 
 # Hyprland configs
 step arch_hyprland_configs
+
+# Optional step to install plugins for EasyEffects
+step arch_install_audioplugins 'flag:easyeffects'
 
 # Extra binaries
 link_home '.local/bin' bin

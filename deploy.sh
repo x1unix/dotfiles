@@ -1303,11 +1303,11 @@ __private_show_target() {
     for val in $_DOC_FLAGS; do
       flagname="$(printf '%s' "$val" | cut -d':' -f1)"
       func_name="$(printf '%s' "$val" | cut -d':' -f2)"
-      flagstr="$(pad_right "$flagname" 10)"
+      flagstr="$(pad_right "$flagname" 15)"
       echo "  --$flagstr - Runs optional '$func_name' step"
     done
 
-    flagstr="$(pad_right 'all' 10)"
+    flagstr="$(pad_right 'all' 15)"
     echo "  --$flagstr - Runs flagged optional steps"
   fi
 }
@@ -1320,7 +1320,7 @@ __private_dump_params() {
   for part in "$@"; do
     flagname="$(printf '%s' "$part" | cut -d'=' -f1)"
     descr="$(printf '%s' "$part" | cut -d'=' -f2)"
-    flagstr="$(pad_right "$flagname" 10)"
+    flagstr="$(pad_right "$flagname" 15)"
     echo "  --$flagstr - $descr"
   done
 }

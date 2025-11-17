@@ -1,6 +1,6 @@
 # vim: set filetype=conf :
 # List of AUR packages to install.
 
-# Dev tools
-perl-perl-languageserver
-codex-acp
+# Stuff for EasyEffects
+mda.lv2
+lsp-plugins
