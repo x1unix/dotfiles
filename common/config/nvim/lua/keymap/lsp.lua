@@ -71,6 +71,13 @@ wk.add({
     '<cmd>Lspsaga diagnostic_jump_next<cr>',
     desc = 'lsp: next diagnostic',
   },
+  {
+    'gm',
+    function()
+      require('telescope.builtin').marks()
+    end,
+    desc = 'marks',
+  },
 })
 
 wk.add({
