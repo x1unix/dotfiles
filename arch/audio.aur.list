@@ -1,6 +1,0 @@
-# vim: set filetype=conf :
-# List of AUR packages to install.
-
-# Stuff for EasyEffects
-mda.lv2
-lsp-plugins
