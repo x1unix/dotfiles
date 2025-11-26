@@ -229,8 +229,19 @@ link_xdg_config() {
   __private_stow 'link_xdg_config' "$XDG_CONFIG_HOME" "$1"
 }
 
+# link_xdg_data - stow a directory to "$XDG_DATA_HOME" (default: ~/.local/share)
+# Usage:
+#   link_xdg_data <src_dir> - Link files in a dir to $XDG_DATA_HOME
+#   link_xdg_data <dst_dir> <src_dir> - Link files in a dir to $XDG_DATA_HOME/dst_dir
 link_xdg_data() {
-  __private_stow 'link_xdg_data' "$XDG_DATA_HOME" "$1"
+  src_dir="$1"
+  bind_dir="$XDG_DATA_HOME"
+  if [ -n "$2" ]; then
+    bind_dir="$bind_dir/$1"
+    src_dir="$2"
+  fi
+
+  __private_stow 'link_xdg_data' "$bind_dir" "$src_dir"
 }
 
 link_xdg_state() {

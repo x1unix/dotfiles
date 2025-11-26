@@ -37,3 +37,6 @@ step arch_hyprland_configs
 
 # Extra binaries
 link_home '.local/bin' bin
+
+# Link TUI apps
+link_xdg_data 'applications' 'applications'

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=lazydocker
+Comment=TUI for managing Docker containers.
+Exec=alacritty --class=ui.terminal.dialog -e lazydocker
+Icon=bluetooth
+Terminal=false
+Categories=Utility;ConsoleOnly;

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=wiremix
+Comment=Pipewire mixer
+Exec=alacritty --class=ui.terminal.dialog -e wiremix
+Icon=audio-speakers
+Terminal=false
+Categories=Utility;ConsoleOnly;

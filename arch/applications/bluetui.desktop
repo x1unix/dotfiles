@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=bluetui
+Comment=TUI for managing bluetooth on Linux
+Exec=alacritty --class=ui.terminal.dialog -e bluetui
+Icon=bluetooth
+Terminal=false
+Categories=Utility;ConsoleOnly;

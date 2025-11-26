@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# Tool to open TUI apps in a terminal dialog.
+set -e
+
+TERM_PROGRAM="${TERM_PROGRAM:-alacritty}"
+
+"$TERM_PROGRAM" --class=ui.terminal.dialog -e $*
