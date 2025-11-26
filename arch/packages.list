@@ -67,8 +67,9 @@ ttf-iosevkaterm-nerd
 
 # Tools used in dotfiles
 blueman
-wofi
 waybar
+wofi
+wiremix
 wl-clipboard
 alacritty
 grim
