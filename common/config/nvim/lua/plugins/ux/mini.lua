@@ -82,6 +82,26 @@ return {
       -- Defaults are Alt (Meta) + hjkl.
       require('mini.move').setup()
 
+      -- Custom notifications (vim.nofify replacement).
+      require('mini.notify').setup({
+        content = {
+          format = function(notif)
+            return notif.msg
+            -- if notif.data.source == 'lsp_progress' then
+            --   return notif.msg
+            -- end
+            -- return MiniNotify.default_format(notif)
+          end,
+          -- Show more recent notifications first
+          sort = function(notif_arr)
+            table.sort(notif_arr, function(a, b)
+              return a.ts_update > b.ts_update
+            end)
+            return notif_arr
+          end,
+        },
+      })
+
       -- Session management
       vim.opt.sessionoptions:append('folds')
       vim.opt.sessionoptions:append('globals')
