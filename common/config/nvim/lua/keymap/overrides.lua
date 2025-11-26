@@ -45,7 +45,7 @@ wk.add({
   {
     'yp',
     function()
-      expand_copy('%', 'Relative path copied to clipboard')
+      expand_copy('%:.', 'Relative path copied to clipboard')
     end,
     mode = 'n',
     desc = 'Copy relative file path',
