@@ -29,14 +29,14 @@ wk.add({
   -- { '<leader>sf', ":echo expand('%:p'},<CR>", mode = 'n', desc = 'display full path' },
 })
 
-local function expand_copy(expr)
+local function expand_copy(expr, msg)
   local p = vim.fn.expand(expr)
   if not p then
     return
   end
 
   vim.fn.setreg('+', p)
-  vim.notify('Path copied to clipboard: "' .. p .. '"', vim.log.levels.INFO, {
+  vim.notify(msg, vim.log.levels.INFO, {
     duration = 1000,
   })
 end
@@ -45,7 +45,7 @@ wk.add({
   {
     'yp',
     function()
-      expand_copy('%')
+      expand_copy('%', 'Relative path copied to clipboard')
     end,
     mode = 'n',
     desc = 'Copy relative file path',
@@ -53,7 +53,7 @@ wk.add({
   {
     'yP',
     function()
-      expand_copy('%:p')
+      expand_copy('%:p', 'Path copied to clipboard')
     end,
     mode = 'n',
     desc = 'Copy absolute file path',

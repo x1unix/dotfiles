@@ -86,11 +86,10 @@ return {
       require('mini.notify').setup({
         content = {
           format = function(notif)
-            return notif.msg
-            -- if notif.data.source == 'lsp_progress' then
-            --   return notif.msg
-            -- end
-            -- return MiniNotify.default_format(notif)
+            if notif.data.source == 'lsp_progress' then
+              return notif.msg
+            end
+            return MiniNotify.default_format(notif)
           end,
           -- Show more recent notifications first
           sort = function(notif_arr)
