@@ -28,3 +28,34 @@ wk.add({
   -- { '<leader>ttj', '<cmd> tabprevious <CR>', mode = 'n', desc = 'previous tab' },
   -- { '<leader>sf', ":echo expand('%:p'},<CR>", mode = 'n', desc = 'display full path' },
 })
+
+local function expand_copy(expr)
+  local p = vim.fn.expand(expr)
+  if not p then
+    return
+  end
+
+  vim.fn.setreg('+', p)
+  vim.notify('Path copied to clipboard: "' .. p .. '"', vim.log.levels.INFO, {
+    duration = 1000,
+  })
+end
+
+wk.add({
+  {
+    'yp',
+    function()
+      expand_copy('%')
+    end,
+    mode = 'n',
+    desc = 'Copy relative file path',
+  },
+  {
+    'yP',
+    function()
+      expand_copy('%:p')
+    end,
+    mode = 'n',
+    desc = 'Copy absolute file path',
+  },
+})
