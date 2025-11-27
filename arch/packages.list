@@ -43,6 +43,7 @@ gnome-keyring
 polkit-gnome
 pipewire-pulse
 pipewire-jack
+archlinux-xdg-menu
 
 # Wayland support
 qt5-wayland
