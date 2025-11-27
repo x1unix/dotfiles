@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=pacseek
+Comment=Pacman TUI
+Exec=alacritty --class=ui.terminal.dialog -e pacseek
+# Icon=audio-speakers
+Terminal=false
+Categories=Utility;ConsoleOnly;
