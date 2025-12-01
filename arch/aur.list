@@ -1,6 +1,9 @@
 # vim: set filetype=conf :
 # List of AUR packages to install.
 
+# Desktop
+vicinae-bin
+
 # Dev tools
 perl-perl-languageserver
 codex-acp
