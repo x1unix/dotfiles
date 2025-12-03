@@ -67,13 +67,16 @@ ttf-zed-mono-nerd
 ttf-iosevka-nerd
 ttf-iosevkaterm-nerd
 
+# I still not sure what term to use.
+alacritty
+kitty
+
 # Tools used in dotfiles
 blueman
 waybar
 wofi
 wiremix
 wl-clipboard
-alacritty
 grim
 slurp
 kitty
