@@ -11,6 +11,9 @@ font-family = "Iosevka NFM"
 font-size = 11
 # font-size = 14
 
+# HACK: see https://github.com/ghostty-org/ghostty/discussions/9795#discussioncomment-15154311
+adjust-cell-width = -1
+
 macos-option-as-alt = true
 macos-icon-frame = beige
 macos-non-native-fullscreen = true
