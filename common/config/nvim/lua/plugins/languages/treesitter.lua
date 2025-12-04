@@ -1,3 +1,16 @@
+---@module 'nvim-treesitter.parsers'
+---@param parsers table<string, ParserInfo> | nil
+local function register_parsers(parsers)
+  if not parsers then
+    return
+  end
+
+  local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+  for k, v in pairs(parsers) do
+    parser_config[k] = v
+  end
+end
+
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -10,9 +23,11 @@ return {
       'windwp/nvim-ts-autotag',
     },
     opts = function()
-      local pkgs = require('config.languages.grammars')
+      local cfg = require('config.languages.grammars')
+      register_parsers(cfg.parsers)
+
       return {
-        ensure_installed = pkgs.languages,
+        ensure_installed = cfg.grammars,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
