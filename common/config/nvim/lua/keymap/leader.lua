@@ -67,7 +67,7 @@ wk.add({
     '<Leader>\\',
     -- '<cmd>Telescope commands<cr>',
     function()
-      Snacks.picker.commands()
+      Snacks.picker()
     end,
     mode = 'n',
     desc = 'commands',

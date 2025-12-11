@@ -20,19 +20,19 @@ wk.add({
     desc = 'Buffer Diagnostics (Trouble)',
   },
   {
-    '<leader>cs',
-    '<cmd>Trouble symbols toggle focus=false<cr>',
-    desc = 'Symbols (Trouble)',
-  },
-  {
-    '<leader>cl',
-    '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+    '<leader>xf',
+    '<cmd>Trouble lsp toggle focus=false<cr>',
     desc = 'LSP Definitions / references / ... (Trouble)',
   },
   {
     '<leader>xl',
     '<cmd>Trouble loclist toggle<cr>',
     desc = 'Location List (Trouble)',
+  },
+  {
+    '<leader>xs',
+    '<cmd>Trouble snacks toggle<cr>',
+    desc = 'Snacks Results (Trouble)',
   },
   {
     '<leader>xq',

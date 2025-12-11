@@ -14,6 +14,15 @@ wk.add({
     icon = icons.symbol_class,
   },
   {
+    'gD',
+    -- '<cmd>Telescope lsp_definitions<cr>',
+    function()
+      Snacks.picker.lsp_declarations()
+    end,
+    desc = 'lsp: declarations',
+    icon = icons.symbol_class,
+  },
+  {
     'gr',
     function()
       Snacks.picker.lsp_references()
@@ -24,6 +33,20 @@ wk.add({
     end,
     desc = 'lsp: go to references',
     icon = icons.symbol_class,
+  },
+  {
+    'gci',
+    function()
+      Snacks.picker.lsp_incoming_calls()
+    end,
+    desc = 'lsp: incomming calls',
+  },
+  {
+    'gco',
+    function()
+      Snacks.picker.lsp_outgoing_calls()
+    end,
+    desc = 'lsp: outgoing calls',
   },
   {
     'gi',
