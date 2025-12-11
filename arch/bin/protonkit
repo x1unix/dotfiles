@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+set -e
+
+STEAM_ROOT="$HOME/.steam/root"
+STEAM_HOME="$HOME/.steam/steam"
+STEAM_APPS="$STEAM_HOME/steamapps"
+STEAM_APPS_COMMON="$STEAM_APPS/common"
+STEAM_COMPAT_DATA="$STEAM_APPS/compatdata"
+
+die() {
+  printf "Error: %s\n" "$1" >&2
+  exit 1
+}
+
+errorf() {
+  printf "Error: %s\n" "$1" >&2
+}
+
+protonrun_help() {
+  BINNAME="$(basename "$0")"
+  cat <<EOF
+Usage: $BINNAME [subcommand] [args...]
+
+EXAMPLES:
+  $BINNAME run 123456 explorer.exe
+  $BINNAME exec 123456 ~/Downloads/game_patch.exe
+
+SUBCOMMANDS:
+  ls        List app IDs.
+  run       Run command inside Proton prefix.
+  open      Install/run local .exe file inside Proton game prefix.
+  help      Show this help.
+EOF
+
+  exit
+}
+
+protonrun_ls() {
+  printf "\nAPP IDS:\n--------\n"
+  awk '/^\s*"appid"/ {appid=$2; gsub(/"/, "", appid)} 
+     /^\s*"name"/ {name=$0; sub(/.*"name"\s+"/, "", name); sub(/".*/, "", name); printf "%-10s %s\n", appid, name}' \
+    "$STEAM_APPS"/appmanifest_*.acf 2>/dev/null
+}
+
+protonrun_exec() {
+  local appid="$1"
+  if [ -z "$1" ]; then
+    echo "Usage: $BINNAME open [appid] [path/to/file]"
+    die 'missing app id'
+  fi
+
+  shift
+
+  local manifest_file="$STEAM_APPS/appmanifest_$appid.acf"
+  if [ ! -f "$manifest_file" ]; then
+    die "cannot find appmanifest in '$STEAM_APPS', is app installed?"
+  fi
+
+  IFS='|' read -r appid appname installdir < <(awk '
+    /^\s*"appid"/ {appid=$2; gsub(/"/, "", appid)} 
+    /^\s*"name"/ {n=$0; sub(/.*"name"\s+"/, "", n); sub(/".*/, "", n)} 
+    /^\s*"installdir"/ {dir=$0; sub(/.*"installdir"\s+"/, "", dir); sub(/".*/, "", dir)}
+    END {print appid "|" n "|" dir}
+' "$manifest_file")
+
+  printf 'Title: %s (%s)\nInstall Dir: "%s"\n' "$appname" "$appid" "$STEAM_APPS_COMMON/$installdir"
+
+  local config_info="$STEAM_COMPAT_DATA/$appid/config_info"
+  if [ ! -f "$config_info" ]; then
+    die "cannot find compatdata dir"
+  fi
+
+  if ! proton_dir="$(sed -n '3p' "$config_info" | sed 's|/files/lib.*||')"; then
+    die "cannot find proton dir in '$config_info'"
+  fi
+
+  local proton_ver="$(basename "$proton_dir")"
+  echo "Proton version: $proton_ver"
+
+  set -x
+  export STEAM_COMPAT_DATA_PATH="$STEAM_COMPAT_DATA/$appid"
+  export STEAM_COMPAT_CLIENT_INSTALL_PATH="$STEAM_ROOT"
+
+  "$STEAM_APPS_COMMON/$proton_ver/proton" run $*
+  echo
+}
+
+protonrun_open() {
+  local appid="$1"
+  local fname="$2"
+
+  if [ -z "$appid" ]; then
+    echo "Usage: $BINNAME open [appid] [path/to/file]"
+    die 'missing app id'
+  fi
+
+  if [ -z "$fname" ]; then
+    echo "Usage: $BINNAME open [appid] [path/to/file]"
+    die 'missing file path'
+  fi
+
+  if [ ! -f "$fname" ]; then
+    die "file doesn't exist: $2"
+  fi
+
+  local wine_path
+  wine_path="Z:\\$(realpath "$fname" | tr '/' '\\')"
+  protonrun_exec "$1" "$wine_path"
+}
+
+if [ -z "$1" ]; then
+  protonrun_help
+fi
+
+cmd="$1"
+shift
+
+case "$cmd" in
+ls)
+  protonrun_ls $*
+  ;;
+open)
+  protonrun_open $*
+  ;;
+exec | run)
+  protonrun_exec $*
+  ;;
+help)
+  protonrun_help
+  ;;
+*)
+  errorf "Unknown subcommand: $cmd"
+  protonrun_help
+  ;;
+esac
