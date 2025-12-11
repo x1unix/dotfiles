@@ -24,6 +24,7 @@ zoxide
 # nvim deps
 fzf
 ripgrep
+shellcheck
 
 # TUI tools
 lazygit
