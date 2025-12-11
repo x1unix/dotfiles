@@ -62,4 +62,80 @@ wk.add({
     desc = 'splits: C^w',
     icon = icons.grid,
   },
+  -- Search --
+  {
+    '<Leader>\\',
+    -- '<cmd>Telescope commands<cr>',
+    function()
+      Snacks.picker.commands()
+    end,
+    mode = 'n',
+    desc = 'commands',
+  },
+  {
+    '<Leader>w',
+    function()
+      require('telescope').extensions['telescope-tabs'].list_tabs({
+        layout_strategy = 'flex',
+      })
+    end,
+    mode = 'n',
+    desc = 'list tabs',
+  },
+  {
+    '<Leader>;',
+    function()
+      Snacks.picker.files({ hidden = true })
+      -- require('telescope.builtin').find_files({
+      --   layout_strategy = 'flex',
+      --   hidden = true,
+      -- })
+    end,
+    mode = 'n',
+    desc = 'find files',
+  },
+  {
+    '<Leader>f',
+    function()
+      require('telescope.builtin').live_grep({
+        layout_strategy = 'flex',
+        hidden = true,
+      })
+    end,
+    mode = 'n',
+    desc = 'grep',
+    icon = icons.action_search,
+  },
+  {
+    '<Leader>/',
+    function()
+      require('telescope.builtin').current_buffer_fuzzy_find({
+        layout_strategy = 'flex',
+        hidden = true,
+      })
+    end,
+    mode = 'n',
+    desc = 'find in file',
+    icon = icons.action_search,
+  },
+  {
+    '<Leader>b',
+    function()
+      require('telescope.builtin').buffers({
+        layout_strategy = 'flex',
+      })
+    end,
+    mode = 'n',
+    desc = 'buffers',
+  },
+  {
+    '<Leader>B',
+    function()
+      require('telescope').extensions.scope.buffers({
+        layout_strategy = 'flex',
+      })
+    end,
+    mode = 'n',
+    desc = 'buffers: all',
+  },
 })

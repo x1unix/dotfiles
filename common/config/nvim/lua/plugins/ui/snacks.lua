@@ -6,6 +6,7 @@ return {
     opts = {
       lazygit = {},
       input = {},
+      image = {},
       styles = {
         input = {
           border = 'rounded',

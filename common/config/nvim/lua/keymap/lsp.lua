@@ -6,30 +6,40 @@ wk.add({
   { 'g', group = 'goto' },
   {
     'gd',
-    '<cmd>Telescope lsp_definitions<cr>',
+    -- '<cmd>Telescope lsp_definitions<cr>',
+    function()
+      Snacks.picker.lsp_definitions()
+    end,
     desc = 'lsp: go to definitions',
     icon = icons.symbol_class,
   },
   {
     'gr',
     function()
-      require('telescope.builtin').lsp_references({
-        fname_width = 60,
-        trim_text = true,
-      })
+      Snacks.picker.lsp_references()
+      -- require('telescope.builtin').lsp_references({
+      --   fname_width = 60,
+      --   trim_text = true,
+      -- })
     end,
     desc = 'lsp: go to references',
     icon = icons.symbol_class,
   },
   {
     'gi',
-    '<cmd>Telescope lsp_implementations<cr>',
+    -- '<cmd>Telescope lsp_implementations<cr>',
+    function()
+      Snacks.picker.lsp_implementations()
+    end,
     desc = 'lsp: go to implementations',
     icon = icons.symbol_class,
   },
   {
     'gw',
-    '<cmd>Telescope diagnostics<cr>',
+    -- '<cmd>Telescope diagnostics<cr>',
+    function()
+      Snacks.picker.diagnostics()
+    end,
     desc = 'lsp: go to diagnostics',
   },
   -- LspSaga
@@ -48,9 +58,10 @@ wk.add({
   {
     'gs',
     function()
-      require('telescope.builtin').lsp_document_symbols({
-        symbol_width = 80,
-      })
+      Snacks.picker.lsp_symbols()
+      -- require('telescope.builtin').lsp_document_symbols({
+      --   symbol_width = 80,
+      -- })
     end,
     desc = 'lsp: document symbols',
   },
@@ -74,7 +85,8 @@ wk.add({
   {
     'gm',
     function()
-      require('telescope.builtin').marks()
+      Snacks.picker.marks()
+      -- require('telescope.builtin').marks()
     end,
     desc = 'marks',
   },
