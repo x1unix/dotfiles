@@ -4,6 +4,12 @@ local icons = require('util.icons')
 -- Leader global hotkeys --
 wk.add({
   {
+    '<Leader>\\',
+    '<cmd>Telescope commands<cr>',
+    mode = 'n',
+    desc = 'commands',
+  },
+  {
     '<Leader>w',
     '<cmd>Telescope telescope-tabs list_tabs<cr>',
     mode = 'n',

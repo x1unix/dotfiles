@@ -4,13 +4,6 @@ local icons = require('util.icons')
 -- Leader
 wk.add({
   { '<Leader>', group = 'leader' },
-  {
-    '<Leader>\\',
-    ':Neotree toggle<cr>',
-    mode = 'n',
-    desc = 'neotree',
-    icon = icons.folder,
-  },
   -- Tabs --
   {
     '<Leader>j',
