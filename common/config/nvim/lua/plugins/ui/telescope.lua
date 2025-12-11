@@ -64,6 +64,17 @@ return {
         })
       end
 
+      local destroy_buffer = function(prompt_bufnr)
+        -- See: https://github.com/razak17/telescope.nvim/blob/master/lua/telescope/actions/init.lua#L826
+        local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+        picker:delete_selection(function(selection)
+          vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+          vim.notify('Buffer wiped: ' .. selection.filename or selection.bufnr, vim.log.levels.INFO, {
+            opts = { duration = 1000 },
+          })
+        end)
+      end
+
       -- END
       telescope.setup({
         defaults = {
@@ -111,6 +122,16 @@ return {
               complete = '<Tab>',
               run_selection = '<C-CR>',
               run_input = '<CR>',
+            },
+          },
+        },
+        pickers = {
+          buffers = {
+            mappings = {
+              n = {
+                ['d'] = require('telescope.actions').delete_buffer,
+                ['D'] = destroy_buffer,
+              },
             },
           },
         },

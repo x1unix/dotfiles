@@ -37,7 +37,9 @@ local function expand_copy(expr, msg)
 
   vim.fn.setreg('+', p)
   vim.notify(msg, vim.log.levels.INFO, {
-    duration = 1000,
+    opts = {
+      duration = 1000,
+    },
   })
 end
 
