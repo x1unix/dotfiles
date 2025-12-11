@@ -36,46 +36,7 @@ return {
       local telescope = require('telescope')
       local actions = require('telescope.actions')
 
-      -- In Telescope source code, actions are combined with '+' operator.
-      -- It should work for cases when there is an Action object + function, e.g:
-      --    actions.send_to_loclist + actions.open_loclist
-      --
-      -- For some reason, this "magic" doesn't work with custom functions.
-      -- Thus, I have to wrap and call parent action manually.
-      --
-      -- P.S - Although in code, builtins are tables. In runtime - they're weird callbable values. WTF?
-      local trouble = require('trouble')
-      local trouble_qflist = function(bufnr)
-        actions.send_to_qflist(bufnr)
-        trouble.open({
-          mode = 'quickfix',
-          focus = true,
-          pinned = true,
-          new = true,
-        })
-      end
-      local trouble_loclist = function(bufnr)
-        actions.send_to_loclist(bufnr)
-        trouble.open({
-          mode = 'loclist',
-          focus = true,
-          pinned = true,
-          new = true,
-        })
-      end
-
-      local destroy_buffer = function(prompt_bufnr)
-        -- See: https://github.com/razak17/telescope.nvim/blob/master/lua/telescope/actions/init.lua#L826
-        local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
-        picker:delete_selection(function(selection)
-          vim.api.nvim_buf_delete(selection.bufnr, { force = true })
-          vim.notify('Buffer wiped: ' .. selection.filename or selection.bufnr, vim.log.levels.INFO, {
-            opts = { duration = 1000 },
-          })
-        end)
-      end
-
-      -- END
+      local custom_actions = require('util.telescope').actions
       telescope.setup({
         defaults = {
           layout_strategy = 'vertical',
@@ -97,12 +58,12 @@ return {
           -- As workaround: remap qfl hotkey.
           mappings = {
             i = {
-              ['<C-q>'] = trouble_qflist,
-              ['<C-l>'] = trouble_loclist,
+              ['<C-q>'] = custom_actions.qflist,
+              ['<C-l>'] = custom_actions.loclist,
             },
             n = {
-              ['<C-q>'] = trouble_qflist,
-              ['<C-l>'] = trouble_loclist,
+              ['<C-q>'] = custom_actions.qflist,
+              ['<C-l>'] = custom_actions.loclist,
             },
           },
         },
@@ -129,8 +90,8 @@ return {
           buffers = {
             mappings = {
               n = {
-                ['dd'] = require('telescope.actions').delete_buffer,
-                ['D'] = destroy_buffer,
+                ['dd'] = actions.delete_buffer,
+                ['D'] = custom_actions.destroy_buffer,
               },
             },
           },
