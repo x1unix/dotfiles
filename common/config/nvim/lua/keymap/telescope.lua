@@ -13,6 +13,7 @@ wk.add({
     '<Leader>;',
     function()
       require('telescope.builtin').find_files({
+        layout_strategy = 'horizontal',
         hidden = true,
       })
     end,
@@ -23,6 +24,7 @@ wk.add({
     '<Leader>f',
     function()
       require('telescope.builtin').live_grep({
+        layout_strategy = 'horizontal',
         hidden = true,
       })
     end,
@@ -34,6 +36,7 @@ wk.add({
     '<Leader>/',
     function()
       require('telescope.builtin').current_buffer_fuzzy_find({
+        layout_strategy = 'horizontal',
         hidden = true,
       })
     end,
@@ -43,7 +46,11 @@ wk.add({
   },
   {
     '<Leader>b',
-    '<cmd>Telescope buffers<cr>',
+    function()
+      require('telescope.builtin').buffers({
+        layout_strategy = 'horizontal',
+      })
+    end,
     mode = 'n',
     desc = 'buffers',
   },
