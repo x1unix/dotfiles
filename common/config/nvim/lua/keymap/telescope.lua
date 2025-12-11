@@ -1,6 +1,18 @@
 local wk = require('which-key')
 local icons = require('util.icons')
 
+local flex_layout_config = {
+  flip_columns = 200,
+  vertical = {
+    mirror = true,
+    -- prompt_position = 'top',
+  },
+  horizontal = {
+    preview_cutoff = 80,
+    preview_width = 0.6,
+  },
+}
+
 -- Leader global hotkeys --
 wk.add({
   {
@@ -19,7 +31,8 @@ wk.add({
     '<Leader>;',
     function()
       require('telescope.builtin').find_files({
-        layout_strategy = 'horizontal',
+        layout_strategy = 'flex',
+        layout_config = flex_layout_config,
         hidden = true,
       })
     end,
@@ -30,7 +43,8 @@ wk.add({
     '<Leader>f',
     function()
       require('telescope.builtin').live_grep({
-        layout_strategy = 'horizontal',
+        layout_strategy = 'flex',
+        layout_config = flex_layout_config,
         hidden = true,
       })
     end,
@@ -42,7 +56,8 @@ wk.add({
     '<Leader>/',
     function()
       require('telescope.builtin').current_buffer_fuzzy_find({
-        layout_strategy = 'horizontal',
+        layout_strategy = 'flex',
+        layout_config = flex_layout_config,
         hidden = true,
       })
     end,
@@ -54,7 +69,8 @@ wk.add({
     '<Leader>b',
     function()
       require('telescope.builtin').buffers({
-        layout_strategy = 'horizontal',
+        layout_strategy = 'flex',
+        layout_config = flex_layout_config,
       })
     end,
     mode = 'n',
@@ -109,7 +125,12 @@ wk.add({
   },
   {
     '<Leader>Th',
-    '<cmd>Telescope help_tags<cr>',
+    function()
+      require('telescope.builtin').help_tags({
+        layout_strategy = 'flex',
+        layout_config = flex_layout_config,
+      })
+    end,
     mode = 'n',
     desc = 'help',
   },

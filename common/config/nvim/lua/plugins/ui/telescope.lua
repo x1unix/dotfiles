@@ -44,6 +44,8 @@ return {
             vertical = {
               width = 0.8,
               -- preview_height = 0.75,
+              mirror = true,
+              -- prompt_position = 'top',
             },
           },
           file_ignore_patterns = {
