@@ -48,6 +48,11 @@ return {
     color = 'grey',
   },
   --- @type wk.Icon
+  warn = {
+    icon = '',
+    color = 'yellow',
+  },
+  --- @type wk.Icon
   bulb = {
     icon = '',
     color = 'yellow',
@@ -56,6 +61,16 @@ return {
   folder = {
     icon = '',
     color = 'orange',
+  },
+  --- @type wk.Icon
+  star = {
+    icon = '󰓎',
+    color = 'yellow',
+  },
+  --- @type wk.Icon
+  help = {
+    icon = '󰋼',
+    color = 'blue',
   },
   --- @type wk.Icon
   grid = {
@@ -72,6 +87,26 @@ return {
   symbol_class = {
     icon = '',
     color = 'purple',
+  },
+  --- @type wk.Icon
+  symbol_field = {
+    icon = '',
+    color = 'orange',
+  },
+  --- @type wk.Icon
+  symbol_iface = {
+    icon = '',
+    color = 'blue',
+  },
+  --- @type wk.Icon
+  symbol_func = {
+    icon = '󰊕',
+    color = 'purple',
+  },
+  --- @type wk.Icon
+  symbol_type = {
+    icon = '',
+    color = 'red',
   },
   --- @type wk.Icon
   symbol_event = {

@@ -35,18 +35,20 @@ wk.add({
     icon = icons.symbol_class,
   },
   {
-    'gci',
+    'gf',
     function()
       Snacks.picker.lsp_incoming_calls()
     end,
     desc = 'lsp: incomming calls',
+    icon = icons.symbol_func,
   },
   {
-    'gco',
+    'gff',
     function()
       Snacks.picker.lsp_outgoing_calls()
     end,
     desc = 'lsp: outgoing calls',
+    icon = icons.symbol_func,
   },
   {
     'gi',
@@ -55,7 +57,7 @@ wk.add({
       Snacks.picker.lsp_implementations()
     end,
     desc = 'lsp: go to implementations',
-    icon = icons.symbol_class,
+    icon = icons.symbol_iface,
   },
   {
     'gw',
@@ -64,6 +66,7 @@ wk.add({
       Snacks.picker.diagnostics()
     end,
     desc = 'lsp: go to diagnostics',
+    icon = icons.warn,
   },
   -- LspSaga
   -- See: https://github.com/mistgc/config.nvim/blob/d1b52b86aba704f6eecb2e95cf3d663f736ebfa1/lua/utils.lua#L53
@@ -77,6 +80,7 @@ wk.add({
     'gh',
     '<cmd>Lspsaga hover_doc<cr>',
     desc = 'lsp: hover doc',
+    icon = icons.help,
   },
   {
     'gs',
@@ -87,6 +91,7 @@ wk.add({
       -- })
     end,
     desc = 'lsp: document symbols',
+    icon = icons.symbol_class,
   },
   {
     'gS',
@@ -94,16 +99,19 @@ wk.add({
       Snacks.picker.lsp_workspace_symbols()
     end,
     desc = 'lsp: workspace symbols',
+    icon = icons.symbol_class,
   },
   {
     'g[',
     '<cmd>Lspsaga diagnostic_jump_prev<cr>',
     desc = 'lsp: previous diagnostic',
+    icon = icons.warn,
   },
   {
     'g]',
     '<cmd>Lspsaga diagnostic_jump_next<cr>',
     desc = 'lsp: next diagnostic',
+    icon = icons.warn,
   },
   {
     'gm',
@@ -112,6 +120,7 @@ wk.add({
       -- require('telescope.builtin').marks()
     end,
     desc = 'marks',
+    icon = icons.star,
   },
 })
 
