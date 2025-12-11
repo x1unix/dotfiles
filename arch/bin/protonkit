@@ -19,6 +19,8 @@ errorf() {
 protonrun_help() {
   BINNAME="$(basename "$0")"
   cat <<EOF
+$BINNAME - Launch commands and install .exe files inside Proton game prefixes.
+
 Usage: $BINNAME [subcommand] [args...]
 
 EXAMPLES:
