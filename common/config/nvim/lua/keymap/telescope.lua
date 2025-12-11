@@ -1,18 +1,6 @@
 local wk = require('which-key')
 local icons = require('util.icons')
 
-local flex_layout_config = {
-  flip_columns = 200,
-  vertical = {
-    mirror = true,
-    -- prompt_position = 'top',
-  },
-  horizontal = {
-    preview_cutoff = 80,
-    preview_width = 0.6,
-  },
-}
-
 -- Leader global hotkeys --
 wk.add({
   {
@@ -32,7 +20,6 @@ wk.add({
     function()
       require('telescope.builtin').find_files({
         layout_strategy = 'flex',
-        layout_config = flex_layout_config,
         hidden = true,
       })
     end,
@@ -44,7 +31,6 @@ wk.add({
     function()
       require('telescope.builtin').live_grep({
         layout_strategy = 'flex',
-        layout_config = flex_layout_config,
         hidden = true,
       })
     end,
@@ -57,7 +43,6 @@ wk.add({
     function()
       require('telescope.builtin').current_buffer_fuzzy_find({
         layout_strategy = 'flex',
-        layout_config = flex_layout_config,
         hidden = true,
       })
     end,
@@ -70,7 +55,6 @@ wk.add({
     function()
       require('telescope.builtin').buffers({
         layout_strategy = 'flex',
-        layout_config = flex_layout_config,
       })
     end,
     mode = 'n',
@@ -128,7 +112,6 @@ wk.add({
     function()
       require('telescope.builtin').help_tags({
         layout_strategy = 'flex',
-        layout_config = flex_layout_config,
       })
     end,
     mode = 'n',

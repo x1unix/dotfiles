@@ -47,6 +47,13 @@ return {
               mirror = true,
               -- prompt_position = 'top',
             },
+            horizontal = {
+              preview_cutoff = 80,
+              preview_width = 0.6,
+            },
+            flex = {
+              flip_columns = 200,
+            },
           },
           file_ignore_patterns = {
             '^.git/',
