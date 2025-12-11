@@ -82,7 +82,6 @@ protonrun_exec() {
   export STEAM_COMPAT_CLIENT_INSTALL_PATH="$STEAM_ROOT"
 
   "$STEAM_APPS_COMMON/$proton_ver/proton" run $*
-  echo
 }
 
 protonrun_open() {
