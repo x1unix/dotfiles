@@ -19,9 +19,11 @@ cmake
 nodejs
 npm
 go
+zoxide
+
+# nvim deps
 fzf
 ripgrep
-zoxide
 
 # TUI tools
 lazygit
@@ -29,6 +31,7 @@ neovim
 bluetui
 lazydocker
 spotify-player
+wiremix
 
 # Sway (used in VM)
 sway
@@ -80,7 +83,6 @@ kitty
 blueman
 waybar
 wofi
-wiremix
 wl-clipboard
 grim
 slurp
