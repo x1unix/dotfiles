@@ -7,7 +7,7 @@ arch_pacman_install() {
   pacmanfile 'packages.list'
 
   rustup default stable
-  aurpkg 'paru'
+  aurpkg 'yay'
   aurfile 'aur.list'
   gsettings set org.blueman.general notification-daemon true
 }
