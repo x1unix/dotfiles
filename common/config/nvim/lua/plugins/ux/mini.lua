@@ -112,23 +112,26 @@ local mini_plugins = {
   },
 
   -- Animations (only for jumps).
-  ['mini.animate'] = {
-    cursor = {
-      enable = false,
-    },
-    scroll = {
-      enable = true,
-    },
-    resize = {
-      enable = false,
-    },
-    open = {
-      enable = false,
-    },
-    close = {
-      enable = false,
-    },
-  },
+  ['mini.animate'] = function(animate)
+    return {
+      cursor = {
+        enable = false,
+      },
+      scroll = {
+        enable = true,
+        timing = animate.gen_timing.linear({ duration = 100, unit = 'total' }),
+      },
+      resize = {
+        enable = false,
+      },
+      open = {
+        enable = false,
+      },
+      close = {
+        enable = false,
+      },
+    }
+  end,
 }
 
 return {
@@ -136,20 +139,6 @@ return {
     'nvim-mini/mini.nvim',
     lazy = false,
     version = false,
-    keys = {
-      {
-        '<leader>e',
-        function()
-          local buf_name = vim.api.nvim_buf_get_name(0)
-          local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
-          ---@module 'mini.files'
-          ---@type mini.files.MiniFiles
-          MiniFiles.open(path)
-          MiniFiles.reveal_cwd()
-        end,
-        desc = 'mini.files',
-      },
-    },
     config = function()
       -- For session management
       vim.opt.sessionoptions:append('folds')
