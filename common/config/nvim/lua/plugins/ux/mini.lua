@@ -81,7 +81,7 @@ local mini_plugins = {
 
   -- Session management. Works with mini.starter
   ['mini.sessions'] = {
-    autoread = true,
+    autoread = false,
     autowrite = true,
     file = '',
     directory = vim.fn.stdpath('data') .. '/sessions',
