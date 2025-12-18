@@ -1,16 +1,29 @@
 local wk = require('which-key')
 
+local function mini_anim_jump(motion)
+  return "<cmd>lua vim.cmd('normal! " .. motion .. "'); MiniAnimate.execute_after('scroll', 'normal! zz')<cr>"
+  -- local cmd = 'normal! ' .. motion
+  -- return function()
+  --   vim.cmd(cmd)
+  --   MiniAnimate.execute_after('scroll', 'normal! zz')
+  -- end
+end
+
 wk.add({
   { 'n', 'nzzzv', mode = 'n', desc = 'next search result centered' },
   { 'N', 'Nzzzv', mode = 'n', desc = 'previous search result centered' },
   { 'g,', 'g,zvzz', mode = 'n', desc = 'next change centered' },
   { 'g;', 'g;zvzz', mode = 'n', desc = 'previous change centered' },
-  { '<C-f>', '<C-f>zz', mode = 'n', desc = 'page half-down centered' },
-  { '<C-b>', '<C-b>zz', mode = 'n', desc = 'page half-up centered' },
-  { '<C-d>', '<C-d>zz', mode = 'n', desc = 'page down centered' },
-  { '<C-u>', '<C-u>zz', mode = 'n', desc = 'page up centered' },
-  { '<C-o>', '<C-o>zz', mode = 'n', desc = 'jump back centered' },
-  { '<C-i>', '<C-i>zz', mode = 'n', desc = 'jump forwards centered' },
+
+  -- Mini animated jumps
+  { '<C-f>', mini_anim_jump('<C-f>'), mode = 'n', desc = 'page half-down centered' },
+  { '<C-b>', mini_anim_jump('<C-b>'), mode = 'n', desc = 'page half-up centered' },
+  { '<C-d>', mini_anim_jump('<C-d>'), mode = 'n', desc = 'page down centered' },
+  { '<C-u>', mini_anim_jump('<C-u>'), mode = 'n', desc = 'page up centered' },
+  { '<C-o>', mini_anim_jump('<C-o>'), mode = 'n', desc = 'jump back centered' },
+  { '<C-i>', mini_anim_jump('<C-i>'), mode = 'n', desc = 'jump forwards centered' },
+
+  -- Other motions
   { 'zt', 'zt5<C-y>', mode = 'n', desc = 'top this line' },
   { 'zb', 'zb5<C-e>', mode = 'n', desc = 'bottom this line' },
   { '>', '>gv', mode = 'v', desc = 'indent' },
