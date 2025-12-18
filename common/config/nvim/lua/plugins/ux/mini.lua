@@ -121,6 +121,8 @@ return {
       -- For session management
       vim.opt.sessionoptions:append('folds')
       vim.opt.sessionoptions:append('globals')
+      vim.opt.sessionoptions:append('buffers')
+      vim.opt.sessionoptions:append('tabpages')
 
       -- Notify LSP server when file is moved in mini.files.
       vim.api.nvim_create_autocmd('User', {
