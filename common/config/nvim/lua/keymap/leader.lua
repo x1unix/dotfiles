@@ -151,4 +151,15 @@ wk.add({
     mode = 'n',
     desc = 'buffers: all',
   },
+  {
+    '<Leader>h',
+    function()
+      require('telescope.builtin').jumplist({
+        layout_strategy = 'flex',
+      })
+    end,
+    mode = 'n',
+    desc = 'jumplist',
+    icon = icons.jump,
+  },
 })

@@ -77,6 +77,10 @@ return {
     icon = '󰕰',
     color = 'blue',
   },
+  jump = {
+    icon = '󰤇',
+    color = 'white',
+  },
 
   --- @type wk.Icon
   symbol_var = {
