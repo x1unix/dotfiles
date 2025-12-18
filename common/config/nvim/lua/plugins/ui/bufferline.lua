@@ -2,6 +2,9 @@ return {
   {
     'akinsho/bufferline.nvim',
     version = '^4.9.1',
+
+    -- Enable back when will be fixed: https://github.com/akinsho/bufferline.nvim/issues/1030
+    enabled = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
