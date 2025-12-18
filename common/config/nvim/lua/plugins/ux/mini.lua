@@ -50,7 +50,7 @@ local mini_plugins = {
 
   -- Move lines
   -- Defaults are Alt (Meta) + hjkl.
-  ['mini.move'] = nil,
+  ['mini.move'] = {},
 
   -- Custom notifications (vim.notify replacement).
   ['mini.notify'] = {
