@@ -26,8 +26,8 @@ local function reload_bufferline_highlights()
     end
   end
 
-  local kfg = require('bufferline.config')
-  kfg.update_highlights()
+  -- local kfg = require('bufferline.config')
+  -- kfg.update_highlights()
 end
 
 local darkmode_init = false
