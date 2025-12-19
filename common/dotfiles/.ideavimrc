@@ -34,6 +34,10 @@ nmap <leader>? :action GotoAction<CR>
 nmap <leader>f :action FindInPath<CR>
 nmap gi :action GotoImplementation<CR>
 
+# See: https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+imap <C-y> <Action>(EditorChooseLookupItemReplace)
+nmap <leader><leader> <C-w>
+
 " AceJump integration
 " See: https://github.com/acejump/AceJump
 map s <Action>(AceAction)
