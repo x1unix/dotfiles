@@ -34,6 +34,23 @@ window-rule {
   open-floating true
 }
 
+// Intellij/Goland
+// See: https://github.com/hyprwm/Hyprland/issues/9355
+window-rule {
+  match app-id=r#"(jetbrains-)(.*)"# title=r#"^win(.*)"#
+  open-floating true
+  open-focused false
+}
+
+// xwaylandvideobridge
+window-rule {
+  match app-id=r#"^(xwaylandvideobridge)$"#
+  opacity 0.0
+  open-focused false
+  max-height 1
+  max-width 1
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
