@@ -16,6 +16,15 @@ window-rule {
   max-height 480
 }
 
+window-rule {
+  match app-id=r#"(firefox|zen)$"# title=r#"^Extension: "#
+  open-floating true
+  default-floating-position x=32 y=32 relative-to="top-right"
+  max-width 800
+  max-height 480
+}
+
+
 // Chrome - Google Meet
 window-rule {
   match app-id=r#"^(google-chrome)$"# title=r#"^(Meet - [a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{3})$"#
