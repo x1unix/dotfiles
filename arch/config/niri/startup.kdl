@@ -39,8 +39,7 @@ environment {
   // Ghidra
   __JAVA_AWT_WM_NONREPARENTING "1"
 
-  XCURSOR_SIZE="24"
-  HYPRCURSOR_SIZE="24"
+  // Arch KDE menu gen
   XDG_MENU_PREFIX="arch-"
 
   // Make HIP use discrette GPU instead of iGPU
