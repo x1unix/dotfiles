@@ -3,7 +3,8 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
     Mod+Space hotkey-overlay-title="Open launcher" { spawn "vicinae" "open"; }
-    Super+Escape hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
+    // Super+Escape hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
+    Super+Escape hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
 
     // Volume
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
