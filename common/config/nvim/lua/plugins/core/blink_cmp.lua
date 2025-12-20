@@ -10,6 +10,7 @@ return {
     dependencies = {
       'rafamadriz/friendly-snippets',
       'Kaiser-Yang/blink-cmp-avante',
+      'fang2hou/blink-copilot',
       {
         'L3MON4D3/LuaSnip',
         version = 'v2.*',
@@ -36,6 +37,7 @@ return {
           'path',
           'snippets',
           'buffer',
+          'copilot',
         },
         providers = {
           -- See: https://github.com/Kaiser-Yang/blink-cmp-avante#installation
@@ -45,6 +47,11 @@ return {
             opts = {
               -- options for blink-cmp-avante
             },
+          },
+          copilot = {
+            name = 'copilot',
+            module = 'blink-copilot',
+            async = true,
           },
         },
       },
