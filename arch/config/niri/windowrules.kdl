@@ -3,22 +3,43 @@
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+  match app-id=r#"^org\.wezfurlong\.wezterm$"#
+  default-column-width {}
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  open-floating true
+  default-floating-position x=32 y=32 relative-to="bottom-left"
+}
+
+// Chrome - Google Meet
+window-rule {
+  match app-id="^(google-chrome)$" title="^(Meet - [a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{3})$"
+  open-floating true
+}
+
+// TUI dialogs
+window-rule {
+  match app-id="^(ui\.terminal\.dialog)$"
+  open-floating true
+  min-width 800
+  min-height 600
+}
+
+// Portals
+window-rule {
+  match app-id="^(xdg-desktop-portal-gtk)$"
+  open-floating true
 }
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+  match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
-    block-out-from "screen-capture"
+  block-out-from "screen-capture"
 }
 
