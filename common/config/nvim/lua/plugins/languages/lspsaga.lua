@@ -5,6 +5,9 @@ return {
       lightbulb = {
         enable = false,
       },
+      implement = {
+        enable = true,
+      },
     },
   },
 }
