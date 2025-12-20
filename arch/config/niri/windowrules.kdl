@@ -9,9 +9,11 @@ window-rule {
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
-  match app-id=r#"firefox$"# title=r#"^Picture-in-Picture$"#
+  match app-id=r#"(firefox|zen)$"# title=r#"^Picture-in-Picture$"#
   open-floating true
-  default-floating-position x=32 y=32 relative-to="bottom-left"
+  default-floating-position x=32 y=32 relative-to="bottom-right"
+  max-width 800
+  max-height 480
 }
 
 // Chrome - Google Meet
