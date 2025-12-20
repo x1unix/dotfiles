@@ -11,12 +11,12 @@ layout {
     center-focused-column "never"
 
     preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
+      proportion 0.33333
+      proportion 0.5
+      proportion 0.66667
 
-        // Fixed sets the width in logical pixels exactly.
-        // fixed 1920
+      // Fixed sets the width in logical pixels exactly.
+      // fixed 1920
     }
 
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
@@ -25,19 +25,20 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        off
-        width 2
-        active-color "#268bd2"
-        inactive-color "#4c78cc"
+      off
+      width 2
+      active-color "#268bd2"
+      inactive-color "#4c78cc"
     }
 
     border {
-        // off
-        width 2
-        active-color "#268bd2"
-        // active-color "#4c78cc"
-        inactive-color "#000000"
-        urgent-color "#9b0000"
+      on
+      // off
+      width 2
+      active-color "#268bd2"
+      // active-color "#4c78cc"
+      inactive-color "#000000"
+      urgent-color "#9b0000"
     }
 }
 
@@ -45,11 +46,11 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // See: https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
-    // Uncomment to turn off all animations.
-    // off
-    slowdown 0.5
-    workspace-switch {
-      off
-    }
+  // Uncomment to turn off all animations.
+  // off
+  slowdown 0.5
+  workspace-switch {
+    off
+  }
 }
 
