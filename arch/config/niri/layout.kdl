@@ -40,6 +40,12 @@ layout {
       inactive-color "#000000"
       urgent-color "#9b0000"
     }
+
+    tab-indicator {
+      position "bottom"
+      length total-proportion=1.0
+      place-within-column
+    }
 }
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
