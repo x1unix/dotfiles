@@ -1,0 +1,49 @@
+spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+spawn-at-startup "systemctl --user start gnome-keyring-daemon"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "waybar"
+spawn-at-startup "udiskie"
+spawn-at-startup "dunst"
+spawn-at-startup "xwayland-satellite"
+// spawn-at-startup "fusuma"
+spawn-at-startup "swayidle" "-w" "timeout" "301" "niri msg action power-off-monitors" "timeout" "300" "swaylock -f -c 000000" "before-sleep" "playerctl pause" "resume" "niri msg action power-on-monirors"
+spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "blueman-applet"
+spawn-at-startup "xwaylandvideobridge"
+spawn-at-startup "vicinae server"
+
+prefer-no-csd
+
+environment {
+  LANG "en_US.UTF-8"
+  EDITOR "/usr/bin/nvim"
+  DISPLAY ":0"
+
+  WLR_NO_HARDWARE_CURSORS "1"
+  // Set wlroots renderer to Vulkan to avoid flickering
+  WLR_RENDERER "vulkan"
+ 
+  // General wayland environment variables
+  XDG_SESSION_TYPE "wayland"
+  QT_QPA_PLATFORM "wayland"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+
+  // Firefox wayland environment variable
+  MOZ_ENABLE_WAYLAND "1"
+  MOZ_USE_XINPUT2 "1"
+
+  // Xwayland compatibility
+  // XWAYLAND_NO_GLAMOR "1"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+
+  // Ghidra
+  __JAVA_AWT_WM_NONREPARENTING "1"
+
+  XCURSOR_SIZE="24"
+  HYPRCURSOR_SIZE="24"
+  XDG_MENU_PREFIX="arch-"
+
+  // Make HIP use discrette GPU instead of iGPU
+  HIP_VISIBLE_DEVICES="0"
+}
+

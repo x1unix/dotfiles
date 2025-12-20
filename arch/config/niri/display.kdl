@@ -1,0 +1,13 @@
+// See: https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+
+// Desktop - 4k
+output "GIGA-BYTE TECHNOLOGY CO., LTD. M28U 23090B006897" {
+  mode "3840x2160@119.999" 
+  scale 1.25
+}
+
+// Laptop - MacBook Pro 2015
+output "eDP-1" {
+  scale 1.25
+}
+
