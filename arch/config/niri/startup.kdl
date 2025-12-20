@@ -12,6 +12,9 @@ spawn-at-startup "blueman-applet"
 spawn-at-startup "xwaylandvideobridge"
 spawn-at-startup "vicinae server"
 
+// Wallpaper
+spawn-at-startup "swaybg" "-i" "~/Pictures/wallpapers/arch-minimal.png" "-m" "fill"
+
 prefer-no-csd
 
 environment {
