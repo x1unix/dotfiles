@@ -9,20 +9,20 @@ window-rule {
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
-  match app-id=r#"firefox$"# title=r#"^Picture-in-Picture$"
+  match app-id=r#"firefox$"# title=r#"^Picture-in-Picture$"#
   open-floating true
   default-floating-position x=32 y=32 relative-to="bottom-left"
 }
 
 // Chrome - Google Meet
 window-rule {
-  match app-id=r#"^(google-chrome)$" title=r#"^(Meet - [a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{3})$"
+  match app-id=r#"^(google-chrome)$"# title=r#"^(Meet - [a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{3})$"#
   open-floating true
 }
 
 // TUI dialogs
 window-rule {
-  match app-id=r#"^(ui\.terminal\.dialog)$"
+  match app-id=r#"^(ui\.terminal\.dialog)$"#
   open-floating true
   min-width 800
   min-height 600
@@ -30,7 +30,7 @@ window-rule {
 
 // Portals
 window-rule {
-  match app-id=r#"^(xdg-desktop-portal-gtk)$"
+  match app-id=r#"^(xdg-desktop-portal-gtk)$"#
   open-floating true
 }
 

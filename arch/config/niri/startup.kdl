@@ -43,9 +43,9 @@ environment {
   __JAVA_AWT_WM_NONREPARENTING "1"
 
   // Arch KDE menu gen
-  XDG_MENU_PREFIX="arch-"
+  XDG_MENU_PREFIX "arch-"
 
   // Make HIP use discrette GPU instead of iGPU
-  HIP_VISIBLE_DEVICES="0"
+  HIP_VISIBLE_DEVICES "0"
 }
 
