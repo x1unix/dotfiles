@@ -1,5 +1,5 @@
 return {
-  { import = 'plugins.core.cmp' },
+  { import = 'plugins.core.blink_cmp' },
   { import = 'plugins.core.git' },
   { import = 'plugins.core.autopairs' },
   { import = 'plugins.core.indent' },

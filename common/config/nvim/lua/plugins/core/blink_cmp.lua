@@ -18,6 +18,17 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      signature = {
+        -- Enable signature help.
+        -- Use <C-d> and <C-u> for scroll.
+        -- Use <C-k> to display signature.
+        enabled = true,
+
+        window = {
+          border = 'single',
+          show_documentation = true,
+        },
+      },
       sources = {
         default = {
           'avante',
