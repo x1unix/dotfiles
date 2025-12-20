@@ -4,7 +4,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
     Mod+Space hotkey-overlay-title="Open launcher" { spawn "vicinae" "open"; }
     // Super+Escape hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
-    Super+Escape hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
+    Mod+Escape hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
 
     // Volume
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
@@ -148,7 +148,7 @@ binds {
     //
     // The allow-inhibiting=false property can be applied to other binds as well,
     // which ensures niri always processes them, even when an inhibitor is active.
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+Escape { quit; }
