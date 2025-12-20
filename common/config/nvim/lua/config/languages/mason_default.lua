@@ -23,7 +23,6 @@ return {
     -- Misc
     'yamlls',
     'jsonls',
-    'copilot',
   },
 
   -- List of other tools to install by Mason.
