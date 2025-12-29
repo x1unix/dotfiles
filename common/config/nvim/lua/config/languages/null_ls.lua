@@ -5,7 +5,7 @@ local M = {}
 
 ---@module 'null-ls'
 ---@param null_ls table
-M.get_config = function(null_ls)
+M.get_sources = function(null_ls)
   return {
     -- Nix formatter
     null_ls.builtins.formatting.nixfmt,
