@@ -8,6 +8,12 @@ return {
     },
     init = function()
       vim.g.copilot_nes_debounce = 500
+
+      local cfg = require('config.ai')
+      if not cfg.copilot_enabled then
+        return
+      end
+
       vim.lsp.enable('copilot_ls')
       vim.keymap.set('n', '<tab>', function()
         local bufnr = vim.api.nvim_get_current_buf()

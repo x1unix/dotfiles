@@ -1,5 +1,6 @@
 return {
   enabled = true,
+  copilot_enabled = false,
 
   -- List of providers that I use. It's a subset of supported Avante providers.
   --
