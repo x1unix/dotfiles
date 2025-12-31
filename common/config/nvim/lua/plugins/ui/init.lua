@@ -1,5 +1,4 @@
 return {
-  { import = 'plugins.ui.oil' },
   { import = 'plugins.ui.bufferline' },
   { import = 'plugins.ui.snacks' },
   { import = 'plugins.ui.dap' },

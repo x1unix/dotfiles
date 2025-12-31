@@ -148,6 +148,12 @@ return {
       -- For ascii art
       'MaximilianLloyd/ascii.nvim',
       'MunifTanjim/nui.nvim',
+
+      -- Icons
+      {
+        'nvim-mini/mini.icons',
+        opts = {},
+      },
     },
   },
 }
