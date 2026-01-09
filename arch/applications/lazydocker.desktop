@@ -2,7 +2,7 @@
 Type=Application
 Name=lazydocker
 Comment=TUI for managing Docker containers.
-Exec=alacritty --class=ui.terminal.dialog -e lazydocker
+Exec=kitty --class=ui.terminal.dialog -e lazydocker
 Icon=bluetooth
 StartupWMClass=ui.terminal.dialog
 Terminal=false

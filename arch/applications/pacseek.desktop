@@ -2,7 +2,7 @@
 Type=Application
 Name=pacseek
 Comment=Pacman TUI
-Exec=alacritty --class=ui.terminal.dialog -e pacseek
+Exec=kitty --class=ui.terminal.dialog -e pacseek
 StartupWMClass=ui.terminal.dialog
 # Icon=audio-speakers
 Terminal=false

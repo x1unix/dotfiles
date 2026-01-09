@@ -2,7 +2,7 @@
 Type=Application
 Name=wiremix
 Comment=Pipewire mixer
-Exec=alacritty --class=ui.terminal.dialog -e wiremix
+Exec=kitty --class=ui.terminal.dialog -e wiremix
 Icon=audio-speakers
 StartupWMClass=ui.terminal.dialog
 Terminal=false

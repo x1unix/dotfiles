@@ -2,7 +2,7 @@
 Type=Application
 Name=bluetui
 Comment=TUI for managing bluetooth on Linux
-Exec=alacritty --class=ui.terminal.dialog -e bluetui
+Exec=kitty --class=ui.terminal.dialog -e bluetui
 Icon=bluetooth
 StartupWMClass=ui.terminal.dialog
 Terminal=false
