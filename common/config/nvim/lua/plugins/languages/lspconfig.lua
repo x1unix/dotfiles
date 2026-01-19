@@ -33,14 +33,24 @@ return {
           -- Fix filetypes for clangd. See: https://github.com/LazyVim/LazyVim/discussions/3997
           filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'hpp' },
         },
-        eslint = {
-          on_attach = function(_client, bufnr)
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              buffer = bufnr,
-              command = 'EslintFixAll',
-            })
-          end,
-        },
+        eslint = function()
+          local base_on_attach = vim.lsp.config.eslint.on_attach
+          return {
+            on_attach = function(client, bufnr)
+              if not base_on_attach then
+                return
+              end
+
+              -- ESLint fix on save.
+              -- Augroup has to be called after parent on_attach, which installs the 'LspEslintFixAll' command.
+              base_on_attach(client, bufnr)
+              vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = bufnr,
+                command = 'LspEslintFixAll',
+              })
+            end,
+          }
+        end,
         lua_ls = {
           capabilities = capabilities,
           settings = {
