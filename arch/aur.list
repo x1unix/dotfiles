@@ -7,3 +7,7 @@ vicinae-bin
 # Dev tools
 perl-perl-languageserver
 codex-acp
+
+# QT/KDE quirks
+qt5ct-kde
+qt6ct-kde

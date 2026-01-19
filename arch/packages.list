@@ -58,6 +58,18 @@ archlinux-xdg-menu
 qt5-wayland
 qt6-wayland
 
+# QT/KDE Quirks
+breeze
+
+# Printer & Scanner
+ipp-usb
+avahi
+nss-mdns
+sane-airscan
+sane
+simple-scan
+cups
+
 # Hyprland
 hyprland
 hyprcursor
@@ -119,3 +131,4 @@ freerdp
 iproute2
 libnotify
 openbsd-netcat
+
