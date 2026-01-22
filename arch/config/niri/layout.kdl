@@ -2,6 +2,9 @@
 layout {
     gaps 0
 
+    // Set transparent workspace background color.
+    background-color "transparent"
+
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -60,3 +63,19 @@ animations {
   }
 }
 
+// Make overview transparent to show background.
+// See: https://github.com/YaLTeR/niri/wiki/Overview#backdrop-customization
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+// Optionally, disable the workspace shadows in the overview.
+overview {
+    workspace-shadow {
+        off
+    }
+}
