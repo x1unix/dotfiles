@@ -54,10 +54,14 @@ window-rule {
 }
 
 // Telegram
-// TODO: window rule doesn't work, see: https://github.com/YaLTeR/niri/issues/2738
+// See: https://github.com/YaLTeR/niri/discussions/206#discussioncomment-8576014
 window-rule {
   match app-id="org.telegram.desktop" title="Media viewer"
   open-floating true
+  open-fullscreen false
+  border {
+    off
+  }
 }
 
 // xwaylandvideobridge
