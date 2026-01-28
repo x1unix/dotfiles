@@ -1,0 +1,4 @@
+timeout 150 "brightnessctl -s set 10" resume "brightnessctl -r"
+timeout 301 "$HOME/.local/bin/desktop-utils/swayidle-helper.sh suspend"
+timeout 300 "swaylock -e -f -c 000000" resume "$HOME/.local/bin/desktop-utils/swayidle-helper.sh resume"
+before-sleep "playerctl pause"
