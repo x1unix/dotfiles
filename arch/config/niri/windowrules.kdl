@@ -53,6 +53,13 @@ window-rule {
   open-focused false
 }
 
+// Telegram
+// TODO: window rule doesn't work, see: https://github.com/YaLTeR/niri/issues/2738
+window-rule {
+  match app-id="org.telegram.desktop" title="Media viewer"
+  open-floating true
+}
+
 // xwaylandvideobridge
 window-rule {
   match app-id=r#"^(xwaylandvideobridge)$"#
