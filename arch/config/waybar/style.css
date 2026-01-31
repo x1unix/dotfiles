@@ -47,6 +47,7 @@ window#waybar {
 
 /* Modules - right */
 
+#battery,
 #bluetooth,
 #network,
 #language,
@@ -71,6 +72,17 @@ window#waybar {
   padding-right: 0.4rem;
 }
 
+/* Battery indicator with text is too wide */
+#battery {
+  padding-right: 0;
+}
+
+/* Backlight icon doesn't find standard width bounds and needs more spacing */
+#backlight {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 #language {
   /* Move language a bit left from a corner of the screen */
   margin-right: 1rem;
@@ -82,11 +94,6 @@ window#waybar {
   margin-bottom: 2px;
   padding: 0;
 }
-
-/* #backlight, */
-/* #battery { */
-/*   margin: 0 10px; */
-/* } */
 
 #clock {
   font-weight: 400;
