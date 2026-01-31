@@ -1,7 +1,9 @@
 @import "colors.css";
 
 * {
-  font-family: 'ZedMono Nerd Font';
+  /* Use Inter for text elements and fallback to a nerd font for icons. */
+  /* ZedMono nerd font is preinstalled and used on terminals. */
+  font-family: 'Inter Variable', 'ZedMono Nerd Font';
   font-size: 14px;
   min-height: 0;
 }
@@ -51,6 +53,9 @@ window#waybar {
 }
 
 #clock {
+  /* font-family: 'Inter Variable'; */
+  font-weight: 400;
+  /* font-size: 10pt; */
   color: @text;
 }
 
