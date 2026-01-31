@@ -13,17 +13,22 @@ window#waybar {
   color: @text;
 }
 
-.modules-left,
-.modules-right {
+.modules-left {
+  /* Reserve space for privacy indicators gap */
   margin: 2px 0;
 }
 
 #workspaces button {
+  /* TODO: fix gap between active element's border and bar caused by .modules-left space reserve */
   margin: 0px;
-  padding: 0 0.25rem;
+  padding: 0 0.5rem;
 
   color: @ws-inactive-text;
-  margin-right: 0.5rem;
+
+  /* Reset corner radius and setup bottom border */
+  border-radius: 0;
+  border: 0px solid transparent;
+  border-bottom-width: 2px;
 }
 
 #workspaces button label {
@@ -36,9 +41,8 @@ window#waybar {
 
 #workspaces button.focused,
 #workspaces button.active {
-  background-color: @ws-active-background;
+  border-bottom-color: @ws-active-background;
   color: white;
-  border-radius: 4px;
 }
 
 /* Modules - right */
