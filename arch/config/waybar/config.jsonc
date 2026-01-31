@@ -80,7 +80,7 @@
   "privacy": {
     "icon-spacing": 0,
     "icon-size": 14,
-    "transition-duration": 250,
+    "transition-duration": 0,
     "modules": [
       {
         "type": "audio-in",

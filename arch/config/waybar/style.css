@@ -13,13 +13,17 @@ window#waybar {
   color: @text;
 }
 
+.modules-left,
+.modules-right {
+  margin: 2px 0;
+}
+
 #workspaces button {
   margin: 0px;
-  border-radius: 0;
-  padding: 2px;
-  border: 1px solid @ws-inactive-border;
-  background-color: @ws-inactive-background;
+  padding: 0 0.25rem;
+
   color: @ws-inactive-text;
+  margin-right: 0.5rem;
 }
 
 #workspaces button label {
@@ -32,30 +36,49 @@ window#waybar {
 
 #workspaces button.focused,
 #workspaces button.active {
-  border-color: @ws-active-border;
   background-color: @ws-active-background;
-  color: @ws-active-text;
+  color: white;
+  border-radius: 4px;
 }
 
-#tray,
+/* Modules - right */
+
 #bluetooth,
 #network,
 #language,
+#wireplumber,
 #idle_inhibitor,
 #custom-darkmode {
-  margin: 0 10px;
+  /* HACK: Padding is necessary to reserve panel height and avoid jump when privacy icon appears*/
+  padding: 0.3rem 0;
+  margin: 0 0.5rem;
+  /* margin: 0 10px; */
+  /* border: 1px solid white; */
 }
 
 #backlight,
 #battery,
-#wireplumber {
-  margin: 0 10px;
+#bluetooth,
+#network,
+#wireplumber,
+#idle_inhibitor,
+#custom-darkmode {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
 }
 
+#language {
+  /* Move language a bit left from a corner of the screen */
+  margin-right: 1rem;
+}
+
+/* #backlight, */
+/* #battery { */
+/*   margin: 0 10px; */
+/* } */
+
 #clock {
-  /* font-family: 'Inter Variable'; */
   font-weight: 400;
-  /* font-size: 10pt; */
   color: @text;
 }
 
@@ -66,7 +89,7 @@ window#waybar {
 /* Privacy */
 #privacy-item {
   border: none;
-  padding: 0 0.8rem;
+  padding: 0.3rem 0.8rem;
   margin: 2px 0.4rem;
   border-radius: 4px;
   color: #fff;
@@ -80,11 +103,10 @@ window#waybar {
   background: #5756d5;
 }
 
-/* Tray */
-
+/* Tray  */
 #tray {
-  margin-right: 0.5rem;
-  margin-left: 1rem;
+  /* Reverse extra space to the right to separate privacy block */
+  margin: 0 0.5rem 0 1rem;
 }
 
 #tray menu {
