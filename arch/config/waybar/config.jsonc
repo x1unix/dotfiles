@@ -14,6 +14,7 @@
     "clock"
   ],
   "modules-right": [
+    "privacy",
     "tray",
     "idle_inhibitor",
     "custom/darkmode",
@@ -75,6 +76,25 @@
       "dark": "󰛩",
       "light": "󰛨"
     }
+  },
+  "privacy": {
+    "icon-spacing": 0,
+    "icon-size": 12,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 16
+      },
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 16
+      }
+    ],
+    "ignore-monitor": true,
+    "ignore": []
   },
   "battery": {
     "interval": 5,

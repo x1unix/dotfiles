@@ -58,15 +58,35 @@ window#waybar {
   color: @yellow;
 }
 
+/* Privacy */
+#privacy-item {
+  border: none;
+  padding: 0 0.8rem;
+  margin: 2px 0.4rem;
+  border-radius: 4px;
+  color: #fff;
+}
+
+#privacy-item.audio-in {
+  background: #f19a38;
+}
+
+#privacy-item.screenshare {
+  background: #5756d5;
+}
+
+/* Tray */
+
 #tray {
   margin-right: 0.5rem;
+  margin-left: 1rem;
 }
 
 #tray menu {
   color: @text;
   background: @surface0;
   border-radius: 0;
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
 
 /* #tray menu * { */
