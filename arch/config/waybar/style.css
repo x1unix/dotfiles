@@ -74,6 +74,13 @@ window#waybar {
 #language {
   /* Move language a bit left from a corner of the screen */
   margin-right: 1rem;
+  background: @lang-background;
+  color: @lang-foreground;
+  border-radius: 4px;
+  min-width: 2rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 0;
 }
 
 /* #backlight, */

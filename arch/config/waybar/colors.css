@@ -26,3 +26,7 @@
 @define-color hi-blue #7cafc2;
 @define-color hi-magenta #ba8baf;
 @define-color hi-cyan #86c1b9;
+
+/* language */
+@define-color lang-background #ffffff;
+@define-color lang-foreground #000000;
