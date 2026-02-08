@@ -34,9 +34,13 @@ window-rule {
 // TUI dialogs
 window-rule {
   match app-id=r#"^(ui\.terminal\.dialog)$"#
+  match app-id="Blueman-manager"
+  match app-id="org.pulseaudio.pavucontrol"
   open-floating true
   min-width 800
   min-height 600
+  max-width 800
+  max-height 600
 }
 
 // Portals
