@@ -11,6 +11,7 @@ return {
       require('go').setup({
         luasnip = true,
         lsp_keymaps = false,
+        gopls_cmd = os.getenv('GOPLS_BIN'),
         lsp_cfg = {
           capabilities = require('util.lsp').make_capabilities(),
 
