@@ -8,10 +8,13 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
+      gopls_bin = os.getenv('GOPLS_BIN')
+      vim.notify('LSP bin: ' .. (gopls_bin or 'none'), vim.log.levels.INFO)
+
       require('go').setup({
         luasnip = true,
         lsp_keymaps = false,
-        gopls_cmd = os.getenv('GOPLS_BIN'),
+        gopls_cmd = gopls_bin and { gopls_bin } or nil,
         lsp_cfg = {
           capabilities = require('util.lsp').make_capabilities(),
 
