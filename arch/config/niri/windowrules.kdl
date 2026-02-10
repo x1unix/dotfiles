@@ -47,6 +47,7 @@ window-rule {
 window-rule {
   match app-id=r#"^(xdg-desktop-portal-gtk)$"#
   match app-id="org.gnome.Nautilus" title="Open File"
+  match app-id="org.gnome.Nautilus" title=r#"^(File Upload - )"#
   open-floating true
 }
 
