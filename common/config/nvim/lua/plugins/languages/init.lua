@@ -9,5 +9,6 @@ return {
   { import = 'plugins.languages.go' },
   { import = 'plugins.languages.ts' },
   { import = 'plugins.languages.none_ls' },
+  { import = 'plugins.languages.markdown' },
   { import = 'plugins.languages.misc' },
 }

@@ -1,5 +1,6 @@
 return {
-  enabled = true,
+  -- TODO: replace avante with codecompanion.
+  enabled = false,
   copilot_enabled = false,
 
   -- List of providers that I use. It's a subset of supported Avante providers.
