@@ -23,6 +23,7 @@ return {
     -- Misc
     'yamlls',
     'jsonls',
+    'jsonnet_ls',
   },
 
   -- List of other tools to install by Mason.
@@ -35,6 +36,7 @@ return {
     'stylua',
     'prettier',
     'codelldb',
+    'jsonnetfmt',
     'shfmt',
   },
 }

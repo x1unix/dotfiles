@@ -25,6 +25,7 @@ return {
         'yamlls',
         'jsonls',
         'bashls',
+        'jsonnet_ls',
         buf_ls = {
           -- Sometimes Mason's buf_ls doesn't start
           capabilities = capabilities,

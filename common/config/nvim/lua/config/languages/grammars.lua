@@ -39,6 +39,7 @@ local grammars = {
     'html',
     'ini',
     'jsonc',
+    'jsonnet',
     'javascript',
     'jsonc',
     'lua',
