@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Toggle Dark Mode
+Comment=Toggle dark mode preference
+Exec=sh -c 'darkmode toggle'
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Utility;ConsoleOnly;
