@@ -1,8 +1,8 @@
 program_options:
-  tray: true # Show tray icon
+  tray: false # Show tray icon
   notify: true # Enable notifications
   automount: true # Enable automatic mounting
-  file_manager: xdg-open # Program to open mounted directories
+  file_manager: nautilus # Program to open mounted directories
 
 # device_config:
 # Example: Special options for specific devices
