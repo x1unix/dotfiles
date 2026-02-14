@@ -70,6 +70,12 @@ window-rule {
   }
 }
 
+// Quickshell
+window-rule {
+  match app-id="org.quickshell"
+  open-floating true
+}
+
 // xwaylandvideobridge
 window-rule {
   match app-id=r#"^(xwaylandvideobridge)$"#
