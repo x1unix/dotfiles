@@ -57,6 +57,9 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
+    cmd-h = [] # Disable "hide application"
+    cmd-alt-h = [] # Disable "hide others"
+    alt-p = 'exec-and-forget screencapture -i -c'
 
     # All possible keys:
     # - Letters.        a, b, c, ..., z
@@ -94,6 +97,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     alt-j = 'focus down'
     alt-k = 'focus up'
     alt-l = 'focus right'
+    alt-f = 'fullscreen'
+    alt-q = 'close'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-h = 'move left'
@@ -135,7 +140,15 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
-    alt-enter = 'exec-and-forget open -na Ghostty.app'
+    # None of those are actually working :(
+    # alt-enter = 'exec-and-forget open -na Ghostty.app --args --quit-after-last-window-closed=true'
+			#  alt-enter = '''exec-and-forget osascript -e '
+			#  tell application "system events"
+			# tell process "ghostty"
+			# 	keystroke "n" using command down
+			# end tell
+			#  end tell'
+			#  '''
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
