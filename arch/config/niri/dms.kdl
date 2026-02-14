@@ -7,3 +7,12 @@ layer-rule {
     match namespace="quickshell"
     place-within-backdrop true
 }
+
+// Quickshell
+window-rule {
+  match app-id="org.quickshell"
+  open-floating true
+  geometry-corner-radius 12
+  clip-to-geometry true
+}
+
