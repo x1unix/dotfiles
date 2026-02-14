@@ -3,6 +3,7 @@
 
 # Desktop
 vicinae-bin
+dms-shell-bin
 
 # Dev tools
 perl-perl-languageserver
