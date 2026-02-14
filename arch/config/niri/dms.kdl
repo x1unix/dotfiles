@@ -4,5 +4,6 @@
 
 layer-rule {
     match namespace="dms:blurwallpaper"
+    match namespace="quickshell"
     place-within-backdrop true
 }
