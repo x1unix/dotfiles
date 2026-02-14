@@ -1,16 +1,10 @@
 spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME"
-spawn-at-startup "systemctl --user start gnome-keyring-daemon"
+spawn-at-startup "systemctl" "--user" "start" "gnome-keyring-daemon"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "systemctl" "--user" "start" "dms"
-spawn-at-startup "udiskie"
-// spawn-at-startup "fusuma"
-spawn-at-startup "swayidle" "-w"
 spawn-at-startup "systemctl" "--user" "start" "vicinae"
-spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "blueman-applet"
-
-// Wallpaper
-spawn-sh-at-startup "swaybg -i ~/Pictures/wallpapers/arch-minimal.png -m fill"
+spawn-at-startup "udiskie"
+spawn-at-startup "swayidle" "-w"
 
 prefer-no-csd
 
