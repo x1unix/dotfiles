@@ -74,8 +74,8 @@ layer-rule {
 }
 
 // Optionally, disable the workspace shadows in the overview.
-overview {
-    workspace-shadow {
-        off
-    }
-}
+// overview {
+//     workspace-shadow {
+//         off
+//     }
+// }
