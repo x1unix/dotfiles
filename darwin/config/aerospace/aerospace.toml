@@ -135,6 +135,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
+    alt-enter = 'exec-and-forget open -na Ghostty.app'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
