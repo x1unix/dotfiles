@@ -9,4 +9,5 @@ include "display.kdl"
 include "layout.kdl"
 include "windowrules.kdl"
 include "binds.kdl"
+include "dms.kdl"
 

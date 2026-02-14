@@ -1,0 +1,8 @@
+// DankMaterialShell configs
+//
+// Althought dms generates it's own Niri config, I still would like to manage it myself.
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
