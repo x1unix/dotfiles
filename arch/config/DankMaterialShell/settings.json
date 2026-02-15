@@ -191,7 +191,7 @@
   "soundsEnabled": true,
   "useSystemSoundTheme": false,
   "soundNewNotification": true,
-  "soundVolumeChanged": true,
+  "soundVolumeChanged": false,
   "soundPluggedIn": true,
   "acMonitorTimeout": 300,
   "acLockTimeout": 120,
