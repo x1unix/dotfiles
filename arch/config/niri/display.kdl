@@ -11,6 +11,13 @@ output "GIGA-BYTE TECHNOLOGY CO., LTD. M28U 23090B006897" {
 output "Ancor Communications Inc ASUS MG279 0x0002AD4F" {
   scale 1
   transform "270"
+
+  // Display is vertical
+  layout {
+    default-column-width {
+      proportion 1.0;
+    }
+  }
 }
 
 // Laptop - MacBook Pro 2015
