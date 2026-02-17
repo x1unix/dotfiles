@@ -4,6 +4,7 @@
 output "GIGA-BYTE TECHNOLOGY CO., LTD. M28U 23090B006897" {
   mode "3840x2160@119.999" 
   scale 1.25
+  focus-at-startup
 }
 
 // Desktop - secondary display
