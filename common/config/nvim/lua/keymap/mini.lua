@@ -4,7 +4,7 @@ local wk = require('which-key')
 wk.add({
   { '<Leader>s', group = 'sessions' },
   {
-    '<Leader>sl',
+    '<Leader>sS',
     function()
       require('mini.sessions').read(nil)
     end,
@@ -12,7 +12,7 @@ wk.add({
     desc = 'Load local or latest global session',
   },
   {
-    '<Leader>sr',
+    '<Leader>ss',
     function()
       require('mini.sessions').select('read')
     end,
@@ -20,7 +20,7 @@ wk.add({
     desc = 'Pick & load session',
   },
   {
-    '<Leader>ss',
+    '<Leader>sw',
     function()
       require('util.sessionutil').prompt_session_name(function(session_name)
         require('mini.sessions').write(session_name, { force = true })
