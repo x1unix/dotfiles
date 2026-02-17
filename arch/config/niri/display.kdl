@@ -6,6 +6,12 @@ output "GIGA-BYTE TECHNOLOGY CO., LTD. M28U 23090B006897" {
   scale 1.25
 }
 
+// Desktop - secondary display
+output "Ancor Communications Inc ASUS MG279 0x0002AD4F" {
+  scale 1
+  transform "270"
+}
+
 // Laptop - MacBook Pro 2015
 output "eDP-1" {
   scale 1.25
