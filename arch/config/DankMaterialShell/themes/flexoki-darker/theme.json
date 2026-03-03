@@ -1,9 +1,9 @@
 {
-  "id": "flexoki",
-  "name": "Flexoki",
+  "id": "flexoki-darker",
+  "name": "Flexoki Darker",
   "version": "1.0.0",
-  "author": "Euan Deas",
-  "description": "Inky color scheme for prose and code by Steph Ango",
+  "author": "x1unix",
+  "description": "Darker version of fleoki theme",
   "dark": {
     "primaryText": "#100F0F",
     "primaryContainer": "#205EA6",
@@ -14,9 +14,9 @@
     "background": "#100F0F",
     "backgroundText": "#CECDC3",
     "outline": "#575653",
-    "surfaceContainer": "#1C1B1A",
-    "surfaceContainerHigh": "#282726",
-    "surfaceContainerHighest": "#343331",
+    "surfaceContainer": "#000000",
+    "surfaceContainerHigh": "#161616",
+    "surfaceContainerHighest": "#1e1e1e",
     "error": "#D14D41",
     "warning": "#DA702C"
   },
@@ -43,10 +43,10 @@
         "id": "blue",
         "name": "Blue",
         "dark": {
-          "primary": "#4385BE",
-          "secondary": "#4385BE",
+          "primary": "#1d74d3",
+          "secondary": "#1d74d3",
           "surfaceTint": "#66A0C8",
-          "info": "#4385BE"
+          "info": "#1d74d3"
         },
         "light": {
           "primary": "#205EA6",
@@ -169,5 +169,5 @@
       }
     ]
   },
-  "sourceDir": "flexoki"
+  "sourceDir": "flexoki-darker"
 }
