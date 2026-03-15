@@ -62,6 +62,14 @@ g_resume() {
   esac
 }
 
+g_lock() {
+  if [ -n "$SWAYIDLE_USE_LOGINCTL" ]; then
+    loginctl lock-session
+  else
+    swaylock
+  fi
+}
+
 if [ -z "$XDG_CURRENT_DESKTOP" ]; then
   die "missing env var XDG_CURRENT_DESKTOP"
 fi
@@ -78,8 +86,11 @@ suspend)
 resume)
   g_resume
   ;;
+lock)
+  g_lock
+  ;;
 *)
-  echo "Usage: $0 [suspend|resume]"
+  echo "Usage: $0 [suspend|resume|lock]"
   die "bad subcommand '$1'"
   ;;
 esac

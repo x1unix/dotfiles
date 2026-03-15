@@ -42,6 +42,9 @@ swayimg
 swaylock
 dunst
 
+# Niri
+quickshell
+
 # XWayland & portals
 xorg-xwayland
 xdg-desktop-portal

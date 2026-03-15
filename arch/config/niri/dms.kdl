@@ -1,0 +1,18 @@
+// DankMaterialShell configs
+//
+// Althought dms generates it's own Niri config, I still would like to manage it myself.
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    // match namespace="quickshell"
+    place-within-backdrop true
+}
+
+// Quickshell
+window-rule {
+  match app-id="org.quickshell"
+  open-floating true
+  geometry-corner-radius 12
+  clip-to-geometry true
+}
+

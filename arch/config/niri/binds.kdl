@@ -5,7 +5,7 @@ binds {
     Mod+Space hotkey-overlay-title="Open launcher" { spawn "vicinae" "open"; }
     // Super+Escape hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
     // Mod+Escape hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
-    Mod+Escape hotkey-overlay-title="Lock the Screen" { spawn "swaylock" "-f"; }
+    Mod+Escape hotkey-overlay-title="Lock the Screen" { spawn "loginctl" "lock-session"; }
 
     // Volume
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }

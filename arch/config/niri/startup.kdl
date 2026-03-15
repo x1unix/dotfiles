@@ -1,18 +1,10 @@
-spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME"
-spawn-at-startup "systemctl --user start gnome-keyring-daemon"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "QT_QPA_PLATFORMTHEME" "SWAYIDLE_USE_LOGINCTL"
+spawn-at-startup "systemctl" "--user" "start" "gnome-keyring-daemon"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-at-startup "waybar"
-spawn-at-startup "udiskie"
-spawn-at-startup "dunst"
-spawn-at-startup "xwayland-satellite"
-// spawn-at-startup "fusuma"
-spawn-at-startup "swayidle" "-w"
-spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "blueman-applet"
+spawn-at-startup "systemctl" "--user" "start" "dms"
 spawn-at-startup "systemctl" "--user" "start" "vicinae"
-
-// Wallpaper
-spawn-sh-at-startup "swaybg -i ~/Pictures/wallpapers/arch-minimal.png -m fill"
+spawn-at-startup "udiskie"
+spawn-at-startup "swayidle" "-w"
 
 prefer-no-csd
 
@@ -30,6 +22,8 @@ environment {
   QT_QPA_PLATFORM "wayland"
   QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
 
+  // swayidle helper
+  SWAYIDLE_USE_LOGINCTL "1"
   
   // QT/KDE dark mode quirks
   GTK_USE_PORTAL "1"
