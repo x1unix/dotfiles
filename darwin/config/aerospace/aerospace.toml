@@ -140,15 +140,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
-    # None of those are actually working :(
-    # alt-enter = 'exec-and-forget open -na Ghostty.app --args --quit-after-last-window-closed=true'
-			#  alt-enter = '''exec-and-forget osascript -e '
-			#  tell application "system events"
-			# tell process "ghostty"
-			# 	keystroke "n" using command down
-			# end tell
-			#  end tell'
-			#  '''
+    # Ask Ghostty to open a new window using AppleScript
+    alt-enter = '''exec-and-forget osascript -l JavaScript -e 'Application("Ghostty").newWindow()''''
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
