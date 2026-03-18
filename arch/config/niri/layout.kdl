@@ -39,7 +39,8 @@ layout {
       on
       // off
       width 2
-      active-color "#268bd2"
+      active-color "#cc0000"
+      // active-color "#268bd2"
       // active-color "#4c78cc"
       inactive-color "#000000"
       urgent-color "#9b0000"
