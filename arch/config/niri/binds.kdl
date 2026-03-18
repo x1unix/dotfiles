@@ -28,8 +28,8 @@ binds {
     Mod+Q { close-window; }
 
     Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-or-workspace-down; }
-    Mod+K     { focus-window-or-workspace-up; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
     Mod+L     { focus-column-right; }
 
     Mod+Shift+H     { move-column-left; }
