@@ -92,3 +92,9 @@ window-rule {
   block-out-from "screen-capture"
 }
 
+
+// Dim inactive window
+window-rule {
+  match is-focused=false
+  opacity 0.9
+}
