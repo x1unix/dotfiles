@@ -27,6 +27,7 @@ ripgrep
 shellcheck
 
 # TUI tools
+fx
 lazygit
 neovim
 bluetui
