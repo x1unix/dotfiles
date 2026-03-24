@@ -19,6 +19,10 @@ return {
       heading = {
         -- Disable backgrounds for headings as it makes headings unreadable on light color scheme.
         backgrounds = {},
+        border = true,
+        border_virtual = true,
+        above = '',
+        below = '─',
       },
     },
   },
