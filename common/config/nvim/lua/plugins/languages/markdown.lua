@@ -15,6 +15,11 @@ return {
         language_icon = false,
         language_name = false,
       },
+
+      heading = {
+        -- Disable backgrounds for headings as it makes headings unreadable on light color scheme.
+        backgrounds = {},
+      },
     },
   },
 }
