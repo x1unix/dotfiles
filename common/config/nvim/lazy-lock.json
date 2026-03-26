@@ -3,7 +3,7 @@
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
   "LuaSnip": { "branch": "master", "commit": "5a1e39223db9a0498024a77b8441169d260c8c25" },
   "ascii.nvim": { "branch": "master", "commit": "70783fea66e99525221e52dce3b3489c05354181" },
-  "auto-dark-mode.nvim": { "branch": "feat/monitor-dbus", "commit": "0e9a68b91c413b8f96201177da2601fd7e005b7c" },
+  "auto-dark-mode.nvim": { "branch": "feat/monitor-dbus", "commit": "138a39a26c9419c95f0920e6b4e7bc66b17e043f" },
   "avante.nvim": { "branch": "main", "commit": "d80b7966c0505809e83e408353bbe8cb3394936d" },
   "blink-cmp-avante": { "branch": "master", "commit": "4f494c6e124acbe31a8f5d58effa0c14aa38a6d5" },
   "blink-copilot": { "branch": "main", "commit": "7ad8209b2f880a2840c94cdcd80ab4dc511d4f39" },
