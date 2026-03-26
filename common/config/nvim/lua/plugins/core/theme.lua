@@ -53,7 +53,13 @@ return {
     lazy = false,
     priority = 9999,
     dependencies = {
-      'f-person/auto-dark-mode.nvim',
+      {
+        -- TODO: switch to upstream after this is merged: https://github.com/f-person/auto-dark-mode.nvim/pull/63
+        -- See: https://github.com/f-person/auto-dark-mode.nvim/issues/64
+        -- 'f-person/auto-dark-mode.nvim',
+        'FineFindus/auto-dark-mode.nvim',
+        branch = 'feat/monitor-dbus',
+      },
       'nvim-lualine/lualine.nvim',
     },
     config = function()
