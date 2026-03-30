@@ -35,6 +35,7 @@ return {
     config = function()
       local telescope = require('telescope')
       local actions = require('telescope.actions')
+      local open_with_trouble = require('trouble.sources.telescope').open
 
       local custom_actions = require('util.telescope').actions
       telescope.setup({
@@ -67,11 +68,13 @@ return {
           -- As workaround: remap qfl hotkey.
           mappings = {
             i = {
-              ['<C-q>'] = custom_actions.qflist,
+              -- ['<C-q>'] = custom_actions.qflist,
+              ['<C-q>'] = open_with_trouble,
               ['<C-l>'] = custom_actions.loclist,
             },
             n = {
-              ['<C-q>'] = custom_actions.qflist,
+              -- ['<C-q>'] = custom_actions.qflist,
+              ['<C-q>'] = open_with_trouble,
               ['<C-l>'] = custom_actions.loclist,
             },
           },
