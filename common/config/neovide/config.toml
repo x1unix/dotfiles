@@ -1,0 +1,16 @@
+# See: https://neovide.dev/config-file.html
+
+[font]
+normal = ["Iosevka Nerd Font"]
+size = 12
+
+# The Unicode standard defines several code points that are useful to draw boxes, diagrams or are otherwise decorations. A font file can include graphical representation for several of these code points (glyphs). For example, Nerd Fonts is a collection of font faces that have been patched to include glyphs for several box drawing code points (and many other use-cases).
+#
+# When Neovide renders these glyphs, some glyphs might not line up correctly or might have gaps between adjacent cells, breaking visual continuity. This is especially pronounced when using the linespace configuration option to add spacing between lines.
+#
+# Neovide has support for native rendering (i.e ignore the glyph data in the font) for a subset of these glyphs to avoid this problem. You can configure this via:
+[box-drawing]
+mode = "native"
+
+# [font.features]
+# "Iosevka Nerd Font" = [ "+ss01", "+ss07", "+ss11", "-calt", "+ss09", "+ss02", "+ss14" ]
