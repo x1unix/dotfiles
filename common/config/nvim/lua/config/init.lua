@@ -36,3 +36,11 @@ vim.opt.equalalways = true -- re-balance on open/close window
 vim.opt.eadirection = 'both' -- resize both directions
 -- vim.opt.winminwidth = 5
 -- vim.opt.winminheight = 3
+
+-- Neovide
+if vim.g.neovide then
+  vim.g.neovide_font_hinting = 'none'
+  vim.g.neovide_font_edging = 'subpixelantialias'
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.o.guifont = 'IosevkaTerm Nerd Font:h11:w-0.5:#e-subpixelantialias:#h-none'
+end

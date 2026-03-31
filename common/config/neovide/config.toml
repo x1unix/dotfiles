@@ -1,8 +1,8 @@
 # See: https://neovide.dev/config-file.html
 
 [font]
-normal = ["Iosevka Nerd Font"]
-size = 12
+normal = ["IosevkaTerm Nerd Font"]
+size = 11
 
 # The Unicode standard defines several code points that are useful to draw boxes, diagrams or are otherwise decorations. A font file can include graphical representation for several of these code points (glyphs). For example, Nerd Fonts is a collection of font faces that have been patched to include glyphs for several box drawing code points (and many other use-cases).
 #
