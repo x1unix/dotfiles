@@ -1,7 +1,13 @@
 -- Neovide-specific keys
 local function neovide_scaler(delta)
   return function()
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
+    local next = vim.g.neovide_scale_factor + delta
+    if next < 0.5 then
+      -- Prevent overflow and crash
+      return
+    end
+
+    vim.g.neovide_scale_factor = next
   end
 end
 
