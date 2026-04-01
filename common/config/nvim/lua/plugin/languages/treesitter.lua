@@ -5,9 +5,9 @@ local function register_parsers(parsers)
     return
   end
 
-  local parsers = require('nvim-treesitter.parsers')
+  local dst = require('nvim-treesitter.parsers')
   for k, v in pairs(parsers) do
-    parsers[k] = v
+    dst[k] = v
   end
 end
 
