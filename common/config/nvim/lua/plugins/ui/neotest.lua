@@ -16,7 +16,10 @@ return {
       'nvim-neotest/neotest-plenary',
       {
         'fredrikaverpil/neotest-golang',
-        version = '^2',
+        version = '*',
+        build = function()
+          vim.system({ 'go', 'install', 'gotest.tools/gotestsum@latest' }):wait()
+        end,
       },
       'marilari88/neotest-vitest',
       'mrcjkb/rustaceanvim',
@@ -27,7 +30,9 @@ return {
       end
 
       vim.list_extend(opts.adapters, {
-        require('neotest-golang'),
+        require('neotest-golang')({
+          runner = 'gotestsum',
+        }),
         require('neotest-vitest'),
         require('rustaceanvim.neotest'),
       })
