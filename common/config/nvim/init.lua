@@ -22,7 +22,9 @@ require('pkg').setup()
 -- Load lazy.nvim
 require('lazy').setup({
   spec = {
-    { import = 'plugins' },
+    -- Since nvim 0.12 it will autoload "plugins" dir.
+    -- Use different dir to avoid collision with builtin package manager.
+    { import = 'plugin' },
   },
   checker = {
     enabled = true,

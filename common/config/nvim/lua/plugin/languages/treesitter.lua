@@ -15,6 +15,8 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     branch = 'main',
+    -- TODO: remove commit when nvim will be upgraded to v0.12
+    commit = '90cd6580e720caedacb91fdd587b747a6e77d61f',
     lazy = false,
     build = ':TSUpdate',
     dependencies = {

@@ -25,6 +25,7 @@ zoxide
 fzf
 ripgrep
 shellcheck
+tree-sitter-cli
 
 # TUI tools
 fx

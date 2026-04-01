@@ -1,10 +1,10 @@
 local function reload_highlights(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  local has_ts_config, _ = pcall(require, 'nvim-treesitter.configs')
-  if has_ts_config then
-    vim.cmd('TSBufDisable highlight | TSBufEnable highlight')
-    return
-  end
+  -- local has_ts_config, _ = pcall(require, 'nvim-treesitter.parsers')
+  -- if has_ts_config then
+  --   vim.cmd('TSBufDisable highlight | TSBufEnable highlight')
+  --   return
+  -- end
 
   vim.treesitter.stop(bufnr)
   vim.treesitter.start(bufnr)
