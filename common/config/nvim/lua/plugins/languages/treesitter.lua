@@ -5,16 +5,16 @@ local function register_parsers(parsers)
     return
   end
 
-  local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+  local parsers = require('nvim-treesitter.parsers')
   for k, v in pairs(parsers) do
-    parser_config[k] = v
+    parsers[k] = v
   end
 end
 
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
+    branch = 'main',
     lazy = false,
     build = ':TSUpdate',
     dependencies = {
@@ -75,7 +75,7 @@ return {
       }
     end,
     config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
+      require('nvim-treesitter').setup(opts)
     end,
   },
 }
