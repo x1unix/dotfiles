@@ -11,6 +11,10 @@ return {
       local gopls_bin = os.getenv('GOPLS_BIN')
       if gopls_bin then
         vim.notify('Using custom gopls bin: ' .. gopls_bin, vim.log.levels.INFO)
+      else
+        -- HACK: go.nvim always tries to install gopls if 'gopls_cmd' is undefined.
+        -- This prevents LSP server start.
+        gopls_bin = vim.fn.exepath('gopls')
       end
 
       require('go').setup({
