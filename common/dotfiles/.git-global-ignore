@@ -2,3 +2,6 @@
 .vscode
 .DS_Store
 .claude/settings.local.json
+
+# mini.nvim session file name
+.session.vim

@@ -6,10 +6,10 @@ wk.add({
   {
     '<Leader>sS',
     function()
-      require('mini.sessions').read(nil)
+      require('util.uiutil').open_dir_dialog.open()
     end,
     mode = 'n',
-    desc = 'Load local or latest global session',
+    desc = 'Load session from directory',
   },
   {
     '<Leader>ss',

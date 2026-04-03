@@ -77,10 +77,19 @@ end
 
 -- File to be opened when directory is selected
 local default_file = 'README.md'
+local session_file = '.session.vim'
 
 --- @param path string
 D._on_dir_picked = function(path)
   vim.api.nvim_set_current_dir(path)
+
+  -- Load session if exists in a dir.
+  local sesspath = vim.fs.joinpath(path, session_file)
+  if vim.fn.filereadable(sesspath) then
+    local sessions = require('mini.sessions')
+    sessions.read(session_file, { force = true })
+    return
+  end
 
   -- Open the readme if exists.
   if vim.fn.filereadable(default_file) then
@@ -118,5 +127,6 @@ D.set_value = function(path, should_close)
 end
 
 M.open_dir_dialog = D
+M.session_file = session_file
 
 return M

@@ -1,3 +1,4 @@
+local uiutil = require('util.uiutil')
 local mini_plugins = {
   -- Better Around/Inside textobject
   --
@@ -88,12 +89,11 @@ local mini_plugins = {
 
     return {
       header = function()
-        return require('util.uiutil').get_header()
+        return uiutil.get_header()
       end,
       items = {
         starter.sections.sessions(5, true),
         starter.sections.recent_files(5, true, false),
-        -- starter.sections.builtin_actions(),
         footer_actions,
       },
     }
@@ -103,7 +103,7 @@ local mini_plugins = {
   ['mini.sessions'] = {
     autoread = false,
     autowrite = true,
-    file = '',
+    file = uiutil.session_file,
     directory = vim.fn.stdpath('data') .. '/sessions',
     force = {
       write = true,
