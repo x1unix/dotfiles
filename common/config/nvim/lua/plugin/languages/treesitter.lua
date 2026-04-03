@@ -56,7 +56,10 @@ return {
     lazy = false,
     build = ':TSUpdate | TSSync',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        branch = 'main',
+      },
       'RRethy/nvim-treesitter-endwise',
       'windwp/nvim-ts-autotag',
     },
