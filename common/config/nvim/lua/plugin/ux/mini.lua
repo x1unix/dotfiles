@@ -73,11 +73,31 @@ local mini_plugins = {
 
   -- Startup screen.
   -- See: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-starter.md
-  ['mini.starter'] = {
-    header = function()
-      return require('util.uiutil').get_header()
-    end,
-  },
+  ['mini.starter'] = function(mod)
+    ---@module 'mini.starter'
+    local starter = mod
+    local footer_actions = {
+      {
+        name = 'Open directory',
+        action = require('util.uiutil').open_dir_dialog.open,
+        section = 'Actions',
+      },
+      { name = 'Edit new buffer', action = 'enew', section = 'Actions' },
+      { name = 'Quit Neovim', action = 'qall', section = 'Actions' },
+    }
+
+    return {
+      header = function()
+        return require('util.uiutil').get_header()
+      end,
+      items = {
+        starter.sections.sessions(5, true),
+        starter.sections.recent_files(5, true, false),
+        -- starter.sections.builtin_actions(),
+        footer_actions,
+      },
+    }
+  end,
 
   -- Session management. Works with mini.starter
   ['mini.sessions'] = {

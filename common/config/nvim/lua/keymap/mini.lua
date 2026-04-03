@@ -41,6 +41,15 @@ wk.add({
 
 local map_split = function(buf_id, lhs, direction)
   local rhs = function()
+    local entry = MiniFiles.get_fs_entry()
+    if not entry then
+      vim.notify('Cursor is not on valid entry')
+      return
+    end
+    if entry.fs_type ~= 'file' then
+      return
+    end
+
     local cur_target = MiniFiles.get_explorer_state().target_window
     local new_target = vim.api.nvim_win_call(cur_target, function()
       vim.cmd(direction .. ' split')
@@ -62,14 +71,36 @@ vim.api.nvim_create_autocmd('User', {
   callback = function(args)
     local bufnr = args.data.buf_id
 
+    -- Mini.files also used as open directory dialog on the welcome screen.
+    -- See: ../util/uiutil.lua
+    local dialog = require('util.uiutil').open_dir_dialog
+
     -- Open selected file in split
     map_split(bufnr, '<C-s>', 'belowright horizontal')
     map_split(bufnr, '<C-v>', 'belowright vertical')
+
+    if dialog.is_active() then
+      -- Handle dir open dialog actions
+      vim.keymap.set('n', '<CR>', function()
+        if not dialog.is_active() then
+          return
+        end
+
+        local entry = MiniFiles.get_fs_entry()
+        dialog.set_value(entry and entry.path or nil, true)
+      end, { buffer = bufnr, desc = 'Select directory' })
+    end
+
     vim.keymap.set('n', '<C-t>', function()
+      if dialog.is_active() then
+        return
+      end
+
       -- Tried to adapt vsplit example from mini.files docs with 'tabe' - didn't work :(
       local entry = MiniFiles.get_fs_entry()
       if not entry then
-        return vim.notify('Cursor is not on valid entry')
+        vim.notify('Cursor is not on valid entry')
+        return
       end
       if entry.fs_type == 'file' then
         MiniFiles.close()
@@ -82,6 +113,10 @@ vim.api.nvim_create_autocmd('User', {
 
     -- Grep in selected dir
     vim.keymap.set('n', '<C-/>', function()
+      if dialog.is_active() then
+        return
+      end
+
       local entry = MiniFiles.get_fs_entry()
       if not entry then
         return vim.notify('Cursor is not on valid entry')
@@ -97,7 +132,6 @@ vim.api.nvim_create_autocmd('User', {
       require('telescope.builtin').live_grep({
         cwd = target_dir,
       })
-      vim.print(target_dir)
     end, { buffer = bufnr, desc = 'Grep in selected directory' })
   end,
 })

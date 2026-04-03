@@ -32,4 +32,91 @@ M.get_header = function()
   return header .. '\n\n' .. vim.fn.getcwd()
 end
 
+local D = {
+  _is_open = false,
+  _is_init = false,
+
+  --- @type string|nil
+  _value = nil,
+
+  --- @module "mini.files"
+  _files = nil,
+}
+
+D.is_active = function()
+  return D._is_open
+end
+
+D._init = function()
+  if D._is_init then
+    return
+  end
+
+  -- Setup on-close hooks to sync picker state.
+  D._is_init = true
+  D._files = require('mini.files')
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesExplorerClose',
+    callback = function()
+      if not D._is_open or not D._value then
+        return
+      end
+
+      D._is_open = false
+      local value = D._value
+      D._value = nil
+
+      if value then
+        vim.schedule(function()
+          D._on_dir_picked(value)
+        end)
+      end
+    end,
+  })
+end
+
+-- File to be opened when directory is selected
+local default_file = 'README.md'
+
+--- @param path string
+D._on_dir_picked = function(path)
+  vim.api.nvim_set_current_dir(path)
+
+  -- Open the readme if exists.
+  if vim.fn.filereadable(default_file) then
+    -- Replicate what ministarter does
+    local bufid = vim.fn.bufadd(vim.fn.fnameescape(default_file))
+    pcall(vim.api.nvim_win_set_buf, 0, bufid)
+    return
+  end
+
+  -- Otherwise, show file explorer
+  vim.cmd('e .')
+end
+
+D.open = function()
+  -- NOTE: directory selection action is handled in autocmd declared in ../keymap/mini.lua
+  D._is_open = true
+  D._init()
+
+  D._files.open(nil, true, {
+    content = {
+      filter = function(a)
+        return a.fs_type == 'directory'
+      end,
+    },
+  })
+end
+
+--- @param path string|nil
+--- @param should_close boolean|nil
+D.set_value = function(path, should_close)
+  D._value = path
+  if should_close then
+    D._files.close()
+  end
+end
+
+M.open_dir_dialog = D
+
 return M
