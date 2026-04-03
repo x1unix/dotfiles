@@ -124,51 +124,51 @@ wk.add({
   },
 })
 
-wk.add({
-  {
-    '<Leader>l',
-    group = 'lspsaga',
-    icon = icons.symbol_event,
-  },
-  {
-    '<Leader>lo',
-    '<cmd>Lspsaga outline<cr>',
-    desc = 'lsp: outline',
-  },
-  {
-    '<Leader>lr',
-    '<cmd>Lspsaga rename<cr>',
-    desc = 'lsp: rename',
-    icon = icons.action_rename,
-  },
-  {
-    '<Leader>ld',
-    '<cmd>Lspsaga goto_definition<cr>',
-    desc = 'lsp: goto definition',
-  },
-  {
-    '<Leader>lf',
-    '<cmd>Lspsaga lsp_finder<cr>',
-    desc = 'lsp: finder',
-  },
-  {
-    '<Leader>lp',
-    '<cmd>Lspsaga preview_definition<cr>',
-    desc = 'lsp: preview_definition',
-  },
-  {
-    '<Leader>ls',
-    '<cmd>Lspsaga signature_help<cr>',
-    desc = 'lsp: signature_help',
-  },
-  {
-    '<Leader>lw',
-    '<cmd>Lspsaga show_line_diagnostics<cr>',
-    desc = 'lsp: show_line_diagnostics',
-  },
-  {
-    '<Leader>lW',
-    '<cmd>Lspsaga show_workspace_diagnostics<cr>',
-    desc = 'lsp: workspace_diagnostics',
-  },
-})
+-- wk.add({
+--   {
+--     '<Leader>l',
+--     group = 'lspsaga',
+--     icon = icons.symbol_event,
+--   },
+--   {
+--     '<Leader>lo',
+--     '<cmd>Lspsaga outline<cr>',
+--     desc = 'lsp: outline',
+--   },
+--   {
+--     '<Leader>lr',
+--     '<cmd>Lspsaga rename<cr>',
+--     desc = 'lsp: rename',
+--     icon = icons.action_rename,
+--   },
+--   {
+--     '<Leader>ld',
+--     '<cmd>Lspsaga goto_definition<cr>',
+--     desc = 'lsp: goto definition',
+--   },
+--   {
+--     '<Leader>lf',
+--     '<cmd>Lspsaga lsp_finder<cr>',
+--     desc = 'lsp: finder',
+--   },
+--   {
+--     '<Leader>lp',
+--     '<cmd>Lspsaga preview_definition<cr>',
+--     desc = 'lsp: preview_definition',
+--   },
+--   {
+--     '<Leader>ls',
+--     '<cmd>Lspsaga signature_help<cr>',
+--     desc = 'lsp: signature_help',
+--   },
+--   {
+--     '<Leader>lw',
+--     '<cmd>Lspsaga show_line_diagnostics<cr>',
+--     desc = 'lsp: show_line_diagnostics',
+--   },
+--   {
+--     '<Leader>lW',
+--     '<cmd>Lspsaga show_workspace_diagnostics<cr>',
+--     desc = 'lsp: workspace_diagnostics',
+--   },
+-- })

@@ -75,6 +75,20 @@ wk.add({
     desc = 'splits: C^w',
     icon = icons.grid,
   },
+  {
+    '<Leader>h',
+    '<C-w>h',
+    mode = 'n',
+    desc = 'splits: go left',
+    icon = icons.grid,
+  },
+  {
+    '<Leader>l',
+    '<C-w>l',
+    mode = 'n',
+    desc = 'splits: go right',
+    icon = icons.grid,
+  },
   -- Search --
   {
     '<Leader>\\',
@@ -152,7 +166,7 @@ wk.add({
     desc = 'buffers: all',
   },
   {
-    '<Leader>h',
+    '<Leader>H',
     function()
       require('telescope.builtin').jumplist({
         layout_strategy = 'flex',
