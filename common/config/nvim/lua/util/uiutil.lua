@@ -87,8 +87,11 @@ D._on_dir_picked = function(path)
   local sesspath = vim.fs.joinpath(path, session_file)
   if vim.fn.filereadable(sesspath) then
     local sessions = require('mini.sessions')
-    sessions.read(session_file, { force = true })
-    return
+    local ok, _ = pcall(sessions.read, session_file, { force = true })
+    if ok then
+      -- FIXME: another local session can't be loaded if when inside another local session.
+      return
+    end
   end
 
   -- Open the readme if exists.
