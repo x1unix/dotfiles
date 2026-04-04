@@ -112,10 +112,13 @@ M.open_dir_session = function(path, opts)
   -- disable mini temporary to avoid session corruption.
   vim.g.minisessions_disable = true
 
+  -- servers should be closed only after all docs are closed to prevent autorestart.
+  vim.cmd('silent! %bwipeout!')
+  vim.lsp.stop_client(vim.lsp.get_clients())
+
   -- unload current session.
   vim.api.nvim_set_current_dir(path)
   local next_session_path = vim.fs.joinpath(path, M.session_file)
-  vim.cmd('silent! %bwipeout!')
 
   if next_session_exists then
     vim.cmd(('silent! source %s'):format(vim.fn.fnameescape(next_session_path)))
@@ -124,13 +127,11 @@ M.open_dir_session = function(path, opts)
     vim.schedule(function()
       vim.v.this_session = M.session_file
       sessions.detected[M.session_file] = new_session()
-      vim.g.minisessions_disable = true
+      vim.g.minisessions_disable = false
     end)
     return true
   end
 
-  -- print('bwipeout')
-  -- vim.cmd('silent! %bwipeout!')
   if opts and opts.on_created then
     opts.on_created(path)
   end
