@@ -101,40 +101,46 @@ M.open_dir_session = function(path, opts)
   -- unload current local session first.
   local sessions = require('mini.sessions')
   if M.is_session_loaded() then
-    -- var_dump({
-    --   msg = 'unload session',
-    --   current = vim.v.this_session,
-    -- })
     sessions.write(nil, {
       verbose = false,
+      force = true,
     })
     sessions.detected[vim.v.this_session] = nil
     vim.v.this_session = ''
   end
 
-  if next_session_exists then
-    print('open_next_session')
-    -- change work dir so mini could detect a new local session during read().
-    -- vim.cmd('silent! %bwipeout!')
+  -- disable mini temporary to avoid session corruption.
+  vim.g.minisessions_disable = true
 
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-      vim.api.nvim_buf_delete(buf, { force = true })
-    end
+  -- unload current session.
+  vim.api.nvim_set_current_dir(path)
+  local next_session_path = vim.fs.joinpath(path, M.session_file)
+  vim.cmd('silent! %bwipeout!')
+
+  if next_session_exists then
+    vim.cmd(('silent! source %s'):format(vim.fn.fnameescape(next_session_path)))
+
+    -- Enable mini back
     vim.schedule(function()
-      vim.api.nvim_set_current_dir(path)
-      sessions.read(M.session_file, { force = true, verbose = false })
+      vim.v.this_session = M.session_file
+      sessions.detected[M.session_file] = new_session()
+      vim.g.minisessions_disable = true
     end)
     return true
   end
 
   -- print('bwipeout')
-  vim.cmd('silent! %bwipeout!')
-  vim.api.nvim_set_current_dir(path)
+  -- vim.cmd('silent! %bwipeout!')
   if opts and opts.on_created then
     opts.on_created(path)
   end
 
-  sessions.write(M.session_file, { force = true, verbose = true })
+  vim.schedule(function()
+    vim.v.this_session = M.session_file
+    sessions.detected[M.session_file] = new_session()
+    vim.g.minisessions_disable = true
+    sessions.write(M.session_file, { force = true, verbose = true })
+  end)
   return true
 end
 

@@ -26,6 +26,10 @@ M.install_reload_highlights_autocmd = function()
     pattern = 'go',
     callback = function(args)
       local buf = args.buf
+      if not vim.api.nvim_buf_is_valid(buf) then
+        return
+      end
+
       vim.schedule(function()
         reload_highlights(buf)
       end)
