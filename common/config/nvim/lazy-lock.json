@@ -75,5 +75,6 @@
   "vim-alloy": { "branch": "main", "commit": "0273f88f7199189f9a0f32213a34ab778e226f86" },
   "vscode.nvim": { "branch": "main", "commit": "aa1102a7e15195c9cca22730b09224a7f7745ba8" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" }
+  "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" },
+  "worktrees.nvim": { "branch": "main", "commit": "c147aac62d44048c244a9096ed4882e6f5dbbc4b" }
 }

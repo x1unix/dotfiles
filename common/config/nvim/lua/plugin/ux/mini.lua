@@ -1,4 +1,5 @@
 local uiutil = require('util.uiutil')
+
 local mini_plugins = {
   -- Better Around/Inside textobject
   --
@@ -103,7 +104,7 @@ local mini_plugins = {
   ['mini.sessions'] = {
     autoread = false,
     autowrite = true,
-    file = uiutil.session_file,
+    file = require('util.sessionutil').session_file,
     directory = vim.fn.stdpath('data') .. '/sessions',
     force = {
       write = true,
@@ -137,6 +138,7 @@ return {
     'nvim-mini/mini.nvim',
     lazy = false,
     version = false,
+    dir = '/home/x1unix/src/mini.nvim',
     config = function()
       -- For session management
       vim.opt.sessionoptions:append('folds')

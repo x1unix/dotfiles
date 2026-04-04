@@ -32,6 +32,49 @@ M.get_header = function()
   return header .. '\n\n' .. vim.fn.getcwd()
 end
 
+-- File to be opened when directory is selected
+local default_file = 'README.md'
+
+M.open_readme = function()
+  if not vim.fn.filereadable(default_file) then
+    return false
+  end
+
+  -- Replicate what ministarter does
+  local bufid = vim.fn.bufadd(vim.fn.fnameescape(default_file))
+  pcall(vim.api.nvim_win_set_buf, 0, bufid)
+  return true
+end
+
+--- @class OpenDirOpts
+--- @field reset_session boolean | nil
+
+--- Switches neovim editor to a different working directory and restores session.
+--- If target dir doesn't contain any session - opens README.md.
+---
+--- Function aims to replicate a classic "Open Folder" action found in most classic editors/IDEs.
+---
+--- @param path string
+--- @param opts OpenDirOpts | nil
+M.open_directory = function(path, opts)
+  local sessutil = require('util.sessionutil')
+
+  if not sessutil.assert_has_unsaved_buffers('Cannot change directory') then
+    return
+  end
+
+  -- Try to load a session from directory.
+  if sessutil.open_dir_session(path) then
+    return
+  end
+
+  -- Manually change work dir and try to open README.md or file explorer.
+  vim.api.nvim_set_current_dir(path)
+  if not M.open_readme() then
+    vim.cmd('e .')
+  end
+end
+
 local D = {
   _is_open = false,
   _is_init = false,
@@ -68,42 +111,11 @@ D._init = function()
 
       if value then
         vim.schedule(function()
-          D._on_dir_picked(value)
+          M.open_directory(value)
         end)
       end
     end,
   })
-end
-
--- File to be opened when directory is selected
-local default_file = 'README.md'
-local session_file = '.session.vim'
-
---- @param path string
-D._on_dir_picked = function(path)
-  vim.api.nvim_set_current_dir(path)
-
-  -- Load session if exists in a dir.
-  local sesspath = vim.fs.joinpath(path, session_file)
-  if vim.fn.filereadable(sesspath) then
-    local sessions = require('mini.sessions')
-    local ok, _ = pcall(sessions.read, session_file, { force = true })
-    if ok then
-      -- FIXME: another local session can't be loaded if when inside another local session.
-      return
-    end
-  end
-
-  -- Open the readme if exists.
-  if vim.fn.filereadable(default_file) then
-    -- Replicate what ministarter does
-    local bufid = vim.fn.bufadd(vim.fn.fnameescape(default_file))
-    pcall(vim.api.nvim_win_set_buf, 0, bufid)
-    return
-  end
-
-  -- Otherwise, show file explorer
-  vim.cmd('e .')
 end
 
 D.open = function()
@@ -130,6 +142,5 @@ D.set_value = function(path, should_close)
 end
 
 M.open_dir_dialog = D
-M.session_file = session_file
 
 return M
