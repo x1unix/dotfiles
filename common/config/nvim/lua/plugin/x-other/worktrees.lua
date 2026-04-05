@@ -4,7 +4,10 @@ end
 
 return {
   {
-    'Juksuu/worktrees.nvim',
+    -- Switch to upstream when merged: https://github.com/Juksuu/worktrees.nvim/pull/11
+    -- 'Juksuu/worktrees.nvim',
+    'x1unix/worktrees.nvim',
+    branch = 'feat/on-before-switch',
     keys = {
       {
         '<Leader>a',
@@ -15,6 +18,8 @@ return {
       },
     },
     opts = {
+      --- @module 'worktrees.nvim'
+      --- @type worktrees.Hooks
       hooks = {
         on_add = function(name, path, branch)
           -- TODO: handle action
@@ -25,13 +30,15 @@ return {
             branch = branch,
           })
         end,
+        on_before_switch = function(from, to, git_path_info)
+          -- Persist workspace session
+          require('util.sessionutil').save_dir_session(from, {
+            force = true,
+            wipeout = true,
+          })
+        end,
         on_switch = function(from, to, git_path_info)
-          -- var_dump({
-          --   event = 'on_switch',
-          --   from = from,
-          --   to = to,
-          --   git_path_info = git_path_info,
-          -- })
+          -- Restore session
           require('util.sessionutil').open_dir_session(to, {
             create_if_missing = true,
             on_created = require('util.uiutil').open_readme,
