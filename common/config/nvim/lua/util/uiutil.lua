@@ -57,14 +57,14 @@ end
 --- @param path string
 --- @param opts OpenDirOpts | nil
 M.open_directory = function(path, opts)
-  local sessutil = require('util.sessionutil')
-
-  if not sessutil.assert_has_unsaved_buffers('Cannot change directory') then
+  local wsutils = require('pkg.mini-session-workspaces.utils')
+  if not wsutils.assert_has_unsaved_buffers('Cannot change directory') then
     return
   end
 
   -- Try to load a session from directory.
-  if sessutil.open_dir_session(path) then
+  local workspaces = require('pkg.mini-session-workspaces')
+  if workspaces.open_workspace(path) then
     return
   end
 

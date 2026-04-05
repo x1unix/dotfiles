@@ -46,7 +46,7 @@ M.is_session_loaded = function()
 end
 
 --- Returns whether a directory (local) session is loaded.
-M.is_local_session_loaded = function()
+M.is_workspace_open = function()
   return vim.v.this_session == M.session_file()
 end
 

@@ -22,9 +22,9 @@ wk.add({
   {
     '<Leader>sw',
     function()
-      require('util.sessionutil').prompt_session_name(function(session_name)
-        require('mini.sessions').write(session_name, { force = true })
-      end)
+      require('pkg.mini-session-workspaces.ui').save_session_dialog({
+        force = true,
+      })
     end,
     mode = 'n',
     desc = 'Save current session',
