@@ -1,9 +1,5 @@
 local M = {}
 
-local function var_dump(v)
-  print(vim.inspect(v))
-end
-
 local function prompt_input(prompt, cb)
   if vim.ui and vim.ui.input then
     vim.ui.input({
@@ -86,10 +82,25 @@ M.is_local_session_loaded = function()
   return vim.v.this_session == M.session_file
 end
 
---- @class OpenDirSessionOpts
---- @field create_if_missing boolean|nil
---- @field on_created function|nil
+--- Closes all buffers and terminates LSP servers.
+local function dispose_workspace()
+  vim.cmd('clearjumps | silent! %bwipeout!')
+  vim.lsp.stop_client(vim.lsp.get_clients())
+  vim.v.this_session = ''
+end
 
+--- @class OpenDirSessionOpts
+--- @field create_if_missing boolean|nil Create a new local session if missing.
+--- @field skip_session_save boolean|nil Don't save current session.
+--- @field on_created function|nil Hook to run if a new session was
+
+--- Opens a local session in a given directory.
+--- Aborts if local session doesn't exist, unless [opts.create_if_missing] is set to true.
+---
+--- Returns success result.
+---
+--- @param path string
+--- @param opts OpenDirSessionOpts
 M.open_dir_session = function(path, opts)
   local next_session_exists = M.dir_has_session(path)
   local create_if_missing = opts and opts.create_if_missing
@@ -107,14 +118,14 @@ M.open_dir_session = function(path, opts)
     })
     sessions.detected[vim.v.this_session] = nil
     vim.v.this_session = ''
+    return false
   end
 
   -- disable mini temporary to avoid session corruption.
   vim.g.minisessions_disable = true
 
   -- servers should be closed only after all docs are closed to prevent autorestart.
-  vim.cmd('silent! %bwipeout!')
-  vim.lsp.stop_client(vim.lsp.get_clients())
+  dispose_workspace()
 
   -- unload current session.
   vim.api.nvim_set_current_dir(path)
@@ -145,73 +156,33 @@ M.open_dir_session = function(path, opts)
   return true
 end
 
---- Open a local directory session.
---- Returns false if directory doesn't contain a local session.
----
---- @param path string
---- @param opts OpenDirSessionOpts | nil
-M.open_dir_session2 = function(path, opts)
-  local next_session_exists = M.dir_has_session(path)
-  local create_if_missing = opts and opts.create_if_missing
-  if not next_session_exists and not create_if_missing then
-    return false
-  end
+--- @class SaveDirSessionOpts
+--- @field force boolean|nil Create a new session if not exists.
+--- @field wipeout boolean|nil Close all buffers after save.
 
-  -- mini throws an error when switching between local sessions.
-  -- unload current local session first.
-  local sessions = require('mini.sessions')
-  if M.is_local_session_loaded() then
-    print('is_local_session_loaded')
-    sessions.write(M.session_file, {
-      verbose = false,
-    })
-    vim.v.this_session = ''
-  end
+--- @param path string | nil
+--- @param opts SaveDirSessionOpts|nil
+M.save_dir_session = function(path, opts)
+  local force = opts and opts.force
+  local wipeout = opts and opts.wipeout
 
-  if next_session_exists then
-    -- switch from global to a local session.
-    -- mini refuses to load items that not present in the detected list.
-    -- manually inject session and load it.
-    sessions.detected[M.session_file] = new_session(vim.fs.joinpath(path, M.session_file), 'local')
-    print('next_session_exists')
-    sessions.read(M.session_file, { force = true, verbose = false })
-    return true
-  end
-
-  -- No session, create one from scratch. Save existing session if necessary.
-  if M.is_session_loaded() then
-    print('is_session_loaded')
-    sessions.write(nil, { force = true, verbose = false })
-    vim.v.this_session = ''
-  end
-
-  print('bwipeout')
-  vim.cmd('silent! %bwipeout!')
-  vim.api.nvim_set_current_dir(path)
-  if opts and opts.on_created then
-    opts.on_created(path)
-  end
-
-  sessions.write(M.session_file, { force = true, verbose = true })
-  return true
-end
-
---- @param path string
---- @param force boolean | nil
-M.save_dir_session = function(path, force)
+  path = path or vim.fn.getcwd()
   local exists = M.dir_has_session(path)
   if force or exists then
     require('mini.sessions').write(M.session_file, {
       force = true,
       verbose = false,
     })
+
+    if wipeout then
+      dispose_workspace()
+    end
   end
 end
 
 --- @param path string
 M.dir_has_session = function(path)
   local sesspath = vim.fs.joinpath(path, M.session_file)
-  local ok = vim.fn.filereadable(sesspath)
   return vim.fn.filereadable(sesspath)
 end
 
