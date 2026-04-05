@@ -75,5 +75,5 @@
   "vscode.nvim": { "branch": "main", "commit": "aa1102a7e15195c9cca22730b09224a7f7745ba8" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" },
-  "worktrees.nvim": { "branch": "feat/on-before-switch", "commit": "3f89784944c67500bd1c622f31ed5219851a561c" }
+  "worktrees.nvim": { "branch": "feat/on-before-switch", "commit": "4cd2505cf9cfc7988e7f9545e34be5446e463541" }
 }

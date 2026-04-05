@@ -10,46 +10,34 @@ return {
     branch = 'feat/on-before-switch',
     keys = {
       {
-        '<Leader>a',
+        'gW',
         mode = { 'n' },
         function()
           Snacks.picker.worktrees()
         end,
+        desc = 'git: switch worktree',
       },
     },
     opts = {
-      --- @module 'worktrees.nvim'
+      --- @module 'worktrees'
       --- @type worktrees.Hooks
       hooks = {
-        on_add = function(name, path, branch)
-          -- TODO: handle action
-          var_dump({
-            event = 'on_add',
-            name = name,
-            path = path,
-            branch = branch,
-          })
-        end,
         on_before_switch = function(from, to, git_path_info)
           -- Persist workspace session
-          require('util.sessionutil').save_dir_session(from, {
+          require('pkg.mini-session-workspaces').save_workspace(from, {
             force = true,
             wipeout = true,
           })
         end,
         on_switch = function(from, to, git_path_info)
           -- Restore session
-          require('util.sessionutil').open_dir_session(to, {
+          require('pkg.mini-session-workspaces').open_workspace(to, {
             create_if_missing = true,
             on_created = require('util.uiutil').open_readme,
           })
         end,
-        on_remove = function(name)
-          -- TODO: handle action
-          var_dump({
-            event = 'on_remove',
-            name = name,
-          })
+        on_before_remove = function(path)
+          require('pkg.mini-session-workspaces').delete_workspace(path, { force = true })
         end,
       },
     },
