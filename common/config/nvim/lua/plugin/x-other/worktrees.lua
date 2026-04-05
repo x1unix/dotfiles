@@ -9,7 +9,7 @@ return {
     'x1unix/worktrees.nvim',
     branch = 'feat/on-before-switch',
     dependencies = {
-      'x1inix/mini-workspaces',
+      'x1unix/mini-workspaces',
     },
     keys = {
       {

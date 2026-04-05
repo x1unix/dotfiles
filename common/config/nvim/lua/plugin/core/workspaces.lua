@@ -1,6 +1,6 @@
 return {
   {
-    'x1inix/mini-workspaces',
+    'x1unix/mini-workspaces',
     lazy = false,
     opts = {},
   },
