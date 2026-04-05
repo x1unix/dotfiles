@@ -165,6 +165,9 @@ return {
 
         mod.setup(cfg)
       end
+
+      -- Init workspaces helper
+      require('pkg.mini-session-workspaces').setup()
     end,
     dependencies = {
       -- For ascii art

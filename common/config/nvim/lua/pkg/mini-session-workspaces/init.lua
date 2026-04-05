@@ -1,9 +1,5 @@
 local utils = require('pkg.mini-session-workspaces.utils')
 
---- @class MiniWorkspaces.Options
---- @field history_file string|nil Path to a file to store workspaces history.
---- @field history_max_items number|nil Max number of workspaces to store in a history file.
-
 --- @class MiniWorkspaces.PluginConfig
 --- @field history_file string
 --- @field history_max_items number
@@ -18,6 +14,10 @@ local M = {
     history_max_items = 5,
   },
 }
+
+--- @class MiniWorkspaces.Options
+--- @field history_file string|nil Path to a file to store workspaces history.
+--- @field history_max_items number|nil Max number of workspaces to store in a history file.
 
 --- @param opts MiniWorkspaces.Options|nil
 M.setup = function(opts)
