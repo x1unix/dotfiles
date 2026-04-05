@@ -139,7 +139,6 @@ return {
     'nvim-mini/mini.nvim',
     lazy = false,
     version = false,
-    dir = '/home/x1unix/src/mini.nvim',
     config = function()
       -- For session management
       vim.opt.sessionoptions:append('folds')
