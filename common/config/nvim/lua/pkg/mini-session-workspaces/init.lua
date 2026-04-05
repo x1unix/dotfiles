@@ -39,6 +39,14 @@ M.setup = function(opts)
   M._sessions = sessions
   M.config = vim.tbl_deep_extend('force', vim.deepcopy(M.config), opts or {})
   M._history = History:open(M.config.history_file, M.config.history_max_items)
+
+  local g = vim.api.nvim_create_augroup('MiniWorkspaces', { clear = true })
+  vim.api.nvim_create_autocmd('VimLeavePre', {
+    group = g,
+    callback = function()
+      M._history:sync()
+    end,
+  })
 end
 
 --- Returns workspaces visit history.
