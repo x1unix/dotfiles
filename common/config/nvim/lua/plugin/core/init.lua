@@ -6,4 +6,5 @@ return {
   { import = 'plugin.core.todo' },
   { import = 'plugin.core.theme' },
   { import = 'plugin.core.whichkey' },
+  { import = 'plugin.core.workspaces' },
 }

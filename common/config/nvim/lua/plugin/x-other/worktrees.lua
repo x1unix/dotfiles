@@ -8,6 +8,9 @@ return {
     -- 'Juksuu/worktrees.nvim',
     'x1unix/worktrees.nvim',
     branch = 'feat/on-before-switch',
+    dependencies = {
+      'x1inix/mini-workspaces',
+    },
     keys = {
       {
         'gW',
@@ -24,20 +27,20 @@ return {
       hooks = {
         on_before_switch = function(from, to, git_path_info)
           -- Persist workspace session
-          require('pkg.mini-session-workspaces').save_workspace(from, {
+          require('mini-workspaces').save_workspace(from, {
             force = true,
             wipeout = true,
           })
         end,
         on_switch = function(from, to, git_path_info)
           -- Restore session
-          require('pkg.mini-session-workspaces').open_workspace(to, {
+          require('mini-workspaces').open_workspace(to, {
             create_if_missing = true,
             on_created = require('util.uiutil').open_readme,
           })
         end,
         on_before_remove = function(path)
-          require('pkg.mini-session-workspaces').delete_workspace(path, { force = true })
+          require('mini-workspaces').delete_workspace(path, { force = true })
         end,
       },
     },

@@ -22,7 +22,7 @@ wk.add({
   {
     '<Leader>sw',
     function()
-      require('pkg.mini-session-workspaces.ui').save_session_dialog({
+      require('mini-workspaces.ui').save_session_dialog({
         force = true,
       })
     end,
