@@ -92,14 +92,13 @@ M.open_workspace = function(path, opts)
   -- unload current session.
   vim.api.nvim_set_current_dir(path)
   local next_session_path = vim.fs.joinpath(path, M.session_file())
-
   if next_session_exists then
     vim.cmd(('silent! source %s'):format(vim.fn.fnameescape(next_session_path)))
 
     -- Enable mini back
     vim.schedule(function()
       vim.v.this_session = M.session_file()
-      M._sessions.detected[vim.v.this_session] = utils.new_session()
+      M._sessions.detected[vim.v.this_session] = utils.new_local_session(next_session_path)
       vim.g.minisessions_disable = false
     end)
     return true
@@ -110,10 +109,8 @@ M.open_workspace = function(path, opts)
   end
 
   vim.schedule(function()
-    vim.v.this_session = M.session_file()
-    M._sessions.detected[vim.v.this_session] = utils.new_session()
     vim.g.minisessions_disable = false
-    M._sessions.write(vim.v.this_session, { force = true, verbose = true })
+    M._sessions.write(M.session_file(), { force = true, verbose = true })
   end)
   return true
 end

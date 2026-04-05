@@ -1,11 +1,12 @@
 local M = {}
 
-M.new_session = function(session_path, session_type)
+--- @param session_path string
+M.new_local_session = function(session_path)
   return {
     modify_time = vim.fn.getftime(session_path),
     name = vim.fn.fnamemodify(session_path, ':t'),
     path = session_path,
-    type = session_type,
+    type = 'local',
   }
 end
 
