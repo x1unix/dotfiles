@@ -1,3 +1,4 @@
+local History = require('pkg.mini-session-workspaces.history')
 local utils = require('pkg.mini-session-workspaces.utils')
 
 --- @class MiniWorkspaces.PluginConfig
@@ -7,6 +8,9 @@ local utils = require('pkg.mini-session-workspaces.utils')
 local M = {
   --- @module 'mini.sessions'
   _sessions = nil,
+
+  --- @module 'pkg.mini-session-workspaces.history'
+  _history = nil,
 
   --- @type MiniWorkspaces.PluginConfig
   config = {
@@ -34,6 +38,7 @@ M.setup = function(opts)
 
   M._sessions = sessions
   M.config = vim.tbl_deep_extend('force', vim.deepcopy(M.config), opts or {})
+  M._history = History:open(M.config.history_file, M.config.history_max_items)
 end
 
 M.session_file = function()
@@ -53,7 +58,8 @@ end
 --- @class MiniWorkspaces.OpenWorkspaceOpts
 --- @field create_if_missing boolean|nil Create a new local session if missing.
 --- @field skip_session_save boolean|nil Don't save current session.
---- @field on_created function|nil Hook to run if a new session was
+--- @field on_created function|nil Hook to run if a new session was created.
+--- @field metadata table|nil Sets session metadata if a new session was created.
 
 --- Opens a local session in a given directory.
 --- Aborts if local session doesn't exist, unless [opts.create_if_missing] is set to true.
@@ -100,6 +106,8 @@ M.open_workspace = function(path, opts)
       vim.v.this_session = M.session_file()
       M._sessions.detected[vim.v.this_session] = utils.new_local_session(next_session_path)
       vim.g.minisessions_disable = false
+
+      -- TODO: call M._history.visit()
     end)
     return true
   end
@@ -118,6 +126,7 @@ end
 --- @class MiniWorkspaces.SaveWorkspaceOpts
 --- @field force boolean|nil Create a new session if not exists.
 --- @field wipeout boolean|nil Close all buffers after save.
+--- @field metadata table|nil Additional metadata for history entry.
 
 --- Save directory session.
 --- @param path string | nil
