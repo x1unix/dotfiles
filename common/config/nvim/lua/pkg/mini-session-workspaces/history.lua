@@ -79,6 +79,7 @@ end
 
 --- @class db History
 local function queue_sync(db)
+  --- @class History
   db._sync_seq = (db._sync_seq or 0) + 1
   local seq = db._sync_seq
 
@@ -163,6 +164,15 @@ end
 --- @return table<MiniWorkspaces.History.Entry>|nil
 function History:entries()
   return self._entries
+end
+
+--- Returns whether path exists in a history.
+---
+--- @param path string
+--- @return boolean
+function History:has(path)
+  local exists = self._index and self._index[path] or nil
+  return exists ~= nil
 end
 
 --- Adds a new entry to history

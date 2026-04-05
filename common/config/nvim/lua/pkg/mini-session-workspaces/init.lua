@@ -6,6 +6,8 @@ local utils = require('pkg.mini-session-workspaces.utils')
 --- @field history_max_items number
 
 local M = {
+  _ready = false,
+
   --- @module 'mini.sessions'
   _sessions = nil,
 
@@ -14,7 +16,7 @@ local M = {
 
   --- @type MiniWorkspaces.PluginConfig
   config = {
-    history_file = vim.fs.joinpath(vim.fn.stdpath('data'), ''),
+    history_file = vim.fs.joinpath(vim.fn.stdpath('data'), 'workspaces.json'),
     history_max_items = 5,
   },
 }
@@ -47,6 +49,21 @@ M.setup = function(opts)
       M._history:sync()
     end,
   })
+
+  vim.api.nvim_create_user_command('MiniWorkspacesOpen', function(args)
+    local path = args.args
+    if path == '' then
+      error('MiniWorkspacesOpen: empty path')
+      return
+    end
+
+    M.open_workspace(path, { create_if_missing = true })
+  end, {
+    nargs = 1,
+    desc = 'Open a local session inside a directory',
+  })
+
+  M._ready = true
 end
 
 --- Returns workspaces visit history.
@@ -119,12 +136,17 @@ M.open_workspace = function(path, opts)
   if next_session_exists then
     vim.cmd(('silent! source %s'):format(vim.fn.fnameescape(next_session_path)))
 
-    -- Enable mini back
     vim.schedule(function()
+      if M._history:has(path) then
+        M._history:touch(path)
+      else
+        M._history:add(path, opts and opts.metadata)
+      end
+
+      -- Enable mini back
       vim.v.this_session = M.session_file()
       M._sessions.detected[vim.v.this_session] = utils.new_local_session(next_session_path)
       vim.g.minisessions_disable = false
-      M._history:touch(path)
     end)
     return true
   end
@@ -136,6 +158,7 @@ M.open_workspace = function(path, opts)
   vim.schedule(function()
     vim.g.minisessions_disable = false
     M._sessions.write(M.session_file(), { force = true, verbose = true })
+    M._history:add(path, opts and opts.metadata)
   end)
   return true
 end
@@ -160,12 +183,7 @@ M.save_workspace = function(path, opts)
       verbose = false,
     })
 
-    if exists then
-      M._history:touch(path)
-    else
-      M._history:add(path, opts and opts.metadata)
-    end
-
+    M._history:add(path, opts and opts.metadata)
     if wipeout then
       utils.dispose_workspace()
     end

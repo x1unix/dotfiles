@@ -94,6 +94,7 @@ local mini_plugins = {
       end,
       items = {
         starter.sections.sessions(5, true),
+        require('pkg.mini-session-workspaces.starter').workspaces(),
         starter.sections.recent_files(5, true, false),
         footer_actions,
       },
@@ -146,6 +147,9 @@ return {
       vim.opt.sessionoptions:append('buffers')
       vim.opt.sessionoptions:append('tabpages')
 
+      -- Init workspaces helper
+      require('pkg.mini-session-workspaces').setup()
+
       -- Notify LSP server when file is moved in mini.files.
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesActionRename',
@@ -165,9 +169,6 @@ return {
 
         mod.setup(cfg)
       end
-
-      -- Init workspaces helper
-      require('pkg.mini-session-workspaces').setup()
     end,
     dependencies = {
       -- For ascii art
