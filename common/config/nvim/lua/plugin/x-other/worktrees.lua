@@ -22,6 +22,8 @@ return {
       },
     },
     opts = {
+      swap_current_buffer = false,
+
       --- @module 'worktrees'
       --- @type worktrees.Hooks
       hooks = {
