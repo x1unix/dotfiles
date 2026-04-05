@@ -41,6 +41,16 @@ M.setup = function(opts)
   M._history = History:open(M.config.history_file, M.config.history_max_items)
 end
 
+--- Returns workspaces visit history.
+--- @return table<MiniWorkspaces.History.Entry>|nil
+M.history = function()
+  if not M._history then
+    return nil
+  end
+
+  return M._history:entries()
+end
+
 M.session_file = function()
   return M._sessions.config.file
 end
@@ -106,8 +116,7 @@ M.open_workspace = function(path, opts)
       vim.v.this_session = M.session_file()
       M._sessions.detected[vim.v.this_session] = utils.new_local_session(next_session_path)
       vim.g.minisessions_disable = false
-
-      -- TODO: call M._history.visit()
+      M._history:touch(path)
     end)
     return true
   end
@@ -143,6 +152,12 @@ M.save_workspace = function(path, opts)
       verbose = false,
     })
 
+    if exists then
+      M._history:touch(path)
+    else
+      M._history:add(path, opts and opts.metadata)
+    end
+
     if wipeout then
       utils.dispose_workspace()
     end
@@ -160,6 +175,7 @@ M.delete_workspace = function(path, opts)
   local cwd = vim.fn.getcwd()
   path = path or cwd
 
+  M._history:delete(path)
   if path ~= cwd then
     -- Non-active local sessions have to be removed manually.
     local session_file = vim.fs.joinpath(path, M.session_file())
