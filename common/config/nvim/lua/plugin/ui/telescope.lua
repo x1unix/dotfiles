@@ -113,7 +113,7 @@ return {
       telescope.load_extension('harpoon')
       telescope.load_extension('ui-select')
       telescope.load_extension('telescope-tabs')
-      require('telescope').load_extension('scope')
+      telescope.load_extension('scope')
     end,
   },
 }
