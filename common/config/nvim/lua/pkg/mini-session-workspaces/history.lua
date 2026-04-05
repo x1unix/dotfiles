@@ -204,7 +204,7 @@ end
 
 --- Updates entry access time.
 --- @param path string
---- @return boolean Whetner entry was updated. False if not found.
+--- @return boolean Whether entry was updated. False if not found.
 function History:touch(path)
   pull_history(self)
 
@@ -231,13 +231,13 @@ function History:sync()
 
   local current_modtime = vim.fn.getftime(self._fname)
   if current_modtime > self._modtime then
+    self._dirty = false
+    pull_history(self)
     return false
   end
 
   local parent_dir = vim.fs.dirname(self._fname)
-  if #parent_dir > 0 then
-    vim.fn.mkdir(parent_dir, 'p')
-  end
+  vim.fn.mkdir(parent_dir, 'p')
 
   local payload = {
     entries = self._entries,
