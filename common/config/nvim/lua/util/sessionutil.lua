@@ -125,7 +125,9 @@ M.open_dir_session = function(path, opts)
   vim.g.minisessions_disable = true
 
   -- servers should be closed only after all docs are closed to prevent autorestart.
-  dispose_workspace()
+  if #vim.api.nvim_list_bufs() > 0 then
+    dispose_workspace()
+  end
 
   -- unload current session.
   vim.api.nvim_set_current_dir(path)
