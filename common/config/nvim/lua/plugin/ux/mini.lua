@@ -94,7 +94,7 @@ local mini_plugins = {
       end,
       items = {
         starter.sections.sessions(5, true),
-        require('mini-workspaces.starter').workspaces(),
+        -- require('mini-workspaces.starter').history(),
         starter.sections.recent_files(5, true, false),
         footer_actions,
       },
