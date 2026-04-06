@@ -1,24 +1,38 @@
-local function var_dump(v)
-  print(vim.inspect(v))
-end
-
 return {
   {
     -- Switch to upstream when merged: https://github.com/Juksuu/worktrees.nvim/pull/11
     -- 'Juksuu/worktrees.nvim',
     'x1unix/worktrees.nvim',
+    lazy = false,
     branch = 'feat/on-before-switch',
     dependencies = {
       'x1unix/mini-workspaces',
+      'folke/snacks.nvim',
     },
     keys = {
       {
-        'gW',
-        mode = { 'n' },
+        '<Leader>Gg',
         function()
           Snacks.picker.worktrees()
         end,
-        desc = 'git: switch worktree',
+        mode = 'n',
+        desc = 'worktree: switch',
+      },
+      {
+        '<Leader>Gd',
+        function()
+          Snacks.picker.worktrees_remove()
+        end,
+        mode = 'n',
+        desc = 'worktree: remove',
+      },
+      {
+        '<Leader>Ga',
+        function()
+          Snacks.picker.worktrees_new()
+        end,
+        mode = 'n',
+        desc = 'worktree: add',
       },
     },
     opts = {

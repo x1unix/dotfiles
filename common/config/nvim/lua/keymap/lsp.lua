@@ -60,7 +60,7 @@ wk.add({
     icon = icons.symbol_iface,
   },
   {
-    'gw',
+    'gx',
     -- '<cmd>Telescope diagnostics<cr>',
     function()
       Snacks.picker.diagnostics()

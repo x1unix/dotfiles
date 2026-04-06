@@ -30,6 +30,7 @@ wk.add({
     mode = 'n',
     desc = 'tab: next',
   },
+  -- Splits
   {
     '<Leader>q',
     ':bprev | :bd#<cr>',
@@ -41,20 +42,6 @@ wk.add({
     ':close<cr>',
     mode = 'n',
     desc = 'split: close',
-  },
-  {
-    '<Leader>g',
-    function()
-      ---@module 'snacks'
-      ---@type snacks.plugins
-      Snacks.lazygit()
-    end,
-    mode = 'n',
-    desc = 'lazygit',
-    icon = {
-      name = 'git',
-      cat = 'filetype',
-    },
   },
   {
     '<Leader>p',
@@ -88,6 +75,30 @@ wk.add({
     mode = 'n',
     desc = 'splits: go right',
     icon = icons.grid,
+  },
+  -- Git keys
+  {
+    '<Leader>g',
+    function()
+      ---@module 'snacks'
+      ---@type snacks.plugins
+      Snacks.lazygit()
+    end,
+    mode = 'n',
+    desc = 'lazygit',
+    icon = {
+      name = 'git',
+      cat = 'filetype',
+    },
+  },
+  -- NOTE: worktree hotkeys are defined at worktrees.lua for lazy-loading purposes.
+  {
+    '<Leader>G',
+    group = 'worktrees',
+    icon = {
+      name = 'git',
+      cat = 'filetype',
+    },
   },
   -- Search --
   {
