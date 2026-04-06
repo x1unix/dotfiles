@@ -19,42 +19,18 @@ wk.add({
   },
   -- Tabs --
   {
-    '<Leader>j',
+    '<Leader>[',
     ':tabp<cr>',
     mode = 'n',
     desc = 'tab: prev',
   },
   {
-    '<Leader>k',
+    '<Leader>]',
     ':tabn<cr>',
     mode = 'n',
     desc = 'tab: next',
   },
   -- Splits
-  {
-    '<Leader>q',
-    ':bprev | :bd#<cr>',
-    mode = 'n',
-    desc = 'buffer: close',
-  },
-  {
-    '<Leader>Q',
-    ':close<cr>',
-    mode = 'n',
-    desc = 'split: close',
-  },
-  {
-    '<Leader>p',
-    function()
-      local win_id = require('window-picker').pick_window()
-      if win_id and vim.api.nvim_win_is_valid(win_id) then
-        vim.api.nvim_set_current_win(win_id)
-      end
-    end,
-    mode = 'n',
-    desc = 'splits: leap',
-    icon = icons.grid,
-  },
   {
     '<Leader><Leader>',
     '<C-w>',
@@ -70,10 +46,48 @@ wk.add({
     icon = icons.grid,
   },
   {
+    '<Leader>j',
+    '<C-w>j',
+    mode = 'n',
+    desc = 'splits: go left',
+    icon = icons.grid,
+  },
+  {
+    '<Leader>k',
+    '<C-w>k',
+    mode = 'n',
+    desc = 'splits: go down',
+    icon = icons.grid,
+  },
+  {
     '<Leader>l',
     '<C-w>l',
     mode = 'n',
     desc = 'splits: go right',
+    icon = icons.grid,
+  },
+  {
+    '<Leader>q',
+    ':close<cr>',
+    mode = 'n',
+    desc = 'split: close',
+  },
+  {
+    '<Leader>Q',
+    ':bprev | :bd#<cr>',
+    mode = 'n',
+    desc = 'buffer: close',
+  },
+  {
+    '<Leader>p',
+    function()
+      local win_id = require('window-picker').pick_window()
+      if win_id and vim.api.nvim_win_is_valid(win_id) then
+        vim.api.nvim_set_current_win(win_id)
+      end
+    end,
+    mode = 'n',
+    desc = 'splits: leap',
     icon = icons.grid,
   },
   -- Git keys
@@ -157,24 +171,13 @@ wk.add({
     icon = icons.action_search,
   },
   {
-    '<Leader>b',
+    '<Leader>o',
     function()
-      require('telescope.builtin').buffers({
-        layout_strategy = 'flex',
-      })
+      Snacks.picker.workspaces()
     end,
     mode = 'n',
-    desc = 'buffers',
-  },
-  {
-    '<Leader>B',
-    function()
-      require('telescope').extensions.scope.buffers({
-        layout_strategy = 'flex',
-      })
-    end,
-    mode = 'n',
-    desc = 'buffers: all',
+    desc = 'workspace: open',
+    icon = icons.folder,
   },
   {
     '<Leader>H',

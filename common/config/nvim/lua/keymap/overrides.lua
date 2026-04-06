@@ -5,10 +5,22 @@ wk.add({
   { 'N', 'Nzzzv', mode = 'n', desc = 'previous search result centered' },
   { 'g,', 'g,zvzz', mode = 'n', desc = 'next change centered' },
   { 'g;', 'g;zvzz', mode = 'n', desc = 'previous change centered' },
+
+  -- Buffers
   {
     'gb',
     function()
       require('telescope.builtin').buffers({
+        layout_strategy = 'flex',
+      })
+    end,
+    mode = 'n',
+    desc = 'buffers',
+  },
+  {
+    'gB',
+    function()
+      require('telescope').extensions.scope.buffers({
         layout_strategy = 'flex',
       })
     end,
