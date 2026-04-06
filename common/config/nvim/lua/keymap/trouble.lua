@@ -12,31 +12,36 @@ wk.add({
   {
     '<leader>xx',
     '<cmd>Trouble diagnostics toggle<cr>',
-    desc = 'Diagnostics (Trouble)',
+    desc = 'Diagnostics',
   },
   {
     '<leader>xX',
     '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-    desc = 'Buffer Diagnostics (Trouble)',
+    desc = 'Buffer Diagnostics',
   },
   {
     '<leader>xf',
     '<cmd>Trouble lsp toggle focus=false<cr>',
-    desc = 'LSP Definitions / references / ... (Trouble)',
+    desc = 'LSP Definitions / references / ...',
   },
   {
     '<leader>xl',
     '<cmd>Trouble loclist toggle<cr>',
-    desc = 'Location List (Trouble)',
+    desc = 'Location List',
   },
   {
     '<leader>xs',
     '<cmd>Trouble snacks toggle<cr>',
-    desc = 'Snacks Results (Trouble)',
+    desc = 'Snacks Results',
+  },
+  {
+    '<leader>xt',
+    '<cmd>Trouble telescope toggle<cr>',
+    desc = 'Telescope Results',
   },
   {
     '<leader>xq',
     '<cmd>Trouble qflist toggle<cr>',
-    desc = 'Quickfix List (Trouble)',
+    desc = 'Quickfix List',
   },
 })
