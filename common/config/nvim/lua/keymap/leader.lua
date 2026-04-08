@@ -105,6 +105,16 @@ wk.add({
       cat = 'filetype',
     },
   },
+  {
+    '<Leader>n',
+    '<Cmd>Neogit kind=tab<CR>',
+    mode = 'n',
+    desc = 'neogit',
+    icon = {
+      name = 'git',
+      cat = 'filetype',
+    },
+  },
   -- NOTE: worktree hotkeys are defined at worktrees.lua for lazy-loading purposes.
   {
     '<Leader>G',
