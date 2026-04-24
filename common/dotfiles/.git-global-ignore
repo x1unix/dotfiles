@@ -1,7 +1,10 @@
 .idea
 .vscode
 .DS_Store
+
+# AI
 .claude/settings.local.json
+.codex
 
 # mini.nvim session file name
 .session.vim
