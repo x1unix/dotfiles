@@ -30,7 +30,7 @@ wk.add({
     mode = 'n',
     desc = 'tab: next',
   },
-  -- Splits
+  -- Splits: navigate
   {
     '<Leader><Leader>',
     '<C-w>',
@@ -66,6 +66,36 @@ wk.add({
     desc = 'splits: go right',
     icon = icons.grid,
   },
+  -- Splits: move
+  {
+    '<Leader>H',
+    '<C-w>H',
+    mode = 'n',
+    desc = 'splits: go left',
+    icon = icons.grid,
+  },
+  {
+    '<Leader>J',
+    '<C-w>J',
+    mode = 'n',
+    desc = 'splits: go left',
+    icon = icons.grid,
+  },
+  {
+    '<Leader>K',
+    '<C-w>K',
+    mode = 'n',
+    desc = 'splits: go down',
+    icon = icons.grid,
+  },
+  {
+    '<Leader>L',
+    '<C-w>L',
+    mode = 'n',
+    desc = 'splits: go right',
+    icon = icons.grid,
+  },
+  -- Splits: commands
   {
     '<Leader>q',
     ':close<cr>',
@@ -190,7 +220,7 @@ wk.add({
     icon = icons.folder,
   },
   {
-    '<Leader>H',
+    "<Leader>'",
     function()
       require('telescope.builtin').jumplist({
         layout_strategy = 'flex',
