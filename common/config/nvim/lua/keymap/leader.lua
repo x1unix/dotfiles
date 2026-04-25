@@ -97,13 +97,13 @@ wk.add({
   },
   -- Splits: commands
   {
-    '<Leader>q',
+    '<Leader>Q',
     ':close<cr>',
     mode = 'n',
     desc = 'split: close',
   },
   {
-    '<Leader>Q',
+    '<Leader>q',
     ':bprev | :bd#<cr>',
     mode = 'n',
     desc = 'buffer: close',
