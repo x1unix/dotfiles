@@ -31,7 +31,7 @@
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "9a10e096703966335bd5c46c8c875d5b0690dade" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc" },
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
-  "mini-workspaces": { "branch": "main", "commit": "77a3e00859d1cf36a0e500f9c4b70954fa5123a4" },
+  "mini-workspaces": { "branch": "main", "commit": "c0eac9fee56d2cec83ec96643f9ed0c9bbe53034" },
   "mini.icons": { "branch": "main", "commit": "7fdae2443a0e2910015ca39ad74b50524ee682d3" },
   "mini.nvim": { "branch": "main", "commit": "402ee6c6ec8ea44b22330446c8fb4e615fd3953e" },
   "neogit": { "branch": "master", "commit": "5432fe2b2565bb10d868c759245cd4c64125da31" },
