@@ -46,6 +46,9 @@ return {
           require('mini-workspaces').save_workspace(from, {
             force = true,
             wipeout = true,
+            metadata = {
+              label = require('mini-workspaces.utils').get_path_segments(from, 2),
+            },
           })
         end,
         on_switch = function(from, to, git_path_info)
@@ -53,6 +56,9 @@ return {
           require('mini-workspaces').open_workspace(to, {
             create_if_missing = true,
             on_created = require('util.uiutil').open_readme,
+            metadata = {
+              label = require('mini-workspaces.utils').get_path_segments(to, 2),
+            },
           })
         end,
         on_before_remove = function(path)
