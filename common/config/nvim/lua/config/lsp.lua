@@ -23,6 +23,15 @@ return {
       'bashls',
       'jsonnet_ls',
       'zls',
+      nixd = {
+        settings = {
+          nixd = {
+            formatting = {
+              command = { 'nixpkgs-fmt' },
+            },
+          },
+        },
+      },
       buf_ls = {
         -- Sometimes Mason's buf_ls doesn't start
         capabilities = capabilities,
