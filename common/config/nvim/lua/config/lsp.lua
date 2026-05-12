@@ -24,6 +24,7 @@ return {
       'jsonnet_ls',
       'zls',
       nixd = {
+        cmd = { 'nixd' },
         settings = {
           nixd = {
             formatting = {
