@@ -163,3 +163,11 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
 
+# Window rules
+
+# Neovide with disabled decorations by default has accordion layout.
+[[on-window-detected]]
+    if.app-id = 'com.neovide.neovide'
+    if.app-name-regex-substring = 'Neovide'
+    run = 'layout tiling'
+

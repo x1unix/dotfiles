@@ -1,5 +1,8 @@
 # See: https://neovide.dev/config-file.html
 
+# Disable window decoration for Mac
+frame = "none"
+
 [font]
 normal = ["IosevkaTerm Nerd Font"]
 size = 11

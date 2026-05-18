@@ -9,3 +9,7 @@ require('util.env').append_paths('~/.local/bin', '~/go/bin')
 
 -- vim.g.experimental_layer_grouping = true
 -- vim.g.neovide_experimental_layer_grouping = true
+
+-- MacOS stuff
+vim.g.neovide_corner_preference = 'do_not_round'
+vim.g.neovide_show_border = false
