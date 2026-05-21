@@ -10,7 +10,13 @@ vim.g.neovide_scroll_animation_length = 0.1
 vim.o.guifont = 'IosevkaTerm Nerd Font:h' .. font_size .. ':w-0.5:#e-subpixelantialias:#h-none'
 
 -- HACK: when nvim started via desktop entry or inside Neovide, PATH isn't initialized.
-require('util.env').append_paths('~/.local/bin', '~/go/bin')
+require('util.env').append_paths(
+  '~/.nix-profile/bin',
+  '/nix/var/nix/profiles/default/bin',
+  '/run/current-system/sw/bin',
+  '~/.local/bin',
+  '~/go/bin'
+)
 
 -- vim.g.experimental_layer_grouping = true
 -- vim.g.neovide_experimental_layer_grouping = true
