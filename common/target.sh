@@ -33,9 +33,6 @@ link_home dotfiles
 # common/bin to ~/.local/bin
 link_local_bin bin
 
-# Mount emacs config to ~/.emacs.d
-link_home '.emacs.d' emacs
-
 # Mount ~/.config
 link_xdg_config config
 
