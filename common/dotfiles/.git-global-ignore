@@ -5,6 +5,7 @@
 # AI
 .claude/settings.local.json
 .codex
+.plans
 
 # mini.nvim session file name
 .session.vim
