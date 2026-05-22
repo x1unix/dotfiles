@@ -1068,8 +1068,7 @@ Usage: $0 <command> [flags]
 
 Applies or rollback a set of actions declared in a target file.
 
-Target file is a file with '.target.sh' extension stored in 'targets' directory.
-Files used by a target are stored in 'target/<target_name>' directory.
+Each target is a sub-directory with a 'target.sh' file.
 
 Commands:
   list                  Print list of available targets.
