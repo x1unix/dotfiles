@@ -1,0 +1,5 @@
+switch-events {
+  lid-close {
+    spawn "loginctl" "lock-session";
+  }
+}
