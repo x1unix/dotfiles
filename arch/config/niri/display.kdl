@@ -20,8 +20,8 @@ output "Ancor Communications Inc ASUS MG279 0x0002AD4F" {
   }
 }
 
-// Laptop - MacBook Pro 2015
-output "eDP-1" {
-  scale 1.25
+// Laptop - Framework
+output "BOE NE135A1M-NY1 Unknown" {
+  scale 1.50
 }
 
