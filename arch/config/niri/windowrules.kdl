@@ -35,6 +35,18 @@ window-rule {
   open-floating true
 }
 
+// Helium - Bitwarden
+window-rule {
+  match app-id=r#"chrome-.+"# title="Bitwarden" is-floating=false
+  open-floating true
+  default-floating-position x=32 y=32 relative-to="bottom-right"
+  max-width 480
+  max-height 640
+  default-column-width { fixed 800; }
+  default-window-height { fixed 640; }
+  block-out-from "screen-capture"
+}
+
 // Chrome - Google Meet
 window-rule {
   match app-id=r#"^(google-chrome)$"# title=r#"^(Meet - [a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{3})$"#
