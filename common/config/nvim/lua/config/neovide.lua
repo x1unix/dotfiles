@@ -24,3 +24,9 @@ require('util.env').append_paths(
 -- MacOS stuff
 vim.g.neovide_corner_preference = 'do_not_round'
 vim.g.neovide_show_border = false
+
+-- Blur
+vim.opt.winblend = 100
+vim.opt.pumblend = 100
+vim.g.neovide_floating_blur_amount_x = 30
+vim.g.neovide_floating_blur_amount_y = 30
