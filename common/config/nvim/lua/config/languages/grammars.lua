@@ -61,6 +61,7 @@ local grammars = {
     'sql',
     'udev',
     'xml',
+    'systemverilog',
     'yaml',
   },
 }
