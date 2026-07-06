@@ -15,13 +15,32 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Enable autoformat for verilog using LSP.
 -- See: https://danielmangum.com/posts/setup-verible-verilog-neovim/
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'verilog', 'systemverilog' },
+local group = vim.api.nvim_create_augroup('lsp_format_on_save_verilog', { clear = true })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = group,
   callback = function(args)
+    local bufnr = args.buf
+    local ft = vim.bo[bufnr].filetype
+
+    if ft ~= 'verilog' and ft ~= 'systemverilog' then
+      return
+    end
+
+    vim.api.nvim_clear_autocmds({
+      group = group,
+      buffer = bufnr,
+      event = 'BufWritePre',
+    })
+
     vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = args.buf,
+      group = group,
+      buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ async = false })
+        vim.lsp.buf.format({
+          bufnr = bufnr,
+          async = false,
+        })
       end,
     })
   end,

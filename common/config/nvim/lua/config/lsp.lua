@@ -25,6 +25,7 @@ return {
       'zls',
       verible = {
         -- Verilog. Requires https://github.com/chipsalliance/verible
+        capabilities = capabilities,
         cmd = {
           'verible-verilog-ls',
           '--rules_config_search',
