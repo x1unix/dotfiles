@@ -23,14 +23,18 @@ return {
       'bashls',
       'jsonnet_ls',
       'zls',
-      verible = {
-        -- Verilog. Requires https://github.com/chipsalliance/verible
+      slang_server = {
+        -- See: https://github.com/hudson-trading/slang-server.nvim
         capabilities = capabilities,
-        cmd = {
-          'verible-verilog-ls',
-          '--rules_config_search',
-        },
       },
+      -- verible = {
+      --   -- Verilog. Requires https://github.com/chipsalliance/verible
+      --   capabilities = capabilities,
+      --   cmd = {
+      --     'verible-verilog-ls',
+      --     '--rules_config_search',
+      --   },
+      -- },
       nixd = {
         cmd = { 'nixd' },
         settings = {
