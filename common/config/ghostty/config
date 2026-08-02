@@ -8,6 +8,9 @@ shell-integration = detect
 theme = "dark:base16-dark,light:Apple System Colors Light"
 # font-family = "ZedMono NFM"
 font-family = "Iosevka NFM"
+font-feature = calt, liga
+font-variation = wght=800
+font-variation = wdth=200
 font-size = 14
 #font-size = 11
 
