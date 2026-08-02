@@ -29,6 +29,8 @@ require('lazy').setup({
     -- Use different dir to avoid collision with builtin package manager.
     { import = 'plugin' },
   },
+  -- Enable project-specific .lazy.lua
+  local_spec = true,
   checker = {
     enabled = true,
     notify = false,
