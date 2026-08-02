@@ -14,6 +14,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Enable project-specific .nvim.lua
+vim.o.exrc = true
+
 -- Core configs should be loaded before lazy.nvim init.
 require('config')
 require('autocmd')
