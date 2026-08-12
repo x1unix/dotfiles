@@ -2,7 +2,7 @@
 Type=Application
 Name=Toggle Dark Mode
 Comment=Toggle dark mode preference
-Exec=sh -c 'darkmode toggle'
+Exec=sh -c '$HOME/.local/bin/darkmode toggle'
 Icon=preferences-desktop-theme
 Terminal=false
 Categories=Utility;ConsoleOnly;
