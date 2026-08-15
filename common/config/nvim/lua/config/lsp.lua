@@ -12,6 +12,7 @@ return {
     -- Enable LSP Diagnostic as virtual text below
     vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true } })
 
+    lsputil.register_goodies()
     lsputil.config({
       'terraformls',
       'html',
