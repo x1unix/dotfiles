@@ -121,6 +121,16 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
 
+    cmd-1 = 'workspace 1'
+    cmd-2 = 'workspace 2'
+    cmd-3 = 'workspace 3'
+    cmd-4 = 'workspace 4'
+    cmd-5 = 'workspace 5'
+    cmd-6 = 'workspace 6'
+    cmd-7 = 'workspace 7'
+    cmd-8 = 'workspace 8'
+    cmd-9 = 'workspace 9'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
@@ -142,6 +152,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
     # Ask Ghostty to open a new window using AppleScript
     alt-enter = '''exec-and-forget osascript -l JavaScript -e 'Application("Ghostty").newWindow()''''
+    cmd-enter = '''exec-and-forget osascript -l JavaScript -e 'Application("Ghostty").newWindow()''''
 
     # Toggle Ghostty dropdown terminal
     alt-backtick = '''exec-and-forget osascript "$HOME/.config/applescripts/ghostty-quick-term.scpt" '''
