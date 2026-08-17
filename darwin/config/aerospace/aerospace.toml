@@ -157,6 +157,9 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     # Toggle Ghostty dropdown terminal
     alt-backtick = '''exec-and-forget osascript "$HOME/.config/applescripts/ghostty-quick-term.scpt" '''
 
+    # Screenshot
+    alt-shift-p = 'exec-and-forget screencapture -i -c'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
