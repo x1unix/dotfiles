@@ -99,6 +99,11 @@ window-rule {
     open-on-output "DP-1"
 }
 
+window-rule {
+  match app-id="zoom"
+  open-floating true
+}
+
 // xwaylandvideobridge
 window-rule {
   match app-id=r#"^(xwaylandvideobridge)$"#
