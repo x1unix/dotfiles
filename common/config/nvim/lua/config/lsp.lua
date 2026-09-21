@@ -24,6 +24,7 @@ return {
       'bashls',
       'jsonnet_ls',
       'zls',
+      'jsonnet_ls',
       slang_server = {
         -- See: https://github.com/hudson-trading/slang-server.nvim
         capabilities = capabilities,
