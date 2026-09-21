@@ -1,15 +1,16 @@
 local function reload_highlights(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  if vim.api.nvim_buf_is_valid(bufnr) then
-    -- local has_ts_config, _ = pcall(require, 'nvim-treesitter.parsers')
-    -- if has_ts_config then
-    --   vim.cmd('TSBufDisable highlight | TSBufEnable highlight')
-    --   return
-    -- end
-
-    vim.treesitter.stop(bufnr)
-    vim.treesitter.start(bufnr)
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return
   end
+
+  local lang = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
+  if not lang or not vim.treesitter.language.add(lang) then
+    return
+  end
+
+  vim.treesitter.stop(bufnr)
+  vim.treesitter.start(bufnr, lang)
 end
 
 local M = {}
@@ -26,10 +27,6 @@ M.install_reload_highlights_autocmd = function()
     group = vim.api.nvim_create_augroup('ts_highlight_reload', { clear = true }),
     callback = function(args)
       local buf = args.buf
-      if not vim.api.nvim_buf_is_valid(buf) then
-        return
-      end
-
       vim.schedule(function()
         reload_highlights(buf)
       end)
