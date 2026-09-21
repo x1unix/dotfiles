@@ -23,7 +23,7 @@ M.install_reload_highlights_autocmd = function()
   ---
   --- This issue can be solved only by restarting TS highlights.
   vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'go',
+    group = vim.api.nvim_create_augroup('ts_highlight_reload', { clear = true }),
     callback = function(args)
       local buf = args.buf
       if not vim.api.nvim_buf_is_valid(buf) then
