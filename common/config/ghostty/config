@@ -53,7 +53,7 @@ quick-terminal-screen=mouse
 quick-terminal-animation-duration=0
 quick-terminal-size = 100%,100%
 
-# Keybinds
+# Binds: Main
 keybind = global:cmd+`=toggle_quick_terminal
 keybind = ctrl+shift+comma=reload_config
 keybind = ctrl+shift+c=copy_to_clipboard
@@ -62,10 +62,34 @@ keybind = ctrl+minus=decrease_font_size:1
 keybind = ctrl+zero=reset_font_size
 keybind = ctrl+shift+l=clear_screen
 
-# TODO: use ghostty instead of tmux?
-# keybind = ctrl+shift+x=new_split:down
+# NOTE: Binds to hyper key
 
+# Binds: Splits: Create
+keybind = ctrl+shift+alt+cmd+s=new_split:down
+keybind = ctrl+shift+alt+cmd+v=new_split:right
+keybind = ctrl+shift+alt+cmd+x=close_surface
+
+# Binds: Splits: Edit
+keybind = ctrl+shift+alt+cmd+equal=resize_split:up,8
+keybind = ctrl+shift+alt+cmd+minus=resize_split:down,8
+keybind = ctrl+shift+alt+cmd+9=resize_split:left,8
+keybind = ctrl+shift+alt+cmd+0=resize_split:right,8
+
+# Binds: Splits: Navigate
+keybind = ctrl+shift+alt+cmd+l=goto_split:right
+keybind = ctrl+shift+alt+cmd+h=goto_split:left
+keybind = ctrl+shift+alt+cmd+k=goto_split:up
+keybind = ctrl+shift+alt+cmd+j=goto_split:down
+
+# Binds: Etc
+keybind = ctrl+shift+alt+cmd+enter=new_window
+keybind = ctrl+shift+alt+cmd+r=reload_config
 keybind = ctrl+shift+t=new_tab
+
+# Appearance: splits
+# unfocused-split-fill = #000000
+unfocused-split-opacity = 0.3
+
 gtk-titlebar-style = native
 
 # Disable useless and annoying bell
