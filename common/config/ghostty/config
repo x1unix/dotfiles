@@ -88,7 +88,7 @@ keybind = ctrl+shift+t=new_tab
 
 # Appearance: splits
 # unfocused-split-fill = #000000
-unfocused-split-opacity = 0.3
+unfocused-split-opacity = 0.5
 
 gtk-titlebar-style = native
 
