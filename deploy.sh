@@ -375,8 +375,8 @@ install_root() {
   fi
 
   notify_step "Running post-install hook..."
-  if ! "$func_name"; then
-    notify_err "Hook '$func_name' returned an error"
+  if ! "$hook_func_name"; then
+    notify_err "Hook '$hook_func_name' returned an error"
   fi
 }
 
