@@ -22,6 +22,10 @@ arch_hyprland_configs() {
     "target=$(current_variant)"
 }
 
+hook_arch_install_root() {
+  sudo udevadm control --reload
+}
+
 require 'common'
 
 # Deps
@@ -42,3 +46,6 @@ link_home '.local/bin' bin
 
 # Link TUI apps
 link_xdg_data 'applications' 'applications'
+
+# Udev rules and etc.
+install_root root

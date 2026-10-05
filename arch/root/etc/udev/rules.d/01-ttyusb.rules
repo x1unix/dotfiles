@@ -1,0 +1,17 @@
+SUBSYSTEMS=="usb-serial", TAG+="uaccess"
+
+# Arduino Pro Micro (SparkFun)
+SUBSYSTEM=="usb", ATTR{idVendor}=="1b4f", ATTR{idProduct}=="9206", MODE="0666", GROUP="uucp"
+SUBSYSTEM=="usb", ATTR{idVendor}=="1b4f", ATTR{idProduct}=="9205", MODE="0666", GROUP="uucp"
+
+# Arduino Official boards
+SUBSYSTEM=="usb", ATTR{idVendor}=="2341", MODE="0666", GROUP="uucp"
+
+# Common Arduino-compatible chips
+SUBSYSTEM=="usb", ATTR{idVendor}=="1a86", ATTR{idProduct}=="7523", MODE="0666", GROUP="uucp"
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", MODE="0666", GROUP="uucp"
+
+# Also add tty rules for serial ports
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1b4f", ATTRS{idProduct}=="9206", MODE="0666", GROUP="uucp"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", MODE="0666", GROUP="uucp"
+
