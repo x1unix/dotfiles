@@ -59,6 +59,9 @@ pipewire-pulse
 pipewire-jack
 archlinux-xdg-menu
 
+# Keyboard
+keyd
+
 # Wayland support
 qt5-wayland
 qt6-wayland
