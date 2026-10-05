@@ -1375,13 +1375,14 @@ __get_flag_val() {
 __is_flag_defined() {
   # In POSIX Sh there is no way to distinguish between undefined and null variables.
   # Flags for steps are defined and have no values.
+  key="$(printf '%s' "$1" | tr '-' '_')"
   eval '[ -n "${G_FLAG_'"$1"'+x}" ]'
 }
 
 __set_flag_val() {
-  key="$1"
+  key="$(printf '%s' "$1" | tr '-' '_')"
   val="$2"
-  eval "G_FLAG_${flag}=\"${value}\""
+  eval "G_FLAG_${key}=\"${val}\""
 }
 
 __private_parse_flags() {
