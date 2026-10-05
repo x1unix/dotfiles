@@ -324,16 +324,19 @@ __private_assert_archlinux() {
   esac
 }
 
-# link_root - Symlink system root directories (e.g. /etc)
+# install_root - Install system root directories (e.g. /etc)
 # Optionally, takes a directory name as a source.
 #
+# Note: contrary to 'link_*' commands, this replaces original files if they're exist.
+# Make sure to backup existing files first!
+#
 # Examples:
-#   link_root       - Links target_dir/root
-#   link_root foo   - Links target_dir/foo
+#   install_root       - Links target_dir/root
+#   install_root foo   - Links target_dir/foo
 #
-# To handle a post-install or revert, define a hook "hook_<target_name>_link_root". For example:
+# To handle a post-install or revert, define a hook "hook_<target_name>_install_root". For example:
 #
-#   hook_darwin_link_root() {
+#   hook_darwin_install_root() {
 #     if [ -n "$G_REVERT" ]; then
 #       ... Rollback logic ...
 #     else
@@ -341,13 +344,13 @@ __private_assert_archlinux() {
 #     fi
 #   }
 #
-#   link_root
+#   install_root
 #
-link_root() {
+install_root() {
   src_dirname="${1:-root}"
   src_dir="$CURRENT_TARGET/$src_dirname"
   if [ ! -d "$src_dir" ]; then
-    die "link_root: directory '$src_dir' doesn't exist"
+    die "install_root: directory '$src_dir' doesn't exist"
   fi
 
   if [ -n "$G_DRY_RUN" ] && [ -z "$G_DRY_RUN_VERBOSE" ]; then
@@ -355,44 +358,34 @@ link_root() {
   fi
 
   if [ -n "$G_REVERT" ]; then
-    __link_root_revert "$src_dir"
+    __install_root_revert "$src_dir"
   else
-    __link_root_install "$src_dir"
+    __install_root_install "$src_dir"
   fi
 
-  hook_func_name="hook_${CURRENT_TARGET}_link_root"
+  hook_func_name="hook_${CURRENT_TARGET}_install_root"
   if ! command -v "$hook_func_name" >/dev/null 2>&1; then
-    debug_log "link_root: $hook_func_name is undefined, skip hook call"
+    debug_log "install_root: $hook_func_name is undefined, skip hook call"
     return
   fi
 
   if [ -n "$G_DRY_RUN" ]; then
-    notify_info "link_root: hook call is skipped in dry-run mode."
+    notify_info "install_root: hook call is skipped in dry-run mode."
     return
   fi
 
-  notify_step "Running post-link hook..."
+  notify_step "Running post-install hook..."
   if ! "$func_name"; then
     notify_err "Hook '$func_name' returned an error"
   fi
 }
 
-__link_root_install() {
+__install_root_install() {
   src_dir="$1"
-  notify_step "Linking system files..."
+  notify_step "Copying system files..."
   find "$src_dir" -type f | while IFS= read -r f; do
     dst="${f#"$src_dir"}"
     src="$(realpath "$f")"
-    if [ -L "$dst" ]; then
-      # TODO: check link destination
-      debug_log "link_root: skip '$dst': symlink already exists"
-      continue
-    fi
-
-    if [ -f "$dst" ]; then
-      notify_warn "link_home: cannot link '$dst': file already exists, skipping."
-      continue
-    fi
 
     if [ -n "$G_DRY_RUN" ]; then
       echo "$src -> $dst"
@@ -400,16 +393,21 @@ __link_root_install() {
     fi
 
     sudo mkdir -pv "$(dirname "$dst")"
-    sudo ln -sv "$src" "$dst"
+    if [ -f "$dst" ]; then
+      debug_log "install_root: remove '$dst'"
+      sudo rm "$dst"
+    fi
+
+    sudo cp -v "$src" "$dst"
   done
 }
 
-__link_root_revert() {
+__install_root_revert() {
   src_dir="$1"
-  notify_step "Removing linked system files..."
+  notify_step "Removing copied system files..."
   find "$src_dir" -type f | while IFS= read -r f; do
     dst="${f#"$src_dir"}"
-    if [ ! -L "$dst" ]; then
+    if [ ! -f "$dst" ]; then
       continue
     fi
 
