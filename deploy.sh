@@ -1568,6 +1568,13 @@ __private_deploy_cmd() {
 
   __private_parse_flags "$@"
   __private_install_deps
+
+  if [ -n "$G_FLAG_dry_run" ]; then
+    G_DRY_RUN=1
+    G_DRY_RUN_VERBOSE=1
+    notify_warn "Dry run mode is experimental and only partially implemented!"
+  fi
+
   __private_eval_target "$target_name" "$target_variant"
 }
 
