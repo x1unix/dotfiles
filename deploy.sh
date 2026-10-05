@@ -324,6 +324,104 @@ __private_assert_archlinux() {
   esac
 }
 
+# link_root - Symlink system root directories (e.g. /etc)
+# Optionally, takes a directory name as a source.
+#
+# Examples:
+#   link_root       - Links target_dir/root
+#   link_root foo   - Links target_dir/foo
+#
+# To handle a post-install or revert, define a hook "hook_<target_name>_link_root". For example:
+#
+#   hook_darwin_link_root() {
+#     if [ -n "$G_REVERT" ]; then
+#       ... Rollback logic ...
+#     else
+#       ... Post-install logic ...
+#     fi
+#   }
+#
+#   link_root
+#
+link_root() {
+  src_dirname="${1:-root}"
+  src_dir="$CURRENT_TARGET/$src_dirname"
+  if [ ! -d "$src_dir" ]; then
+    die "link_root: directory '$src_dir' doesn't exist"
+  fi
+
+  if [ -n "$G_DRY_RUN" ] && [ -z "$G_DRY_RUN_VERBOSE" ]; then
+    return
+  fi
+
+  if [ -n "$G_REVERT" ]; then
+    __link_root_revert "$src_dir"
+  else
+    __link_root_install "$src_dir"
+  fi
+
+  hook_func_name="hook_${CURRENT_TARGET}_link_root"
+  if ! command -v "$hook_func_name" >/dev/null 2>&1; then
+    debug_log "link_root: $hook_func_name is undefined, skip hook call"
+    return
+  fi
+
+  if [ -n "$G_DRY_RUN" ]; then
+    notify_info "link_root: hook call is skipped in dry-run mode."
+    return
+  fi
+
+  notify_info "Running post-link hook..."
+  if ! "$func_name"; then
+    notify_err "Hook '$func_name' returned an error"
+  fi
+}
+
+__link_root_install() {
+  src_dir="$1"
+  notify_step "Linking system files..."
+  find "$src_dir" -type f | while IFS= read -r f; do
+    dst="${f#"$src_dir"}"
+    src="$(realpath "$f")"
+    if [ -f "$dst" ]; then
+      notify_warn "link_home: cannot link '$dst': file already exists, skipping."
+      continue
+    fi
+
+    if [ -L "$dst" ]; then
+      # TODO: check link destination
+      debug_log "link_root: skip '$dst': symlink already exists"
+      continue
+    fi
+
+    if [ -n "$G_DRY_RUN" ]; then
+      echo "$src -> $dst"
+      continue
+    fi
+
+    sudo mkdir -pv "$(dirname "$dst")"
+    sudo ln -sv "$src" "$dst"
+  done
+}
+
+__link_root_revert() {
+  src_dir="$1"
+  notify_step "Removing linked system files..."
+  find "$src_dir" -type f | while IFS= read -r f; do
+    dst="${f#"$src_dir"}"
+    if [ ! -L "$dst" ]; then
+      continue
+    fi
+
+    if [ -n "$G_DRY_RUN" ]; then
+      echo "$dst"
+      continue
+    fi
+
+    sudo rm -v "$dst"
+  done
+}
+
 # brewfile - Install brew packages from file
 brewfile() {
   assert_in_target
