@@ -60,7 +60,6 @@ pipewire-jack
 archlinux-xdg-menu
 
 # Keyboard
-keyd
 
 # Wayland support
 qt5-wayland

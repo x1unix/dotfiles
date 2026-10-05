@@ -5,7 +5,9 @@ input {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
             layout "us,ru"
-            options "grp:alt_shift_toggle"
+            options "grp:lalt_lshift_toggle"
+            // options "grp:lalt_lshift_toggle"
+            // options "grp:alt_shift_toggle"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
 
