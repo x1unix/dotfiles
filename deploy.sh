@@ -371,7 +371,7 @@ link_root() {
     return
   fi
 
-  notify_info "Running post-link hook..."
+  notify_step "Running post-link hook..."
   if ! "$func_name"; then
     notify_err "Hook '$func_name' returned an error"
   fi
@@ -383,14 +383,14 @@ __link_root_install() {
   find "$src_dir" -type f | while IFS= read -r f; do
     dst="${f#"$src_dir"}"
     src="$(realpath "$f")"
-    if [ -f "$dst" ]; then
-      notify_warn "link_home: cannot link '$dst': file already exists, skipping."
-      continue
-    fi
-
     if [ -L "$dst" ]; then
       # TODO: check link destination
       debug_log "link_root: skip '$dst': symlink already exists"
+      continue
+    fi
+
+    if [ -f "$dst" ]; then
+      notify_warn "link_home: cannot link '$dst': file already exists, skipping."
       continue
     fi
 
