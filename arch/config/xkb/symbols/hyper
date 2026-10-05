@@ -1,0 +1,7 @@
+xkb_symbols "caps" {
+    key <CAPS> {
+        type[Group1] = "ONE_LEVEL",
+        symbols[Group1] = [ Hyper_L ],
+        actions[Group1] = [ SetMods(modifiers=Control+Shift+Mod1+Mod4) ]
+    };
+};
