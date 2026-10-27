@@ -5,9 +5,8 @@
 vicinae-bin
 dms-shell-bin
 
-# Dev tools
-perl-perl-languageserver
-codex-acp
+# TUI
+wifitui
 
 # QT/KDE quirks
 qt5ct-kde

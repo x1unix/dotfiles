@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=wifitui
+Comment=WiFi TUI for Network Manager
+Exec=kitty --class=ui.terminal.dialog -e wifitui
+StartupWMClass=ui.terminal.dialog
+Icon=network-wireless
+Terminal=false
+Categories=Utility;ConsoleOnly;
