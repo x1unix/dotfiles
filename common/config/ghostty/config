@@ -14,9 +14,6 @@ font-variation = wdth=200
 font-size = 14
 #font-size = 11
 
-# HACK: see https://github.com/ghostty-org/ghostty/discussions/9795#discussioncomment-15154311
-# adjust-cell-width = -1
-
 # Ghostty: try to make Iosevka look correct
 font-style = Regular
 font-style-bold = Medium
@@ -26,7 +23,9 @@ font-style-bold-italic = SemiBold Italic
 font-synthetic-style = false
 #font-size = 11
 
-adjust-cell-width = -2
+# HACK: see https://github.com/ghostty-org/ghostty/discussions/9795#discussioncomment-15154311
+#adjust-cell-width = -2
+adjust-cell-width = -1
 adjust-font-baseline = 0
 adjust-cell-height = 0
 
