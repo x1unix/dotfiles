@@ -10,15 +10,10 @@
     "flexoki": "blue"
   },
   "widgetBackgroundColor": "sc",
-  "cornerRadius": 12,
-  "nightModeEnabled": false,
   "blurredWallpaperLayer": true,
-  "controlCenterShowMicPercent": true,
-  "runningAppsCurrentWorkspace": false,
   "appIdSubstitutions": [],
   "clockDateFormat": "ddd MMM d",
   "useAutoLocation": true,
-  "iconTheme": "System Default",
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
@@ -41,8 +36,6 @@
   "acLockTimeout": 120,
   "acSuspendTimeout": 600,
   "lockBeforeSuspend": true,
-  "gtkThemingEnabled": false,
-  "qtThemingEnabled": false,
   "matugenTemplateNeovim": true,
   "enableFprint": true,
   "osdPosition": 0,
@@ -154,18 +147,93 @@
       "popupGapsManual": 4,
       "maximizeDetection": false,
       "scrollEnabled": false,
-      "scrollXBehavior": "column",
+      "scrollXBehavior": "focusWindow",
       "scrollYBehavior": "workspace",
       "shadowIntensity": 0,
       "shadowOpacity": 60,
       "shadowColorMode": "text",
       "shadowCustomColor": "#000000",
       "widgetPadding": 12,
-      "iconScale": 1.25
+      "iconScale": 1.25,
+      "followInterfaceStyle": true,
+      "widgetFollowInterfaceStyle": true
     }
   ],
-  "configVersion": 18,
+  "configVersion": 42,
   "barElevationEnabled": false,
   "closeNiriOverviewOnWindowFocus": true,
-  "clockFormat": "12h"
+  "clockFormat": "12h",
+  "radiusStrength": 38,
+  "dockConfigs": [
+    {
+      "id": "dock",
+      "name": "Dock",
+      "enabled": false,
+      "screenPreferences": [
+        "all"
+      ],
+      "showOnLastDisplay": true,
+      "position": 1,
+      "mode": "compact",
+      "taskbarAlign": "center",
+      "widgetExpansion": "popout",
+      "iconSize": 40,
+      "spacing": 4,
+      "itemSpacing": 4,
+      "margin": 0,
+      "bottomGap": 0,
+      "transparency": 1,
+      "followInterfaceStyle": true,
+      "autoHide": false,
+      "smartAutoHide": false,
+      "useOverlayLayer": false,
+      "editOnRightClick": false,
+      "showOnFullscreen": false,
+      "openOnOverview": false,
+      "groupByApp": false,
+      "separatePinnedAndRunningApps": false,
+      "restoreSpecialWorkspaceOnClick": false,
+      "isolateDisplays": false,
+      "indicatorStyle": "circle",
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "launcherEnabled": false,
+      "launcherLogoMode": "apps",
+      "launcherLogoCustomPath": "",
+      "launcherLogoColorOverride": "",
+      "launcherLogoSizeOffset": 0,
+      "launcherLogoBrightness": 0.5,
+      "launcherLogoContrast": 1,
+      "maxVisibleApps": 0,
+      "maxVisibleRunningApps": 0,
+      "showOverflowBadge": true,
+      "showTrash": false,
+      "trashFileManager": "default",
+      "trashCustomCommand": "",
+      "magnification": false,
+      "magnificationScale": 130,
+      "magnificationProfile": "parabolic",
+      "magnificationExpand": false,
+      "order": [],
+      "widgets": [
+        {
+          "id": "dock_launcher",
+          "widgetId": "dockLauncher",
+          "enabled": true
+        },
+        {
+          "id": "dock_apps",
+          "widgetId": "appsDock",
+          "enabled": true
+        },
+        {
+          "id": "dock_trash",
+          "widgetId": "dockTrash",
+          "enabled": true
+        }
+      ]
+    }
+  ]
 }
